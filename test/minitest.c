@@ -3,6 +3,7 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
 
 int ft_strlen(const char *str)
 {
@@ -12,34 +13,6 @@ int ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-char *ft_strjoin(char *str1, char *str2)
-{
-	char	*res;
-	int		i;
-
-	if (ft_strlen(str1) == 0)
-		return (str2);
-	if (ft_strlen(str2) == 0)
-		return (str1);
-	res = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (str1[i])
-	{
-		res[i] = str1[i];
-		i++;
-	}
-	i = 0;
-	while (str2[i])
-	{
-		res[i + ft_strlen(str1)] = str2[i];
-		i++;
-	}
-	res[i + ft_strlen(str1)] = '\0';
-	return (res);
 }
 
 int	ft_strcmp(const char *str1, const char *str2)
@@ -69,21 +42,30 @@ int main(int argc, char **argv)
 {	
 	char *str;
 	
+	/*		SIGNAL
+	**	ctrl \	SIGQUIT
+	**	ctrl c	SIGINT
+	**	ctrl d	EOF
+	*/
+
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &ft_quit);
-//	signal(SIGTERM, SIG_IGN);
-//	signal(SIGKILL, SIG_IGN);
-//	signal(SIGABRT, SIG_IGN);
 
 	while (1)
 	{
 		str = readline("");
 		if (ft_strcmp(str, "exit") == 0)
 			break;
-		printf("|%s|", str);
+		printf("|%s|\n", str);
+//		rl_line_buffer = ft_strmalloc("BOOH");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 		if (ft_strlen(str) != 0)
 			add_history(str);
 		printf("\n");
+		free(str);
 	}
+	rl_clear_history();
 	return (0);
 }
