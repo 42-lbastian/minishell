@@ -35,32 +35,38 @@ int	ft_strcmp(const char *str1, const char *str2)
 
 void	ft_quit(int i)
 {
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 	printf("\n");
+}
+
+void	ft_signal(int signum, void *handler)
+{
+	struct sigaction act;
+	act.sa_handler = handler;
+	sigaction(signum, &act, NULL);
 }
 
 int main(int argc, char **argv)
 {	
 	char *str;
-	
+
 	/*		SIGNAL
 	**	ctrl \	SIGQUIT
 	**	ctrl c	SIGINT
 	**	ctrl d	EOF
 	*/
 
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, &ft_quit);
+	ft_signal(SIGQUIT, SIG_IGN);
+	ft_signal(SIGINT, &ft_quit);
 
 	while (1)
 	{
 		str = readline("");
 		if (ft_strcmp(str, "exit") == 0)
 			break;
-		printf("|%s|\n", str);
-//		rl_line_buffer = ft_strmalloc("BOOH");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		printf("|%s|", str);
 		if (ft_strlen(str) != 0)
 			add_history(str);
 		printf("\n");
