@@ -65,11 +65,16 @@ int main(int argc, char **argv)
 	int		ret;
 	int		width;
 	char	*cap;
+	
 
 	/*		SIGNAL
 	**	ctrl \	SIGQUIT
 	**	ctrl c	SIGINT
 	**	ctrl d	EOF
+	*/
+
+	/*
+	**	Maybe use termios ??????
 	*/
 
 	ft_signal(SIGQUIT, SIG_IGN);
