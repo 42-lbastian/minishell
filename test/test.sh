@@ -27,12 +27,15 @@ exec_cmd 'echo toto'
 exec_cmd 'echo toto tata titi'
 exec_cmd 'echo toto tata titi -n'
 exec_cmd 'echo toto'
+exec_cmd 'echo'
+exec_cmd 'echo "toto"'
+exec_cmd 'echo '\''toto'\'''
 exec_cmd 'echo " "'
 exec_cmd 'echo '\'' '\'''
 exec_cmd 'echo ""'
 exec_cmd 'echo ! "" !'
 exec_cmd 'echo '\'''\'''
-exec_cmd 'echo ! '' !'
+exec_cmd 'echo ! '\'''\'' !'
 
 exec_cmd 'echo -n !toto tata titi!'
 exec_cmd 'echo -n !toto!'
@@ -40,9 +43,6 @@ exec_cmd 'echo -n !""!'
 exec_cmd 'echo -n ! "" !'
 exec_cmd 'echo -n'
 
-exec_cmd 'echo toto'
-exec_cmd 'echo "toto"'
-exec_cmd 'echo 'toto''
 
 exec_cmd 'echo "$USER"'
 exec_cmd 'echo '$USER''
@@ -52,10 +52,11 @@ exec_cmd 'ls '$USER''
 exec_cmd '$USER'
 
 exec_cmd 'ls ~/Documents'
-exec_cmd '~/\Documents'
-exec_cmd '~/Docum\ents'
-exec_cmd '\~/Documents'
+exec_cmd 'ls ~/\Documents'
+exec_cmd 'ls ~/Docum\ents'
+exec_cmd 'ls \~/Documents'
+
+
 
 printf "\n\n${magenta}A tester\n\n${normal}"
 echo 'ls ~/Documents/\'
-echo 'echo'
