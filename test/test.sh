@@ -16,7 +16,7 @@ function exec_cmd ()
 	fi
 }
 
-
+make re
 clear
 
 ps -p $$
