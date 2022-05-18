@@ -1,1 +1,1 @@
-gcc minitest.c -lreadline -lncurses
+gcc $1 -lreadline -lncurses
