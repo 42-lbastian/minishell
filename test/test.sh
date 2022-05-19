@@ -47,7 +47,6 @@ then
 	exec_cmd 'echo ! "" !'
 	exec_cmd 'echo '\'''\'''
 	exec_cmd 'echo ! '\'''\'' !'
-	exec_cmd '"'\''"toto""'
 
 	exec_cmd 'echo -n !toto tata titi!'
 	exec_cmd 'echo -n !toto!'

@@ -32,7 +32,26 @@ char *ft_remove_char(char *str, int index)
 		i++;
 	}
 	res[y] = '\0';
+	free(str);
 	return (res);
+}
+
+char *ft_strcpy(char *str)
+{
+	char *ret;
+	int i;
+
+	i = 0;
+	ret = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!ret)
+		return (NULL);
+	while (str[i])
+	{
+		ret[i] = str[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
 }
 
 char *ft_check_quotes(char *str)
@@ -42,14 +61,13 @@ char *ft_check_quotes(char *str)
 	int i;
 	int last_double_q;
 	int last_simple_q;
-	char *res;
 
 	double_quotes = 0;
 	simple_quotes = 0;
 	last_double_q = 0;
 	last_simple_q =0;
 	i = 0;
-	res = NULL;
+	str = ft_strcpy(str);
 	while (str[i])
 	{
 		if (str[i] == '"')
@@ -70,23 +88,85 @@ char *ft_check_quotes(char *str)
 		}
 		i++;
 	}
-	if (simple_quotes == 1 && double_quotes == 1)
+	if (simple_quotes == 1)
 	{
-		res = ft_remove_char(str, last_simple_q);
-		res = ft_remove_char(res, last_double_q);
+		str = ft_remove_char(str, last_simple_q);
+		if (last_double_q > last_simple_q)
+			last_double_q--;
 	}
-	else if (simple_quotes == 1)
+	if (double_quotes == 1)
+		str = ft_remove_char(str, last_double_q);
+	return (str);
+}
+
+char *ft_strjoin(char *str, char c)
+{
+	char *ret;
+	int i;
+
+	i = 0;
+	if (!str)
 	{
-		res = ft_remove_char(str, last_simple_q);
+		ret = malloc(sizeof(char) * 2);
+		if (!ret)
+			return (NULL);
+		ret[0] = c;
+		ret[1] = '\0';
+		return (ret);
 	}
-	else if (double_quotes == 1)
-		res = ft_remove_char(str, last_double_q);
-	return (res);
+	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	if (!ret)
+		return (NULL);
+	while (str[i])
+	{
+		ret[i] = str[i];
+		i++;
+	}
+	ret[i] = c;
+	ret[i + 1] = '\0';
+	free(str);
+	return (ret);
+}
+
+char **ft_lexer(char *str)
+{
+	int i;
+	char **ret;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+		{
+			while (str[i] != '"')
+			{
+				if (str[i] != '\\')
+				{}
+				i++;
+			}
+		}
+		if (str[i] == '\'')
+		{
+			while (str[i] != '\'')
+			{
+				if (str[i] != '\\')
+				{}
+				i++;
+			}
+		}
+
+	}
+
+	free(str);
+	return (ret);
 }
 
 int main(int argc, char **argv)
 {
+	char *str_ret;
+
 	printf ("Arg: |%s|\n", argv[1]);
-	printf ("Clear |%s|", ft_check_quotes(argv[1]));
+	str_ret = ft_check_quotes(argv[1]);
+	free(str_ret);
 	return (0);
 }
