@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int	ft_strlen(const char *str)
 {
@@ -185,7 +187,6 @@ char ***ft_lexer(char *str)
 	{
 		if (ft_avoid_char(str[i]))
 		{
-			printf("index %d\n", f_index);
 			while (str[i] != ' ' && str[i])
 			{
 	//			ret[s_index] = ft_add_cell(ret[s_index]);
@@ -231,23 +232,55 @@ void	ft_print_arr(char ***arr)
 	{
 		while (arr[i][j])
 		{
-			printf("%s\n", arr[i][j]);
+			printf("%s\t", arr[i][j]);
 			j++;
 		}
 		i++;
+		printf("\n");
 	}
+}
+
+int	ft_strcmp(const char *str1, const char *str2)
+{
+	int i;
+
+	i = 0;
+	if (!str1)
+		return (0);
+	while (str1[i] && str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (1);
+		i++;
+	}
+	if (i < ft_strlen(str1) || i < ft_strlen(str2))
+		return (1);
+	return (0);
+}
+
+char 	***ft_main_lexer(char *str)
+{	
+	char *str_ret;
+	char ***arr_lexer;
+
+	str_ret = ft_check_quotes(str);
+	arr_lexer = ft_lexer(str_ret);
+	return (arr_lexer);
 }
 
 int main(int argc, char **argv)
 {
-	char *str_ret;
 	char ***arr_lexer;
+	char *str_read;
 
-	printf("Arg: |%s|\n", argv[1]);
-	str_ret = ft_check_quotes(argv[1]);
-	arr_lexer = ft_lexer(str_ret);
-	ft_print_arr(arr_lexer);
+	while (1)
+	{
+		str_read = readline("");
+		if (ft_strcmp(str_read, "exit") == 0)
+			return (0);
+		arr_lexer = ft_main_lexer(str_read);
+		ft_print_arr(arr_lexer);
 
-//	free(str_ret);
+	}
 	return (0);
 }
