@@ -47,6 +47,7 @@ then
 	exec_cmd 'echo ! "" !'
 	exec_cmd 'echo '\'''\'''
 	exec_cmd 'echo ! '\'''\'' !'
+	exec_cmd '"'\''"toto""'
 
 	exec_cmd 'echo -n !toto tata titi!'
 	exec_cmd 'echo -n !toto!'
@@ -74,4 +75,7 @@ else
 	echo
 	echo 'echo "to\"to"'
 	echo 'cat << EOF(what you want)'
+	echo '"toto'\'''
+	echo ''\''toto"'
+
 fi
