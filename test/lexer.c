@@ -49,6 +49,7 @@ char *ft_check_quotes(char *str)
 	last_double_q = 0;
 	last_simple_q =0;
 	i = 0;
+	res = NULL;
 	while (str[i])
 	{
 		if (str[i] == '"')
@@ -85,7 +86,7 @@ char *ft_check_quotes(char *str)
 
 int main(int argc, char **argv)
 {
-	printf ("%s\n", argv[1]);
-	printf ("%s", ft_check_quotes(argv[1]));
+	printf ("Arg: |%s|\n", argv[1]);
+	printf ("Clear |%s|", ft_check_quotes(argv[1]));
 	return (0);
 }

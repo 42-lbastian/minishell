@@ -77,21 +77,21 @@ int main(int argc, char **argv)
 	**	Maybe use termios ??????
 	*/
 
-	ft_signal(SIGQUIT, SIG_IGN);
-	ft_signal(SIGINT, &ft_quit);
+//	ft_signal(SIGQUIT, SIG_IGN);
+//	ft_signal(SIGINT, &ft_quit);
 
-	term = getenv("TERM");
-	if (term == 0)
-	{
-		printf("Error Term\n");
-		return (1);
-	}
-	ret = tgetent(buffterm, term);
-	if (ret <= 0)
-	{
-		printf("Error tgetent\n");
-		return (1);
-	}
+//	term = getenv("TERM");
+//	if (term == 0)
+//	{
+//		printf("Error Term\n");
+//		return (1);
+//	}
+//	ret = tgetent(buffterm, term);
+//	if (ret <= 0)
+//	{
+//		printf("Error tgetent\n");
+//		return (1);
+//	}
 //	width = tgetnum("co");
 //	tgoto("%%", 20, 0);
 //	tputs(tgoto("%%", 20, 10), 20, &ft_putchar);
