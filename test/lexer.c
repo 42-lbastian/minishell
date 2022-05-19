@@ -128,14 +128,73 @@ char *ft_strjoin(char *str, char c)
 	return (ret);
 }
 
-char **ft_lexer(char *str)
+int	ft_avoid_char(char c)
+{
+	if (c == ' ' || c == '\\' || c == ';')
+		return (0);
+	return (1);
+}
+
+/*
+char **ft_add_cell(char **arr)
+{
+	char **ret;
+	int sec;
+	int index;
+	int size;
+
+	size = 0;
+	sec = 0;
+	while (arr[size])
+		size++;
+	ret = malloc(sizeof(char **) * (size + 1)); 
+	ret[size] = NULL;
+	if (size == 0)
+		return (ret);
+	while (arr[sec])
+	{
+		index = 0;
+		ret[sec] = malloc(sizeof(char *) * ft_strlen(arr[sec]));
+		while (arr[sec][index])
+		{
+			ret[sec][index] = arr[sec][index];
+			index++;
+		}
+		ret[sec][index] = '\0';
+		sec++;
+	}
+	return (ret);
+}
+*/
+
+char ***ft_lexer(char *str)
 {
 	int i;
-	char **ret;
+	int f_index;
+	int s_index;
+	char ***ret;
 
 	i = 0;
+	ret = malloc(sizeof(char **) * 2);
+	ret[0] = malloc(sizeof(char*) * 16);
+	ret[1] = NULL;
+	ret[0][0] = NULL;
+	f_index = 0;
+	s_index = 0;
 	while (str[i])
 	{
+		if (ft_avoid_char(str[i]))
+		{
+			printf("index %d\n", f_index);
+			while (str[i] != ' ' && str[i])
+			{
+	//			ret[s_index] = ft_add_cell(ret[s_index]);
+				ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
+				i++;
+			}
+			f_index++;
+			ret[s_index][f_index] = NULL;
+		}
 		if (str[i] == '"')
 		{
 			while (str[i] != '"')
@@ -154,19 +213,41 @@ char **ft_lexer(char *str)
 				i++;
 			}
 		}
-
+		if (str[i] == ' ')
+			i++;
 	}
-
 	free(str);
 	return (ret);
+}
+
+void	ft_print_arr(char ***arr)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (arr[i])
+	{
+		while (arr[i][j])
+		{
+			printf("%s\n", arr[i][j]);
+			j++;
+		}
+		i++;
+	}
 }
 
 int main(int argc, char **argv)
 {
 	char *str_ret;
+	char ***arr_lexer;
 
-	printf ("Arg: |%s|\n", argv[1]);
+	printf("Arg: |%s|\n", argv[1]);
 	str_ret = ft_check_quotes(argv[1]);
-	free(str_ret);
+	arr_lexer = ft_lexer(str_ret);
+	ft_print_arr(arr_lexer);
+
+//	free(str_ret);
 	return (0);
 }
