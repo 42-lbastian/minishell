@@ -280,7 +280,8 @@ int main(int argc, char **argv)
 		if (ft_strcmp(str_read, "exit") == 0)
 			return (0);
 		arr_lexer = ft_main_lexer(str_read);
-		ft_print_arr(arr_lexer);
+		//parser
+//		ft_print_arr(arr_lexer);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		free (str_read);
