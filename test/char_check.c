@@ -21,10 +21,10 @@ int	ft_special_char(char c)
 	return (0);
 }
 
-
-int	ft_exclude_char(char c)
+int	ft_is_char(char c)
 {
-	if (ft_special_char(c) == 0 && c != '"' && c != '\'')
+	if (c >= ' ' && c <= '~')
 		return (1);
 	return (0);
 }
+

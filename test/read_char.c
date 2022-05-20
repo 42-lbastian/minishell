@@ -21,6 +21,7 @@ void	ft_read_quotes(char *str, t_struct *main, char c)
 	main->i++;
 	while (str[main->i] != c && str[main->i])
 	{
+		if (!(str[main->i + 1] && str[main->i] == '\\' && str[main->i + 1] == c))
 		main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
 		main->i++;
 	}
@@ -34,8 +35,7 @@ void	ft_read_cmd(char *str, t_struct *main)
 {
 	while (ft_belong_cmd_end(str[main->i]) && str[main->i])
 	{
-		if (ft_exclude_char(str[main->i]) == 0)
-			main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
+		main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
 		main->i++;
 	}
 	main->f_index++;

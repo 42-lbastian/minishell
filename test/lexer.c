@@ -72,15 +72,35 @@ void	ft_free(t_struct *main)
 	free(main);
 }
 
+void	ft_fill_tab_char(t_struct *main, char *str)
+{
+	int i;
+
+	i = 0;
+	if (ft_strlen(str) > NB_CHAR_VALID || ft_strlen(str) < NB_CHAR_VALID)
+	{
+		printf("ERROR NB_CHAR\n");
+		exit(0);
+	}
+	while (str[i])
+	{
+		main->char_valid[i] = str[i];
+		i++;
+	}
+}
+
 int main()
 {
 	char *str_read;
 	t_struct *main;
+	char *output;
 
 	main = malloc(sizeof(t_struct));
+	ft_fill_tab_char(main, "|<>.");
+	output = ft_strcpy("~$ ");
 	while (1)
 	{
-		str_read = readline("");
+		str_read = readline(output);
 		if (ft_strcmp(str_read, "exit") == 0)
 			break ;
 		ft_main_lexer(str_read, main);
@@ -90,6 +110,7 @@ int main()
 			add_history(str_read);
 		free (str_read);
 	}
+	free(output);
 	ft_free(main);
 	clear_history();
 	return (0);

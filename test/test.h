@@ -2,6 +2,10 @@
 #define TEST_H
 #define SIMPLE 0
 #define DOUBLE 1
+#define NB_CHAR_VALID 4
+#define ORANGE "\1\033[0;31m\2"
+#define NORMAL "\1\x1b[0m\2"
+#define NAME "minishell> "
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,6 +14,7 @@
 
 typedef struct s_struct
 {
+	char char_valid[NB_CHAR_VALID];
 	int	f_index;
 	int	s_index;
 	int	i;
