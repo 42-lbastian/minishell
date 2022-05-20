@@ -169,6 +169,13 @@ char **ft_add_cell(char **arr)
 }
 */
 
+int	ft_belong_cmd(char c)
+{
+	if (c != ' ' && c != '"' && c != '\'' && c != ';' && c != '\\')
+		return (1);
+	return (0);
+}
+
 char ***ft_lexer(char *str)
 {
 	int i;
@@ -185,7 +192,7 @@ char ***ft_lexer(char *str)
 	s_index = 0;
 	while (str[i])
 	{
-		if (ft_avoid_char(str[i]))
+		if (ft_belong_cmd(str[i]))
 		{
 			while (str[i] != ' ' && str[i])
 			{
@@ -197,16 +204,37 @@ char ***ft_lexer(char *str)
 			f_index++;
 			ret[s_index][f_index] = NULL;
 		}
-/*		if (str[i] == '"')
+		if (str[i] == '"')
 		{
-			while (str[i] != '"')
+			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
+			i++;
+			while (str[i] != '"' && str[i])
 			{
-				if (str[i] != '\\')
-				{}
+				if (str[i] != '\\' && str[i] != ';')
+					ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
 				i++;
 			}
+			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
+			i++;
+			f_index++;
+			ret[s_index][f_index] = NULL;
 		}
 		if (str[i] == '\'')
+		{
+			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
+			i++;
+			while (str[i] != '\'' && str[i])
+			{
+				if (str[i] != '\\' && str[i] != ';')
+					ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
+				i++;
+			}
+			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
+			i++;
+			f_index++;
+			ret[s_index][f_index] = NULL;
+		}
+/*		if (str[i] == '\'')
 		{
 			while (str[i] != '\'')
 			{
@@ -215,7 +243,7 @@ char ***ft_lexer(char *str)
 				i++;
 			}
 		} */
-		if (str[i] == ' ')
+		while (str[i] == ' ' && str[i])
 			i++;
 	}
 	free(str);
@@ -281,7 +309,7 @@ int main(int argc, char **argv)
 			return (0);
 		arr_lexer = ft_main_lexer(str_read);
 		//parser
-//		ft_print_arr(arr_lexer);
+		ft_print_arr(arr_lexer);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		free (str_read);
