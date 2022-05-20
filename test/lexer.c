@@ -196,7 +196,7 @@ char ***ft_lexer(char *str)
 			f_index++;
 			ret[s_index][f_index] = NULL;
 		}
-		if (str[i] == '"')
+/*		if (str[i] == '"')
 		{
 			while (str[i] != '"')
 			{
@@ -213,7 +213,7 @@ char ***ft_lexer(char *str)
 				{}
 				i++;
 			}
-		}
+		} */
 		if (str[i] == ' ')
 			i++;
 	}
@@ -280,6 +280,8 @@ int main(int argc, char **argv)
 			return (0);
 		arr_lexer = ft_main_lexer(str_read);
 		ft_print_arr(arr_lexer);
+		if (ft_strlen(str_read) != 0)
+			add_history(str_read);
 
 	}
 	return (0);
