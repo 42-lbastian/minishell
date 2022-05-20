@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "test.h"
 
 int	ft_strlen(const char *str)
 {
@@ -138,36 +139,36 @@ int	ft_avoid_char(char c)
 }
 
 /*
-char **ft_add_cell(char **arr)
-{
-	char **ret;
-	int sec;
-	int index;
-	int size;
+   char **ft_add_cell(char **arr)
+   {
+   char **ret;
+   int sec;
+   int index;
+   int size;
 
-	size = 0;
-	sec = 0;
-	while (arr[size])
-		size++;
-	ret = malloc(sizeof(char **) * (size + 1)); 
-	ret[size] = NULL;
-	if (size == 0)
-		return (ret);
-	while (arr[sec])
-	{
-		index = 0;
-		ret[sec] = malloc(sizeof(char *) * ft_strlen(arr[sec]));
-		while (arr[sec][index])
-		{
-			ret[sec][index] = arr[sec][index];
-			index++;
-		}
-		ret[sec][index] = '\0';
-		sec++;
-	}
-	return (ret);
-}
-*/
+   size = 0;
+   sec = 0;
+   while (arr[size])
+   size++;
+   ret = malloc(sizeof(char **) * (size + 1)); 
+   ret[size] = NULL;
+   if (size == 0)
+   return (ret);
+   while (arr[sec])
+   {
+   index = 0;
+   ret[sec] = malloc(sizeof(char *) * ft_strlen(arr[sec]));
+   while (arr[sec][index])
+   {
+   ret[sec][index] = arr[sec][index];
+   index++;
+   }
+   ret[sec][index] = '\0';
+   sec++;
+   }
+   return (ret);
+   }
+ */
 
 int	ft_belong_cmd(char c)
 {
@@ -176,78 +177,56 @@ int	ft_belong_cmd(char c)
 	return (0);
 }
 
-char ***ft_lexer(char *str)
+void	ft_read_quotes(char *str, t_struct *main, char c)
 {
-	int i;
-	int f_index;
-	int s_index;
-	char ***ret;
-
-	i = 0;
-	ret = malloc(sizeof(char **) * 2);
-	ret[0] = malloc(sizeof(char*) * 16);
-	ret[1] = NULL;
-	ret[0][0] = NULL;
-	f_index = 0;
-	s_index = 0;
-	while (str[i])
+	main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
+	main->i++;
+	while (str[main->i] != c && str[main->i])
 	{
-		if (ft_belong_cmd(str[i]))
-		{
-			while (str[i] != ' ' && str[i])
-			{
-	//			ret[s_index] = ft_add_cell(ret[s_index]);
-				if (str[i] != '\\' && str[i] != ';')
-					ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
-				i++;
-			}
-			f_index++;
-			ret[s_index][f_index] = NULL;
-		}
-		if (str[i] == '"')
-		{
-			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
-			i++;
-			while (str[i] != '"' && str[i])
-			{
-				if (str[i] != '\\' && str[i] != ';')
-					ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
-				i++;
-			}
-			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
-			i++;
-			f_index++;
-			ret[s_index][f_index] = NULL;
-		}
-		if (str[i] == '\'')
-		{
-			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
-			i++;
-			while (str[i] != '\'' && str[i])
-			{
-				if (str[i] != '\\' && str[i] != ';')
-					ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
-				i++;
-			}
-			ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
-			i++;
-			f_index++;
-			ret[s_index][f_index] = NULL;
-		}
-/*		if (str[i] == '\'')
-		{
-			while (str[i] != '\'')
-			{
-				if (str[i] != '\\')
-				{}
-				i++;
-			}
-		} */
-		while (str[i] == ' ' && str[i])
-			i++;
+		if (str[main->i] != '\\' && str[main->i] != ';')
+			main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
+		main->i++;
+	}
+	main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
+	main->i++;
+	main->f_index++;
+	main->ret[main->s_index][main->f_index] = NULL;
+}
+
+void	ft_read_cmd(char *str, t_struct *main)
+{
+	while (str[main->i] != ' ' && str[main->i])
+	{
+		if (str[main->i] != '\\' && str[main->i] != ';')
+			main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
+		main->i++;
+	}
+	main->f_index++;
+	main->ret[main->s_index][main->f_index] = NULL;
+}
+
+
+void	ft_lexer(char *str, t_struct *main)
+{
+	main->i = 0;
+	main->ret = malloc(sizeof(char **) * 2);
+	main->ret[0] = malloc(sizeof(char*) * 16);
+	main->ret[1] = NULL;
+	main->ret[0][0] = NULL;
+	main->f_index = 0;
+	main->s_index = 0;
+	while (str[main->i])
+	{
+		if (ft_belong_cmd(str[main->i]))
+			ft_read_cmd(str, main);
+		if (str[main->i] == '"')
+			ft_read_quotes(str, main, '"');
+		if (str[main->i] == '\'')
+			ft_read_quotes(str, main, '\'');
+		while (str[main->i] == ' ' && str[main->i])
+			main->i++;
 	}
 	free(str);
-	return (ret);
 }
 
 void	ft_print_arr(char ***arr)
@@ -287,29 +266,28 @@ int	ft_strcmp(const char *str1, const char *str2)
 	return (0);
 }
 
-char 	***ft_main_lexer(char *str)
+void	ft_main_lexer(char *str, t_struct *main)
 {	
 	char *str_ret;
-	char ***arr_lexer;
 
 	str_ret = ft_check_quotes(str);
-	arr_lexer = ft_lexer(str_ret);
-	return (arr_lexer);
+	ft_lexer(str_ret, main);
 }
 
 int main(int argc, char **argv)
 {
-	char ***arr_lexer;
 	char *str_read;
+	t_struct *main;
 
+	main = malloc(sizeof(t_struct));
 	while (1)
 	{
 		str_read = readline("");
 		if (ft_strcmp(str_read, "exit") == 0)
 			return (0);
-		arr_lexer = ft_main_lexer(str_read);
+		ft_main_lexer(str_read, main);
 		//parser
-		ft_print_arr(arr_lexer);
+		ft_print_arr(main->ret);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		free (str_read);
