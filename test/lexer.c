@@ -282,7 +282,7 @@ int main(int argc, char **argv)
 		ft_print_arr(arr_lexer);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
-
+		free (str_read);
 	}
 	return (0);
 }
