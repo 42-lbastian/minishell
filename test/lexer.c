@@ -190,7 +190,8 @@ char ***ft_lexer(char *str)
 			while (str[i] != ' ' && str[i])
 			{
 	//			ret[s_index] = ft_add_cell(ret[s_index]);
-				ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
+				if (str[i] != '\\' && str[i] != ';')
+					ret[s_index][f_index] = ft_strjoin(ret[s_index][f_index], str[i]);
 				i++;
 			}
 			f_index++;
