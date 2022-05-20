@@ -2,7 +2,7 @@
 
 void    pwd(void)
 {
-    char    cwd[256];
+    char    cwd[1024];
 
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
