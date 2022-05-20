@@ -170,9 +170,16 @@ int	ft_avoid_char(char c)
    }
  */
 
-int	ft_belong_cmd(char c)
+int	ft_belong_cmd_start(char c)
 {
-	if (c != ' ' && c != '"' && c != '\'' && c != ';' && c != '\\')
+	if (c != ' ' && c != '"' && c != '\'' && c != ';' && c != '\\' && c != ' ' && c != '<' && c != '>' && c != '|')
+		return (1);
+	return (0);
+}
+
+int	ft_belong_cmd_end(char c)
+{
+	if (c != ' ' && c != '<' && c != '>' && c != '|')
 		return (1);
 	return (0);
 }
@@ -195,7 +202,7 @@ void	ft_read_quotes(char *str, t_struct *main, char c)
 
 void	ft_read_cmd(char *str, t_struct *main)
 {
-	while (str[main->i] != ' ' && str[main->i])
+	while (ft_belong_cmd_end(str[main->i]) && str[main->i])
 	{
 		if (str[main->i] != '\\' && str[main->i] != ';')
 			main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
@@ -209,7 +216,7 @@ void	ft_read_cmd(char *str, t_struct *main)
 void	ft_lexer(char *str, t_struct *main)
 {
 	main->i = 0;
-	main->ret = malloc(sizeof(char **) * 2);
+	main->ret = malloc(sizeof(char **) * 3);
 	main->ret[0] = malloc(sizeof(char*) * 16);
 	main->ret[1] = NULL;
 	main->ret[0][0] = NULL;
@@ -217,12 +224,24 @@ void	ft_lexer(char *str, t_struct *main)
 	main->s_index = 0;
 	while (str[main->i])
 	{
-		if (ft_belong_cmd(str[main->i]))
+		if (ft_belong_cmd_start(str[main->i]))
 			ft_read_cmd(str, main);
 		if (str[main->i] == '"')
 			ft_read_quotes(str, main, '"');
 		if (str[main->i] == '\'')
 			ft_read_quotes(str, main, '\'');
+		if (str[main->i] == '|')
+		{		
+			main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
+			main->i++;
+			main->ret[main->s_index][main->f_index + 1] = NULL;
+			main->f_index = 0;
+			main->s_index++;
+			main->ret[main->s_index] = malloc(sizeof(char*) * 16);
+			main->ret[main->s_index + 1] = NULL;
+			main->ret[main->s_index][0] = NULL;
+
+		}
 		while (str[main->i] == ' ' && str[main->i])
 			main->i++;
 	}
@@ -235,9 +254,9 @@ void	ft_print_arr(char ***arr)
 	int j;
 
 	i = 0;
-	j = 0;
 	while (arr[i])
 	{
+		j = 0;
 		while (arr[i][j])
 		{
 			printf("%s\t", arr[i][j]);
