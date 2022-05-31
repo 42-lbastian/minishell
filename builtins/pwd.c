@@ -1,4 +1,5 @@
 #include "../libft/libft.h"
+#include "builtin.h"
 
 void    pwd(void)
 {
@@ -8,10 +9,4 @@ void    pwd(void)
     {
        ft_printf("%s\n", cwd);
     }
-}
-
-int main()
-{
-    pwd();
-    return (0);
 }
