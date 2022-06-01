@@ -8,9 +8,10 @@ void cd(const char *path)
     pwd();
     ft_printf("\n");
     c = chdir(path);
+     ft_printf("%d",c);
     if (c != 0)
         return ;
-    ft_printf("%d",c);
+   
     ft_printf("\n");
     pwd();
 }
