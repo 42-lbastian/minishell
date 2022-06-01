@@ -105,11 +105,15 @@ void	ft_print_line(char **str)
 void	ft_cmd(t_struct *main)
 {
 	if (ft_strcmp(main->ret[0][0], "echo") == 0)
-	{}	//builtin echo
+	{
+		echo(main->ret[0]);
+	}	//builtin echo
 	else if (ft_strcmp(main->ret[0][0], "cd") == 0)
 	{}	//builtin cd
 	else if (ft_strcmp(main->ret[0][0], "pwd") == 0)
-	{}	//builtin pwd
+	{
+		pwd();
+	}	//builtin pwd
 	else if (ft_strcmp(main->ret[0][0], "export") == 0)
 	{}	//builtin export
 	else if (ft_strcmp(main->ret[0][0], "unset") == 0)
@@ -124,7 +128,7 @@ int main()
 	t_struct *main;
 
 	main = malloc(sizeof(t_struct));
-	ft_fill_tab_char(main, "/|<>.");
+	ft_fill_tab_char(main, "/|<>.'\"");
 	while (1)
 	{
 		str_read = readline(ORANGE NAME NORMAL);
@@ -133,7 +137,7 @@ int main()
 		ft_main_lexer(str_read, main);
 		//parser
 		ft_cmd(main);
-//		ft_print_arr(main->ret);
+		ft_print_arr(main->ret);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		free (str_read);

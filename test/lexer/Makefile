@@ -5,8 +5,13 @@ SRCS =	char_check.c \
 		read_char.c \
 		unwanted.c \
 		utils.c \
+		cd.c \
+		pwd.c \
+		echo.c \
 
 OBJS = ${SRCS:.c=.o}
+
+LIBFT        = ../libft/libft.a
 
 CC = gcc
 
@@ -17,8 +22,8 @@ RM = rm -rf
 all:	$(NAME)
 
 $(NAME): ${OBJS}
-	$(CC) -o $(NAME) ${OBJS} $(CFLAGS)
-
+	$(CC) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT}
+	
 clean:
 	${RM} ${OBJS}
 
