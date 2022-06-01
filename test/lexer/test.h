@@ -2,7 +2,7 @@
 #define TEST_H
 #define SIMPLE 0
 #define DOUBLE 1
-#define NB_CHAR_VALID 7
+#define NB_CHAR_VALID 8
 #define ORANGE "\1\033[1;31m\2"
 #define NORMAL "\1\x1b[0m\2"
 #define NAME "minishell> "

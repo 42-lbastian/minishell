@@ -128,7 +128,7 @@ int main()
 	t_struct *main;
 
 	main = malloc(sizeof(t_struct));
-	ft_fill_tab_char(main, "/|<>.'\"");
+	ft_fill_tab_char(main, "/|<>.'\" ");
 	while (1)
 	{
 		str_read = readline(ORANGE NAME NORMAL);
@@ -137,7 +137,7 @@ int main()
 		ft_main_lexer(str_read, main);
 		//parser
 		ft_cmd(main);
-		ft_print_arr(main->ret);
+//		ft_print_arr(main->ret);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		free (str_read);
