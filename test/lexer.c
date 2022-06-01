@@ -89,28 +89,55 @@ void	ft_fill_tab_char(t_struct *main, char *str)
 	}
 }
 
+void	ft_print_line(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		printf("%s\t", str[i]);
+		i++;
+	}
+	printf("\n");
+}
+
+void	ft_cmd(t_struct *main)
+{
+	if (ft_strcmp(main->ret[0][0], "echo") == 0)
+	{}	//builtin echo
+	else if (ft_strcmp(main->ret[0][0], "cd") == 0)
+	{}	//builtin cd
+	else if (ft_strcmp(main->ret[0][0], "pwd") == 0)
+	{}	//builtin pwd
+	else if (ft_strcmp(main->ret[0][0], "export") == 0)
+	{}	//builtin export
+	else if (ft_strcmp(main->ret[0][0], "unset") == 0)
+	{}	//builtin unset
+	else if (ft_strcmp(main->ret[0][0], "env") == 0)
+	{}	//builtin env
+}
+
 int main()
 {
 	char *str_read;
 	t_struct *main;
-	char *output;
 
 	main = malloc(sizeof(t_struct));
-	ft_fill_tab_char(main, "|<>.");
-	output = ft_strcpy("~$ ");
+	ft_fill_tab_char(main, "/|<>.");
 	while (1)
 	{
-		str_read = readline(output);
+		str_read = readline(ORANGE NAME NORMAL);
 		if (ft_strcmp(str_read, "exit") == 0)
 			break ;
 		ft_main_lexer(str_read, main);
 		//parser
-		ft_print_arr(main->ret);
+		ft_cmd(main);
+//		ft_print_arr(main->ret);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		free (str_read);
 	}
-	free(output);
 	ft_free(main);
 	clear_history();
 	return (0);
