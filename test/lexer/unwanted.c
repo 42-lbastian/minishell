@@ -52,13 +52,13 @@ char *ft_check_unwanted(char *str, t_struct *main)
 	str = ft_strcpy(str);
 	while (str[i])
 	{
-		if (ft_exclude_special(str[i], main) == 0)
-			str = ft_remove_char(str, i);
+//		if (ft_exclude_special(str[i], main) == 0)
+//			str = ft_remove_char(str, i);
 		if (str[i] == '"')
 			double_quotes = ft_count_quotes(i, double_quotes, main, DOUBLE);
 		if (str[i] == '\'')
 			simple_quotes = ft_count_quotes(i, simple_quotes, main, SIMPLE);
-		if (ft_exclude_special(str[i], main) == 1 && str[i])
+//		if (ft_exclude_special(str[i], main) == 1 && str[i])
 			i++;
 	}
 	if (simple_quotes == 1)

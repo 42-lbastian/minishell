@@ -2,7 +2,7 @@
 #define TEST_H
 #define SIMPLE 0
 #define DOUBLE 1
-#define NB_CHAR_VALID 8
+#define NB_CHAR_VALID 9
 #define ORANGE "\1\033[1;31m\2"
 #define NORMAL "\1\x1b[0m\2"
 #define NAME "minishell> "
@@ -13,6 +13,12 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+typedef struct	s_list
+{
+	char			*content;
+	struct s_list	*next;
+}				t_list;
+
 typedef struct s_struct
 {
 	char char_valid[NB_CHAR_VALID];
@@ -20,6 +26,7 @@ typedef struct s_struct
 	int	s_index;
 	int	i;
 	char ***ret;
+	t_list	*lst;
 	int	last_simple_q;
 	int	last_double_q;
 }		t_struct;
@@ -62,6 +69,14 @@ void	ft_read_cmd(char *str, t_struct *main);
 char *ft_remove_char(char *str, int index);
 int	ft_count_quotes(int i, int quotes, t_struct *main, int fact);
 char *ft_check_unwanted(char *str, t_struct *main);
+
+/*
+**		list.c
+*/
+t_list	*ft_lst_new(char *content);
+t_list *ft_lst_last(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_print_lst(t_list *lst);
 
 
 

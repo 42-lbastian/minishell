@@ -17,7 +17,16 @@ void	ft_read_special(char *str, t_struct *main)
 
 void	ft_read_quotes(char *str, t_struct *main, char c)
 {
-	main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
+	int y;
+
+	y = 1;
+	while (str[main->i + y] != c && str[main->i + y])
+		y++;
+	ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y + 1)));
+	main->i += y;
+	if (str[main->i])
+		main->i++;
+/*	main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
 	main->i++;
 	while (str[main->i] != c && str[main->i])
 	{
@@ -29,6 +38,7 @@ void	ft_read_quotes(char *str, t_struct *main, char c)
 	main->i++;
 	main->f_index++;
 	main->ret[main->s_index][main->f_index] = NULL;
+*/
 }
 
 void	ft_read_cmd(char *str, t_struct *main)

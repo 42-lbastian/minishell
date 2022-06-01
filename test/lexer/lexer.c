@@ -5,9 +5,10 @@ void	ft_lexer(char *str, t_struct *main)
 	main->i = 0;
 	main->f_index = 0;
 	main->s_index = 0;
-	ft_calloc_first(16, sizeof(char **), main);
-	ft_calloc_second(16, sizeof(char *), main);
-	main->ret[1] = NULL;
+	//Fix Calloc resize
+//	ft_calloc_first(16, sizeof(char **), main);
+//	ft_calloc_second(16, sizeof(char *), main);
+//	main->ret[1] = NULL;
 	while (str[main->i])
 	{
 		if (ft_belong_cmd_start(str[main->i]))
@@ -109,7 +110,9 @@ void	ft_cmd(t_struct *main)
 		echo(main->ret[0]);
 	}	//builtin echo
 	else if (ft_strcmp(main->ret[0][0], "cd") == 0)
-	{}	//builtin cd
+	{
+		cd(main->ret[0][1]);
+	}	//builtin cd
 	else if (ft_strcmp(main->ret[0][0], "pwd") == 0)
 	{
 		pwd();
@@ -127,8 +130,31 @@ int main()
 	char *str_read;
 	t_struct *main;
 
+///////////////////////////////////
+
+/*	int i;
+	int y;
+
+	i = 0;
+	while (argv[1][i])
+	{
+		y = 0;
+		if (ft_is_numb(argv[1][i]))
+		{
+			while (ft_is_numb(argv[1][i + y]))
+				y++;
+			printf("|%s|\n", ft_substr(argv[1], i, y));
+			i+=y;
+		}
+		if (argv[1][i])
+			i++;
+	}
+*/
+
+//////////////////////////////////
+
 	main = malloc(sizeof(t_struct));
-	ft_fill_tab_char(main, "/|<>.'\" ");
+	ft_fill_tab_char(main, "/|<>.'\" $");
 	while (1)
 	{
 		str_read = readline(ORANGE NAME NORMAL);
@@ -136,7 +162,8 @@ int main()
 			break ;
 		ft_main_lexer(str_read, main);
 		//parser
-		ft_cmd(main);
+	//	ft_cmd(main);
+		ft_print_lst(main->lst);
 //		ft_print_arr(main->ret);
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);

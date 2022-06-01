@@ -5,6 +5,7 @@ SRCS =	char_check.c \
 		read_char.c \
 		unwanted.c \
 		utils.c \
+		list.c \
 		cd.c \
 		pwd.c \
 		echo.c \
@@ -22,6 +23,7 @@ RM = rm -rf
 all:	$(NAME)
 
 $(NAME): ${OBJS}
+	$(MAKE) -C ../libft
 	$(CC) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT}
 	
 clean:

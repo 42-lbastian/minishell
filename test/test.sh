@@ -76,5 +76,6 @@ else
 	echo 'cat << EOF(what you want)'
 	echo '"toto'\'''
 	echo ''\''toto"'
+	echo './minishell'
 
 fi
