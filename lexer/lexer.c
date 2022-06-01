@@ -109,9 +109,15 @@ void	ft_cmd(t_struct *main)
 		echo(main->ret[0]);
 	}	//builtin echo
 	else if (ft_strcmp(main->ret[0][0], "cd") == 0)
-	{}	//builtin cd
+	{
+		 cd(main->ret[0][1]);
+
+	}	//builtin cd
 	else if (ft_strcmp(main->ret[0][0], "pwd") == 0)
-	{}	//builtin pwd
+	{
+		pwd();
+
+	}	//builtin pwd
 	else if (ft_strcmp(main->ret[0][0], "export") == 0)
 	{}	//builtin export
 	else if (ft_strcmp(main->ret[0][0], "unset") == 0)

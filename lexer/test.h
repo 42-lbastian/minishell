@@ -28,7 +28,7 @@ typedef struct s_struct
 
 void    pwd(void);
 int echo(char **str);
-void cd(const char *path);
+void cd( char *path);
 /*		
 **		char_check.c
 */
