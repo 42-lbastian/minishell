@@ -1,10 +1,10 @@
 #include "../include/minishell.h"
 
-char *ft_remove_char(char *str, int index)
+char	*ft_remove_char(char *str, int index)
 {
-	char *res;
-	int i;
-	int y;
+	char	*res;
+	int		i;
+	int		y;
 
 	i = 0;
 	y = 0;
@@ -38,21 +38,20 @@ int	ft_count_quotes(int i, int quotes, t_struct *main, int fact)
 	return (quotes);
 }
 
-char *ft_check_quotes(char *str, t_struct *main)
+char	*ft_check_quotes(char *str, t_struct *main)
 {
-	int i;
+	int	i;
 	int	simple_quotes;
 	int	double_quotes;
 
 	double_quotes = 0;
 	simple_quotes = 0;
 	main->last_double_q = 0;
-	main->last_simple_q =0;
+	main->last_simple_q = 0;
 	i = 0;
 	str = ft_strcpy(str);
 	while (str[i])
 	{
-
 		if (str[i] == '"')
 			double_quotes = ft_count_quotes(i, double_quotes, main, DOUBLE);
 		if (str[i] == '\'')
@@ -70,11 +69,20 @@ char *ft_check_quotes(char *str, t_struct *main)
 	return (str);
 }
 
-char *ft_remove_special(char *str, t_struct *main)
+int	ft_count_quotes_unwanted(int quotes)
 {
-	int i;
-	int simple_quotes;
-	int double_quotes;
+	if (quotes == 0)
+		quotes++;
+	else if (quotes == 1)
+		quotes--;
+	return (quotes);
+}
+
+char	*ft_remove_special(char *str, t_struct *main)
+{
+	int	i;
+	int	simple_quotes;
+	int	double_quotes;
 
 	i = 0;
 	simple_quotes = 0;
@@ -82,14 +90,15 @@ char *ft_remove_special(char *str, t_struct *main)
 	while (str[i])
 	{
 		if (str[i] == '"')
-			double_quotes++;
+			double_quotes = ft_count_quotes_unwanted(double_quotes);
 		if (str[i] == '\'')
-			simple_quotes++;
+			simple_quotes = ft_count_quotes_unwanted(simple_quotes);
 		if (ft_exclude_special(str[i], main) == 0)
 		{
 			if (double_quotes == 0 && simple_quotes == 0)
 				str = ft_remove_char(str, i);
-			else if (str[i] == '\\' && (str[i + 1] == '"' || str[i + 1] == '\''))
+			else if (str[i] == '\\' && (str[i + 1] == '"'
+					|| str[i + 1] == '\''))
 				str = ft_remove_char(str, i);
 			else
 				i++;

@@ -27,8 +27,8 @@ void	ft_lexer(char *str, t_struct *main)
 
 void	ft_print_arr(char ***arr)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (arr[i])
@@ -46,7 +46,7 @@ void	ft_print_arr(char ***arr)
 
 void	ft_main_lexer(char *str, t_struct *main)
 {	
-	char *str_ret;
+	char	*str_ret;
 
 	str_ret = ft_check_quotes(str, main);
 	str_ret = ft_remove_special(str_ret, main);
@@ -78,7 +78,7 @@ void	ft_free(t_struct *main)
 
 void	ft_fill_tab_char(t_struct *main, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strlen(str) > NB_CHAR_VALID || ft_strlen(str) < NB_CHAR_VALID)
@@ -93,6 +93,7 @@ void	ft_fill_tab_char(t_struct *main, char *str)
 	}
 }
 
+/*
 void	ft_print_line(char **str)
 {
 	int i;
@@ -105,7 +106,7 @@ void	ft_print_line(char **str)
 	}
 	printf("\n");
 }
-
+*/
 void	ft_cmd(t_struct *main)
 {
 	(void)main;
@@ -130,10 +131,10 @@ void	ft_cmd(t_struct *main)
 	*/
 }
 
-int main()
+int	main(void)
 {
-	char *str_read;
-	t_struct *main;
+	char		*str_read;
+	t_struct	*main;
 
 	main = malloc(sizeof(t_struct));
 	main->lst = NULL;

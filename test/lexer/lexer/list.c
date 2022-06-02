@@ -2,7 +2,7 @@
 
 t_list	*ft_lst_new(char *content)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	new->next = NULL;
@@ -11,7 +11,7 @@ t_list	*ft_lst_new(char *content)
 	return (new);
 }
 
-t_list *ft_lst_last(t_list *lst)
+t_list	*ft_lst_last(t_list *lst)
 {
 	while (lst->next)
 		lst = lst->next;
@@ -30,8 +30,8 @@ void	ft_print_lst(t_list *lst)
 {
 	while (lst->next)
 	{
-		printf("%s\n", lst->content);
+		printf("|%s|\n", lst->content);
 		lst = lst->next;
 	}
-	printf("%s\n", lst->content);
+	printf("|%s|\n", lst->content);
 }

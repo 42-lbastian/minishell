@@ -2,7 +2,7 @@
 
 void	ft_free_lst(t_list **lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	while ((*lst) && (*lst)->next)
 	{
