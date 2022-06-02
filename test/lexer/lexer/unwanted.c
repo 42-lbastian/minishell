@@ -98,9 +98,11 @@ char	*ft_remove_special(char *str, t_struct *main)
 			if (double_quotes == 0 && simple_quotes == 0)
 				str = ft_remove_char(str, i);
 			else if (str[i] == '\\' && (str[i + 1] == '"'
-					|| str[i + 1] == '\''))
+					|| str[i + 1] == '\'' || str[i + 1] == '\\'))
 				str = ft_remove_char(str, i);
 			else
+				i++;
+			if (str[i] == '\\')
 				i++;
 			i--;
 		}
