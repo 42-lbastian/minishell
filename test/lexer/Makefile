@@ -1,36 +1,45 @@
 NAME = minishell
 
-SRCS =	char_check.c \
-		lexer.c \
-		read_char.c \
-		unwanted.c \
-		utils.c \
-		list.c \
-		cd.c \
-		pwd.c \
-		echo.c \
+SRCS =	lexer/char_check.c \
+		lexer/lexer.c \
+		lexer/read_char.c \
+		lexer/unwanted.c \
+		lexer/utils.c \
+		lexer/list.c \
+		lexer/free.c \
+		builtins/cd.c \
+		builtins/pwd.c \
+		builtins/echo.c \
 
 OBJS = ${SRCS:.c=.o}
 
-LIBFT        = ../libft/libft.a
+LIBFT        = libft/libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -O3 -lreadline
+CFLAGS = -Wall -Wextra -Werror -lreadline
+
+FFLAGS = -Wall -Wextra -Werror -lreadline -g -fsanitize=address
 
 RM = rm -rf
 
 all:	$(NAME)
 
 $(NAME): ${OBJS}
-	$(MAKE) -C ../libft
+	$(MAKE) -C libft
 	$(CC) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT}
+
+fsan: ${OBJS}
+	$(MAKE) -C libft
+	$(CC) -o $(NAME) ${OBJS} $(FFLAGS) ${LIBFT}
 	
 clean:
+	$(MAKE) clean -C libft
 	${RM} ${OBJS}
 
 fclean:	clean
 		${RM} ${NAME}
+		${RM} libft/libft.a
 
 re:		fclean all
 
