@@ -9,8 +9,8 @@ void	ft_read_special(char *str, t_struct *main)
 		y++;
 	ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y)));
 	main->i += y;
-	if (str[main->i])
-		main->i++;
+//	if (str[main->i])
+//		main->i++;
 /*	while (ft_special_char(str[main->i]))
 	{
 		main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
@@ -60,8 +60,8 @@ void	ft_read_cmd(char *str, t_struct *main)
 		y++;
 	ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y)));
 	main->i += y;
-	if (str[main->i])
-		main->i++;
+//	if (str[main->i])
+//		main->i++;
 /*	while (ft_belong_cmd_end(str[main->i]) && str[main->i])
 	{
 		main->ret[main->s_index][main->f_index] = ft_strjoin(main->ret[main->s_index][main->f_index], str[main->i]);
