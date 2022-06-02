@@ -102,8 +102,6 @@ char	*ft_remove_special(char *str, t_struct *main)
 				str = ft_remove_char(str, i);
 			else
 				i++;
-			if (str[i] == '\\')
-				i++;
 			i--;
 		}
 		i++;
