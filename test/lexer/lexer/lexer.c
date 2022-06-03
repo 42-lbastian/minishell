@@ -81,7 +81,7 @@ void	ft_fill_tab_char(t_struct *main, char *str)
 	int	i;
 
 	i = 0;
-	if (ft_strlen(str) > NB_CHAR_VALID || ft_strlen(str) < NB_CHAR_VALID)
+	if (ft_strlen(str) != NB_CHAR_VALID)
 	{
 		printf("ERROR NB_CHAR\n");
 		exit(0);
