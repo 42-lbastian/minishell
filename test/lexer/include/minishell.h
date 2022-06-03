@@ -19,15 +19,18 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-typedef struct s_struct
+typedef	struct	s_char_check
 {
-	char char_valid[NB_CHAR_VALID];
-	int	f_index;
-	int	s_index;
-	int	i;
-	t_list	*lst;
 	int	last_simple_q;
 	int	last_double_q;
+	char char_valid[NB_CHAR_VALID];
+}				t_char_check;
+
+typedef struct s_struct
+{
+	int	i;
+	t_list	*lst;
+	t_char_check char_check;
 }		t_struct;
 
 

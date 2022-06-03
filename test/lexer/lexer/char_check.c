@@ -15,7 +15,7 @@ int	ft_belong_good_special(char c, t_struct *main)
 	i = 0;
 	while (i < NB_CHAR_VALID)
 	{
-		if (c == main->char_valid[i])
+		if (c == main->char_check.char_valid[i])
 			return (1);
 		i++;
 	}

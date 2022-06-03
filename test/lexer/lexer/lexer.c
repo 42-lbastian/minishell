@@ -3,8 +3,8 @@
 void	ft_lexer(char *str, t_struct *main)
 {
 	main->i = 0;
-	main->f_index = 0;
-	main->s_index = 0;
+//	main->f_index = 0;
+//	main->s_index = 0;
 	//Fix Calloc resize
 //	ft_calloc_first(16, sizeof(char **), main);
 //	ft_calloc_second(16, sizeof(char *), main);
@@ -88,7 +88,7 @@ void	ft_fill_tab_char(t_struct *main, char *str)
 	}
 	while (str[i])
 	{
-		main->char_valid[i] = str[i];
+		main->char_check.char_valid[i] = str[i];
 		i++;
 	}
 }
@@ -140,6 +140,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)envp;
 	main = malloc(sizeof(t_struct));
+	if (!main)
+		return (1);
 	main->lst = NULL;
 	ft_fill_tab_char(main, "/|<>.'\" $?");
 	while (1)

@@ -28,9 +28,9 @@ char	*ft_remove_char(char *str, int index)
 int	ft_count_quotes(int i, int quotes, t_struct *main, int fact)
 {
 	if (fact == SIMPLE)
-		main->last_simple_q = i;
+		main->char_check.last_simple_q = i;
 	else if (fact == DOUBLE)
-		main->last_double_q = i;
+		main->char_check.last_double_q = i;
 	if (quotes == 0)
 		quotes++;
 	else if (quotes == 1)
@@ -46,8 +46,8 @@ char	*ft_check_quotes(char *str, t_struct *main)
 
 	double_quotes = 0;
 	simple_quotes = 0;
-	main->last_double_q = 0;
-	main->last_simple_q = 0;
+	main->char_check.last_double_q = 0;
+	main->char_check.last_simple_q = 0;
 	i = 0;
 	str = ft_strcpy(str);
 	while (str[i])
@@ -60,12 +60,12 @@ char	*ft_check_quotes(char *str, t_struct *main)
 	}
 	if (simple_quotes == 1)
 	{
-		str = ft_remove_char(str, main->last_simple_q);
-		if (main->last_double_q > main->last_simple_q)
-			main->last_double_q--;
+		str = ft_remove_char(str, main->char_check.last_simple_q);
+		if (main->char_check.last_double_q > main->char_check.last_simple_q)
+			main->char_check.last_double_q--;
 	}
 	if (double_quotes == 1)
-		str = ft_remove_char(str, main->last_double_q);
+		str = ft_remove_char(str, main->char_check.last_double_q);
 	return (str);
 }
 
