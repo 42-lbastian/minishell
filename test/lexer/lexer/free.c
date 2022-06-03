@@ -7,7 +7,8 @@ void	ft_free_lst(t_list **lst)
 	while ((*lst) && (*lst)->next)
 	{
 		temp = ((*lst)->next);
-		free((*lst)->content);
+		if ((*lst)->content)
+			free((*lst)->content);
 		free((*lst));
 		(*lst) = temp;
 	}

@@ -21,21 +21,22 @@ typedef struct	s_list
 
 typedef	struct	s_char_check
 {
-	int	last_simple_q;
-	int	last_double_q;
-	char char_valid[NB_CHAR_VALID];
+	int		last_simple_q;
+	int		last_double_q;
+	char	char_valid[NB_CHAR_VALID];
+	int		error;
 }				t_char_check;
 
 typedef struct s_struct
 {
-	int	i;
-	t_list	*lst;
-	t_char_check char_check;
+	int				i;
+	t_list			*lst;
+	t_char_check	char_check;
 }		t_struct;
 
 
 
-void    pwd(void);
+void pwd(void);
 int echo(char **str);
 void cd(const char *path);
 

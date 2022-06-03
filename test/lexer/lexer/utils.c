@@ -18,43 +18,14 @@ int	ft_strcmp(const char *str1, const char *str2)
 	return (0);
 }
 
-char	*ft_strjoin(char *str, char c)
-{
-	char	*ret;
-	int		i;
-
-	i = 0;
-	if (!str)
-	{
-		ret = malloc(sizeof(char) * 2);
-		if (!ret)
-			return (NULL);
-		ret[0] = c;
-		ret[1] = '\0';
-		return (ret);
-	}
-	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (!ret)
-		return (NULL);
-	while (str[i])
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	ret[i] = c;
-	ret[i + 1] = '\0';
-	free(str);
-	return (ret);
-}
-
-char	*ft_strcpy(char *str)
+char	*ft_strcpy_2(char *str)
 {
 	char	*ret;
 	int		i;
 
 	i = 0;
 	ret = malloc(sizeof(char) * (ft_strlen(str) + 1));
-	if (!ret)
+	if (ret)
 		return (NULL);
 	while (str[i])
 	{

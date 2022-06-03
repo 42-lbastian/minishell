@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void	ft_lexer(char *str, t_struct *main)
+int	ft_lexer(char *str, t_struct *main)
 {
 	main->i = 0;
 //	main->f_index = 0;
@@ -21,8 +21,10 @@ void	ft_lexer(char *str, t_struct *main)
 			ft_read_special(str, main);
 		while (str[main->i] == ' ' && str[main->i])
 			main->i++;
+		if (main->char_check.error == 1)
+			return (1);
 	}
-	free(str);
+	return (0);
 }
 
 void	ft_print_arr(char ***arr)
@@ -44,13 +46,16 @@ void	ft_print_arr(char ***arr)
 	}
 }
 
-void	ft_main_lexer(char *str, t_struct *main)
+int	ft_main_lexer(char *str, t_struct *main)
 {	
-	char	*str_ret;
+//	char	*str_ret;
+	int		ret;
 
-	str_ret = ft_check_quotes(str, main);
-	str_ret = ft_remove_special(str_ret, main);
-	ft_lexer(str_ret, main);
+	str = ft_check_quotes(str, main);
+	str = ft_remove_special(str, main);
+	ret = ft_lexer(str, main);
+	free(str);
+	return (ret);
 }
 
 /*
@@ -143,21 +148,32 @@ int	main(int argc, char **argv, char **envp)
 	if (!main)
 		return (1);
 	main->lst = NULL;
+	main->char_check.error = 0;
 	ft_fill_tab_char(main, "/|<>.'\" $?");
 	while (1)
 	{
 		str_read = readline(RED NAME NORMAL);
+		if (!str_read)
+		{
+			clear_history();
+			return (1);
+		}
 		if (ft_strcmp(str_read, "exit") == 0)
 			break ;
-		ft_main_lexer(str_read, main);
+		if (ft_strlen(str_read) != 0)
+			add_history(str_read);
+		if (ft_main_lexer(str_read, main))
+		{
+			ft_free_lst(&main->lst);
+			break;
+		}
 		//parser
 	//	ft_cmd(main);
 		ft_print_lst(main->lst);
 		ft_free_lst(&main->lst);
 //		ft_print_arr(main->ret);
-		if (ft_strlen(str_read) != 0)
-			add_history(str_read);
-		free (str_read);
+
+	//	free (str_read);
 	}
 	free(str_read);
 	free(main);
