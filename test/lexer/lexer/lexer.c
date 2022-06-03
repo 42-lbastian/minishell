@@ -136,6 +136,9 @@ int	main(int argc, char **argv, char **envp)
 	char		*str_read;
 	t_struct	*main;
 
+	(void)argc;
+	(void)argv;
+	(void)envp;
 	main = malloc(sizeof(t_struct));
 	main->lst = NULL;
 	ft_fill_tab_char(main, "/|<>.'\" $?");
