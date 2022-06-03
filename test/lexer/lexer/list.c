@@ -28,10 +28,9 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 void	ft_print_lst(t_list *lst)
 {
-	while (lst->next)
+	while (lst)
 	{
 		printf("|%s|\n", lst->content);
 		lst = lst->next;
 	}
-	printf("|%s|\n", lst->content);
 }
