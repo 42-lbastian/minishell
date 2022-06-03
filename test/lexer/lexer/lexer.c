@@ -131,7 +131,7 @@ void	ft_cmd(t_struct *main)
 	*/
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char		*str_read;
 	t_struct	*main;
