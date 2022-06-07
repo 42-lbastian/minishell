@@ -9,7 +9,6 @@
 /*   Updated: 2022/03/05 19:41:16 by hspriet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 int	how_many_word(char const *str, char charset)
