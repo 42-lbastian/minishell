@@ -26,7 +26,7 @@ static char	*ft_strcpy2(char const *s, int *i, int size)
 	return (ret);
 }
 
-static char	**ft_free_equal(char    **ret, int k)
+static char	**ft_free_equal(char **ret, int k)
 {
 	while (k >= 0)
 	{

@@ -12,6 +12,8 @@ typedef struct t_ListElement
 }t_ListElement,	*t_List;
 
 void    pwd(void);
-
+char	**ft_trim_equal(char const *s, char charset);
+void 	env(char **envp);
+t_List	add_list(char **tab, t_List sta);
 
 #endif

@@ -34,7 +34,7 @@ t_List	add_list(char **tab, t_List sta)
 	j = 0;
 	while (tab[++j])
 	{   
-            ret = ft_split(tab[j], '=');
+            ret = ft_trim_equal(tab[j], '=');
             if (ret[0] == NULL)
                 var_name = "";
             else
@@ -48,15 +48,6 @@ t_List	add_list(char **tab, t_List sta)
         
 	}
 	return (sta);
-}
-
-void env(char **envp)
-{
-    t_List st;
-
-    st = NULL;
-    st = add_list(envp, st);
-    print_env(st);
 }
 
 void print_env(t_List st)
@@ -75,8 +66,13 @@ void print_env(t_List st)
 	}
 }
 
-int main(int ac, char **av, char **envp)
+void env(char **envp)
 {
-    env(envp);
-    return (0);
+    t_List st;
+
+    st = NULL;
+    st = add_list(envp, st);
+    print_env(st);
 }
+
+
