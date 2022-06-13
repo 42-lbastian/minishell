@@ -6,7 +6,6 @@ t_list	*ft_lst_new(char *content)
 
 	new = malloc(sizeof(t_list));
 	new->next = NULL;
-//	new->content = ft_strcpy(content);
 	new->content = content;
 	return (new);
 }

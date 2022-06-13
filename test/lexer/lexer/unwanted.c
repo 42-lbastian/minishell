@@ -46,8 +46,6 @@ char	*ft_check_quotes(char *str, t_struct *main)
 
 	double_quotes = 0;
 	simple_quotes = 0;
-	main->char_check.last_double_q = 0;
-	main->char_check.last_simple_q = 0;
 	i = 0;
 	while (str[i])
 	{
@@ -77,13 +75,11 @@ int	ft_count_quotes_unwanted(int quotes)
 	return (quotes);
 }
 
-char	*ft_remove_special(char *str, t_struct *main)
+char	*ft_remove_special(char *str, t_struct *main, int i)
 {
-	int	i;
 	int	simple_quotes;
 	int	double_quotes;
 
-	i = 0;
 	simple_quotes = 0;
 	double_quotes = 0;
 	while (str && str[i])

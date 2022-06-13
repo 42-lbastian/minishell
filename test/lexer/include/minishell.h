@@ -2,7 +2,7 @@
 #define TEST_H
 #define SIMPLE 0
 #define DOUBLE 1
-#define NB_CHAR_VALID 10
+#define NB_CHAR_VALID 11
 #define RED "\1\033[1;31m\2"
 #define NORMAL "\1\x1b[0m\2"
 #define NAME "minishell> "
@@ -46,8 +46,19 @@ void cd(const char *path);
 */
 int	ft_belong_cmd_start(char c);
 int	ft_belong_cmd_end(char c);
+int	ft_is_alpha(char c);
+
+/*
+**		char_check_special.c
+*/
 int	ft_special_char(char c);
 int	ft_exclude_special(char c, t_struct *main);
+
+/*
+**		init.c
+*/
+void	ft_init_struct(t_struct *main, int argc, char **argv);
+void	ft_fill_tab_char(t_struct *main, char *str);
 
 /*
 **		utils.c
@@ -70,7 +81,7 @@ void	ft_read_cmd(char *str, t_struct *main);
 **		unwanted.c
 */
 char *ft_check_quotes(char *str, t_struct *main);
-char *ft_remove_special(char *str, t_struct *main);
+char *ft_remove_special(char *str, t_struct *main, int i);
 
 /*
 **		list.c

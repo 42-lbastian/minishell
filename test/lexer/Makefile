@@ -1,7 +1,9 @@
 NAME = minishell
 
 SRCS =	lexer/char_check.c \
+		lexer/char_check_special.c \
 		lexer/lexer.c \
+		lexer/init.c \
 		lexer/read_char.c \
 		lexer/unwanted.c \
 		lexer/utils.c \
