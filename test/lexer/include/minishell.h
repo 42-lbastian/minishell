@@ -32,6 +32,7 @@ typedef struct s_struct
 	int				i;
 	t_list			*lst;
 	t_char_check	char_check;
+	char			**temp_str;
 }		t_struct;
 
 
@@ -64,11 +65,8 @@ void	ft_fill_tab_char(t_struct *main, char *str);
 **		utils.c
 */
 int	ft_strcmp(const char *str1, const char *str2);
-char *ft_strjoin(char *str, char c);
-char *ft_strcpy(char *str);
+char *ft_strcpy_2(char *str);
 int	ft_strlen(const char *str);
-void	ft_calloc_second(int count, size_t size, t_struct *main);
-void	ft_calloc_first(int count, size_t size, t_struct *main);
 
 /*
 **		read_char.c
@@ -90,6 +88,8 @@ t_list	*ft_lst_new(char *content);
 t_list *ft_lst_last(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_print_lst(t_list *lst);
+int		ft_lst_size(t_list *lst);
+char	*ft_get_lst_str_index(t_list *lst, int index);
 
 /*
 **		free.c

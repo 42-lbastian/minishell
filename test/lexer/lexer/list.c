@@ -33,3 +33,29 @@ void	ft_print_lst(t_list *lst)
 		lst = lst->next;
 	}
 }
+
+int	ft_lst_size(t_list *lst)
+{
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
+char *ft_get_lst_str_index(t_list *lst, int index)
+{
+	int i;
+
+	i = 0;
+	while (lst && i < index)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (lst->content);
+}

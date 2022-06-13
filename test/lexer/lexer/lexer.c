@@ -34,8 +34,26 @@ int	ft_main_lexer(char *str, t_struct *main)
 
 void	ft_cmd(t_struct *main, char **envp)
 {
-	(void)main;
+	if (ft_strcmp(main->temp_str[0], "echo") == 0)
+		echo(main->temp_str);
 	(void)envp;
+}
+
+void	ft_temp_test_cmd(t_struct *main)
+{
+	int i;
+	int size;
+
+
+	size = ft_lst_size(main->lst);
+	i = 0;
+	main->temp_str = malloc(sizeof(char*) * (size + 1));
+	main->temp_str[size] = NULL;
+	while (i < size)
+	{
+		main->temp_str[i] = ft_strcpy_2(ft_get_lst_str_index(main->lst, i));
+		i++;
+	}
 }
 
 int	ft_main_action(t_struct *main, char *str_read, char **envp)
@@ -55,8 +73,9 @@ int	ft_main_action(t_struct *main, char *str_read, char **envp)
 			break ;
 		}
 		//parser
+		ft_temp_test_cmd(main);
 		ft_cmd(main, envp);
-		ft_print_lst(main->lst);
+		//ft_print_lst(main->lst);
 		ft_free_lst(&main->lst);
 	}
 	free(str_read);

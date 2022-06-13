@@ -25,7 +25,7 @@ char	*ft_strcpy_2(char *str)
 
 	i = 0;
 	ret = malloc(sizeof(char) * (ft_strlen(str) + 1));
-	if (ret)
+	if (!ret)
 		return (NULL);
 	while (str[i])
 	{
@@ -45,31 +45,3 @@ int	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
-/*
-void	ft_calloc_second(int count, size_t size, t_struct *main)
-{
-	int i;
-
-	i = 0;
-	main->ret[main->s_index] = malloc(size * count);
-	while (i < count)
-	{
-		main->ret[main->s_index][i] = NULL;
-		i++;
-	}
-}
-
-void	ft_calloc_first(int count, size_t size, t_struct *main)
-{
-	int i;
-
-	i = 1;
-	main->ret = malloc(size * count);
-	while (i < count)
-	{
-		main->ret[i] = NULL;
-		i++;
-	}
-}
-*/
