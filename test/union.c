@@ -21,6 +21,7 @@ struct	s_node
 };
 
 
+
 int main()
 {
 	t_node node_a;
@@ -32,6 +33,4 @@ int main()
 
 	node_p.value.node_pointer.left = &node_a;
 	node_p.value.node_pointer.right = &node_b;
-
-	printf("%c\n", node_p.value.node_pointer.left)
 }
