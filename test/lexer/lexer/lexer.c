@@ -34,8 +34,14 @@ int	ft_main_lexer(char *str, t_struct *main)
 
 void	ft_cmd(t_struct *main, char **envp)
 {
-	if (ft_strcmp(main->temp_str[0], "echo") == 0)
+	if (ft_strcmp_2(main->temp_str[0], "echo") == 0)
 		echo(main->temp_str);
+	if (ft_strcmp_2(main->temp_str[0], "cd") == 0)
+		cd(main->temp_str[1]);
+	if (ft_strcmp_2(main->temp_str[0], "pwd") == 0)
+		pwd();	
+	if (ft_strcmp_2(main->temp_str[0], "env") == 0)
+		env(envp);
 	(void)envp;
 }
 
@@ -63,7 +69,7 @@ int	ft_main_action(t_struct *main, char *str_read, char **envp)
 		str_read = readline(RED NAME NORMAL);
 		if (!str_read)
 			return (0);
-		if (ft_strcmp(str_read, "exit") == 0)
+		if (ft_strcmp_2(str_read, "exit") == 0)
 			break ;
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);

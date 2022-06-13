@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int		ft_strcmp2(char *s1, char *s2)
+int		ft_strcmp(char *s1, char *s2)
 {
 	int i;
 
@@ -25,7 +25,7 @@ int echo(char **str)
 	i = 1; //pour les tests
 	if (str[i])
 	{
-		while (str[i] && !ft_strcmp2(str[i], "-n"))
+		while (str[i] && !ft_strcmp(str[i], "-n"))
 		{
 				i++;
 				n = 1;

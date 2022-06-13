@@ -12,6 +12,9 @@ SRCS =	lexer/char_check.c \
 		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/echo.c \
+		builtins/env.c \
+		builtins/utils_env.c \
+
 
 OBJS = ${SRCS:.c=.o}
 

@@ -1,5 +1,5 @@
-#ifndef TEST_H
-#define TEST_H
+#ifndef MINISHELL_H
+#define MINISHELL_H
 #define SIMPLE 0
 #define DOUBLE 1
 #define NB_CHAR_VALID 11
@@ -8,10 +8,18 @@
 #define NAME "minishell> "
 
 #include <stdlib.h>
+#include <unistd.h>
 #include "../libft/libft.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
+typedef struct t_ListElement
+{
+	char			    	*var;
+    char                    *value;
+	struct t_ListElement	*next;
+}t_ListElement,	*t_List;
 
 typedef struct	s_list
 {
@@ -35,12 +43,31 @@ typedef struct s_struct
 	char			**temp_str;
 }		t_struct;
 
+/**
+**		pwd.c
+**/
+void	pwd(void);
 
+/**
+**		echo.c
+**/
+int		echo(char **str);
 
-void pwd(void);
-int echo(char **str);
-void cd(const char *path);
+/**
+**		cd.c
+**/
+void	cd(const char *path);
 
+/**
+**		env.c
+**/
+void	env(char **envp);
+t_List	add_list(char **tab, t_List sta);
+
+/**
+**		utils_env.c
+**/
+char	**ft_trim_equal(char const *s, char charset);
 
 /*		
 **		char_check.c
@@ -64,7 +91,7 @@ void	ft_fill_tab_char(t_struct *main, char *str);
 /*
 **		utils.c
 */
-int	ft_strcmp(const char *str1, const char *str2);
+int	ft_strcmp_2(const char *str1, const char *str2);
 char *ft_strcpy_2(char *str);
 int	ft_strlen(const char *str);
 

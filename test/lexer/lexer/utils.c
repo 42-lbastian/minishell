@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int	ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp_2(const char *str1, const char *str2)
 {
 	int	i;
 
