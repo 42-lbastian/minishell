@@ -81,7 +81,7 @@ int	ft_main_action(t_struct *main, char *str_read, char **envp)
 		//parser
 		ft_temp_test_cmd(main);
 		ft_cmd(main, envp);
-		ft_print_lst(main->lst);
+		//ft_print_lst(main->lst);
 		ft_free_lst(&main->lst);
 	}
 	free(str_read);
