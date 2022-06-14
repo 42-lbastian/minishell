@@ -117,9 +117,10 @@ int main(int argc, char **argv)
 	tab_node[3].value.oper = argv[4][0];
 
 	*/
-	ft_print_tree(&tab_node[3]);
+	ft_print_tree(&tab_node[1]);
 	printf("\n");
 
+	
 //	printf("%c-%d\n", tab_node[3].value.oper, tab_node[3].node_pointer.right->value.nb);
 //	printf("%c-%d-%d\n", tab_node[3].node_pointer.left->value.oper, tab_node[3].node_pointer.left->node_pointer.left->value.nb, tab_node[3].node_pointer.left->node_pointer.right->value.nb);
 
