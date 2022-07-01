@@ -126,7 +126,6 @@ int main(int argc, char **argv)
 		}
 		i++;
 	}
-	printf("\n");
 
 	/*
 	tab_node[0].value.nb = atoi(argv[1]);
@@ -155,7 +154,7 @@ int main(int argc, char **argv)
 //	printf("|%c|\n", tab_node[3].node_pointer.left->value.oper);
 //	printf("%d-%d\n", tab_node[3].node_pointer.left->value.nb, tab_node[3].node_pointer.right->value.nb);
 //	printf("%p-%p\n", tab_node[3].node_pointer.left->node_pointer.left, tab_node[3].node_pointer.right->node_pointer.right);
-	printf("%d\n", ft_print_tree(&tab_node[3]));
+	printf("%d\n", ft_print_tree(&tab_node[7]));
 	
 	//printf("%p\t%p\n", tab_node[1].node_pointer.left, tab_node[1].node_pointer.right);
 
