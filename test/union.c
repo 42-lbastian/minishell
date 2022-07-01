@@ -34,7 +34,7 @@ void	ft_print_tree(t_node *node)
 		printf("%c\t", node->value.oper);
 }
 
-int	ft_find_left_node(char **str, int index)
+int	ft_find_left_node_add(char **str, int index)
 {
 	int i;
 
@@ -42,6 +42,22 @@ int	ft_find_left_node(char **str, int index)
 	while (i > 1)
 	{
 		if (str[i][0] == '+' || str[i][0] == '*')
+			break;
+		i--;
+	}
+	return (i - 1);
+}
+
+int	ft_find_left_node_mult(char **str, int index)
+{
+	int i;
+
+	i = index;
+	while (i > 1)
+	{
+		if (str[i][0] == '+')
+			return (index - 1);
+		else if (str[i][0] == '*')
 			break;
 		i--;
 	}
@@ -77,13 +93,13 @@ int main(int argc, char **argv)
 		if (argv[i + 1][0] == '+')
 		{
 			tab_node[i].value.oper = argv[i + 1][0];
-			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node(argv, i)];
+			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_add(argv, i)];
 			tab_node[i].node_pointer.right = &tab_node[ft_find_right_node(argv, i, argc - 1)];
 		}
 		else if (argv[i + 1][0] == '*')
 		{
 			tab_node[i].value.oper = argv[i + 1][0];
-			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node(argv, i)];
+			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_mult(argv, i)];
 			tab_node[i].node_pointer.right = &tab_node[i + 1];
 		}
 		else
@@ -94,6 +110,7 @@ int main(int argc, char **argv)
 		}
 		i++;
 	}
+	printf("\n");
 
 	/*
 	tab_node[0].value.nb = atoi(argv[1]);
@@ -117,11 +134,18 @@ int main(int argc, char **argv)
 	tab_node[3].value.oper = argv[4][0];
 
 	*/
+
+//	printf("%d-%p\n", tab_node[4].value.nb, tab_node[4].node_pointer.right);
+	printf("|%c|\n", tab_node[3].node_pointer.left->value.oper);
+	printf("%d-%d\n", tab_node[3].node_pointer.left->value.nb, tab_node[3].node_pointer.right->value.nb);
+	printf("%p-%p\n", tab_node[3].node_pointer.left->node_pointer.left, tab_node[3].node_pointer.right->node_pointer.right);
 	ft_print_tree(&tab_node[1]);
 	printf("\n");
-
 	
-//	printf("%c-%d\n", tab_node[3].value.oper, tab_node[3].node_pointer.right->value.nb);
+	//printf("%p\t%p\n", tab_node[1].node_pointer.left, tab_node[1].node_pointer.right);
+
+	//printf("|%d|\n", tab_node[2].value.nb);
+//	printf("%d\n", tab_node[1].node_pointer.left->value.nb);
 //	printf("%c-%d-%d\n", tab_node[3].node_pointer.left->value.oper, tab_node[3].node_pointer.left->node_pointer.left->value.nb, tab_node[3].node_pointer.left->node_pointer.right->value.nb);
 
 //	printf("%d\t", tab_node[1].node_pointer.left->value.nb);
