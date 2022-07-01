@@ -22,16 +22,32 @@ struct	s_node
 	t_node_pointer node_pointer;
 };
 
-void	ft_print_tree(t_node *node)
+int	ft_print_tree(t_node *node)
 {
+	int value;
+	int value2;
+
+	value = 0;
+	value2 = 0;
 	if (node->node_pointer.left)
-		ft_print_tree(node->node_pointer.left);
+		value = ft_print_tree(node->node_pointer.left);
 	if (node->node_pointer.right)
-		ft_print_tree(node->node_pointer.right);
+		value2 = ft_print_tree(node->node_pointer.right);
+	if (node->node_pointer.right)
+	{
+		if (node->value.oper == '*')
+			return (value * value2);
+		if (node->value.oper == '+')
+			return (value + value2);
+	}
+	else
+		return (node->value.nb);
+	/*
 	if (!node->node_pointer.left)
 		printf("%d\t", node->value.nb);
 	else
 		printf("%c\t", node->value.oper);
+	*/
 }
 
 int	ft_find_left_node_add(char **str, int index)
@@ -136,11 +152,10 @@ int main(int argc, char **argv)
 	*/
 
 //	printf("%d-%p\n", tab_node[4].value.nb, tab_node[4].node_pointer.right);
-	printf("|%c|\n", tab_node[3].node_pointer.left->value.oper);
-	printf("%d-%d\n", tab_node[3].node_pointer.left->value.nb, tab_node[3].node_pointer.right->value.nb);
-	printf("%p-%p\n", tab_node[3].node_pointer.left->node_pointer.left, tab_node[3].node_pointer.right->node_pointer.right);
-	ft_print_tree(&tab_node[1]);
-	printf("\n");
+//	printf("|%c|\n", tab_node[3].node_pointer.left->value.oper);
+//	printf("%d-%d\n", tab_node[3].node_pointer.left->value.nb, tab_node[3].node_pointer.right->value.nb);
+//	printf("%p-%p\n", tab_node[3].node_pointer.left->node_pointer.left, tab_node[3].node_pointer.right->node_pointer.right);
+	printf("%d\n", ft_print_tree(&tab_node[3]));
 	
 	//printf("%p\t%p\n", tab_node[1].node_pointer.left, tab_node[1].node_pointer.right);
 
