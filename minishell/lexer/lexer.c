@@ -68,7 +68,8 @@ int	ft_main_action(t_struct *main, char *str_read, t_List st)
 {
 	while (1)
 	{
-		str_read = readline(RED NAME NORMAL);
+		//str_read = readline(RED NAME NORMAL);
+		str_read = readline(NAME);
 		if (!str_read)
 			return (0);
 		if (ft_strcmp_2(str_read, "exit") == 0)
@@ -83,7 +84,7 @@ int	ft_main_action(t_struct *main, char *str_read, t_List st)
 		//parser
 		ft_temp_test_cmd(main);
 		ft_cmd(main, st);
-		ft_print_lst(main->lst);
+		//ft_print_lst(main->lst);
 		ft_free_lst(&main->lst);
 	}
 	free(str_read);
