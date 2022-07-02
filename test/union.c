@@ -22,6 +22,60 @@ struct	s_node
 	t_node_pointer node_pointer;
 };
 
+typedef struct	s_list
+{
+	char			*content;
+	struct s_list	*next;
+}		t_list;
+
+t_list	*ft_lst_init(char *str)
+{
+	t_list *lst;
+
+	lst = malloc(sizeof(t_list));
+	lst->content = str;
+	lst->next = NULL;
+	return (lst);
+}
+
+t_list	*ft_lst_last(t_list *lst)
+{
+	while (lst && lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	ft_lst_add_back(t_list **lst, t_list *lst_new)
+{
+	if (lst && (*lst))
+		ft_lst_last((*lst))->next = lst_new;
+	else
+		(*lst) = lst_new;
+}
+
+int		ft_lst_size(t_list *lst)
+{
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
+void	ft_print_lst(t_list *lst)
+{
+	while (lst)
+	{
+		printf("%s\t", lst->content);
+		lst = lst->next;
+	}
+	printf("\n");
+}
+
 int	ft_print_tree(t_node *node)
 {
 	int value;
@@ -96,25 +150,24 @@ int	ft_find_right_node(char **str, int index, int size)
 	return (i - 1);
 }
 
-int main(int argc, char **argv)
+t_node	*ft_create_tree(t_list *lst, t_node *tab_node)
 {
 	int i;
-	t_node *tab_node;
-	
-	i = 0;
-	tab_node = malloc(sizeof(t_node) * argc - 1);
+	int	size;
 
-	while (i < argc - 1)
+	size = ft_lst_size(lst);
+	i = 0;
+	while (i < size)
 	{
-		if (argv[i + 1][0] == '+')
+		if (lst->content[0] == '+')
 		{
-			tab_node[i].value.oper = argv[i + 1][0];
+			tab_node[i].value.oper = lst->content[0];
 			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_add(argv, i)];
 			tab_node[i].node_pointer.right = &tab_node[ft_find_right_node(argv, i, argc - 1)];
 		}
-		else if (argv[i + 1][0] == '*')
+		else if (lst->content[0] == '*')
 		{
-			tab_node[i].value.oper = argv[i + 1][0];
+			tab_node[i].value.oper = lst->content[0];
 			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_mult(argv, i)];
 			tab_node[i].node_pointer.right = &tab_node[i + 1];
 		}
@@ -124,8 +177,29 @@ int main(int argc, char **argv)
 			tab_node[i].node_pointer.left = NULL;
 			tab_node[i].node_pointer.right = NULL;	
 		}
+		lst = lst->next;
 		i++;
 	}
+	return (tab_node);
+}
+
+int main(int argc, char **argv)
+{
+	int i;
+	t_node *tab_node;
+	t_list	*lst;
+	
+	lst = NULL;
+	i = 1;
+	tab_node = malloc(sizeof(t_node) * argc - 1);
+
+	while (i < argc)
+	{
+		ft_lst_add_back(&lst, ft_lst_init(argv[i]));
+		i++;
+	}
+	tab_node = ft_create_tree(lst, tab_node);
+
 
 	/*
 	tab_node[0].value.nb = atoi(argv[1]);
@@ -154,8 +228,10 @@ int main(int argc, char **argv)
 //	printf("|%c|\n", tab_node[3].node_pointer.left->value.oper);
 //	printf("%d-%d\n", tab_node[3].node_pointer.left->value.nb, tab_node[3].node_pointer.right->value.nb);
 //	printf("%p-%p\n", tab_node[3].node_pointer.left->node_pointer.left, tab_node[3].node_pointer.right->node_pointer.right);
-	printf("%d\n", ft_print_tree(&tab_node[7]));
 	
+	printf("%d\n", ft_print_tree(&tab_node[1]));
+
+
 	//printf("%p\t%p\n", tab_node[1].node_pointer.left, tab_node[1].node_pointer.right);
 
 	//printf("|%d|\n", tab_node[2].value.nb);
@@ -178,3 +254,12 @@ int main(int argc, char **argv)
 //	printf("%d\n", tab_node[3].node_pointer.left->node_pointer.left->value.nb);
 
 }
+
+	
+		
+			
+				
+					
+						
+							
+								
