@@ -56,7 +56,7 @@ int		echo(char **str);
 /**
 **		cd.c
 **/
-void	cd(const char *path);
+void	cd(t_List st, const char *path);
 
 char	**ft_trim_equal(char const *s, char charset);
 void    ft_export(t_List st, char **arg);
@@ -66,6 +66,8 @@ void	push_list_back(t_List *st, char *var_name, char *var_value);
 /**
 **		env.c
 **/
+void is_var(char *str, t_List st);
+void    ft_export(t_List st, char **arg);
 void	create_env(char **envp);
 void print_env(t_List st);
 t_List	add_list(char **tab, t_List sta);

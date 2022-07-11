@@ -1,16 +1,23 @@
 #include "../include/minishell.h"
 
-void cd(const char *path)
+void cd(t_List st, const char *path)
 {
     int c;
+    char    cwd[1024];
+    char *oldpath;
 
-    pwd();
-    ft_printf("\n");
+    
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+    {
+        oldpath = ft_strjoin("OLDPWD=", cwd);
+        is_var(oldpath, st);
+    }
     c = chdir(path);
-     ft_printf("%d",c);
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+    {
+         oldpath = ft_strjoin("PWD=", cwd);
+         is_var(oldpath, st);
+    }
     if (c != 0)
         return ;
-   
-    ft_printf("\n");
-    pwd();
 }
