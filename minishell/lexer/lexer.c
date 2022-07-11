@@ -26,6 +26,7 @@ int	ft_main_lexer(char *str, t_struct *main)
 	int		ret;
 
 	str = ft_check_quotes(str, main);
+	str = ft_check_quotes(str, main);
 	str = ft_remove_special(str, main, 0);
 	ret = ft_lexer(str, main);
 	free(str);
@@ -67,7 +68,8 @@ int	ft_main_action(t_struct *main, char *str_read, t_List st)
 {
 	while (1)
 	{
-		str_read = readline(RED NAME NORMAL);
+		//str_read = readline(RED NAME NORMAL);
+		str_read = readline(NAME);
 		if (!str_read)
 			return (0);
 		if (ft_strcmp_2(str_read, "exit") == 0)

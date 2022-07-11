@@ -49,9 +49,9 @@ char	*ft_check_quotes(char *str, t_struct *main)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '"')
+		if (str[i] == '"' && simple_quotes == 0)
 			double_quotes = ft_count_quotes(i, double_quotes, main, DOUBLE);
-		if (str[i] == '\'')
+		if (str[i] == '\'' && double_quotes == 0)
 			simple_quotes = ft_count_quotes(i, simple_quotes, main, SIMPLE);
 		i++;
 	}
