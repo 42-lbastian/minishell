@@ -1,6 +1,20 @@
 #include "../include/minishell.h"
 
-char    *search_in_env
+char    *search_in_env(t_List st, char *str)
+{   
+    t_List tmp;
+
+    tmp = st;
+    while (tmp != NULL)
+    {
+        if (!ft_strcmp_2(str, tmp->var))
+        {
+            return (tmp->value);
+        }
+        tmp->next;
+    }
+    return (NULL);
+}
 
 
 void cd(t_List st, const char *path)
@@ -12,12 +26,14 @@ void cd(t_List st, const char *path)
 
     if (path == NULL || path[0] == '~')
     {
+        
         if (getcwd(cwd, sizeof(cwd)) != NULL)
         {
             oldpath = ft_strjoin("OLDPWD=", cwd);
             is_var(oldpath, st);
         }
-        c = chdir("~");
+        oldpath = search_in_env(st, "HOME");
+        c = chdir(oldpath);
         if (getcwd(cwd, sizeof(cwd)) != NULL)
         {
             oldpath = ft_strjoin("PWD=", cwd);
@@ -40,5 +56,4 @@ void cd(t_List st, const char *path)
         if (c != 0)
            return ;
     }   
-    
 }
