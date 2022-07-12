@@ -108,22 +108,22 @@ int	ft_find_left_node_add(char **str, int index)
 {
 	int i;
 
-	i = index;
+	i = index - 1;
 	while (i > 1)
 	{
 		if (str[i][0] == '+' || str[i][0] == '*')
 			break;
 		i--;
 	}
-	return (i - 1);
+	return (i);
 }
 
 int	ft_find_left_node_mult(char **str, int index)
 {
 	int i;
 
-	i = index;
-	while (i > 1)
+	i = index - 1;
+	while (i > 0)
 	{
 		if (str[i][0] == '+')
 			return (index - 1);
@@ -131,18 +131,18 @@ int	ft_find_left_node_mult(char **str, int index)
 			break;
 		i--;
 	}
-	return (i - 1);
+	return (i);
 }
 
-int	ft_find_right_node(char **str, int index, int size)
+int	ft_find_right_node(char **str, int index)
 {
 	int i;
 
-	i = index + 2;
-	while (i < size)
+	i = index + 1;
+	while (str[i])
 	{
 		if (str[i][0] == '*')
-			break;
+			return (i);
 		if (str[i][0] == '+')
 			return (index + 1);
 		i++;
@@ -150,37 +150,64 @@ int	ft_find_right_node(char **str, int index, int size)
 	return (i - 1);
 }
 
-t_node	*ft_create_tree(t_list *lst, t_node *tab_node)
+t_node	*ft_create_tree(char **token, t_node *tab_node)
 {
 	int i;
-	int	size;
 
-	size = ft_lst_size(lst);
 	i = 0;
-	while (i < size)
+	while (token[i])
 	{
-		if (lst->content[0] == '+')
+		if (token[i][0] == '+')
 		{
-			tab_node[i].value.oper = lst->content[0];
-			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_add(argv, i)];
-			tab_node[i].node_pointer.right = &tab_node[ft_find_right_node(argv, i, argc - 1)];
+			tab_node[i].value.oper = token[i][0];
+			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_add(token, i)];
+			tab_node[i].node_pointer.right = &tab_node[ft_find_right_node(token, i)];
 		}
-		else if (lst->content[0] == '*')
+		else if (token[i][0] == '*')
 		{
-			tab_node[i].value.oper = lst->content[0];
-			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_mult(argv, i)];
+			tab_node[i].value.oper = token[i][0];
+			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_mult(token, i)];
 			tab_node[i].node_pointer.right = &tab_node[i + 1];
 		}
 		else
 		{
-			tab_node[i].value.nb = atoi(argv[i + 1]);
+			tab_node[i].value.nb = atoi(token[i]);
 			tab_node[i].node_pointer.left = NULL;
 			tab_node[i].node_pointer.right = NULL;	
 		}
-		lst = lst->next;
 		i++;
 	}
 	return (tab_node);
+}
+
+int ft_find_root(char **token)
+{
+	int	i;
+	int	last_node;
+	int	found_add;
+
+	i = 0;
+	last_node = 0;
+	found_add = 0;
+	while (token[i])
+	{
+		if (token[i][0] == '*')
+		{
+			if (found_add == 0)
+				if (last_node == 0)
+					last_node = i;
+		}
+		if (token[i][0] == '+')
+		{
+			if (found_add == 0)
+			{
+				found_add = 1;
+				last_node = i;
+			}
+		}
+		i++;
+	}
+	return (last_node);
 }
 
 int main(int argc, char **argv)
@@ -188,7 +215,9 @@ int main(int argc, char **argv)
 	int i;
 	t_node *tab_node;
 	t_list	*lst;
-	
+	char	**token;
+	int size;
+
 	lst = NULL;
 	i = 1;
 	tab_node = malloc(sizeof(t_node) * argc - 1);
@@ -198,8 +227,20 @@ int main(int argc, char **argv)
 		ft_lst_add_back(&lst, ft_lst_init(argv[i]));
 		i++;
 	}
-	tab_node = ft_create_tree(lst, tab_node);
+	size = ft_lst_size(lst);
+	i = 0;
+	token = malloc(sizeof(char *) * (size + 1));
+	token[size] = NULL;
+	while (i < size)
+	{
+		token[i] = lst->content;
+		lst = lst->next;
+		i++;
+	}
 
+	tab_node = ft_create_tree(token, tab_node);
+
+//	printf("%d-%d\n", tab_node[1].node_pointer.right->node_pointer.right->value.nb, tab_node[1].node_pointer.right->node_pointer.left->value.nb);
 
 	/*
 	tab_node[0].value.nb = atoi(argv[1]);
@@ -229,6 +270,8 @@ int main(int argc, char **argv)
 //	printf("%d-%d\n", tab_node[3].node_pointer.left->value.nb, tab_node[3].node_pointer.right->value.nb);
 //	printf("%p-%p\n", tab_node[3].node_pointer.left->node_pointer.left, tab_node[3].node_pointer.right->node_pointer.right);
 	
+//	printf("Root? %d\n", ft_find_root(token));
+//	printf("%d\n", ft_print_tree(&tab_node[ft_find_root(token)]));
 	printf("%d\n", ft_print_tree(&tab_node[1]));
 
 
