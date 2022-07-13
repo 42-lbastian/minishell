@@ -3,10 +3,15 @@
 int	ft_lexer(char *str, t_struct *main)
 {
 	main->i = 0;
+	main->is_arg = 0;
 	while (str[main->i])
 	{
-		if (ft_belong_cmd_start(str[main->i]))
+		if (ft_belong_cmd_start(str[main->i]) && main->is_arg == 0)
 			ft_read_cmd(str, main);
+		if (str[main->i] == '-')
+			ft_read_flag(str, main);
+		if (ft_belong_cmd_start(str[main->i]) && main->is_arg == 1)
+			ft_read_arg(str, main);
 		if (str[main->i] == '"')
 			ft_read_quotes(str, main, '"');
 		if (str[main->i] == '\'')
@@ -29,6 +34,7 @@ int	ft_main_lexer(char *str, t_struct *main)
 	str = ft_check_quotes(str, main);
 	str = ft_remove_special(str, main, 0);
 	ret = ft_lexer(str, main);
+	ft_remove_spaces(&main->lst);
 	free(str);
 	return (ret);
 }
@@ -84,7 +90,7 @@ int	ft_main_action(t_struct *main, char *str_read, t_List st)
 		//parser
 		ft_temp_test_cmd(main);
 		ft_cmd(main, st);
-		//ft_print_lst(main->lst);
+		ft_print_lst(main->lst);
 		ft_free_lst(&main->lst);
 	}
 	free(str_read);

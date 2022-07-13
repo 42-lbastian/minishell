@@ -6,6 +6,10 @@
 #define RED "\1\033[1;31m\2"
 #define NORMAL "\1\x1b[0m\2"
 #define NAME "minishell> "
+#define	OPER 1
+#define CMD 2
+#define FLAG 3
+#define ARG 4
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -25,6 +29,7 @@ typedef struct	s_list
 {
 	char			*content;
 	struct s_list	*next;
+	int				type;
 }				t_list;
 
 typedef	struct	s_char_check
@@ -38,6 +43,7 @@ typedef	struct	s_char_check
 typedef struct s_struct
 {
 	int				i;
+	int				is_arg;
 	t_list			*lst;
 	t_char_check	char_check;
 	char			**temp_str;
@@ -82,6 +88,7 @@ char	**ft_trim_equal(char const *s, char charset);
 */
 int	ft_belong_cmd_start(char c);
 int	ft_belong_cmd_end(char c);
+int	ft_belong_arg_end(char c);
 int	ft_is_alpha(char c);
 
 /*
@@ -109,6 +116,8 @@ int	ft_strlen(const char *str);
 void	ft_read_special(char *str, t_struct *main);
 void	ft_read_quotes(char *str, t_struct *main, char c);
 void	ft_read_cmd(char *str, t_struct *main);
+void	ft_read_arg(char *str, t_struct *main);
+void	ft_read_flag(char *str, t_struct *main);
 
 /*
 **		unwanted.c
@@ -119,7 +128,7 @@ char *ft_remove_special(char *str, t_struct *main, int i);
 /*
 **		list.c
 */
-t_list	*ft_lst_new(char *content);
+t_list	*ft_lst_new(char *content, int type);
 t_list *ft_lst_last(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_print_lst(t_list *lst);
@@ -131,5 +140,9 @@ char	*ft_get_lst_str_index(t_list *lst, int index);
 */
 void	ft_free_lst(t_list **lst);
 
+/*
+**		remove_spaces.c
+*/
+void	ft_remove_spaces(t_list **lst);
 
 #endif

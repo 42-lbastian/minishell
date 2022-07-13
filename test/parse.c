@@ -12,7 +12,7 @@ typedef struct	s_node_pointer
 
 typedef union	u_node_value
 {
-	int	nb;
+	char	*cmd;
 	char	oper;
 }				t_union_node;
 
@@ -76,6 +76,7 @@ void	ft_print_lst(t_list *lst)
 	printf("\n");
 }
 
+/*
 int	ft_print_tree(t_node *node)
 {
 	int value;
@@ -96,13 +97,7 @@ int	ft_print_tree(t_node *node)
 	}
 	else
 		return (node->value.nb);
-	/*
-	if (!node->node_pointer.left)
-		printf("%d\t", node->value.nb);
-	else
-		printf("%c\t", node->value.oper);
-	*/
-}
+}*/
 
 int	ft_find_left_node_add(char **str, int index)
 {
@@ -150,6 +145,32 @@ int	ft_find_right_node(char **str, int index)
 	return (i - 1);
 }
 
+int	ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	ft_strcmp(char *str1, char *str2)
+{
+	int	i;
+
+	i = 0;
+	while (str1[i] && str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (1);
+		i++;
+	}
+	if (i < ft_strlen(str1) || i < ft_strlen(str2))
+		return (1);
+	return (0);
+}
+
 t_node	*ft_create_tree(char **token, t_node *tab_node)
 {
 	int i;
@@ -157,23 +178,21 @@ t_node	*ft_create_tree(char **token, t_node *tab_node)
 	i = 0;
 	while (token[i])
 	{
-		if (token[i][0] == '+')
-		{
-			tab_node[i].value.oper = token[i][0];
-			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_add(token, i)];
-			tab_node[i].node_pointer.right = &tab_node[ft_find_right_node(token, i)];
-		}
-		else if (token[i][0] == '*')
-		{
-			tab_node[i].value.oper = token[i][0];
-			tab_node[i].node_pointer.left = &tab_node[ft_find_left_node_mult(token, i)];
-			tab_node[i].node_pointer.right = &tab_node[i + 1];
-		}
+		if (ft_strcmp(token[i], "|") == 0)
+		{}
+		else if (ft_strcmp(token[i], "<") == 0)
+		{}
+		else if (ft_strcmp(token[i], ">") == 0)
+		{}
+		else if (ft_strcmp(token[i], ">>") == 0)
+		{}
+		else if (ft_strcmp(token[i], "<<") == 0)
+		{}
 		else
 		{
-			tab_node[i].value.nb = atoi(token[i]);
+			tab_node[i].node_pointer.right = NULL;
 			tab_node[i].node_pointer.left = NULL;
-			tab_node[i].node_pointer.right = NULL;	
+			tab_node[i].value.cmd = token[i];
 		}
 		i++;
 	}
@@ -272,7 +291,7 @@ int main(int argc, char **argv)
 	
 //	printf("Root? %d\n", ft_find_root(token));
 //	printf("%d\n", ft_print_tree(&tab_node[ft_find_root(token)]));
-	printf("%d\n", ft_print_tree(&tab_node[1]));
+//	printf("%d\n", ft_print_tree(&tab_node[1]));
 
 
 	//printf("%p\t%p\n", tab_node[1].node_pointer.left, tab_node[1].node_pointer.right);

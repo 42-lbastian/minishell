@@ -9,6 +9,7 @@ SRCS =	lexer/char_check.c \
 		lexer/utils.c \
 		lexer/list.c \
 		lexer/free.c \
+		lexer/remove_spaces.c \
 		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/echo.c \

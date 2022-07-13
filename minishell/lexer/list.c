@@ -1,12 +1,13 @@
 #include "../include/minishell.h"
 
-t_list	*ft_lst_new(char *content)
+t_list	*ft_lst_new(char *content, int type)
 {
 	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	new->next = NULL;
 	new->content = content;
+	new->type = type;
 	return (new);
 }
 
