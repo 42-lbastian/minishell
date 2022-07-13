@@ -38,7 +38,7 @@ void	ft_cmd(t_struct *main, t_List st)
 	if (ft_strcmp_2(main->temp_str[0], "echo") == 0)
 		echo(main->temp_str);
 	if (ft_strcmp_2(main->temp_str[0], "cd") == 0)
-		cd(main->temp_str[1]);
+		cd(st, main->temp_str[1]);
 	if (ft_strcmp_2(main->temp_str[0], "pwd") == 0)
 		pwd();	
 	if (ft_strcmp_2(main->temp_str[0], "env") == 0)
