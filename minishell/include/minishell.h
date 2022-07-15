@@ -130,7 +130,7 @@ char *ft_remove_special(char *str, t_struct *main, int i);
 */
 t_list	*ft_lst_new(char *content, int type);
 t_list *ft_lst_last(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
+int		ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_print_lst(t_list *lst);
 int		ft_lst_size(t_list *lst);
 char	*ft_get_lst_str_index(t_list *lst, int index);
@@ -143,6 +143,11 @@ void	ft_free_lst(t_list **lst);
 /*
 **		remove_spaces.c
 */
-void	ft_remove_spaces(t_list **lst);
+int		ft_remove_spaces(t_list **lst);
+
+/*
+**		env_var.c
+*/
+int		ft_env_var(t_list **lst, t_List st);
 
 #endif

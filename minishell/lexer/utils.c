@@ -6,7 +6,7 @@ int	ft_strcmp_2(const char *str1, const char *str2)
 
 	i = 0;
 	if (!str1)
-		return (0);
+		return (1);
 	while (str1[i] && str2[i])
 	{
 		if (str1[i] != str2[i])

@@ -5,6 +5,8 @@ t_list	*ft_lst_new(char *content, int type)
 	t_list	*new;
 
 	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
 	new->next = NULL;
 	new->content = content;
 	new->type = type;
@@ -18,19 +20,29 @@ t_list	*ft_lst_last(t_list *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_lstadd_back(t_list **lst, t_list *new)
 {
+	if (!new)
+		return (1);
 	if (lst && (*lst))
 		ft_lst_last((*lst))->next = new;
 	else
 		(*lst) = new;
+	return (0);
 }
 
 void	ft_print_lst(t_list *lst)
 {
 	while (lst)
 	{
-		printf("|%s|\n", lst->content);
+		if (lst->type == OPER)
+			printf("|%s|\t|OPER|\n", lst->content);
+		if (lst->type == ARG)
+			printf("|%s|\t|ARG|\n", lst->content);
+		if (lst->type == CMD)
+			printf("|%s|\t|CMD|\n", lst->content);
+		if (lst->type == FLAG)
+			printf("|%s|\t|FLAG|\n", lst->content);
 		lst = lst->next;
 	}
 }

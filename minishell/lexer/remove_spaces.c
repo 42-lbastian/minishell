@@ -56,7 +56,7 @@ char	*ft_spaces_flag(char *str)
 	return (temp);
 }
 
-void	ft_remove_spaces(t_list **lst)
+int	ft_remove_spaces(t_list **lst)
 {
 	t_list *temp;
 
@@ -67,7 +67,10 @@ void	ft_remove_spaces(t_list **lst)
 			(*lst)->content = ft_spaces_flag((*lst)->content);
 		if ((*lst)->type == ARG && ((*lst)->content[0] != '"' && (*lst)->content[0] != '\''))
 			(*lst)->content = ft_spaces_flag((*lst)->content);
+		if (!(*lst)->content)
+			return (1);
 		(*lst) = (*lst)->next;
 	}
 	(*lst) = temp;
+	return (0);
 }

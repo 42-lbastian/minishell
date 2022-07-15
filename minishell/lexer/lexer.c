@@ -6,19 +6,19 @@ int	ft_lexer(char *str, t_struct *main_s)
 	main_s->is_arg = 0;
 	while (str[main_s->i])
 	{
-		if (ft_belong_cmd_start(str[main_s->i]) && main_s->is_arg == 0)
+		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i]) && main_s->is_arg == 0)
 			ft_read_cmd(str, main_s);
-		if (str[main_s->i] == '-')
+		if (str[main_s->i] && str[main_s->i] == '-')
 			ft_read_flag(str, main_s);
-		if (ft_belong_cmd_start(str[main_s->i]) && main_s->is_arg == 1)
+		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i]) && main_s->is_arg == 1)
 			ft_read_arg(str, main_s);
-		if (str[main_s->i] == '"')
+		if (str[main_s->i] && str[main_s->i] == '"')
 			ft_read_quotes(str, main_s, '"');
-		if (str[main_s->i] == '\'')
+		if (str[main_s->i] && str[main_s->i] == '\'')
 			ft_read_quotes(str, main_s, '\'');
-		if (ft_special_char(str[main_s->i]))
+		if (str[main_s->i] && ft_special_char(str[main_s->i]))
 			ft_read_special(str, main_s);
-		while (str[main_s->i] == ' ' && str[main_s->i])
+		while (str[main_s->i] && str[main_s->i] == ' ')
 			main_s->i++;
 		if (main_s->char_check.error == 1)
 			return (1);
@@ -26,16 +26,19 @@ int	ft_lexer(char *str, t_struct *main_s)
 	return (0);
 }
 
-int	ft_main_s_lexer(char *str, t_struct *main_s)
+int	ft_main_s_lexer(char *str, t_struct *main_s, t_List st)
 {	
 	int		ret;
-
+	
 	str = ft_check_quotes(str, main_s);
 	str = ft_check_quotes(str, main_s);
 	str = ft_remove_special(str, main_s, 0);
 	ret = ft_lexer(str, main_s);
-	ft_remove_spaces(&main_s->lst);
-	free(str);
+	if (ret == 0)
+		ret = ft_env_var(&main_s->lst, st);
+	if (ret == 0)
+		ret = ft_remove_spaces(&main_s->lst);
+	//free(str);
 	return (ret);
 }
 
@@ -65,7 +68,10 @@ void	ft_temp_test_cmd(t_struct *main_s)
 	main_s->temp_str[size] = NULL;
 	while (i < size)
 	{
-		main_s->temp_str[i] = ft_strcpy_2(ft_get_lst_str_index(main_s->lst, i));
+		if (ft_strlen(ft_get_lst_str_index(main_s->lst, i))  == 0)
+			main_s->temp_str[i] = NULL;
+		else
+			main_s->temp_str[i] = ft_strcpy_2(ft_get_lst_str_index(main_s->lst, i));
 		i++;
 	}
 }
@@ -82,8 +88,9 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 			break ;
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
-		if (ft_main_s_lexer(str_read, main_s))
+		if (ft_main_s_lexer(str_read, main_s, st))
 		{
+			ft_putstr_fd("Malloc error\n", 2);
 			ft_free_lst(&main_s->lst);
 			break ;
 		}
