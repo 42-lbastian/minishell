@@ -122,7 +122,7 @@ int		ft_count_char(char *str)
 
 //STRJOIN
 
-void	ft_str_join2(char *dest, char *str, int start)
+int	ft_str_join2(char *dest, char *str, int start)
 {
 	int	i;
 	int	j;
@@ -141,6 +141,7 @@ void	ft_str_join2(char *dest, char *str, int start)
 	}
 	else
 		dest = NULL;
+	return (j);
 }
 
 char	*ft_find_var(char *str, t_List st)
@@ -182,13 +183,9 @@ char	*ft_replace(int size, t_List st, char *str)
 					i++;
 				//printf("Substr %s\n", ft_substr(str, j, i - j));
 				//printf("Find %s\n", ft_find_var(ft_substr(str, j, i - j), st));
-				ft_str_join2(temp, ft_find_var((ft_substr(str, j, i - j)), st), y);
-				
-
-				//i -= 2
-				
-				i--;
-				y = i;
+				//printf("Y Start %d\n", y);
+				y = ft_str_join2(temp, ft_find_var((ft_substr(str, j, i - j)), st), y);
+				//printf("J %d\tCj |%c|\tI %d\tCi |%c|\tY New %d\n", j, str[j], i, str[i], y);
 			}
 			else
 			{
@@ -198,20 +195,20 @@ char	*ft_replace(int size, t_List st, char *str)
 		}
 		else
 		{
-			printf("SIZE %d\tY %d\tI %d\n", size, y, i);
+			//printf("SIZE %d\tY %d\tI %d\n", size, y, i);
 			//printf("CHAR2MERDE %c\n", str[i]);
 			temp[y] = str[i];
 			i++;
 			y++;
 		}
 	}
-	printf("\nSTR %s\n", str);
-	printf("TEMP |%s|\n\n", temp);
+	//printf("\nSTR %s\n", str);
+	//printf("TEMP |%s|\n\n", temp);
 	free(str);
 	return (temp);
 }
 
-void	ft_main_replace_env(char *str, t_List st)
+char	*ft_main_replace_env(char *str, t_List st)
 {
 	int index;
 	int	size;
@@ -226,8 +223,9 @@ void	ft_main_replace_env(char *str, t_List st)
 	}
 	//printf("SIZE %d\n", size);
 	str = ft_replace(size, st, str);
-//	if (!str)
-	//PROTECT MALLOC		
+	if (!str)
+		return (NULL);
+	return (str);
 }
 
 int		ft_env_var(t_list **lst, t_List st)
@@ -242,7 +240,11 @@ int		ft_env_var(t_list **lst, t_List st)
 		if ((*lst)->type == ARG)
 		{
 			if ((*lst)->content[0] != '\'')
-				ft_main_replace_env((*lst)->content, st);
+			{
+				(*lst)->content = ft_main_replace_env((*lst)->content, st);
+				if (!(*lst)->content)
+					return (1);
+			}
 		}
 		(*lst) = (*lst)->next;
 	}
