@@ -146,8 +146,8 @@ void	ft_free_lst(t_list **lst);
 int		ft_remove_spaces(t_list **lst);
 
 /*
-**		env_var.c
+**		replace_arg.c
 */
-int		ft_env_var(t_list **lst, t_List st);
+int		ft_replace_arg(t_list **lst, t_List st);
 
 #endif

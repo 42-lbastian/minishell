@@ -103,8 +103,8 @@ int		ft_count_char(char *str)
 		if (str[i] == '$')
 		{
 			i++;
-			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$')
-				while (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$')
+			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$' && str[i] != ' ')
+				while (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$' && str[i] != ' ')
 					i++;
 			else
 				size++;
@@ -176,10 +176,10 @@ char	*ft_replace(int size, t_List st, char *str)
 		if (str[i] == '$')
 		{
 			i++;
-			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$')
+			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$' && str[i] != ' ')
 			{
 				j = i;
-				while (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$')
+				while (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$' && str[i] != ' ')
 					i++;
 				//printf("Substr %s\n", ft_substr(str, j, i - j));
 				//printf("Find %s\n", ft_find_var(ft_substr(str, j, i - j), st));
@@ -228,7 +228,12 @@ char	*ft_main_replace_env(char *str, t_List st)
 	return (str);
 }
 
-int		ft_env_var(t_list **lst, t_List st)
+char	*ft_remove_quotes(char *str)
+{
+	return (str);
+}
+
+int		ft_replace_arg(t_list **lst, t_List st)
 {
 	t_list *temp;
 
@@ -245,6 +250,7 @@ int		ft_env_var(t_list **lst, t_List st)
 				if (!(*lst)->content)
 					return (1);
 			}
+			(*lst)->content = ft_remove_quotes((*lst)->content);
 		}
 		(*lst) = (*lst)->next;
 	}

@@ -37,7 +37,7 @@ int	ft_main_s_lexer(char *str, t_struct *main_s, t_List st)
 	if (ret == 0)
 		ret = ft_remove_spaces(&main_s->lst);
 	if (ret == 0)
-		ret = ft_env_var(&main_s->lst, st);
+		ret = ft_replace_arg(&main_s->lst, st);
 	//free(str);
 	return (ret);
 }
