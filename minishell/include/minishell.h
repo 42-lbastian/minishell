@@ -52,7 +52,8 @@ void	pwd(void);
 **		echo.c
 **/
 int		echo(char **str);
-
+int is_in_env(t_List st, char *var_name, char *var_value);
+void	ft_unset(t_List st, char **arg);
 /**
 **		cd.c
 **/

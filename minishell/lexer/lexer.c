@@ -45,6 +45,8 @@ void	ft_cmd(t_struct *main, t_List st)
 		print_env(st);
 	if (ft_strcmp_2(main->temp_str[0], "export") == 0)
 		ft_export(st, main->temp_str);
+	if (ft_strcmp_2(main->temp_str[0], "unset") == 0)
+		ft_unset(st, main->temp_str);
 }
 
 void	ft_temp_test_cmd(t_struct *main)
