@@ -57,7 +57,6 @@ void is_var(char *str, t_List st)
 
 void    export_only(t_List st)
 {
-    char **tab;
     int	i;
 
 	i = 0;

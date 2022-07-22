@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-
+/*
 void	ft_list_remove_if(t_ListElement **st, char *var_name, char *var_value)
 {
 	t_ListElement	*curr;
@@ -21,12 +21,24 @@ void	ft_list_remove_if(t_ListElement **st, char *var_name, char *var_value)
         printf("%s\n", (curr)->var);
 		if (!ft_strcmp_2(var_name, (curr)->var))
 		{
-            printf("on supp\n\n\n");
+	           	printf("on supp\n\n\n");
 			tmp = curr->next;
 			curr->next = tmp->next;
 			free(tmp);
 		}
 		curr = curr->next;
+	}
+}
+*/
+
+void	ft_list_remove_if(t_List st, char *var_name, char *var_value)
+{
+	(void) var_value;
+	while (st && st->next)
+	{
+		if (!ft_strcmp_2(var_name, st->next->var))
+			st = st->next->next;
+
 	}
 }
 
@@ -65,7 +77,7 @@ void is_var2(char *str, t_List st)
                 var_value = ret[1];
         free(ret);
         if (is_in_env(st, var_name, var_value))
-            ft_list_remove_if(&st , var_name, var_value);
+            ft_list_remove_if(st , var_name, var_value);
    }
 }
 
