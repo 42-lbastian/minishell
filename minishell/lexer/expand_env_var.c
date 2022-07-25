@@ -35,9 +35,13 @@ char	*ft_find_var(char *str, t_List st)
 	while (st)
 	{
 		if (ft_strcmp_2(st->var, str) == 0)
+		{
+			free(str);
 			return (st->value);
+		}
 		st = st->next;
 	}
+	free(str);
 	return ("");
 }
 

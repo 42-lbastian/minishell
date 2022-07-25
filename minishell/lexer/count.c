@@ -63,7 +63,7 @@ int	ft_lenght_read_var(char *str, int index)
 
 	i = index;
 	size = 0;
-	while (str[i])
+	while (i < ft_strlen(str))
 	{
 		while (str[i] == '"' || str[i] == '\'')
 			i++;

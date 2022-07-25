@@ -61,7 +61,6 @@ int	ft_strjoin_2(char *dest, char *str, int start)
 			i++;
 			j++;
 		}
-		//free(str); WTF REPLACE ENV VAR
 	}
 	else
 		dest = NULL;
