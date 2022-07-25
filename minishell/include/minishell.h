@@ -83,6 +83,11 @@ t_List	add_list(char **tab, t_List sta);
 **/
 char	**ft_trim_equal(char const *s, char charset);
 
+/**
+**		lexer.c
+**/
+int	ft_main_s_lexer(char *str, t_struct *main_s, t_List st);
+
 /*		
 **		char_check.c
 */
@@ -104,11 +109,31 @@ void	ft_init_struct(t_struct *main, int argc, char **argv);
 void	ft_fill_tab_char(t_struct *main, char *str);
 
 /*
+**		remove_quotes.c
+*/
+char	*ft_remove_quotes(char *str);
+
+/*
+**		expand_var.c
+*/
+char	*ft_main_replace_env(char *str, t_List st);
+
+/**
+**		count.c
+**/
+int	ft_start_read_var(char *str, int index);
+int	ft_lenght_read_var(char *str, int index);
+int	ft_count_char(char *str);
+int	ft_count_nb_quotes(char *str);
+int	ft_count_remove_quotes(char *str);
+
+/*
 **		utils.c
 */
 int	ft_strcmp_2(const char *str1, const char *str2);
 char *ft_strcpy_2(char *str);
 int	ft_strlen(const char *str);
+int	ft_strjoin_2(char *dest, char *str, int start);
 
 /*
 **		read_char.c

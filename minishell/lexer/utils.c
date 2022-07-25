@@ -45,3 +45,25 @@ int	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+
+int	ft_strjoin_2(char *dest, char *str, int start)
+{
+	int	i;
+	int	j;
+
+	j = start;
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			dest[j] = str[i];
+			i++;
+			j++;
+		}
+		//free(str); WTF REPLACE ENV VAR
+	}
+	else
+		dest = NULL;
+	return (j);
+}

@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int		ft_count_spaces(char *str)
+int	ft_count_spaces(char *str)
 {
 	int	size;
 	int	i;
@@ -58,14 +58,15 @@ char	*ft_spaces_flag(char *str)
 
 int	ft_remove_spaces(t_list **lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	temp = (*lst);
 	while (lst && (*lst))
 	{
 		if ((*lst)->type == FLAG)
 			(*lst)->content = ft_spaces_flag((*lst)->content);
-		if ((*lst)->type == ARG && ((*lst)->content[0] != '"' && (*lst)->content[0] != '\''))
+		if ((*lst)->type == ARG && ((*lst)->content[0] != '"'
+				&& (*lst)->content[0] != '\''))
 			(*lst)->content = ft_spaces_flag((*lst)->content);
 		if (!(*lst)->content)
 			return (1);
