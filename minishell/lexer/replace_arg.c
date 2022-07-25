@@ -15,7 +15,6 @@ int	ft_replace_arg(t_list **lst, t_List st)
 				if (!(*lst)->content)
 					return (1);
 			}
-
 		}
 		(*lst)->content = ft_remove_quotes((*lst)->content);
 		if (!(*lst)->content)

@@ -20,7 +20,7 @@ int	ft_size_env_var(t_List st, char *str, int index, int fact)
 		if (ft_strcmp_2(st->var, temp) == 0)
 		{
 			size = ft_strlen(st->value);
-			break;
+			break ;
 		}
 		st = st->next;
 	}
