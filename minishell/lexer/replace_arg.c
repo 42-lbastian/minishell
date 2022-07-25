@@ -80,11 +80,9 @@ int		ft_size_env_var(t_List st, char *str, int index, int fact)
 	{
 		if (ft_strcmp_2(st->var, temp) == 0)
 		{
-			//printf("\nTEST |%s|=|%s|\t%s\n\n", temp, st->var, st->value);
 			size = ft_strlen(st->value);
 			break;
 		}
-		//printf("TEST |%s|=|%s|\n", temp, st->var);
 		st = st->next;
 	}
 	free(temp);
@@ -119,8 +117,6 @@ int		ft_count_char(char *str)
 	}
 	return (size);
 }
-
-//STRJOIN
 
 int	ft_str_join2(char *dest, char *str, int start)
 {
@@ -164,7 +160,6 @@ char	*ft_replace(int size, t_List st, char *str)
 	int		y;
 	int		j;
 
-//	(void)st;
 	i = 0;
 	y = 0;
 	temp = malloc(sizeof(char) * (size + 1));
@@ -181,11 +176,7 @@ char	*ft_replace(int size, t_List st, char *str)
 				j = i;
 				while (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$' && str[i] != ' ')
 					i++;
-				//printf("Substr %s\n", ft_substr(str, j, i - j));
-				//printf("Find %s\n", ft_find_var(ft_substr(str, j, i - j), st));
-				//printf("Y Start %d\n", y);
 				y = ft_str_join2(temp, ft_find_var((ft_substr(str, j, i - j)), st), y);
-				//printf("J %d\tCj |%c|\tI %d\tCi |%c|\tY New %d\n", j, str[j], i, str[i], y);
 			}
 			else
 			{
@@ -195,15 +186,11 @@ char	*ft_replace(int size, t_List st, char *str)
 		}
 		else
 		{
-			//printf("SIZE %d\tY %d\tI %d\n", size, y, i);
-			//printf("CHAR2MERDE %c\n", str[i]);
 			temp[y] = str[i];
 			i++;
 			y++;
 		}
 	}
-	//printf("\nSTR %s\n", str);
-	//printf("TEMP |%s|\n\n", temp);
 	free(str);
 	return (temp);
 }
@@ -221,16 +208,67 @@ char	*ft_main_replace_env(char *str, t_List st)
 		size += ft_size_env_var(st, str, index, 0);
 		index = ft_size_env_var(st, str, index, 1);
 	}
-	//printf("SIZE %d\n", size);
 	str = ft_replace(size, st, str);
 	if (!str)
 		return (NULL);
 	return (str);
 }
 
+int		ft_count_remove_quotes(char *str)
+{
+	int	i;
+	int	size;
+	int	quotes;
+
+	size = 0;
+	i = 0;
+	quotes = 0;
+	while (str[i])
+	{
+		if (str[i] == '"' && quotes == 0)
+			quotes = 1;
+		else if (str[i] == '\'' && quotes == 0)
+			quotes = 2;
+		else if ((str[i] == '\'' && quotes == 2) || (str[i] == '"' && quotes == 1))
+			quotes = 0;
+		else
+			size++;
+		i++;
+	}
+	return (size);
+}
+
 char	*ft_remove_quotes(char *str)
 {
-	return (str);
+	char	*temp;
+	int		i;
+	int		j;
+	int		quotes;
+
+	i = 0;
+	j = 0;
+	quotes = 0;
+	temp = malloc(sizeof(char) * (ft_count_remove_quotes(str) + 1));
+	if (!temp)
+		return (NULL);
+	temp[ft_count_remove_quotes(str)] = '\0';
+	while (str[i])
+	{
+		if (str[i] == '"' && quotes == 0)
+			quotes = 1;
+		else if (str[i] == '\'' && quotes == 0)
+			quotes = 2;
+		else if ((str[i] == '\'' && quotes == 2) || (str[i] == '"' && quotes == 1))
+			quotes = 0;
+		else
+		{
+			temp[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	free(str);
+	return (temp);
 }
 
 int		ft_replace_arg(t_list **lst, t_List st)
