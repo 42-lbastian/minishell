@@ -10,7 +10,8 @@ function exec_cmd ()
 	echo $@ | ./minishell/minishell &> 1
 
 	printf "minishell> %s\n" "$@" > 2
-	echo $@ | bash --posix &>> 2
+	#echo $@ | bash --posix &>> 2
+	echo $@ | bash &>> 2
 	printf "minishell> " >> 2
 	
 	DIFF=$(diff 1 2)
@@ -45,12 +46,12 @@ then
 	exec_cmd 'echo toto tata titi -n'
 	exec_cmd 'echo toto'
 	exec_cmd 'echo'
-	#exec_cmd 'echo "toto"'
-	#exec_cmd 'echo '\''toto'\'''
-	#exec_cmd 'echo " "'
-	#exec_cmd 'echo '\'' '\'''
-	#exec_cmd 'echo ""'
-	#exec_cmd 'echo '\'''\'''
+	exec_cmd 'echo "toto"'
+	exec_cmd 'echo '\''toto'\'''
+	exec_cmd 'echo " "'
+	exec_cmd 'echo '\'' '\'''
+	exec_cmd 'echo ""'
+	exec_cmd 'echo '\'''\'''
 
 	exec_cmd 'echo -n toto tata titi'
 	exec_cmd 'echo -n toto'
@@ -60,10 +61,16 @@ then
 	exec_cmd 'echo -ntoto'
 	exec_cmd 'echo -n'
 
-	#exec_cmd "echo "\""$USER"\"""
-	#exec_cmd 'echo '\''$USER'\'''
-	#exec_cmd "echo $USER"
+	exec_cmd "echo "\""$USER"\"""
+	exec_cmd 'echo '\''$USER'\'''
+	exec_cmd "echo $USER"
+	exit 1
+	exec_cmd 'echo '\''$US"ER'\'''
 
+	exec_cmd '"echo" toto'
+	exec_cmd ''\''echo'\'' toto'
+	exec_cmd 'echo '\''"toto"'\'''
+	exit 1
 
 	#PWD
 	exec_cmd 'pwd'
