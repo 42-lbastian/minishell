@@ -64,6 +64,7 @@ then
 	exec_cmd "echo "\""$USER"\"""
 	exec_cmd 'echo '\''$USER'\'''
 	exec_cmd "echo $USER"
+	exec_cmd 'echo \$USER'
 	exit 1
 	exec_cmd 'echo '\''$US"ER'\'''
 
