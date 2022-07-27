@@ -22,10 +22,3 @@ int	ft_belong_cmd_end(char c)
 		return (1);
 	return (0);
 }
-
-int	ft_belong_arg_end(char c)
-{
-	if (c != '<' && c != '>' && c != '|')
-		return (1);
-	return (0);
-}

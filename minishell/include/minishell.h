@@ -99,7 +99,6 @@ int	ft_main_s_lexer(char *str, t_struct *main_s, t_List st);
 */
 int	ft_belong_cmd_start(char c);
 int	ft_belong_cmd_end(char c);
-int	ft_belong_arg_end(char c);
 int	ft_is_alpha(char c);
 
 /*
@@ -148,7 +147,6 @@ void	ft_read_special(char *str, t_struct *main);
 void	ft_read_quotes(char *str, t_struct *main, char c);
 void	ft_read_cmd(char *str, t_struct *main, int type);
 void	ft_read_arg(char *str, t_struct *main);
-void	ft_read_flag(char *str, t_struct *main);
 
 /*
 **		unwanted.c
