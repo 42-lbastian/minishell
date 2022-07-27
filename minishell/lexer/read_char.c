@@ -35,17 +35,16 @@ void	ft_read_quotes(char *str, t_struct *main, char c)
 			|| (str[main->i + y] == '\'' && quotes == 2))
 			quotes = 0;
 		if (ft_belong_cmd_end(str[main->i + y]) == 0 && quotes == 0)
-		{
-			printf("BELONG %c\t%c\n", str[main->i + y], str[main->i + y - 1]);
-			printf("QUOTES %d\n", quotes);
 			break;
-		}
 		y++;
 	}
+	if (str[main->i + y] == ' ')
+		y--;
 	error = ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y
 					+ 1), ARG));
 	if (error || !(ft_lst_last(main->lst)->content))
 		main->char_check.error = 1;
+	printf("STR |%s|\n", ft_lst_last(main->lst)->content);
 	main->i += y;
 	if (str[main->i])
 		main->i++;
