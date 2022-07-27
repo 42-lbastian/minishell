@@ -31,17 +31,6 @@ void	ft_list_remove_if(t_ListElement **st, char *var_name, char *var_value)
 }
 */
 
-void	ft_list_remove_if(t_List st, char *var_name, char *var_value)
-{
-	(void) var_value;
-	while (st && st->next)
-	{
-		if (!ft_strcmp_2(var_name, st->next->var))
-			st = st->next->next;
-
-	}
-}
-
 
 void is_var2(char *str, t_List st)
 {

@@ -49,7 +49,7 @@ int echo(char **str)
 	i = 1;
 	if (str[i])
 	{
-		if (is_n(str[1]))
+		while (is_n(str[i]))
 		{
 			n = 0;
 			i++;
