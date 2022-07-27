@@ -50,6 +50,12 @@ typedef struct s_struct
 }		t_struct;
 
 /**
+**		unset.c
+**/
+void	ft_unset(t_List st, char **arg);
+int		is_in_env(t_List st, char *var_name, char *var_value);
+
+/**
 **		pwd.c
 **/
 void	pwd(void);

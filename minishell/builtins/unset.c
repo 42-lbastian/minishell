@@ -1,26 +1,41 @@
 #include "../include/minishell.h"
 
-int is_in_env(t_List st, char *var_name, char *var_value)
+/*
+void	ft_list_remove_if(t_ListElement **st, char *var_name, char *var_value)
 {
-	if (st == NULL)
-		return 0;
-	while (st !=NULL)
-	{
-        if (!ft_strcmp_2(var_name, st->var))
-        {
-            st->var = var_name;
-	        st->value = var_value;
-            return (1);
-        }
-		st = st->next;
-	}
-    return (0);
-}
+	t_ListElement	*curr;
+	t_ListElement	*tmp;
 
-void is_var(char *str, t_List st)
+    (void) var_value;
+    printf("here\n");
+	while (*st && !ft_strcmp_2(var_name, (*st)->var))
+	{
+		curr = *st;
+		*st = (*st)->next;
+		free(curr);
+	}
+	curr = *st;
+	while (curr && curr->next)
+	{
+        printf("here\n");
+        printf("%s\n", (curr)->var);
+		if (!ft_strcmp_2(var_name, (curr)->var))
+		{
+	           	printf("on supp\n\n\n");
+			tmp = curr->next;
+			curr->next = tmp->next;
+			free(tmp);
+		}
+		curr = curr->next;
+	}
+}
+*/
+
+
+void is_var2(char *str, t_List st)
 {
-   int i;
-    char **ret;
+	int i;
+	char **ret;
     char    *var_name;
     char    *var_value;
 
@@ -50,39 +65,20 @@ void is_var(char *str, t_List st)
            else 
                 var_value = ret[1];
         free(ret);
-        if (!is_in_env(st, var_name, var_value))
-            push_list_back(&st , var_name, var_value);
+        if (is_in_env(st, var_name, var_value))
+            ft_list_remove_if(st , var_name, var_value);
    }
 }
 
-void    export_only(t_List st)
-{
-    int	i;
 
-	i = 0;
-	if (st == NULL)
-		return ;
-	while (st !=NULL)
-	{
-        printf("%s=", st->var);
-        printf("%s\n", st->value);
-		st = st->next;
-		i++;
-	}
-}
-
-void    ft_export(t_List st, char **arg)
+void	ft_unset(t_List st,char **arg)
 {
     int i;
 
     i = 0;
-    if (arg[1] == NULL)
-    {
-        printf("le tri\n");
-    }
     while (arg[i])
     {
-        is_var(arg[i], st);
+        is_var2(arg[i], st);
         i++;
     }
 }

@@ -11,7 +11,6 @@ char    *search_in_env(t_List st, char *str)
         {
             return (tmp->value);
         }
-		//tmp->next;
         tmp = tmp->next;
     }
     return (NULL);
