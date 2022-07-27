@@ -146,7 +146,7 @@ int	ft_strjoin_2(char *dest, char *str, int start);
 */
 void	ft_read_special(char *str, t_struct *main);
 void	ft_read_quotes(char *str, t_struct *main, char c);
-void	ft_read_cmd(char *str, t_struct *main);
+void	ft_read_cmd(char *str, t_struct *main, int type);
 void	ft_read_arg(char *str, t_struct *main);
 void	ft_read_flag(char *str, t_struct *main);
 

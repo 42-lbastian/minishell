@@ -8,9 +8,9 @@ int	ft_lexer(char *str, t_struct *main_s)
 	{
 		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i])
 			&& main_s->is_arg == 0)
-			ft_read_cmd(str, main_s);
+			ft_read_cmd(str, main_s, CMD);
 		if (str[main_s->i] && str[main_s->i] == '-')
-			ft_read_flag(str, main_s);
+			ft_read_cmd(str, main_s, FLAG);
 		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i])
 			&& main_s->is_arg == 1)
 			ft_read_arg(str, main_s);

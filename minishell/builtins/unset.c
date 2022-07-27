@@ -65,7 +65,7 @@ void is_var2(char *str, t_List st)
            else 
                 var_value = ret[1];
         free(ret);
-        if (is_in_env(st, var_name, var_value))
+       	if (is_in_env(st, var_name, var_value))
             ft_list_remove_if(st , var_name, var_value);
    }
 }
