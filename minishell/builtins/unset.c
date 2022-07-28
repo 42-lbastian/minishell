@@ -32,53 +32,53 @@ void	ft_list_remove_if(t_ListElement **st, char *var_name, char *var_value)
 */
 
 
-void is_var2(char *str, t_List st)
-{
-	int i;
-	char **ret;
-    char    *var_name;
-    char    *var_value;
+// void is_var2(char *str, t_List st)
+// {
+// 	int i;
+// 	char **ret;
+//     char    *var_name;
+//     char    *var_value;
 
     
-   i = 0;
-   if (!ft_isalpha(str[i]))
-    {
-        ft_putstr_fd("minishell: export: : not a valid identifier\n", 2);
-		return ;
-	}
-    while (str[i] && (ft_isalnum(str[i]) || (str[i] == '_')))
-    {
-        i++;
-    }
-    if (str[i] && str[i] == '=')
-    {
-        ret = ft_trim_equal(str, '=');
-        if (ret[0] == NULL)
-			{
-                ft_putstr_fd("bash: export: : not a valid identifier", 2);
-				return ;
-			}
-            else
-                 var_name = ret[0];
-            if (ret[1] == NULL)
-                var_value = NULL;
-           else 
-                var_value = ret[1];
-        free(ret);
-        if (is_in_env(st, var_name, var_value))
-            ft_list_remove_if(st , var_name, var_value);
-   }
-}
+//    i = 0;
+//    if (!ft_isalpha(str[i]))
+//     {
+//         ft_putstr_fd("minishell: export: : not a valid identifier\n", 2);
+// 		return ;
+// 	}
+//     while (str[i] && (ft_isalnum(str[i]) || (str[i] == '_')))
+//     {
+//         i++;
+//     }
+//     if (str[i] && str[i] == '=')
+//     {
+//         ret = ft_trim_equal(str, '=');
+//         if (ret[0] == NULL)
+// 			{
+//                 ft_putstr_fd("bash: export: : not a valid identifier", 2);
+// 				return ;
+// 			}
+//             else
+//                  var_name = ret[0];
+//             if (ret[1] == NULL)
+//                 var_value = NULL;
+//            else 
+//                 var_value = ret[1];
+//         free(ret);
+//         if (is_in_env(st, var_name, var_value))
+//             ft_list_remove_if(st , var_name, var_value);
+//    }
+// }
 
 
-void	ft_unset(t_List st,char **arg)
-{
-    int i;
+// void	ft_unset(t_List st,char **arg)
+// {
+//     int i;
 
-    i = 0;
-    while (arg[i])
-    {
-        is_var2(arg[i], st);
-        i++;
-    }
-}
+//     i = 0;
+//     while (arg[i])
+//     {
+//         is_var2(arg[i], st);
+//         i++;
+//     }
+// }

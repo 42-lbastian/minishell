@@ -45,8 +45,10 @@ void	ft_cmd(t_struct *main, t_List st)
 		print_env(st);
 	if (ft_strcmp_2(main->temp_str[0], "export") == 0)
 		ft_export(st, main->temp_str);
-	if (ft_strcmp_2(main->temp_str[0], "unset") == 0)
-		ft_unset(st, main->temp_str);
+	// if (ft_strcmp_2(main->temp_str[0], "unset") == 0)
+	// 	ft_unset(st, main->temp_str);
+	if (ft_strcmp_2(main->temp_str[0], "exit") == 0)
+		ft_exit(main->temp_str[1]);	
 }
 
 void	ft_temp_test_cmd(t_struct *main)
@@ -74,8 +76,8 @@ int	ft_main_action(t_struct *main, char *str_read, t_List st)
 		str_read = readline(NAME);
 		if (!str_read)
 			return (0);
-		if (ft_strcmp_2(str_read, "exit") == 0)
-			break ;
+		// if (ft_strcmp_2(str_read, "exit") == 0)
+		// 	break ;
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		if (ft_main_lexer(str_read, main))

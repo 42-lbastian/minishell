@@ -14,6 +14,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+int code_retour;
+
 typedef struct t_ListElement
 {
 	char			    	*var;
@@ -57,6 +59,7 @@ void	ft_unset(t_List st, char **arg);
 /**
 **		cd.c
 **/
+int		ft_exit(char *str);
 void	cd(t_List st, const char *path);
 
 char	**ft_trim_equal(char const *s, char charset);
