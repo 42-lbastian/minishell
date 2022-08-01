@@ -6,7 +6,7 @@ int	ft_strcmp_2(const char *str1, const char *str2)
 
 	i = 0;
 	if (!str1)
-		return (0);
+		return (1);
 	while (str1[i] && str2[i])
 	{
 		if (str1[i] != str2[i])
@@ -44,4 +44,25 @@ int	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+int	ft_strjoin_2(char *dest, char *str, int start)
+{
+	int	i;
+	int	j;
+
+	j = start;
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			dest[j] = str[i];
+			i++;
+			j++;
+		}
+	}
+	else
+		dest = NULL;
+	return (j);
 }
