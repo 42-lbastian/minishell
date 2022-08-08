@@ -63,10 +63,7 @@ int	ft_remove_spaces(t_list **lst)
 	temp = (*lst);
 	while (lst && (*lst))
 	{
-		if ((*lst)->type == FLAG)
-			(*lst)->content = ft_spaces_flag((*lst)->content);
-		if ((*lst)->type == ARG && ((*lst)->content[0] != '"'
-				&& (*lst)->content[0] != '\''))
+		if (((*lst)->content[0] != '"' && (*lst)->content[0] != '\''))
 			(*lst)->content = ft_spaces_flag((*lst)->content);
 		if (!(*lst)->content)
 			return (1);

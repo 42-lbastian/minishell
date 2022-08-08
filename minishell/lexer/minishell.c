@@ -12,8 +12,8 @@ void	ft_cmd(t_struct *main_s, t_List st)
 		print_env(st);
 	if (ft_strcmp_2(main_s->temp_str[0], "export") == 0)
 		ft_export(st, main_s->temp_str);
-//	if (ft_strcmp_2(main_s->temp_str[0], "unset") == 0)
-//		ft_unset(st, main_s->temp_str);
+	if (ft_strcmp_2(main_s->temp_str[0], "unset") == 0)
+		ft_unset(st, main_s->temp_str);
 }
 
 void	ft_temp_test_cmd(t_struct *main_s)
@@ -44,13 +44,13 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 		str_read = readline(NAME);
 		if (!str_read)
 			return (0);
-		if (ft_strcmp_2(str_read, "exit") == 0)
-			break ;
+		// if (ft_strcmp_2(str_read, "exit") == 0)
+		// 	break ;
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		if (ft_main_s_lexer(str_read, main_s, st))
 		{
-			ft_putstr_fd("Malloc error\n", 2);
+			ft_putstr_fd("Error Lexer\n", 2);
 			ft_free_lst(&main_s->lst);
 			break ;
 		}

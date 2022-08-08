@@ -6,14 +6,17 @@ int	ft_lexer(char *str, t_struct *main_s)
 	main_s->is_arg = 0;
 	while (str[main_s->i])
 	{
-		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i])
+/*		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i])
 			&& main_s->is_arg == 0)
 			ft_read_cmd(str, main_s, CMD);
 		if (str[main_s->i] && str[main_s->i] == '-')
-			ft_read_cmd(str, main_s, FLAG);
+			ft_read_cmd(str, main_s, CMD);
 		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i])
 			&& main_s->is_arg == 1)
 			ft_read_arg(str, main_s);
+*/
+		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i]))
+			ft_read_cmd(str, main_s);
 		if (str[main_s->i] && str[main_s->i] == '"')
 			ft_read_quotes(str, main_s, '"');
 		if (str[main_s->i] && str[main_s->i] == '\'')

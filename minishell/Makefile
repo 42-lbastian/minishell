@@ -21,7 +21,7 @@ SRCS =	lexer/minishell.c \
 		builtins/env.c \
 		builtins/utils_env.c \
 		builtins/export.c \
-		#builtins/unset.c
+		builtins/unset.c
 
 
 OBJS = ${SRCS:.c=.o}

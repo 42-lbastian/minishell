@@ -1,15 +1,25 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
+
 #define SIMPLE 0
 #define DOUBLE 1
 #define NB_CHAR_VALID 12
+
 #define RED "\1\033[1;31m\2"
 #define NORMAL "\1\x1b[0m\2"
 #define NAME "minishell> "
-#define	OPER 1
+
+#define	DEFAULT 1
 #define CMD 2
-#define FLAG 3
-#define ARG 4
+#define ARG_FILE_IN 3
+#define ARG_FILE_OUT_OVER 4
+#define ARG_FILE_OUT_APP 5
+#define LIMITOR 6
+#define PIPE 7 /* | */
+#define FILE_IN 8 /* < */
+#define FILE_OUT_OVER 9 /* > */
+#define FILE_OUT_APP 10 /* >> */
+#define HERE_DOC 11 /* << */
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -145,7 +155,7 @@ int	ft_strjoin_2(char *dest, char *str, int start);
 */
 void	ft_read_special(char *str, t_struct *main);
 void	ft_read_quotes(char *str, t_struct *main, char c);
-void	ft_read_cmd(char *str, t_struct *main, int type);
+void	ft_read_cmd(char *str, t_struct *main);
 void	ft_read_arg(char *str, t_struct *main);
 
 /*

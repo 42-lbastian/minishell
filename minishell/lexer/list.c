@@ -35,14 +35,23 @@ void	ft_print_lst(t_list *lst)
 {
 	while (lst)
 	{
-		if (lst->type == OPER)
-			printf("|%s|\t|OPER|\n", lst->content);
-		if (lst->type == ARG)
-			printf("|%s|\t|ARG|\n", lst->content);
+		if (lst->type == PIPE)
+			printf("|%s|\t[|]\n", lst->content);
+		if (lst->type == FILE_IN)
+			printf("|%s|\t[<]\n", lst->content);
+		if (lst->type == FILE_OUT_OVER)
+			printf("|%s|\t[>]\n", lst->content);
+		if (lst->type == FILE_OUT_APP)
+			printf("|%s|\t[>>]\n", lst->content);
+		if (lst->type == HERE_DOC)
+			printf("|%s|\t[<<]\n", lst->content);
+
+		//if (lst->type == ARG)
+		//	printf("|%s|\t[ARG]\n", lst->content);
 		if (lst->type == CMD)
-			printf("|%s|\t|CMD|\n", lst->content);
-		if (lst->type == FLAG)
-			printf("|%s|\t|FLAG|\n", lst->content);
+			printf("|%s|\t[CMD]\n", lst->content);
+		//if (lst->type == FLAG)
+		//	printf("|%s|\t[FLAG]\n", lst->content);
 		lst = lst->next;
 	}
 }
