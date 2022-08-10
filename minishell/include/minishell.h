@@ -154,9 +154,10 @@ int	ft_strjoin_2(char *dest, char *str, int start);
 **		read_char.c
 */
 void	ft_read_special(char *str, t_struct *main);
-void	ft_read_quotes(char *str, t_struct *main, char c);
+void	ft_read_quotes(char *str, t_struct *main);
 void	ft_read_cmd(char *str, t_struct *main);
 void	ft_read_arg(char *str, t_struct *main);
+int		ft_count_read_quotes(char *str, int start);
 
 /*
 **		unwanted.c

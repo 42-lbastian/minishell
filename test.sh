@@ -47,8 +47,13 @@ then
 	exec_cmd 'echo toto'
 	exec_cmd 'echo'
 	exec_cmd 'echo "toto"'
+	exec_cmd 'echo t"toto"'
+	exec_cmd 'echo t" toto"'
+	exec_cmd 'echo t"  toto"'
 	exec_cmd 'echo '\''toto'\'''
 	exec_cmd 'echo " "'
+	exec_cmd 'echo "   "'
+	exec_cmd 'echo "   t"'
 	exec_cmd 'echo '\'' '\'''
 	exec_cmd 'echo ""'
 	exec_cmd 'echo '\'''\'''
@@ -61,16 +66,15 @@ then
 	exec_cmd 'echo -ntoto'
 	exec_cmd 'echo -n'
 
-	exec_cmd "echo "\""$USER"\"""
-	exec_cmd 'echo '\''$USER'\'''
-	exec_cmd "echo $USER"
-	exec_cmd 'echo \$USER'
-	exit 1
-	exec_cmd 'echo '\''$US"ER'\'''
+	#exec_cmd "echo "\""$USER"\"""
+	#exec_cmd 'echo '\''$USER'\'''
+	#exec_cmd "echo $USER"
+	#exec_cmd 'echo \$USER'
+	#exec_cmd 'echo '\''$US"ER'\'''
 
-	exec_cmd '"echo" toto'
-	exec_cmd ''\''echo'\'' toto'
-	exec_cmd 'echo '\''"toto"'\'''
+	#exec_cmd '"echo" toto'
+	#exec_cmd ''\''echo'\'' toto'
+	#exec_cmd 'echo '\''"toto"'\'''
 	exit 1
 
 	#PWD

@@ -16,11 +16,12 @@ int	ft_lexer(char *str, t_struct *main_s)
 			ft_read_arg(str, main_s);
 */
 		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i]))
-			ft_read_cmd(str, main_s);
-		if (str[main_s->i] && str[main_s->i] == '"')
-			ft_read_quotes(str, main_s, '"');
+			ft_read_quotes(str, main_s);
+/*		if (str[main_s->i] && str[main_s->i] == '"')
+			ft_read_quotes(str, main_s);
 		if (str[main_s->i] && str[main_s->i] == '\'')
-			ft_read_quotes(str, main_s, '\'');
+			ft_read_quotes(str, main_s);
+*/
 		if (str[main_s->i] && ft_special_char(str[main_s->i]))
 			ft_read_special(str, main_s);
 		while (str[main_s->i] && str[main_s->i] == ' ')

@@ -4,21 +4,26 @@ int	ft_count_spaces(char *str)
 {
 	int	size;
 	int	i;
+	int	ret;
 
 	size = 0;
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] != ' ')
+		if (str[i] && (str[i] == '"' || str[i] == '\''))
+		{
+			ret = ft_count_read_quotes(str, i);
+			i += ret + 1;
+			size += ret + 1;
+		}
+		else if (str[i] && str[i] != ' ')
 		{
 			i++;
 			size++;
 		}
-		size++;
-		while (str[i] && str[i] == ' ')
+		else
 			i++;
 	}
-	size--;
 	return (size);
 }
 
@@ -28,6 +33,7 @@ char	*ft_spaces_flag(char *str)
 	int		j;
 	int		size;
 	char	*temp;
+	char	c;
 
 	i = 0;
 	j = 0;
@@ -38,18 +44,29 @@ char	*ft_spaces_flag(char *str)
 		return (NULL);
 	while (str[i])
 	{
-		while (str[i] && str[i] != ' ')
+		if (str[i] && (str[i] == '"' || str[i] == '\''))
+		{
+			c = str[i];
+			temp[j] = str[i];
+			j++;
+			i++;
+			while (str[i] != c)
+			{
+				temp[j] = str[i];
+				i++;
+				j++;
+			}
+			temp[j] = str[i];
+			i++;
+			j++;
+		}
+		else if (str[i] && str[i] != ' ')
 		{
 			temp[j] = str[i];
 			j++;
 			i++;
 		}
-		if (str[i] && j < size)
-		{
-			j++;
-			temp[i] = ' ';
-		}
-		while (str[i] && str[i] == ' ')
+		else
 			i++;
 	}
 	free(str);
