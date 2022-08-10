@@ -30,6 +30,8 @@ echo "$"
 echo '$'
 echo $
 
+echo -
+echo -n
 echo -n toto
 echo ---toto
 echo -toto
