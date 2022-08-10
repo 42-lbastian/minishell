@@ -1,13 +1,14 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
-#define SIMPLE 0
-#define DOUBLE 1
-#define NB_CHAR_VALID 12
-
 #define RED "\1\033[1;31m\2"
 #define NORMAL "\1\x1b[0m\2"
 #define NAME "minishell> "
+
+#define NB_CHAR_VALID 12
+
+#define SIMPLE 0
+#define DOUBLE 1
 
 #define	DEFAULT 1
 #define CMD 2
@@ -154,9 +155,7 @@ int	ft_strjoin_2(char *dest, char *str, int start);
 **		read_char.c
 */
 void	ft_read_special(char *str, t_struct *main);
-void	ft_read_quotes(char *str, t_struct *main);
 void	ft_read_cmd(char *str, t_struct *main);
-void	ft_read_arg(char *str, t_struct *main);
 int		ft_count_read_quotes(char *str, int start);
 
 /*
@@ -189,5 +188,11 @@ int		ft_remove_spaces(t_list **lst);
 **		replace_arg.c
 */
 int		ft_replace_arg(t_list **lst, t_List st);
+
+/*
+**		set_type_cmd.c
+*/
+int	ft_set_type_cmd(t_list **lst);
+
 
 #endif

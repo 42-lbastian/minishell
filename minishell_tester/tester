@@ -67,8 +67,6 @@ for testfile in ${test_lists[*]}; do
 		else
 			printf ❌
 			printf "$GREY $teste \n$END"
-			printf "\nMINI %s\n" "$MINI_OUTPUT"
-			printf "BASH %s\n" "$BASH_OUTPUT"
 			exit 1
 		fi
 	done < $testfile

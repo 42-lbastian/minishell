@@ -50,6 +50,7 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 			add_history(str_read);
 		if (ft_main_s_lexer(str_read, main_s, st))
 		{
+			//EXPLICIT ERROR MSG && NO EXIT OPER ERROR
 			ft_putstr_fd("Error Lexer\n", 2);
 			ft_free_lst(&main_s->lst);
 			break ;
@@ -57,7 +58,7 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 		//parser
 		ft_temp_test_cmd(main_s);
 		ft_cmd(main_s, st);
-		//ft_print_lst(main_s->lst);
+		ft_print_lst(main_s->lst);
 		ft_free_lst(&main_s->lst);
 	}
 	free(str_read);

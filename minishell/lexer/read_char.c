@@ -46,7 +46,7 @@ int		ft_count_read_quotes(char *str, int start)
 	return(size);
 }
 
-void	ft_read_quotes(char *str, t_struct *main)
+void	ft_read_cmd(char *str, t_struct *main)
 {
 	int	y;
 	int	error;
@@ -54,14 +54,6 @@ void	ft_read_quotes(char *str, t_struct *main)
 	y = 0;
 	while (str[main->i + y])
 	{
-		/*if (str[main->i + y] == '"' && quotes == 0)
-			quotes = 1;
-		else if (str[main->i + y] == '\'' && quotes == 0)
-			quotes = 2;
-		else if ((str[main->i + y] == '"' && quotes == 1)
-			|| (str[main->i + y] == '\'' && quotes == 2))
-			quotes = 0;
-		*/
 		if (str[main->i + y] == '"' || str[main->i + y] == '\'')
 			y += ft_count_read_quotes(str, main->i + y);
 		if (!(str[main->i + y]) || ft_belong_cmd_end(str[main->i + y]) == 0)
@@ -77,38 +69,4 @@ void	ft_read_quotes(char *str, t_struct *main)
 	main->i += y;
 	if (str[main->i])
 		main->i++;
-}
-
-void	ft_read_cmd(char *str, t_struct *main)
-{
-	int	y;
-	int	error;
-
-	//main->is_arg = 1;
-//	y = 1;
-	y = 0;
-	while (str[main->i + y] && ft_belong_cmd_end(str[main->i + y]))
-		y++;
-	error = ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y),
-				CMD));
-	if (error || !(ft_lst_last(main->lst)->content))
-		main->char_check.error = 1;
-	main->i += y;
-}
-
-void	ft_read_arg(char *str, t_struct *main)
-{
-	int	y;
-	int	error;
-
-	y = 1;
-	while (str[main->i + y] && ft_belong_cmd_end(str[main->i + y]))
-		y++;
-	//if (str[main->i + y - 1] == ' ')
-	//	y--;
-	error = ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y),
-				CMD));
-	if (error || !(ft_lst_last(main->lst)->content))
-		main->char_check.error = 1;
-	main->i += y;
 }
