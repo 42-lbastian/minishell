@@ -38,8 +38,14 @@ void	ft_temp_test_cmd(t_struct *main_s)
 
 int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 {
+	glob.ret = 0;
 	while (1)
 	{
+		glob.pid = 0;
+		glob.sigint = 0;
+		glob.sigquit = 0;
+		signal(SIGINT, get_signal);
+		signal(SIGQUIT, get_signal);
 		//str_read = readline(RED NAME NORMAL);
 		str_read = readline(NAME);
 		if (!str_read)
@@ -62,8 +68,10 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 		ft_free_lst(&main_s->lst);
 	}
 	free(str_read);
-	return (0);
+	return (glob.ret);
 }
+
+t_struct glob;
 
 int	main(int argc, char **argv, char **envp)
 {

@@ -21,6 +21,9 @@
 #define FILE_OUT_OVER 9 /* > */
 #define FILE_OUT_APP 10 /* >> */
 #define HERE_DOC 11 /* << */
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -28,6 +31,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+# include <signal.h>
 
 typedef struct t_ListElement
 {
@@ -58,7 +62,18 @@ typedef struct s_struct
 	t_list			*lst;
 	t_char_check	char_check;
 	char			**temp_str;
+	int				ret;
+	int			sigint;
+	int			sigquit;
+	pid_t		pid;
 }		t_struct;
+
+
+
+extern	t_struct glob;
+
+
+void	get_signal(int sig);
 
 /**
 **		unset.c
