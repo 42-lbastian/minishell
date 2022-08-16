@@ -71,7 +71,7 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 	return (glob.ret);
 }
 
-t_struct glob;
+t_sig glob;
 
 int	main(int argc, char **argv, char **envp)
 {

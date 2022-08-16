@@ -62,15 +62,17 @@ typedef struct s_struct
 	t_list			*lst;
 	t_char_check	char_check;
 	char			**temp_str;
+}		t_struct;
+
+typedef struct s_sig
+{
 	int				ret;
 	int			sigint;
 	int			sigquit;
 	pid_t		pid;
-}		t_struct;
+}		t_sig;
 
-
-
-extern	t_struct glob;
+extern	t_sig glob;
 
 
 void	get_signal(int sig);
