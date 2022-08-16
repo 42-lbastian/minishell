@@ -1,7 +1,6 @@
 NAME = minishell
 
-SRCS =	lexer/minishell.c \
-		lexer/char_check.c \
+SRCS =	lexer/char_check.c \
 		lexer/char_check_special.c \
 		lexer/lexer.c \
 		lexer/init.c \
@@ -10,18 +9,12 @@ SRCS =	lexer/minishell.c \
 		lexer/utils.c \
 		lexer/list.c \
 		lexer/free.c \
-		lexer/remove_spaces.c \
-		lexer/replace_arg.c \
-		lexer/remove_quotes.c \
-		lexer/expand_env_var.c \
-		lexer/count.c \
 		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/echo.c \
 		builtins/env.c \
 		builtins/utils_env.c \
 		builtins/export.c \
-		builtins/unset.c
 
 
 OBJS = ${SRCS:.c=.o}

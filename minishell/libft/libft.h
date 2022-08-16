@@ -61,5 +61,5 @@ char		**ft_split(char const *str, char charset);
 int			how_many_word(char const *str, char charset);
 int			is_charset(char c, char charset);
 char		*ft_substr(char  *s, unsigned int start, int len);
-char	*ft_strjoin(char const *s1, char const *s2);
+
 #endif

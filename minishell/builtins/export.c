@@ -40,7 +40,7 @@ void is_var(char *str, t_List st)
         ret = ft_trim_equal(str, '=');
         if (ret[0] == NULL)
 			{
-                ft_putstr_fd("bash: export: : not a valid identifier", 2);
+                ft_putstr_fd("bash: export: `=89': not a valid identifier", 2);
 				return ;
 			}
             else
@@ -55,31 +55,12 @@ void is_var(char *str, t_List st)
    }
 }
 
-void    export_only(t_List st)
-{
-    int	i;
-
-	i = 0;
-	if (st == NULL)
-		return ;
-	while (st !=NULL)
-	{
-        printf("%s=", st->var);
-        printf("%s\n", st->value);
-		st = st->next;
-		i++;
-	}
-}
 
 void    ft_export(t_List st, char **arg)
 {
     int i;
 
     i = 0;
-    if (arg[1] == NULL)
-    {
-        printf("le tri\n");
-    }
     while (arg[i])
     {
         is_var(arg[i], st);
