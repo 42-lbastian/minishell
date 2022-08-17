@@ -25,6 +25,7 @@ int	ft_size_env_var(t_List st, char *str, int index, int fact)
 		st = st->next;
 	}
 	free(temp);
+	printf("Size env var %d\n", size);
 	return (size);
 }
 
@@ -57,6 +58,7 @@ char	*ft_replace(int size, t_List st, char *str)
 	temp = malloc(sizeof(char) * (size + 1));
 	if (!temp)
 		return (NULL);
+	printf("Size %d\n", size);
 	temp[size] = '\0';
 	while (str[i])
 	{
@@ -81,11 +83,13 @@ char	*ft_replace(int size, t_List st, char *str)
 		}
 		else
 		{
+			//printf("y %d\t%d\t|%c|\n", y, i, str[i]);
 			temp[y] = str[i];
 			i++;
 			y++;
 		}
 	}
+	printf("Size Final %d\n", ft_strlen(temp));
 	free(str);
 	return (temp);
 }
@@ -97,7 +101,9 @@ char	*ft_main_replace_env(char *str, t_List st)
 
 	index = 0;
 	size = ft_count_char(str);
+	printf("Count char %d\n", size);
 	size += ft_count_nb_quotes(str);
+	printf("Count quotes %d\n", size);
 	while (str[index])
 	{
 		size += ft_size_env_var(st, str, index, 0);

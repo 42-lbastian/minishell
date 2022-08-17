@@ -39,9 +39,9 @@ char	*ft_spaces_flag(char *str)
 	j = 0;
 	size = ft_count_spaces(str);
 	temp = malloc(sizeof(char) * (size + 1));
-	temp[size] = '\0';
 	if (!temp)
 		return (NULL);
+	temp[size] = '\0';
 	while (str[i])
 	{
 		if (str[i] && (str[i] == '"' || str[i] == '\''))

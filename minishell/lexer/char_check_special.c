@@ -23,7 +23,7 @@ int	ft_belong_good_special(char c, t_struct *main)
 
 int	ft_exclude_special(char c, t_struct *main)
 {
-	if (ft_is_alpha(c) || ft_belong_good_special(c, main))
+	if (ft_is_alpha_numb(c) || ft_belong_good_special(c, main))
 		return (1);
 	return (0);
 }

@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int	ft_is_alpha(char c)
+int	ft_is_alpha_numb(char c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
 		|| (c >= '0' && c <= '9'))

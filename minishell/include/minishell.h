@@ -127,7 +127,7 @@ int	ft_main_s_lexer(char *str, t_struct *main_s, t_List st);
 */
 int	ft_belong_cmd_start(char c);
 int	ft_belong_cmd_end(char c);
-int	ft_is_alpha(char c);
+int	ft_is_alpha_numb(char c);
 
 /*
 **		char_check_special.c

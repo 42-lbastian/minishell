@@ -30,6 +30,7 @@ char	*ft_remove_quotes(char *str)
 		}
 		i++;
 	}
+	//printf("Exit loop\n");
 	free(str);
 	return (temp);
 }
