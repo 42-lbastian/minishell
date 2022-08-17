@@ -1,0 +1,11 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "nvim.c"
+    ],
+    "directory": "/mnt/nfs/homes/lbastian/Documents/minishell/minishell",
+    "file": "/mnt/nfs/homes/lbastian/Documents/minishell/minishell/nvim.c"
+  }
+]
