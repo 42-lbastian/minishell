@@ -15,6 +15,8 @@ int	ft_size_env_var(t_List st, char *str, int index, int fact)
 	if (fact == 1)
 		return (start + lenght);
 	temp = ft_substr(str, start + 1, lenght);
+	printf("start %d\tlenght %d\n", start, lenght);
+	printf("Temp size |%s|\n", temp);
 	while (st)
 	{
 		if (ft_strcmp_2(st->var, temp) == 0)

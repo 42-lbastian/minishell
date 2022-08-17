@@ -1,0 +1,2 @@
+minishell> echo "exit_code ->$ user ->$USER home -> $HOME"
+malloc(): corrupted top size
