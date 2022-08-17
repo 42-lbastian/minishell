@@ -53,7 +53,7 @@ int	ft_strjoin_2(char *dest, char *str, int start)
 
 	j = start;
 	i = 0;
-	printf("start %d\n", start);
+	//printf("start %d\n", start);
 	if (str)
 	{
 		while (str[i])
