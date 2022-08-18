@@ -45,7 +45,7 @@ char	*ft_find_var(char *str, t_List st)
 	return ("");
 }
 
-char	*ft_replace(int size, t_List st, char *str)
+char	*ft_replace(int size, t_List st, t_list **lst)
 {
 	char	*temp;
 	int		i;
@@ -60,25 +60,25 @@ char	*ft_replace(int size, t_List st, char *str)
 	if (!temp)
 		return (NULL);
 	temp[size] = '\0';
-	while (str[i])
+	while ((*lst)->content[i])
 	{
-		if (str[i] == '\'' && quotes == 0)
+		if ((*lst)->content[i] == '\'' && quotes == 0)
 			quotes = 1;
-		else if (str[i] == '"' && quotes == 0)
+		else if ((*lst)->content[i] == '"' && quotes == 0)
 			quotes = 2;
-		else if ((str[i] == '\'' && quotes == 1) || (str[i] == '"' && quotes == 2))
+		else if (((*lst)->content[i] == '\'' && quotes == 1) || ((*lst)->content[i] == '"' && quotes == 2))
 			quotes = 0;
-		if (str[i] == '$' && quotes != 1)
+		if ((*lst)->content[i] == '$' && quotes != 1)
 		{
 			i++;
-			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$'
-				&& str[i] != ' ')
+			if ((*lst)->content[i] && (*lst)->content[i] != '\'' && (*lst)->content[i] != '"' && (*lst)->content[i] != '$'
+				&& (*lst)->content[i] != ' ')
 			{
 				j = i;
-				while (str[i] && str[i] != '\'' && str[i] != '"'
-					&& str[i] != '$' && str[i] != ' ')
+				while ((*lst)->content[i] && (*lst)->content[i] != '\'' && (*lst)->content[i] != '"'
+					&& (*lst)->content[i] != '$' && (*lst)->content[i] != ' ')
 					i++;
-				y = ft_strjoin_2(temp, ft_find_var((ft_substr(str, j, i - j)),
+				y = ft_strjoin_2(temp, ft_find_var((ft_substr((*lst)->content, j, i - j)),
 							st), y);
 			}
 			else
@@ -89,31 +89,28 @@ char	*ft_replace(int size, t_List st, char *str)
 		}
 		else
 		{
-			temp[y] = str[i];
+			temp[y] = (*lst)->content[i];
 			i++;
 			y++;
 		}
 	}
-	//printf("Str |%s|\tTemp |%s|\n", str, temp);
-	free(str);
+	//printf("Str |%s|\tTemp |%s|\n", (*lst)->content, temp);
+	free((*lst)->content);
 	return (temp);
 }
 
-char	*ft_main_replace_env(char *str, t_List st)
+void	ft_main_replace_env(t_list **lst, t_List st)
 {
 	int	index;
 	int	size;
 
 	index = 0;
-	size = ft_count_char(str);
-	size += ft_count_nb_quotes(str);
-	while (str[index])
+	size = ft_count_char((*lst)->content);
+	size += ft_count_nb_quotes((*lst)->content);
+	while ((*lst)->content[index])
 	{
-		size += ft_size_env_var(st, str, index, 0);
-		index = ft_size_env_var(st, str, index, 1);
+		size += ft_size_env_var(st, (*lst)->content, index, 0);
+		index = ft_size_env_var(st, (*lst)->content, index, 1);
 	}
-	str = ft_replace(size, st, str);
-	if (!str)
-		return (NULL);
-	return (str);
+	ft_replace(size, st, lst);
 }

@@ -149,7 +149,7 @@ char	*ft_remove_quotes(char *str);
 /*
 **		expand_var.c
 */
-char	*ft_main_replace_env(char *str, t_List st);
+void	ft_main_replace_env(t_list **lst, t_List st);
 
 /**
 **		count.c
