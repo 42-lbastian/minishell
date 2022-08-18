@@ -45,7 +45,6 @@ void	ft_print_lst(t_list *lst)
 			printf("{%s}\t[>>]\n", lst->content);
 		if (lst->type == HERE_DOC)
 			printf("{%s}\t[<<]\n", lst->content);
-
 		if (lst->type == CMD)
 			printf("{%s}\t[CMD]\n", lst->content);
 		if (lst->type == ARG_FILE_IN)

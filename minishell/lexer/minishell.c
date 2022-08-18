@@ -38,12 +38,12 @@ void	ft_temp_test_cmd(t_struct *main_s)
 
 int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 {
-	glob.ret = 0;
+	g_glob.ret = 0;
 	while (1)
 	{
-		glob.pid = 0;
-		glob.sigint = 0;
-		glob.sigquit = 0;
+		g_glob.pid = 0;
+		g_glob.sigint = 0;
+		g_glob.sigquit = 0;
 		signal(SIGINT, get_signal);
 		signal(SIGQUIT, get_signal);
 		//str_read = readline(RED NAME NORMAL);
@@ -58,7 +58,7 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 		{
 			//EXPLICIT ERROR MSG && NO EXIT OPER ERROR
 			ft_putstr_fd("Error Lexer\n", 2);
-			ft_free_lst(&main_s->lst);
+			//ft_free_all(&main_s->lst);
 			break ;
 		}
 		//parser
@@ -67,11 +67,12 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 		//ft_print_lst(main_s->lst);
 		ft_free_lst(&main_s->lst);
 	}
+	ft_free_all(&main_s->lst);
 	free(str_read);
-	return (glob.ret);
+	return (g_glob.ret);
 }
 
-t_sig glob;
+t_sig	g_glob;
 
 int	main(int argc, char **argv, char **envp)
 {

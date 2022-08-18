@@ -71,7 +71,7 @@ int	ft_lenght_read_var(char *str, int index)
 		{
 			size++;
 			i++;
-			while (str[i] && str[i] != '"' && str[i] != '\'' && str[i] != '$')
+			while (str[i] && str[i] != '"' && str[i] != '\'' && str[i] != '$' && str[i] != ' ')
 			{
 				size++;
 				i++;

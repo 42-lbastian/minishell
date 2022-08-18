@@ -15,8 +15,6 @@ int	ft_size_env_var(t_List st, char *str, int index, int fact)
 	if (fact == 1)
 		return (start + lenght);
 	temp = ft_substr(str, start + 1, lenght);
-	//printf("start %d\tlenght %d\n", start, lenght);
-	//printf("Temp size |%s|\n", temp);
 	while (st)
 	{
 		if (ft_strcmp_2(st->var, temp) == 0)
@@ -27,7 +25,6 @@ int	ft_size_env_var(t_List st, char *str, int index, int fact)
 		st = st->next;
 	}
 	free(temp);
-	//printf("Size env var %d\n", size);
 	return (size);
 }
 
@@ -54,17 +51,24 @@ char	*ft_replace(int size, t_List st, char *str)
 	int		i;
 	int		y;
 	int		j;
+	int		quotes;
 
 	i = 0;
 	y = 0;
+	quotes = 0;
 	temp = malloc(sizeof(char) * (size + 1));
 	if (!temp)
 		return (NULL);
-	//printf("Size %d\n", size);
 	temp[size] = '\0';
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '\'' && quotes == 0)
+			quotes = 1;
+		else if (str[i] == '"' && quotes == 0)
+			quotes = 2;
+		else if ((str[i] == '\'' && quotes == 1) || (str[i] == '"' && quotes == 2))
+			quotes = 0;
+		if (str[i] == '$' && quotes != 1)
 		{
 			i++;
 			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$'
@@ -85,13 +89,12 @@ char	*ft_replace(int size, t_List st, char *str)
 		}
 		else
 		{
-			//printf("y %d\t%d\t|%c|\n", y, i, str[i]);
 			temp[y] = str[i];
 			i++;
 			y++;
 		}
 	}
-	//printf("Size Final %d\n", ft_strlen(temp));
+	//printf("Str |%s|\tTemp |%s|\n", str, temp);
 	free(str);
 	return (temp);
 }
@@ -103,9 +106,7 @@ char	*ft_main_replace_env(char *str, t_List st)
 
 	index = 0;
 	size = ft_count_char(str);
-	//printf("Count char %d\n", size);
 	size += ft_count_nb_quotes(str);
-	//printf("Count quotes %d\n", size);
 	while (str[index])
 	{
 		size += ft_size_env_var(st, str, index, 0);

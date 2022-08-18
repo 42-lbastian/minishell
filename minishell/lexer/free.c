@@ -1,5 +1,10 @@
 #include "../include/minishell.h"
 
+void	ft_free_all(t_list **lst)
+{
+	ft_free_lst(lst);
+}
+
 void	ft_free_lst(t_list **lst)
 {
 	t_list	*temp;

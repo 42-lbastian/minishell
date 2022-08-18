@@ -72,7 +72,7 @@ typedef struct s_sig
 	pid_t		pid;
 }		t_sig;
 
-extern	t_sig glob;
+extern	t_sig g_glob;
 
 
 void	get_signal(int sig);
@@ -195,6 +195,7 @@ char	*ft_get_lst_str_index(t_list *lst, int index);
 **		free.c
 */
 void	ft_free_lst(t_list **lst);
+void	ft_free_all(t_list **lst);
 
 /*
 **		remove_spaces.c

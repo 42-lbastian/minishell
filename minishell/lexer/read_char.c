@@ -13,7 +13,7 @@ void	ft_set_type_oper(t_struct *main)
 	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, "<<") == 0)
 		ft_lst_last(main->lst)->type = HERE_DOC;
 	else
-		main->char_check.error = 1;	
+		main->char_check.error = 1;
 }
 
 void	ft_read_special(char *str, t_struct *main)
@@ -34,7 +34,7 @@ void	ft_read_special(char *str, t_struct *main)
 	main->i += y;
 }
 
-int		ft_count_read_quotes(char *str, int start)
+int	ft_count_read_quotes(char *str, int start)
 {
 	int		size;
 	char	c;
@@ -43,7 +43,7 @@ int		ft_count_read_quotes(char *str, int start)
 	size = 1;
 	while (str[start + size] != c)
 		size++;
-	return(size);
+	return (size);
 }
 
 void	ft_read_cmd(char *str, t_struct *main)
@@ -57,7 +57,7 @@ void	ft_read_cmd(char *str, t_struct *main)
 		if (str[main->i + y] == '"' || str[main->i + y] == '\'')
 			y += ft_count_read_quotes(str, main->i + y);
 		if (!(str[main->i + y]) || ft_belong_cmd_end(str[main->i + y]) == 0)
-			break;
+			break ;
 		y++;
 	}
 	if (str[main->i + y] == ' ')

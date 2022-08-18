@@ -18,6 +18,16 @@ echo '$PWD'
 echo "'$PWD'"
 echo '"$PWD"'
 echo "$US'ER"
+echo a"$USER"
+echo a"'$USER"
+echo a'$USER'
+echo a'"$USER'
+
+echo "$USER"a
+echo "'$USER"a
+echo '$USER'a
+echo '"$USER'a
+
 echo "aspas ->'"
 echo "aspas -> ' "
 echo 'aspas ->"'
@@ -30,16 +40,14 @@ echo "$"
 echo '$'
 echo $
 
-echo -
-echo -n
 echo -n toto
 echo ---toto
 echo -toto
 echo -ntoto
 echo -nntoto
 echo - toto
-
-echo $+toto
+echo -
+echo -n
 
 pwd
 pwd oi
