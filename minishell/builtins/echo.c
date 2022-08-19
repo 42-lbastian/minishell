@@ -18,10 +18,12 @@ int		ft_strcmp(char *s1, char *s2)
 int is_n(char *str)
 {
 	
-	
+	int a;
 	int i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	if (str[0] != '-')
 	{
 		return (0);
@@ -29,12 +31,15 @@ int is_n(char *str)
 	else
 	{
 		i++;
+		a = i;
 		while (str[i])
 		{
-			if (str[i] != 'n')
+			if (str[i] != 'n' || !str[i])
 				return (0);
 			i++;	
 		}
+		if (i == a)
+			return (0);
 	}
 	return (1);	
 }
@@ -54,13 +59,15 @@ int echo(char **str)
 			n = 0;
 			i++;
 		}
+		if (str[i])
+		{
 		while (str[i])
 		{
-			
-			ft_putstr_fd(str[i],1);
-			i++;
-			if (str[i])
-				ft_putstr_fd(" ", 1);
+				ft_putstr_fd(str[i],1);
+				i++;
+				if (str[i])
+					ft_putstr_fd(" ", 1);
+			}
 		}
 	}
 	if (n == 1)
