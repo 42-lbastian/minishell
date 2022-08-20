@@ -16,44 +16,55 @@ char    *search_in_env(t_List st, char *str)
     return (NULL);
 }
 
-
-void cd(t_List st, const char *path)
+void	change_pwd(t_List st, char *old)
 {
-    int c;
-    char    cwd[1024];
-    char *oldpath;
+	char	*cwd;
 
+	cwd = NULL;
+	cwd = getcwd(cwd, 999999);
+    is_var(ft_strjoin("OLDPWD=", old), st);
+	is_var(ft_strjoin("PWD=", cwd), st);
+	free(cwd);
+}
 
-    if (path == NULL || path[0] == '~')
-    {
-        
-        if (getcwd(cwd, sizeof(cwd)) != NULL)
-        {
-            oldpath = ft_strjoin("OLDPWD=", cwd);
-            is_var(oldpath, st);
-        }
-        oldpath = search_in_env(st, "HOME");
-        c = chdir(oldpath);
-        if (getcwd(cwd, sizeof(cwd)) != NULL)
-        {
-            oldpath = ft_strjoin("PWD=", cwd);
-            is_var(oldpath, st);
-        }
-    } 
+void	home(t_List st, char *buf)
+{
+	char	*home;
+
+	home = search_in_env(st, "HOME");
+	if (home)
+	{
+		chdir(home);
+		change_pwd(st, buf);
+	}
+	else
+	    ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+	free(buf);
+}
+
+void    path_error( char *path, char *cwd)
+{
+    ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	free(cwd);
+	glob.ret = 127;
+}
+
+void cd(t_List st,  char *path)
+{
+    char    *cwd;
+
+    cwd = NULL;
+	cwd = getcwd(cwd, 999999); 
+
+    if (path == NULL)
+        return (home(st, cwd));
+    else if (chdir(path))
+        return (path_error(path, cwd));
     else
     {
-        if (getcwd(cwd, sizeof(cwd)) != NULL)
-        {
-            oldpath = ft_strjoin("OLDPWD=", cwd);
-            is_var(oldpath, st);
-        }
-        c = chdir(path);
-        if (getcwd(cwd, sizeof(cwd)) != NULL)
-        {
-            oldpath = ft_strjoin("PWD=", cwd);
-            is_var(oldpath, st);
-        }
-        if (c != 0)
-           return ;
-    }   
+        change_pwd(st, cwd);
+        free(cwd);
+    }
 }
