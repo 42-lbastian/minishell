@@ -9,7 +9,7 @@ int	ft_replace_arg(t_list **lst, t_List st)
 	{
 		if ((*lst)->type != LIMITOR)
 		{
-			(*lst)->content = ft_main_replace_env((*lst)->content, st);
+			ft_main_replace_env(lst, st);
 			if (!(*lst)->content)
 				return (1);
 		}

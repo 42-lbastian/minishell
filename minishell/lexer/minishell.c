@@ -62,9 +62,9 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 			break ;
 		}
 		//parser
-		ft_temp_test_cmd(main_s);
-		ft_cmd(main_s, st);
-		//ft_print_lst(main_s->lst);
+		//ft_temp_test_cmd(main_s);
+		//ft_cmd(main_s, st);
+		ft_print_lst(main_s->lst);
 		ft_free_lst(&main_s->lst);
 	}
 	ft_free_all(&main_s->lst);
