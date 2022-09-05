@@ -11,7 +11,6 @@ SRCS =	lexer/minishell.c \
 		lexer/list.c \
 		lexer/free.c \
 		lexer/remove_spaces.c \
-		lexer/replace_arg.c \
 		lexer/remove_quotes.c \
 		lexer/expand_env_var.c \
 		lexer/count.c \

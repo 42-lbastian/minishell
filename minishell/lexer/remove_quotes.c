@@ -30,7 +30,22 @@ char	*ft_remove_quotes(char *str)
 		}
 		i++;
 	}
-	//printf("Exit loop\n");
 	free(str);
 	return (temp);
+}
+
+int	ft_main_remove_quotes(t_list **lst)
+{
+	t_list *temp;
+
+	temp = (*lst);
+	while (lst && (*lst))
+	{
+		(*lst)->content = ft_remove_quotes((*lst)->content);
+		if (!(*lst)->content)
+			return (1);
+		(*lst) = (*lst)->next;
+	}
+	(*lst) = temp;
+	return (0);
 }

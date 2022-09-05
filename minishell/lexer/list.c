@@ -31,6 +31,15 @@ int	ft_lstadd_back(t_list **lst, t_list *new)
 	return (0);
 }
 
+int	ft_lstadd(t_list **lst, t_list *new)
+{
+	if (!new)
+		return (1);
+	new->next = (*lst)->next;
+	(*lst)->next = new;
+	return (0);
+}
+
 void	ft_print_lst(t_list *lst)
 {
 	while (lst)

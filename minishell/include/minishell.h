@@ -144,12 +144,12 @@ void	ft_fill_tab_char(t_struct *main, char *str);
 /*
 **		remove_quotes.c
 */
-char	*ft_remove_quotes(char *str);
+int	ft_main_remove_quotes(t_list **lst);
 
 /*
 **		expand_var.c
 */
-void	ft_main_replace_env(t_list **lst, t_List st);
+int	ft_main_replace_env(t_list **lst, t_List st);
 
 /**
 **		count.c
@@ -163,10 +163,13 @@ int	ft_count_remove_quotes(char *str);
 /*
 **		utils.c
 */
-int	ft_strcmp_2(const char *str1, const char *str2);
-char *ft_strcpy_2(char *str);
-int	ft_strlen(const char *str);
-int	ft_strjoin_2(char *dest, char *str, int start);
+int		ft_strcmp_2(const char *str1, const char *str2);
+char	*ft_strcpy_2(char *str);
+int		ft_strlen(const char *str);
+int		ft_strjoin_3(char *dest, char *str, int start);
+char	*ft_strjoin_2(char *str1, char *str2);
+char	*ft_strjoin_c(char *str, char c);
+int		ft_have_space(char *str);
 
 /*
 **		read_char.c
@@ -190,6 +193,7 @@ int		ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_print_lst(t_list *lst);
 int		ft_lst_size(t_list *lst);
 char	*ft_get_lst_str_index(t_list *lst, int index);
+int		ft_lstadd(t_list **lst, t_list *new);
 
 /*
 **		free.c
@@ -201,11 +205,6 @@ void	ft_free_all(t_list **lst);
 **		remove_spaces.c
 */
 int		ft_remove_spaces(t_list **lst);
-
-/*
-**		replace_arg.c
-*/
-int		ft_replace_arg(t_list **lst, t_List st);
 
 /*
 **		set_type_cmd.c

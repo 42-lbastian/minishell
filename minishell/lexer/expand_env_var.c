@@ -45,72 +45,100 @@ char	*ft_find_var(char *str, t_List st)
 	return ("");
 }
 
-char	*ft_replace(int size, t_List st, t_list **lst)
+int	ft_split_expand(t_list **lst, char **split)
+{
+	int i;
+
+	i = 1;
+	if (!split)
+		return (1);
+	(*lst)->content = ft_strjoin_2(((*lst)->content), split[0]);
+	while (split[i])
+	{
+		if (ft_lstadd(lst, ft_lst_new(split[i], CMD)))
+			return (1);
+		(*lst) = (*lst)->next;
+		i++;
+	}
+	return (0);
+}
+
+int	ft_replace(t_list **lst, t_List st)
 {
 	char	*temp;
+	char	*str;
 	int		i;
-	int		y;
 	int		j;
 	int		quotes;
 
 	i = 0;
-	y = 0;
 	quotes = 0;
-	temp = malloc(sizeof(char) * (size + 1));
-	if (!temp)
-		return (NULL);
-	temp[size] = '\0';
-	while ((*lst)->content[i])
+	str = ft_strcpy_2((*lst)->content);
+	if (!str)
+		return (1);
+	free((*lst)->content);
+	(*lst)->content = NULL;
+	temp = NULL;
+	while (str[i])
 	{
-		if ((*lst)->content[i] == '\'' && quotes == 0)
+		if (str[i] == '\'' && quotes == 0)
 			quotes = 1;
-		else if ((*lst)->content[i] == '"' && quotes == 0)
+		else if (str[i] == '"' && quotes == 0)
 			quotes = 2;
-		else if (((*lst)->content[i] == '\'' && quotes == 1) || ((*lst)->content[i] == '"' && quotes == 2))
+		else if ((str[i] == '\'' && quotes == 1) || (str[i] == '"' && quotes == 2))
 			quotes = 0;
-		if ((*lst)->content[i] == '$' && quotes != 1)
+		if (str[i] == '$' && quotes != 1)
 		{
 			i++;
-			if ((*lst)->content[i] && (*lst)->content[i] != '\'' && (*lst)->content[i] != '"' && (*lst)->content[i] != '$'
-				&& (*lst)->content[i] != ' ')
+			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$'
+				&& str[i] != ' ')
 			{
 				j = i;
-				while ((*lst)->content[i] && (*lst)->content[i] != '\'' && (*lst)->content[i] != '"'
-					&& (*lst)->content[i] != '$' && (*lst)->content[i] != ' ')
+				while (str[i] && str[i] != '\'' && str[i] != '"'
+					&& str[i] != '$' && str[i] != ' ')
 					i++;
-				y = ft_strjoin_2(temp, ft_find_var((ft_substr((*lst)->content, j, i - j)),
-							st), y);
+				temp = ft_find_var((ft_substr(str, j, i - j)), st);
+				if (!temp)
+					return (1);
+				if (quotes == 2 || ft_have_space(temp) == 0)
+					(*lst)->content = ft_strjoin_2((*lst)->content, temp);
+				else
+					if (ft_split_expand(lst, ft_split(temp, ' ')))
+						return (1);
 			}
 			else
-			{
-				temp[y] = '$';
-				y++;
-			}
+				(*lst)->content = ft_strjoin_c((*lst)->content, '$');
 		}
 		else
 		{
-			temp[y] = (*lst)->content[i];
+			(*lst)->content = ft_strjoin_c((*lst)->content, str[i]);
 			i++;
-			y++;
 		}
+		if (!(*lst)->content)
+			return (1);
 	}
-	//printf("Str |%s|\tTemp |%s|\n", (*lst)->content, temp);
-	free((*lst)->content);
-	return (temp);
+	free(str);
+	return (0);
 }
 
-void	ft_main_replace_env(t_list **lst, t_List st)
+int	ft_main_replace_env(t_list **lst, t_List st)
 {
-	int	index;
-	int	size;
+	t_list	*temp;
 
-	index = 0;
-	size = ft_count_char((*lst)->content);
-	size += ft_count_nb_quotes((*lst)->content);
-	while ((*lst)->content[index])
+	temp = (*lst);
+	while (lst && (*lst))
 	{
-		size += ft_size_env_var(st, (*lst)->content, index, 0);
-		index = ft_size_env_var(st, (*lst)->content, index, 1);
+		if ((*lst)->type != LIMITOR)
+		{
+			ft_replace(lst, st);
+			if (!(*lst)->content)
+				return (1);
+		}
+		//(*lst)->content = ft_remove_quotes((*lst)->content);
+		//if (!(*lst)->content)
+		//	return (1);
+		(*lst) = (*lst)->next;
 	}
-	ft_replace(size, st, lst);
+	(*lst) = temp;
+	return (0);
 }
