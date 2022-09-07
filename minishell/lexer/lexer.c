@@ -18,7 +18,7 @@ int	ft_lexer(char *str, t_struct *main_s)
 	return (0);
 }
 
-int	ft_main_s_lexer(char *str, t_struct *main_s, t_List st)
+int	ft_main_lexer(char *str, t_struct *main_s, t_List st)
 {	
 	int		ret;
 

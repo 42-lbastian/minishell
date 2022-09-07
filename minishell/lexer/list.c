@@ -1,5 +1,18 @@
 #include "../include/minishell.h"
 
+t_list	*ft_lst_new_join(char *content, int type)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->next = NULL;
+	new->content = ft_strcpy_2(content);
+	new->type = type;
+	return (new);
+}
+
 t_list	*ft_lst_new(char *content, int type)
 {
 	t_list	*new;

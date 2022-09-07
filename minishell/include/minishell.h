@@ -120,7 +120,7 @@ char	**ft_trim_equal(char const *s, char charset);
 /**
 **		lexer.c
 **/
-int	ft_main_s_lexer(char *str, t_struct *main_s, t_List st);
+int	ft_main_lexer(char *str, t_struct *main_s, t_List st);
 
 /*		
 **		char_check.c
@@ -188,6 +188,7 @@ char *ft_remove_special(char *str, t_struct *main, int i);
 **		list.c
 */
 t_list	*ft_lst_new(char *content, int type);
+t_list	*ft_lst_new_join(char *content, int type);
 t_list *ft_lst_last(t_list *lst);
 int		ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_print_lst(t_list *lst);

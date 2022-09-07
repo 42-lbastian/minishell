@@ -36,7 +36,20 @@ void	ft_temp_test_cmd(t_struct *main_s)
 	}
 }
 
-int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
+void	ft_free_temp(t_struct *main_s)
+{
+	int i;
+
+	i = 0;
+	while (main_s->temp_str[i])
+	{
+		free(main_s->temp_str[i]);
+		i++;
+	}
+	free(main_s->temp_str);
+}
+
+int	ft_main_action(t_struct *main_s, char *str_read, t_List st)
 {
 	g_glob.ret = 0;
 	while (1)
@@ -50,11 +63,11 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 		str_read = readline(NAME);
 		if (!str_read)
 			return (0);
-		// if (ft_strcmp_2(str_read, "exit") == 0)
-		// 	break ;
+		if (ft_strcmp_2(str_read, "exit") == 0)
+			break ;
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
-		if (ft_main_s_lexer(str_read, main_s, st))
+		if (ft_main_lexer(str_read, main_s, st))
 		{
 			//EXPLICIT ERROR MSG && NO EXIT OPER ERROR
 			ft_putstr_fd("Error Lexer\n", 2);
@@ -64,6 +77,7 @@ int	ft_main_s_action(t_struct *main_s, char *str_read, t_List st)
 		//parser
 		ft_temp_test_cmd(main_s);
 		ft_cmd(main_s, st);
+		ft_free_temp(main_s);
 		ft_print_lst(main_s->lst);
 		ft_free_lst(&main_s->lst);
 	}
@@ -87,7 +101,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	str_read = NULL;
 	ft_init_struct(main_s, argc, argv);
-	ft_main_s_action(main_s, str_read, st);
+	ft_main_action(main_s, str_read, st);
 	free(main_s);
 	clear_history();
 	return (0);
