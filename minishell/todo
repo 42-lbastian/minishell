@@ -33,3 +33,7 @@ lbastian@e2r3p12:~$ echo $tata > 1
 lbastian@e2r3p12:~$ cat -e 1
 A B C$
 lbastian@e2r3p12:~$
+
+
+
+a$USERa

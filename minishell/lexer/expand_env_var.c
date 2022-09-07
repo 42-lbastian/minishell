@@ -109,7 +109,7 @@ int	ft_replace(t_list **lst, t_List st)
 				temp = ft_find_var((ft_substr(str, j, i - j)), st);
 				if (!temp)
 					return (ft_error_return(str));
-				if (quotes == 2 || ft_have_space(temp) == 0)
+				if (quotes == 2)
 					(*lst)->content = ft_strjoin_2((*lst)->content, temp);
 				else
 					if (ft_split_expand(lst, ft_split(temp, ' ')))
