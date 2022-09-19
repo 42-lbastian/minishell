@@ -21,9 +21,6 @@
 #define FILE_OUT_OVER 9 /* > */
 #define FILE_OUT_APP 10 /* >> */
 #define HERE_DOC 11 /* << */
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
 
 #include <stdlib.h>
 #include <unistd.h>
