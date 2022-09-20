@@ -246,6 +246,7 @@ int main(int argc, char **argv)
 		ft_lst_add_back(&lst, ft_lst_init(argv[i]));
 		i++;
 	}
+	ft_print_lst(lst);
 	size = ft_lst_size(lst);
 	i = 0;
 	token = malloc(sizeof(char *) * (size + 1));
@@ -257,7 +258,7 @@ int main(int argc, char **argv)
 		i++;
 	}
 
-	tab_node = ft_create_tree(token, tab_node);
+//	tab_node = ft_create_tree(token, tab_node);
 
 //	printf("%d-%d\n", tab_node[1].node_pointer.right->node_pointer.right->value.nb, tab_node[1].node_pointer.right->node_pointer.left->value.nb);
 
