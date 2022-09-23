@@ -37,6 +37,21 @@ typedef struct t_ListElement
 	struct t_ListElement	*next;
 }t_ListElement,	*t_List;
 
+typedef union	s_value
+{
+	char	**cmd;
+	char	*oper;
+}				t_value;
+
+typedef struct	s_node
+{
+	struct s_node	*left;
+	struct s_node	*right;
+	t_value			value;
+	int				type;
+
+}				t_node;
+
 typedef struct	s_list
 {
 	char			*content;
@@ -71,43 +86,53 @@ typedef struct s_sig
 
 extern	t_sig g_glob;
 
-
+/**
+**		signal/signal.c
+**/
 void	get_signal(int sig);
 
+
+
 /**
-**		unset.c
+**		builtins/unset.c
 **/
 void	ft_unset(t_List st, char **arg);
 int		is_in_env(t_List st, char *var_name, char *var_value);
 
 /**
-**		pwd.c
+**		builtins/pwd.c
 **/
 void	pwd(void);
 
 /**
-**		echo.c
+**		builtins/echo.c
 **/
 int		echo(char **str);
 
 /**
-**		cd.c
+**		builtins/cd.c
 **/
 void	cd(t_List st, const char *path);
 
+/**
+**		builtins/utils_env.c
+**/
 char	**ft_trim_equal(char const *s, char charset);
-void    ft_export(t_List st, char **arg);
-void	push_list_back(t_List *st, char *var_name, char *var_value);
-
 
 /**
-**		env.c
+**		builtins/export.c
 **/
-void is_var(char *str, t_List st);
 void    ft_export(t_List st, char **arg);
-void	create_env(char **envp);
-void print_env(t_List st);
+void is_var(char *str, t_List st);
+
+/**
+**		builtins/env.c
+**/
+void	push_list_back(t_List *st, char *var_name, char *var_value);
 t_List	add_list(char **tab, t_List sta);
+void print_env(t_List st);
+
+
 
 /**
 **		utils_env.c
@@ -115,41 +140,41 @@ t_List	add_list(char **tab, t_List sta);
 char	**ft_trim_equal(char const *s, char charset);
 
 /**
-**		lexer.c
+**		lexer/lexer.c
 **/
 int	ft_main_lexer(char *str, t_struct *main_s, t_List st);
 
 /*		
-**		char_check.c
+**		lexer/char_check.c
 */
 int	ft_belong_cmd_start(char c);
 int	ft_belong_cmd_end(char c);
 int	ft_is_alpha_numb(char c);
 
 /*
-**		char_check_special.c
+**		lexer/char_check_special.c
 */
 int	ft_special_char(char c);
 int	ft_exclude_special(char c, t_struct *main);
 
 /*
-**		init.c
+**		lexer/init.c
 */
 void	ft_init_struct(t_struct *main, int argc, char **argv);
 void	ft_fill_tab_char(t_struct *main, char *str);
 
 /*
-**		remove_quotes.c
+**		lexer/remove_quotes.c
 */
 int	ft_main_remove_quotes(t_list **lst);
 
 /*
-**		expand_var.c
+**		lexer/expand_var.c
 */
 int	ft_main_replace_env(t_list **lst, t_List st);
 
 /**
-**		count.c
+**		lexer/count.c
 **/
 int	ft_start_read_var(char *str, int index);
 int	ft_lenght_read_var(char *str, int index);
@@ -158,7 +183,7 @@ int	ft_count_nb_quotes(char *str);
 int	ft_count_remove_quotes(char *str);
 
 /*
-**		utils.c
+**		lexer/utils.c
 */
 int		ft_strcmp_2(const char *str1, const char *str2);
 char	*ft_strcpy_2(char *str);
@@ -169,20 +194,20 @@ char	*ft_strjoin_c(char *str, char c);
 int		ft_have_space(char *str);
 
 /*
-**		read_char.c
+**		lexer/read_char.c
 */
 void	ft_read_special(char *str, t_struct *main);
 void	ft_read_cmd(char *str, t_struct *main);
 int		ft_count_read_quotes(char *str, int start);
 
 /*
-**		unwanted.c
+**		lexer/unwanted.c
 */
 char *ft_check_quotes(char *str, t_struct *main);
 char *ft_remove_special(char *str, t_struct *main, int i);
 
 /*
-**		list.c
+**		lexer/list.c
 */
 t_list	*ft_lst_new(char *content, int type);
 t_list	*ft_lst_new_join(char *content, int type);
@@ -194,20 +219,26 @@ char	*ft_get_lst_str_index(t_list *lst, int index);
 int		ft_lstadd(t_list **lst, t_list *new);
 
 /*
-**		free.c
+**		lexer/free.c
 */
 void	ft_free_lst(t_list **lst);
 void	ft_free_all(t_list **lst);
 
 /*
-**		remove_spaces.c
+**		lexer/remove_spaces.c
 */
 int		ft_remove_spaces(t_list **lst);
 
 /*
-**		set_type_cmd.c
+**		lexer/set_type_cmd.c
 */
 int	ft_set_type_cmd(t_list **lst);
 
+
+
+/*
+**		parse/parse.c
+*/
+int		ft_parse(t_list **lst, t_List st);
 
 #endif
