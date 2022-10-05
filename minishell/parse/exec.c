@@ -101,7 +101,5 @@ void	ft_main_exec(char **complete_cmd, t_List st)
 		if (ft_exec_cmd(path, complete_cmd, NULL) == 1)
 			printf("Error exec\n");
 	}
-	printf("Pre wait |%s|\n", complete_cmd[0]);
 	waitpid(pid, NULL, 0);
-	printf("Post wait\n");
 }

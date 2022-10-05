@@ -52,7 +52,7 @@ int		ft_parse(t_list **lst, t_List st)
 	node->left->value.cmd = ft_split("ls" ,' ');
 	node->right->left = NULL;
 	node->right->right = NULL;
-	node->right->value.cmd = ft_split("wc -l" ,' ');
+	node->right->value.cmd = ft_split("echo toto" ,' ');
 	ft_read_ast(st, node);
 	(void)lst;
 	(void)st;
