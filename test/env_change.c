@@ -11,7 +11,7 @@ void	ft_print_envp(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		printf("%s\n", envp[i]);
+		printf("|%s|\n", envp[i]);
 		i++;
 	}
 	printf("\n");

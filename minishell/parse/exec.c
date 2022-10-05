@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-char	*ft_strcat_path(char *str1, char *str2)
+char	*ft_strjoin_env(char *str1, char *str2, char c)
 {
 	char	*dst;
 	int		i;
@@ -17,7 +17,7 @@ char	*ft_strcat_path(char *str1, char *str2)
 		y++;
 		i++;
 	}
-	dst[y] = '/';
+	dst[y] = c;
 	y++;
 	i = 0;
 	while (str2[i])
@@ -59,7 +59,7 @@ char	*ft_find_path(char *cmd, char **all_path)
 	{
 		while (all_path[i])
 		{
-			good_path = ft_strcat_path(all_path[i], cmd);
+			good_path = ft_strjoin_env(all_path[i], cmd, '/');
 			if (access(good_path, F_OK | X_OK) == 0)
 				return (good_path);
 			else
@@ -71,6 +71,36 @@ char	*ft_find_path(char *cmd, char **all_path)
 		}
 	}
 	return (NULL);
+}
+
+int		ft_env_size(t_List st)
+{
+	int	i;
+
+	i = 0;
+	while (st)
+	{
+		i++;
+		st = st->next;
+	}
+	return (i);
+}
+
+char	**ft_env_array(t_List st)
+{
+	int		i;
+	char	**env_arr;
+
+	i = 0;
+	env_arr = malloc(sizeof(char *) * (ft_env_size(st) + 1));
+	env_arr[ft_env_size(st)] = NULL;
+	while (st)
+	{
+		env_arr[i] = ft_strjoin_env(st->var, st->value, '=');
+		st = st->next;
+		i++;
+	}
+	return (env_arr);
 }
 
 int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
@@ -98,7 +128,7 @@ void	ft_main_exec(char **complete_cmd, t_List st)
 	}
 	if (pid == 0)
 	{
-		if (ft_exec_cmd(path, complete_cmd, NULL) == 1)
+		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
 			printf("Error exec\n");
 	}
 	waitpid(pid, NULL, 0);
