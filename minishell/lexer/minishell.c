@@ -74,6 +74,7 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_List st)
 			//ft_free_all(&main_s->lst);
 			break ;
 		}
+		ft_parse(&main_s->lst, st);
 		//parser
 		ft_temp_test_cmd(main_s);
 		ft_cmd(main_s, st);

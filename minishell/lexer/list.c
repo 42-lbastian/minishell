@@ -106,3 +106,33 @@ char	*ft_get_lst_str_index(t_list *lst, int index)
 	}
 	return (lst->content);
 }
+
+char	*ft_find_var(char *str, t_List st)
+{
+	if (!str)
+		return (NULL);
+	while (st)
+	{
+		if (ft_strcmp_2(st->var, str) == 0)
+		{
+			free(str);
+			return (st->value);
+		}
+		st = st->next;
+	}
+	free(str);
+	return ("");
+}
+
+char	*ft_find_var_path(char *str, t_List st)
+{
+	if (!str)
+		return (NULL);
+	while (st)
+	{
+		if (ft_strcmp_2(st->var, str) == 0)
+			return (st->value);
+		st = st->next;
+	}
+	return ("");
+}

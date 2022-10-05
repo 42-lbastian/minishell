@@ -24,11 +24,12 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "../libft/libft.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-# include <signal.h>
+#include <signal.h>
+#include <sys/wait.h>
+#include "../libft/libft.h"
 
 typedef struct t_ListElement
 {
@@ -217,6 +218,8 @@ void	ft_print_lst(t_list *lst);
 int		ft_lst_size(t_list *lst);
 char	*ft_get_lst_str_index(t_list *lst, int index);
 int		ft_lstadd(t_list **lst, t_list *new);
+char	*ft_find_var(char *str, t_List st);
+char	*ft_find_var_path(char *str, t_List st);
 
 /*
 **		lexer/free.c
@@ -240,5 +243,10 @@ int	ft_set_type_cmd(t_list **lst);
 **		parse/parse.c
 */
 int		ft_parse(t_list **lst, t_List st);
+
+/*
+**		parse/exec.c
+*/
+void	ft_main_exec(char **complete_cmd, t_List st);
 
 #endif

@@ -28,23 +28,6 @@ int	ft_size_env_var(t_List st, char *str, int index, int fact)
 	return (size);
 }
 
-char	*ft_find_var(char *str, t_List st)
-{
-	if (!str)
-		return (NULL);
-	while (st)
-	{
-		if (ft_strcmp_2(st->var, str) == 0)
-		{
-			free(str);
-			return (st->value);
-		}
-		st = st->next;
-	}
-	free(str);
-	return ("");
-}
-
 int	ft_split_expand(t_list **lst, char **split)
 {
 	int i;

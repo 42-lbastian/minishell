@@ -16,6 +16,7 @@ SRCS =	lexer/minishell.c \
 		lexer/count.c \
 		lexer/set_type_cmd.c \
 		parse/parse.c \
+		parse/exec.c \
 		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/echo.c \
