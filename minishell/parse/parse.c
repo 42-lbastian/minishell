@@ -16,19 +16,18 @@ int		ft_print_cmd(char **str)
 
 int		ft_read_ast(t_List st, t_node *node)
 {
-	//int	pip[2];
-
-	(void)node;
-	(void)st;
-	//pipe(pip);
+	int	pip[2];
+	int fd;
+	
+	pipe(pip);
 	if (node->left)
-		ft_read_ast(st, node->left);
+		fd = ft_read_ast(st, node->left);
 	if (node->right)
-		ft_read_ast(st, node->right);
+		fd = ft_read_ast(st, node->right);
 	if (!node->right)
 	{
 		ft_main_exec(node->value.cmd, st);
-		return (1);
+		return (pip[0]);
 	}
 	else
 		printf("%s\n", node->value.oper);
@@ -52,9 +51,8 @@ int		ft_parse(t_list **lst, t_List st)
 	node->left->value.cmd = ft_split("ls" ,' ');
 	node->right->left = NULL;
 	node->right->right = NULL;
-	node->right->value.cmd = ft_split("echo $USER" ,' ');
+	node->right->value.cmd = ft_split("echo lbastian" ,' ');
 	ft_read_ast(st, node);
 	(void)lst;
-	(void)st;
 	return (0);
 }
