@@ -14,6 +14,7 @@ int		ft_print_cmd(char **str)
 	return (0);
 }
 
+/*
 int		ft_read_ast(t_List st, t_node *node)
 {
 	int	pip[2];
@@ -33,10 +34,26 @@ int		ft_read_ast(t_List st, t_node *node)
 		printf("%s\n", node->value.oper);
 	return (0);
 }
+*/
+
+int	ft_read_lst(t_lst_cmd *lst, t_List st)
+{
+	while (lst)
+	{
+		if (lst->type = PIPE)
+		{
+			if (lst->next)
+			{
+			}
+			else
+				printf("bash: syntax error near unexpected token `|'\n");
+		}
+	}
+}
 
 int		ft_parse(t_list **lst, t_List st)
 {
-	t_node *node;
+	/*t_node *node;
 	t_node *left;
 	t_node *right;
 
@@ -53,6 +70,26 @@ int		ft_parse(t_list **lst, t_List st)
 	node->right->right = NULL;
 	node->right->value.cmd = ft_split("echo lbastian" ,' ');
 	ft_read_ast(st, node);
+	*/
+
+	t_lst_cmd *lst1;
+	t_lst_cmd *lst2;
+	t_lst_cmd *lst3;
+
+	lst1->next = lst2;
+	lst2->next = lst3;
+	lst3->next =  NULL;
+
+	lst1->value.oper = "|";
+	lst1->type = PIPE;
+
+	lst2->value.cmd = ft_split("ls", ' ');
+	lst2->type = CMD;
+
+	lst3->value.cmd = ft_split("echo lbastian", ' ');
+	lst3->type = CMD;
+	ft_read_lst(lst1, st);
+
 	(void)lst;
 	return (0);
 }

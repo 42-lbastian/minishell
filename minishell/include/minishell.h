@@ -38,12 +38,15 @@ typedef struct t_ListElement
 	struct t_ListElement	*next;
 }t_ListElement,	*t_List;
 
+
+//Value for AST/LST_CMD
 typedef union	s_value
 {
 	char	**cmd;
 	char	*oper;
 }				t_value;
 
+//AST?
 typedef struct	s_node
 {
 	struct s_node	*left;
@@ -53,6 +56,16 @@ typedef struct	s_node
 
 }				t_node;
 
+//LST_CMD
+typedef struct	s_lst_cmd
+{
+	struct s_lst_cmd	*next;
+	t_value			value;
+	int				type;
+
+}				t_lst_cmd;
+
+//LEXER TOKEN
 typedef struct	s_list
 {
 	char			*content;
@@ -77,6 +90,7 @@ typedef struct s_struct
 	char			**temp_str;
 }		t_struct;
 
+//SIGNAL + RET FUNC
 typedef struct s_sig
 {
 	int				ret;
