@@ -36,14 +36,20 @@ int		ft_read_ast(t_List st, t_node *node)
 }
 */
 
-int	ft_read_lst(t_lst_cmd *lst, t_List st)
+int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
 {
+	int pip[2];
+
 	while (lst)
 	{
 		if (lst->type = PIPE)
 		{
 			if (lst->next)
 			{
+				pipe(pip);
+				lst = lst->next;
+				ft_read_lst(lst, st, pip[1]);
+
 			}
 			else
 				printf("bash: syntax error near unexpected token `|'\n");
@@ -76,6 +82,10 @@ int		ft_parse(t_list **lst, t_List st)
 	t_lst_cmd *lst2;
 	t_lst_cmd *lst3;
 
+	lst1 = malloc(sizeof(t_lst_cmd));
+	lst2 = malloc(sizeof(t_lst_cmd));
+	lst3 = malloc(sizeof(t_lst_cmd));
+
 	lst1->next = lst2;
 	lst2->next = lst3;
 	lst3->next =  NULL;
@@ -88,7 +98,7 @@ int		ft_parse(t_list **lst, t_List st)
 
 	lst3->value.cmd = ft_split("echo lbastian", ' ');
 	lst3->type = CMD;
-	ft_read_lst(lst1, st);
+	ft_read_lst(lst1, st, 1);
 
 	(void)lst;
 	return (0);
