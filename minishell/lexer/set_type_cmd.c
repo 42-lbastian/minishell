@@ -19,12 +19,14 @@ int	ft_set_type_cmd(t_list **lst)
 		else if ((*lst)->next && (*lst)->next->type == CMD
 			&& (*lst)->type == HERE_DOC)
 			(*lst)->next->type = LIMITOR;
+		/*
 		else if ((*lst)->next && (*lst)->next->type >= PIPE
 			&& (*lst)->type >= PIPE)
 		{
 			(*lst) = temp;
 			return (1);
 		}
+		*/
 		(*lst) = (*lst)->next;
 	}
 	(*lst) = temp;

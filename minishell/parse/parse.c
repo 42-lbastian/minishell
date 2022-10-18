@@ -40,9 +40,10 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
 {
 	int pip[2];
 
+	printf("%d\n", fd);
 	while (lst)
 	{
-		if (lst->type = PIPE)
+		if (lst->type == PIPE)
 		{
 			if (lst->next)
 			{
@@ -54,7 +55,10 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
 			else
 				printf("bash: syntax error near unexpected token `|'\n");
 		}
+		else
+			lst = lst->next;
 	}
+	return (1);
 }
 
 int		ft_parse(t_list **lst, t_List st)
