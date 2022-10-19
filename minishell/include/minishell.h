@@ -24,6 +24,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -262,7 +263,7 @@ int		ft_parse(t_list **lst, t_List st);
 /*
 **		parse/exec.c
 */
-void	ft_main_exec(char **complete_cmd, t_List st);
+void	ft_main_exec(char **complete_cmd, t_List st, int read, int write);
 
 /*
 **		parse/lst.c

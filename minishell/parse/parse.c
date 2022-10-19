@@ -40,17 +40,18 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
 {
 	int pip[2];
 
-	printf("%d\n", fd);
 	while (lst)
 	{
 		if (lst->type == PIPE)
 		{
-			if (lst->next)
+			if (lst->next && lst->prev)
 			{
 				pipe(pip);
+				ft_main_exec(lst->next->value.cmd, st, 0, pip[1]);
+				ft_main_exec(lst->prev->value.cmd, st, pip[0], fd);
+				close(pip[0]);
+				close(pip[1]);
 				lst = lst->next;
-				ft_read_lst(lst, st, pip[0]);
-
 			}
 			else
 				printf("bash: syntax error near unexpected token `|'\n");
@@ -84,14 +85,14 @@ int		ft_parse(t_list **lst, t_List st)
 
 	t_lst_cmd *lst1;
 
-	lst1 = ft_lst_parse_new(NULL, "|", PIPE);
-
+	lst1 = NULL;
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("echo toto", ' '), NULL, CMD));
 
-	ft_print_lst_parse(lst1);
-	printf("\n\n");
-	ft_print_lst_parse_reverse(lst1);
+//	ft_print_lst_parse(lst1);
+//	printf("\n\n");
+//	ft_print_lst_parse_reverse(lst1);
 
 	ft_read_lst(lst1, st, 1);
 

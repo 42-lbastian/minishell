@@ -109,7 +109,7 @@ int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
 	return (1);
 }
 
-void	ft_main_exec(char **complete_cmd, t_List st)
+void	ft_main_exec(char **complete_cmd, t_List st, int read, int write)
 {
 	char	*path;
 	int		pid;
@@ -128,6 +128,22 @@ void	ft_main_exec(char **complete_cmd, t_List st)
 	}
 	if (pid == 0)
 	{
+		if (read != 0)
+		{
+			dup2(read, 0);
+			close(read);
+		}
+		if (write != 1)
+		{
+			dup2(write, 1);
+			close(write);
+		}
+		/*
+		dup2(read, 0);
+		dup2(write, 1);
+		close(write);
+		close(read);
+		*/
 		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
 			printf("Error exec\n");
 	}
