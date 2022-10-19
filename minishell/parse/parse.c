@@ -39,7 +39,6 @@ int		ft_print_cmd(char **str)
 int	ft_read_lst(t_lst_cmd *lst, t_List st, int *pip2)
 {
 	int pip[2];
-	(void)pip2;
 
 	while (lst && lst->type == CMD)
 		lst = lst->next;
@@ -54,13 +53,15 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int *pip2)
 			}
 			//ft_main_exec(lst->next->value.cmd, st, pip, CMD_BEGIN);
 			//ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
-			ft_read_lst(lst->next, st, pip);
+			if (ft_read_lst(lst->next, st, pip))
+				return (1);
 			printf("OPER %s-%s-%s\n", lst->next->value.cmd[0], lst->value.oper, lst->prev->value.cmd[0]);
+		
 		}
 		else
 			printf("bash: syntax error near unexpected token `|'\n");
 	}
-	return (1);
+	return (0);
 }
 
 int		ft_parse(t_list **lst, t_List st)
