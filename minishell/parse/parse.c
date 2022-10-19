@@ -51,8 +51,6 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
 					printf("Pipe Fail\n");
 				ft_main_exec(lst->next->value.cmd, st, pip, CMD_BEGIN);
 				ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
-				close(pip[0]);
-				close(pip[1]);
 				lst = lst->next;
 			}
 			else

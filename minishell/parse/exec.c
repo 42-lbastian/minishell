@@ -144,5 +144,12 @@ void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int type)
 			//printf("Error exec\n");
 	}
 	else
+	{
+		if (type == CMD_END)
+		{
+			close(pip[0]);
+			close(pip[1]);
+		}
 		waitpid(pid, NULL, 0);
+	}
 }
