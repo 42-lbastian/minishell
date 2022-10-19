@@ -263,4 +263,12 @@ int		ft_parse(t_list **lst, t_List st);
 */
 void	ft_main_exec(char **complete_cmd, t_List st);
 
+/*
+**		parse/lst.c
+*/
+t_lst_cmd	*ft_lst_parse_new(char **cmd, char *oper, int type);
+int	ft_lst_parse_add_back(t_lst_cmd **lst, t_lst_cmd *new);
+void	ft_print_lst_parse(t_lst_cmd *lst);
+
+
 #endif

@@ -49,7 +49,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
 			{
 				pipe(pip);
 				lst = lst->next;
-				ft_read_lst(lst, st, pip[1]);
+				ft_read_lst(lst, st, pip[0]);
 
 			}
 			else
@@ -83,25 +83,14 @@ int		ft_parse(t_list **lst, t_List st)
 	*/
 
 	t_lst_cmd *lst1;
-	t_lst_cmd *lst2;
-	t_lst_cmd *lst3;
 
-	lst1 = malloc(sizeof(t_lst_cmd));
-	lst2 = malloc(sizeof(t_lst_cmd));
-	lst3 = malloc(sizeof(t_lst_cmd));
+	lst1 = ft_lst_parse_new(NULL, "|", PIPE);
 
-	lst1->next = lst2;
-	lst2->next = lst3;
-	lst3->next =  NULL;
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("echo toto", ' '), NULL, CMD));
 
-	lst1->value.oper = "|";
-	lst1->type = PIPE;
+	//ft_print_lst_parse(lst1);
 
-	lst2->value.cmd = ft_split("ls", ' ');
-	lst2->type = CMD;
-
-	lst3->value.cmd = ft_split("echo lbastian", ' ');
-	lst3->type = CMD;
 	ft_read_lst(lst1, st, 1);
 
 	(void)lst;

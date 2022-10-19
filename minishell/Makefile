@@ -8,7 +8,7 @@ SRCS =	lexer/minishell.c \
 		lexer/read_char.c \
 		lexer/unwanted.c \
 		lexer/utils.c \
-		lexer/list.c \
+		lexer/lst.c \
 		lexer/free.c \
 		lexer/remove_spaces.c \
 		lexer/remove_quotes.c \
@@ -17,6 +17,7 @@ SRCS =	lexer/minishell.c \
 		lexer/set_type_cmd.c \
 		parse/parse.c \
 		parse/exec.c \
+		parse/lst.c \
 		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/echo.c \

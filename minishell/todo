@@ -6,5 +6,3 @@ export ech="echo -n" -> $ech titi
 
 
 < infile cat
-
-a$USERa
