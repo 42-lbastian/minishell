@@ -89,7 +89,9 @@ int		ft_parse(t_list **lst, t_List st)
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("echo toto", ' '), NULL, CMD));
 
-	//ft_print_lst_parse(lst1);
+	ft_print_lst_parse(lst1);
+	printf("\n\n");
+	ft_print_lst_parse_reverse(lst1);
 
 	ft_read_lst(lst1, st, 1);
 

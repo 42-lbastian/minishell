@@ -21,6 +21,7 @@ t_lst_cmd	*ft_lst_parse_new(char **cmd, char *oper, int type)
 	if (!new)
 		return (NULL);
 	new->next = NULL;
+	new->prev = NULL;
 	if (type == CMD)
 		new->value.cmd = cmd;
 	else
@@ -41,11 +42,29 @@ int	ft_lst_parse_add_back(t_lst_cmd **lst, t_lst_cmd *new)
 	if (!new)
 		return (1);
 	if (lst && (*lst))
+	{
+		new->prev = ft_lst_parse_last((*lst));
 		ft_lst_parse_last((*lst))->next = new;
+	}
 	else
 		(*lst) = new;
 	return (0);
 }
+
+int	ft_lst_parse_add_front(t_lst_cmd **lst, t_lst_cmd *new)
+{
+	if (!new)
+		return (1);
+	if (lst && (*lst))
+	{
+		new->next = (*lst);
+		(*lst) = new;
+	}
+	else
+		(*lst) = new;
+	return (0);
+}
+
 
 void	ft_print_lst_parse(t_lst_cmd *lst)
 {
@@ -66,5 +85,28 @@ void	ft_print_lst_parse(t_lst_cmd *lst)
 		else
 			printf("%s\n", lst->value.oper);
 		lst = lst->next;
+	}
+}
+
+void	ft_print_lst_parse_reverse(t_lst_cmd *lst)
+{
+	int i;
+
+	lst = ft_lst_parse_last(lst);
+	while (lst)
+	{
+		i = 0;
+		if (lst->type == CMD)
+		{
+			while (lst->value.cmd[i])
+			{
+				printf("%s\t", lst->value.cmd[i]);
+				i++;
+			}
+			printf("\n");
+		}
+		else
+			printf("%s\n", lst->value.oper);
+		lst = lst->prev;
 	}
 }

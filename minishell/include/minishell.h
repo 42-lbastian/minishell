@@ -60,6 +60,7 @@ typedef struct	s_node
 typedef struct	s_lst_cmd
 {
 	struct s_lst_cmd	*next;
+	struct s_lst_cmd	*prev;
 	t_value			value;
 	int				type;
 
@@ -268,7 +269,9 @@ void	ft_main_exec(char **complete_cmd, t_List st);
 */
 t_lst_cmd	*ft_lst_parse_new(char **cmd, char *oper, int type);
 int	ft_lst_parse_add_back(t_lst_cmd **lst, t_lst_cmd *new);
+int	ft_lst_parse_add_front(t_lst_cmd **lst, t_lst_cmd *new);
 void	ft_print_lst_parse(t_lst_cmd *lst);
+void	ft_print_lst_parse_reverse(t_lst_cmd *lst);
 
 
 #endif
