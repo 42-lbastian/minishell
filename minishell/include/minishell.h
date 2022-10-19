@@ -22,6 +22,10 @@
 #define FILE_OUT_APP 10 /* >> */
 #define HERE_DOC 11 /* << */
 
+#define CMD_BEGIN 0
+#define CMD_END 1
+#define CMD_MIDDLE 3
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -263,7 +267,7 @@ int		ft_parse(t_list **lst, t_List st);
 /*
 **		parse/exec.c
 */
-void	ft_main_exec(char **complete_cmd, t_List st, int read, int write);
+void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int type);
 
 /*
 **		parse/lst.c

@@ -109,7 +109,7 @@ int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
 	return (1);
 }
 
-void	ft_main_exec(char **complete_cmd, t_List st, int read, int write)
+void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int type)
 {
 	char	*path;
 	int		pid;
@@ -126,26 +126,23 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write)
 		printf("Error fork\n");
 		return ;
 	}
-	if (pid == 0)
+	else if (pid == 0)
 	{
-		if (read != 0)
+		if (type == CMD_END)
+			dup2(pip[0], STDIN_FILENO);
+		else if (type == CMD_BEGIN)
+			dup2(pip[1], STDOUT_FILENO);
+		else
 		{
-			dup2(read, 0);
-			close(read);
+			dup2(pip[0], STDIN_FILENO);
+			dup2(pip[1], STDOUT_FILENO);
 		}
-		if (write != 1)
-		{
-			dup2(write, 1);
-			close(write);
-		}
-		/*
-		dup2(read, 0);
-		dup2(write, 1);
-		close(write);
-		close(read);
-		*/
+		close(pip[0]);
+		close(pip[1]);
 		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
-			printf("Error exec\n");
+			ft_putstr_fd("Error exec\n", STDERR_FILENO);
+			//printf("Error exec\n");
 	}
-	waitpid(pid, NULL, 0);
+	else
+		waitpid(pid, NULL, 0);
 }
