@@ -109,7 +109,7 @@ int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
 	return (1);
 }
 
-void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int type)
+void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int *pip2, int type)
 {
 	char	*path;
 	int		pid;
@@ -135,7 +135,12 @@ void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int type)
 		else
 		{
 			dup2(pip[0], STDIN_FILENO);
-			dup2(pip[1], STDOUT_FILENO);
+			dup2(pip2[1], STDOUT_FILENO);
+		}
+		if (pip2)
+		{
+			close(pip2[0]);
+			close(pip2[1]);
 		}
 		close(pip[0]);
 		close(pip[1]);

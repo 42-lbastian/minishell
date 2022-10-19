@@ -36,10 +36,10 @@ int		ft_read_ast(t_List st, t_node *node)
 }
 */
 
-int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
+int	ft_read_lst(t_lst_cmd *lst, t_List st, int *pip2)
 {
 	int pip[2];
-	(void)fd;
+	(void)pip2;
 
 	while (lst)
 	{
@@ -48,10 +48,14 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int fd)
 			if (lst->next && lst->prev)
 			{
 				if (pipe(pip) == -1)
+				{
 					printf("Pipe Fail\n");
-				ft_main_exec(lst->next->value.cmd, st, pip, CMD_BEGIN);
-				ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
+					return (1);
+				}
+				//ft_main_exec(lst->next->value.cmd, st, pip, CMD_BEGIN);
+				//ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
 				lst = lst->next;
+				ft_read_lst(lst, st, pip);
 			}
 			else
 				printf("bash: syntax error near unexpected token `|'\n");
@@ -94,7 +98,7 @@ int		ft_parse(t_list **lst, t_List st)
 //	printf("\n\n");
 //	ft_print_lst_parse_reverse(lst1);
 
-	ft_read_lst(lst1, st, 1);
+	ft_read_lst(lst1, st, NULL);
 
 	(void)lst;
 	return (0);

@@ -267,7 +267,7 @@ int		ft_parse(t_list **lst, t_List st);
 /*
 **		parse/exec.c
 */
-void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int type);
+void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int *pip2, int type);
 
 /*
 **		parse/lst.c
