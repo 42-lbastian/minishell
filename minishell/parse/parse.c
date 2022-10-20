@@ -40,6 +40,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 {
 	int pip[2];
 
+	printf("CMD %s\tRead %d - Write %d\n", lst->value.cmd[0], read, write);
 	if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
@@ -55,7 +56,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 			//ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
 			if (ft_read_lst(lst->next, st, pip[0], pip[1]))
 				return (1);
-			printf("CMD %s\tRead %d|Write %d\n", lst->next->value.cmd[0], read, write);
+			printf("CMD %s\tRead %d|Write %d\tReadB %d|WriteB %d\n", lst->next->value.cmd[0], read, write, pip[0], pip[1]);
 			if (strcmp(lst->next->value.cmd[0], "ls") == 0)
 				ft_main_exec(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "cat") == 0)
@@ -70,10 +71,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 			printf("bash: syntax error near unexpected token `|'\n");
 	}
 	if (lst && read == 0)
-	{
-		printf("END %s\n", lst->prev->value.cmd[0]);
 		ft_main_exec(lst->prev->value.cmd, st, pip[0], pip[1], 0, 0, CMD_END);
-	}
 	return (0);
 }
 
