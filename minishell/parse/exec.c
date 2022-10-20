@@ -150,7 +150,7 @@ void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int *pip2, int type)
 	}
 	else
 	{
-		if (type == CMD_END)
+		if (type == CMD_END || type == CMD_MIDDLE)
 		{
 			close(pip[0]);
 			close(pip[1]);

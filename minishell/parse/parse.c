@@ -44,7 +44,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int *pip2)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
 	{
-		if (lst->next && lst->prev)
+		if (lst->next)
 		{
 			if (pipe(pip) == -1)
 			{
@@ -55,7 +55,14 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int *pip2)
 			//ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
 			if (ft_read_lst(lst->next, st, pip))
 				return (1);
-			printf("OPER %s-%s-%s\n", lst->next->value.cmd[0], lst->value.oper, lst->prev->value.cmd[0]);
+			if (strcmp(lst->next->value.cmd[0], "ls") == 0)
+				ft_main_exec(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
+			else if (strcmp(lst->next->value.cmd[0], "cat") == 0)
+				ft_main_exec(lst->next->value.cmd, st, pip2, NULL, CMD_BEGIN);
+			else
+				ft_main_exec(lst->next->value.cmd, st, pip, NULL, CMD_END);
+			//printf("CMD %s-%s\n", lst->value.oper, lst->next->value.cmd[0]);
+			//printf("OPER %s-%s-%s\n", lst->next->value.cmd[0], lst->value.oper, lst->prev->value.cmd[0]);
 		
 		}
 		else
@@ -90,9 +97,11 @@ int		ft_parse(t_list **lst, t_List st)
 	lst1 = NULL;
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("grep toto", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("cat beha", ' '), NULL, CMD));
 
 	//	ft_print_lst_parse(lst1);
 	//	printf("\n\n");
