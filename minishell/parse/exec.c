@@ -135,8 +135,6 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 			dup2(write, STDOUT_FILENO);
 		else
 		{
-			printf("OH OH %s\n", complete_cmd[0]);
-			dprintf(STDERR_FILENO, "CMD %s\tPip2 %d-%d\n", complete_cmd[0], read2, write2);
 			dup2(read, STDIN_FILENO);
 			dup2(write2, STDOUT_FILENO);
 		}
@@ -155,7 +153,6 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 	{
 		if (type == CMD_END || type == CMD_MIDDLE)
 		{
-			printf("I close %s\n", complete_cmd[0]);
 			close(read);
 			close(write);
 		}

@@ -40,7 +40,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 {
 	int pip[2];
 
-	printf("CMD %s\tRead %d - Write %d\n", lst->value.cmd[0], read, write);
+	//printf("CMD %s\tRead %d - Write %d\n", lst->value.cmd[0], read, write);
 	if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
@@ -56,7 +56,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 			//ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
 			if (ft_read_lst(lst->next, st, pip[0], pip[1]))
 				return (1);
-			printf("CMD %s\tRead %d|Write %d\tReadB %d|WriteB %d\n", lst->next->value.cmd[0], read, write, pip[0], pip[1]);
+			//printf("CMD %s\tRead %d|Write %d\tReadB %d|WriteB %d\n", lst->next->value.cmd[0], read, write, pip[0], pip[1]);
 			if (strcmp(lst->next->value.cmd[0], "ls") == 0)
 				ft_main_exec(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "cat") == 0)
@@ -151,8 +151,10 @@ int		ft_parse(t_list **lst, t_List st)
 	//	ft_print_lst_parse(lst1);
 	//	printf("\n\n");
 	//	ft_print_lst_parse_reverse(lst1);
+	int bubule[2];
 
-	ft_read_lst(lst1, st, 0, 0);
+	pipe(bubule);
+	ft_read_lst(lst1, st, bubule[0], bubule[1]);
 	//ft_read_lst(lst1, st, NULL);
 
 	(void)lst;
