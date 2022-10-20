@@ -109,7 +109,7 @@ int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
 	return (1);
 }
 
-void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int *pip2, int type)
+void	ft_main_exec(char **complete_cmd, t_List st, int pip[2], int pip2[2], int type)
 {
 	char	*path;
 	int		pid;
@@ -134,6 +134,8 @@ void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int *pip2, int type)
 			dup2(pip[1], STDOUT_FILENO);
 		else
 		{
+			printf("OH OH %s\n", complete_cmd[0]);
+			dprintf(STDERR_FILENO, "CMD %s\tPip2 %d-%d\n", complete_cmd[0], pip2[0], pip2[1]);
 			dup2(pip[0], STDIN_FILENO);
 			dup2(pip2[1], STDOUT_FILENO);
 		}
@@ -152,8 +154,14 @@ void	ft_main_exec(char **complete_cmd, t_List st, int *pip, int *pip2, int type)
 	{
 		if (type == CMD_END || type == CMD_MIDDLE)
 		{
+			printf("I close %s\n", complete_cmd[0]);
 			close(pip[0]);
 			close(pip[1]);
+		}
+		if (type == CMD_BEGIN)
+		{
+			close(pip2[0]);
+			close(pip2[1]);
 		}
 		waitpid(pid, NULL, 0);
 	}

@@ -36,11 +36,12 @@ int		ft_print_cmd(char **str)
    }
  */
 
-int	ft_read_lst(t_lst_cmd *lst, t_List st, int *pip2)
+int	ft_read_lst(t_lst_cmd *lst, t_List st, int pip2[2])
 {
 	int pip[2];
 
-	while (lst && lst->type == CMD)
+
+	if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
 	{
@@ -58,15 +59,20 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int *pip2)
 			if (strcmp(lst->next->value.cmd[0], "ls") == 0)
 				ft_main_exec(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "cat") == 0)
-				ft_main_exec(lst->next->value.cmd, st, pip2, NULL, CMD_BEGIN);
-			else
-				ft_main_exec(lst->next->value.cmd, st, pip, NULL, CMD_END);
+				ft_main_exec(lst->next->value.cmd, st, pip2, pip, CMD_BEGIN);
+			//else
+			//	ft_main_exec(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 			//printf("CMD %s-%s\n", lst->value.oper, lst->next->value.cmd[0]);
 			//printf("OPER %s-%s-%s\n", lst->next->value.cmd[0], lst->value.oper, lst->prev->value.cmd[0]);
 		
 		}
 		else
 			printf("bash: syntax error near unexpected token `|'\n");
+	}
+	if (lst && pip2 == NULL)
+	{
+		printf("END %s\n", lst->prev->value.cmd[0]);
+		ft_main_exec(lst->prev->value.cmd, st, pip, NULL, CMD_END);
 	}
 	return (0);
 }
@@ -95,8 +101,6 @@ int		ft_parse(t_list **lst, t_List st)
 	t_lst_cmd *lst1;
 
 	lst1 = NULL;
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
