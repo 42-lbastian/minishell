@@ -27,7 +27,7 @@ int		ft_print_cmd(char **str)
    fd = ft_read_ast(st, node->right);
    if (!node->right)
    {
-   ft_main_exec(node->value.cmd, st);
+   ft_is_builtin(node->value.cmd, st);
    return (pip[0]);
    }
    else
@@ -52,23 +52,23 @@ int	ft_read_lst(t_lst_parser *lst, t_List st, int read, int write)
 				printf("Pipe Fail\n");
 				return (1);
 			}
-			//ft_main_exec(lst->next->value.cmd, st, pip, CMD_BEGIN);
-			//ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
+			//ft_is_builtin(lst->next->value.cmd, st, pip, CMD_BEGIN);
+			//ft_is_builtin(lst->prev->value.cmd, st, pip, CMD_END);
 			if (ft_read_lst(lst->next, st, pip[0], pip[1]))
 				return (1);
 			//printf("CMD %s\tRead %d|Write %d\tReadB %d|WriteB %d\n", lst->next->value.cmd[0], read, write, pip[0], pip[1]);
 			if (lst->next->next == NULL)
-				ft_main_exec(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
+				ft_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
 			else if (lst->prev)
-				ft_main_exec(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
+				ft_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			/*
 			if (strcmp(lst->next->value.cmd[0], "grep") == 0)
-				ft_main_exec(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
+				ft_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "ls") == 0)
-				ft_main_exec(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
+				ft_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
 			*/
 			//else
-			//	ft_main_exec(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
+			//	ft_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 			//printf("CMD %s-%s\n", lst->value.oper, lst->next->value.cmd[0]);
 			//printf("OPER %s-%s-%s\n", lst->next->value.cmd[0], lst->value.oper, lst->prev->value.cmd[0]);
 		
@@ -77,9 +77,9 @@ int	ft_read_lst(t_lst_parser *lst, t_List st, int read, int write)
 			printf("bash: syntax error near unexpected token `|'\n");
 	}
 	if (lst && lst->prev == NULL && lst->next == NULL)
-		ft_main_exec(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+		ft_is_builtin(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	else if (lst && read == 3)
-		ft_main_exec(lst->prev->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+		ft_is_builtin(lst->prev->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	return (0);
 }
 
@@ -101,18 +101,18 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int pip2[2])
 				printf("Pipe Fail\n");
 				return (1);
 			}
-			//ft_main_exec(lst->next->value.cmd, st, pip, CMD_BEGIN);
-			//ft_main_exec(lst->prev->value.cmd, st, pip, CMD_END);
+			//ft_is_builtin(lst->next->value.cmd, st, pip, CMD_BEGIN);
+			//ft_is_builtin(lst->prev->value.cmd, st, pip, CMD_END);
 			printf("PREPIPE %s\t%d-%d\n", lst->next->value.cmd[0], pip[0], pip[1]);
 			
 			if (ft_read_lst(lst->next, st, pip))
 				return (1);
 			if (strcmp(lst->next->value.cmd[0], "ls") == 0)
-				ft_main_exec(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
+				ft_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "cat") == 0)
-				ft_main_exec(lst->next->value.cmd, st, pip2, pip, CMD_BEGIN);
+				ft_is_builtin(lst->next->value.cmd, st, pip2, pip, CMD_BEGIN);
 			//else
-			//	ft_main_exec(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
+			//	ft_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 		
 		}
 		else
@@ -121,7 +121,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int pip2[2])
 	if (lst && !pip2)
 	{
 		printf("END %s\n", lst->prev->value.cmd[0]);
-		ft_main_exec(lst->prev->value.cmd, st, pip, NULL, CMD_END);
+		ft_is_builtin(lst->prev->value.cmd, st, pip, NULL, CMD_END);
 	}
 	return (0);
 }*/
@@ -172,6 +172,7 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 int		ft_parse(t_list *lst, t_List st)
 {
 	int pip[2];
+	t_lst_parser *lst_parser;
 
 	/*t_node *node;
 	  t_node *left;
@@ -192,18 +193,17 @@ int		ft_parse(t_list *lst, t_List st)
 	  ft_read_ast(st, node);
 	 */
 
-	t_lst_parser *lst_parser;
-	t_lst_parser *lst_parser2;
 
 	lst_parser = NULL;
-	lst_parser2 = NULL;
-	ft_create_lst_parser(lst, &lst_parser2);
+	ft_create_lst_parser(lst, &lst_parser);
+	
+	/*
 	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(NULL, "|", PIPE));
 	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("grep l", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(NULL, "|", PIPE));
 	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
-
+	*/
 	//	ft_print_lst_parse(lst_parser);
 	//	printf("\n\n");
 	//	ft_print_lst_parse_reverse(lst_parser);
@@ -212,7 +212,7 @@ int		ft_parse(t_list *lst, t_List st)
 	//printf("--------------\n");
 	//ft_print_lst_parse(lst_parser2);
 	pipe(pip);
-	ft_read_lst(lst_parser2, st, pip[0], pip[1]);
+	ft_read_lst(lst_parser, st, pip[0], pip[1]);
 	//ft_read_lst(lst_parser, st, NULL);
 
 	(void)lst;

@@ -26,6 +26,8 @@
 #define CMD_END 1
 #define CMD_MIDDLE 3
 
+#define CD 0
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -268,6 +270,7 @@ int		ft_parse(t_list *lst, t_List st);
 **		parse/exec.c
 */
 void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
+void	ft_is_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
 //void	ft_main_exec(char **complete_cmd, t_List st, int pip[2], int pip2[2], int type);
 
 /*

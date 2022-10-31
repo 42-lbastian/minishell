@@ -76,10 +76,10 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_List st)
 		}
 		ft_parse(main_s->lst, st);
 		//parser
-		ft_temp_test_cmd(main_s);
-		ft_cmd(main_s, st);
-		ft_free_temp(main_s);
-		ft_print_lst(main_s->lst);
+		//ft_temp_test_cmd(main_s);
+		//ft_cmd(main_s, st);
+		//ft_free_temp(main_s);
+		//ft_print_lst(main_s->lst);
 		ft_free_lst(&main_s->lst);
 	}
 	ft_free_all(&main_s->lst);
