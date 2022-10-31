@@ -33,11 +33,13 @@ OBJS = ${SRCS:.c=.o}
 
 LIBFT        = libft/libft.a
 
-CC = gcc
+CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -lreadline -g
+RFLAG = -lreadline
 
-FFLAGS = -Wall -Wextra -Werror -lreadline -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
+
+FFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 RM = rm -rf
 
@@ -45,11 +47,11 @@ all:	$(NAME)
 
 $(NAME): ${OBJS}
 	$(MAKE) -C libft
-	$(CC) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT}
+	$(CC) $(RFLAG) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT}
 
 fsan: ${OBJS}
 	$(MAKE) -C libft
-	$(CC) -o $(NAME) ${OBJS} $(FFLAGS) ${LIBFT}
+	$(CC) $(RFLAG) -o $(NAME) ${OBJS} $(FFLAGS) ${LIBFT}
 	
 clean:
 	$(MAKE) clean -C libft
