@@ -57,9 +57,9 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 			if (ft_read_lst(lst->next, st, pip[0], pip[1]))
 				return (1);
 			//printf("CMD %s\tRead %d|Write %d\tReadB %d|WriteB %d\n", lst->next->value.cmd[0], read, write, pip[0], pip[1]);
-			if (strcmp(lst->next->value.cmd[0], "ls") == 0)
+			if (strcmp(lst->next->value.cmd[0], "grep") == 0)
 				ft_main_exec(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
-			else if (strcmp(lst->next->value.cmd[0], "cat") == 0)
+			else if (strcmp(lst->next->value.cmd[0], "ls") == 0)
 				ft_main_exec(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
 			//else
 			//	ft_main_exec(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
@@ -70,8 +70,8 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 		else
 			printf("bash: syntax error near unexpected token `|'\n");
 	}
-	if (lst && read == 0)
-		ft_main_exec(lst->prev->value.cmd, st, pip[0], pip[1], 0, 0, CMD_END);
+	if (lst && read == 3)
+		ft_main_exec(lst->prev->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	return (0);
 }
 
@@ -144,9 +144,9 @@ int		ft_parse(t_list **lst, t_List st)
 	lst1 = NULL;
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("grep l", ' '), NULL, CMD));
 	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("cat beha", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
 
 	//	ft_print_lst_parse(lst1);
 	//	printf("\n\n");
