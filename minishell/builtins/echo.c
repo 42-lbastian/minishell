@@ -55,8 +55,7 @@ int echo(char **str)
 			i++;
 		}
 		while (str[i])
-		{
-			
+		{	
 			ft_putstr_fd(str[i],1);
 			i++;
 			if (str[i])

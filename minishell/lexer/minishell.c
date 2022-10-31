@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void	ft_cmd(t_struct *main_s, t_List st)
+/*void	ft_cmd(t_struct *main_s, t_List st)
 {
 	if (ft_strcmp_2(main_s->temp_str[0], "echo") == 0)
 		echo(main_s->temp_str);
@@ -14,7 +14,7 @@ void	ft_cmd(t_struct *main_s, t_List st)
 		ft_export(st, main_s->temp_str);
 	if (ft_strcmp_2(main_s->temp_str[0], "unset") == 0)
 		ft_unset(st, main_s->temp_str);
-}
+}*/
 
 void	ft_temp_test_cmd(t_struct *main_s)
 {

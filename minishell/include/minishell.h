@@ -27,6 +27,7 @@
 #define CMD_MIDDLE 3
 
 #define CD 0
+#define ECHO 1
 
 #include <stdlib.h>
 #include <unistd.h>

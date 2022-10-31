@@ -114,7 +114,7 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 {
 	char	*path;
 	int		pid;
-	
+
 	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
 	if (!path)
 	{
@@ -147,7 +147,7 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 		close(write);
 		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
 			ft_putstr_fd("Error exec\n", STDERR_FILENO);
-			//printf("Error exec\n");
+		//printf("Error exec\n");
 	}
 	else
 	{
@@ -167,117 +167,97 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 
 void	ft_exec_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type, int builtin)
 {
-	int		pid;
-	
-	pid = fork();
-	if (pid == -1)
-	{
-		printf("Error fork\n");
-		return ;
-	}
-	else if (pid == 0)
-	{
-		if (type == CMD_END)
-			dup2(read, STDIN_FILENO);
-		else if (type == CMD_BEGIN)
-			dup2(write, STDOUT_FILENO);
-		else
-		{
-			dup2(read, STDIN_FILENO);
-			dup2(write2, STDOUT_FILENO);
-		}
-		if (!read2 || !write2)
-		{
-			close(read2);
-			close(write2);
-		}
-		close(read);
-		close(write);
-		if (builtin ==  CD)
-			cd(st, complete_cmd[1]);
-		//if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
-		//ft_putstr_fd("Error exec\n", STDERR_FILENO);
-		//printf("Error exec\n");
-	}
+	if (type == CMD_END)
+		dup2(read, STDIN_FILENO);
+	else if (type == CMD_BEGIN)
+		dup2(write, STDOUT_FILENO);
 	else
 	{
-		if (type == CMD_END || type == CMD_MIDDLE)
-		{
-			close(read);
-			close(write);
-		}
-		if (type == CMD_BEGIN)
-		{
-			close(read2);
-			close(write2);
-		}
-		waitpid(pid, NULL, 0);
+		dup2(read, STDIN_FILENO);
+		dup2(write2, STDOUT_FILENO);
 	}
+	if (!read2 || !write2)
+	{
+		close(read2);
+		close(write2);
+	}
+	close(read);
+	close(write);
+	if (builtin == CD)
+	{
+		printf("Start cd\n");
+		cd(st, complete_cmd[1]);
+		printf("Exit cd\n");
+	}
+	if (builtin == ECHO)
+		echo(complete_cmd);
 }
 
 void	ft_is_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
 {
 	if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
 		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
+	else if (ft_strcmp_2(complete_cmd[0], "echo") == 0)
+		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, ECHO);
 	else
 		ft_main_exec(complete_cmd, st, read, write, read2, write2, type);
 }
 
 /*
-void	ft_main_exec(char **complete_cmd, t_List st, int pip[2], int pip2[2], int type)
+   void	ft_main_exec(char **complete_cmd, t_List st, int pip[2], int pip2[2], int type)
+   {
+   char	*path;
+   int		pid;
+
+   path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
+   if (!path)
+   {
+   printf("Command not found\n");
+   return ;
+   }
+   pid = fork();
+   if (pid == -1)
+   {
+   printf("Error fork\n");
+   return ;
+   }
+   else if (pid == 0)
+   {
+   if (type == CMD_END)
+   dup2(pip[0], STDIN_FILENO);
+   else if (type == CMD_BEGIN)
+   dup2(pip[1], STDOUT_FILENO);
+   else
+   {
+   printf("OH OH %s\n", complete_cmd[0]);
+   dprintf(STDERR_FILENO, "CMD %s\tPip2 %d-%d\n", complete_cmd[0], pip2[0], pip2[1]);
+   dup2(pip[0], STDIN_FILENO);
+   dup2(pip2[1], STDOUT_FILENO);
+   }
+   if (pip2)
+   {
+   close(pip2[0]);
+   close(pip2[1]);
+   }
+   close(pip[0]);
+   close(pip[1]);
+   if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
+   ft_putstr_fd("Error exec\n", STDERR_FILENO);
+//printf("Error exec\n");
+}
+else
 {
-	char	*path;
-	int		pid;
-	
-	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
-	if (!path)
-	{
-		printf("Command not found\n");
-		return ;
-	}
-	pid = fork();
-	if (pid == -1)
-	{
-		printf("Error fork\n");
-		return ;
-	}
-	else if (pid == 0)
-	{
-		if (type == CMD_END)
-			dup2(pip[0], STDIN_FILENO);
-		else if (type == CMD_BEGIN)
-			dup2(pip[1], STDOUT_FILENO);
-		else
-		{
-			printf("OH OH %s\n", complete_cmd[0]);
-			dprintf(STDERR_FILENO, "CMD %s\tPip2 %d-%d\n", complete_cmd[0], pip2[0], pip2[1]);
-			dup2(pip[0], STDIN_FILENO);
-			dup2(pip2[1], STDOUT_FILENO);
-		}
-		if (pip2)
-		{
-			close(pip2[0]);
-			close(pip2[1]);
-		}
-		close(pip[0]);
-		close(pip[1]);
-		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
-			ft_putstr_fd("Error exec\n", STDERR_FILENO);
-			//printf("Error exec\n");
-	}
-	else
-	{
-		if (type == CMD_END || type == CMD_MIDDLE)
-		{
-			printf("I close %s\n", complete_cmd[0]);
-			close(pip[0]);
-			close(pip[1]);
-		}
-		if (type == CMD_BEGIN)
-		{
-			close(pip2[0]);
-			close(pip2[1]);
-		}
-		waitpid(pid, NULL, 0);
-	}
+if (type == CMD_END || type == CMD_MIDDLE)
+{
+printf("I close %s\n", complete_cmd[0]);
+close(pip[0]);
+close(pip[1]);
+}
+if (type == CMD_BEGIN)
+{
+close(pip2[0]);
+close(pip2[1]);
+}
+waitpid(pid, NULL, 0);
+}
 }*/
