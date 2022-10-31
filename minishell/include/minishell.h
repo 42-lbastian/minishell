@@ -69,7 +69,7 @@ typedef struct	s_lst_cmd
 	t_value			value;
 	int				type;
 
-}				t_lst_cmd;
+}				t_lst_parser;
 
 //LEXER TOKEN
 typedef struct	s_list
@@ -262,7 +262,7 @@ int	ft_set_type_cmd(t_list **lst);
 /*
 **		parse/parse.c
 */
-int		ft_parse(t_list **lst, t_List st);
+int		ft_parse(t_list *lst, t_List st);
 
 /*
 **		parse/exec.c
@@ -273,11 +273,15 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 /*
 **		parse/lst.c
 */
-t_lst_cmd	*ft_lst_parse_new(char **cmd, char *oper, int type);
-int	ft_lst_parse_add_back(t_lst_cmd **lst, t_lst_cmd *new);
-int	ft_lst_parse_add_front(t_lst_cmd **lst, t_lst_cmd *new);
-void	ft_print_lst_parse(t_lst_cmd *lst);
-void	ft_print_lst_parse_reverse(t_lst_cmd *lst);
+t_lst_parser	*ft_lst_parse_new(char **cmd, char *oper, int type);
+int	ft_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new);
+int	ft_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new);
+void	ft_print_lst_parse(t_lst_parser *lst);
+void	ft_print_lst_parse_reverse(t_lst_parser *lst);
 
+/*
+**		parse/tools.c
+*/
+char	**ft_strcpy_cmd(char **arr);
 
 #endif

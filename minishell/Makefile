@@ -18,6 +18,7 @@ SRCS =	lexer/minishell.c \
 		parse/parse.c \
 		parse/exec.c \
 		parse/lst.c \
+		parse/tools.c \
 		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/echo.c \

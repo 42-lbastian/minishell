@@ -36,7 +36,7 @@ int		ft_print_cmd(char **str)
    }
  */
 
-int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
+int	ft_read_lst(t_lst_parser *lst, t_List st, int read, int write)
 {
 	int pip[2];
 
@@ -59,7 +59,7 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 			//printf("CMD %s\tRead %d|Write %d\tReadB %d|WriteB %d\n", lst->next->value.cmd[0], read, write, pip[0], pip[1]);
 			if (lst->next->next == NULL)
 				ft_main_exec(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
-			else if (lst->prev != NULL)
+			else if (lst->prev)
 				ft_main_exec(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			/*
 			if (strcmp(lst->next->value.cmd[0], "grep") == 0)
@@ -76,7 +76,9 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int read, int write)
 		else
 			printf("bash: syntax error near unexpected token `|'\n");
 	}
-	if (lst && read == 3)
+	if (lst && lst->prev == NULL && lst->next == NULL)
+		ft_main_exec(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+	else if (lst && read == 3)
 		ft_main_exec(lst->prev->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	return (0);
 }
@@ -124,8 +126,53 @@ int	ft_read_lst(t_lst_cmd *lst, t_List st, int pip2[2])
 	return (0);
 }*/
 
-int		ft_parse(t_list **lst, t_List st)
+int	ft_count_nb_cmd(t_list *lst)
 {
+	int i;
+
+	i = 0;
+	while (lst && lst->type == CMD)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
+int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
+{
+	char	**cmd;
+	int		i;
+
+	while (lst)
+	{
+		if (lst->type == CMD)
+		{
+			i = 0;
+			cmd = malloc(sizeof(char *) * (ft_count_nb_cmd(lst) + 1));
+			while(lst && lst->type == CMD)
+			{
+				cmd[i] = lst->content;
+				i++;
+				lst = lst->next;
+			}
+			cmd[i] = NULL;
+			ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			free(cmd);
+		}
+		else
+		{
+			ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+			lst = lst->next;
+		}
+	}
+	return (0);
+}
+
+int		ft_parse(t_list *lst, t_List st)
+{
+	int pip[2];
+
 	/*t_node *node;
 	  t_node *left;
 	  t_node *right;
@@ -145,23 +192,28 @@ int		ft_parse(t_list **lst, t_List st)
 	  ft_read_ast(st, node);
 	 */
 
-	t_lst_cmd *lst1;
+	t_lst_parser *lst_parser;
+	t_lst_parser *lst_parser2;
 
-	lst1 = NULL;
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(NULL, "|", PIPE));
-	ft_lst_parse_add_back(&lst1, ft_lst_parse_new(ft_split("cat toto", ' '), NULL, CMD));
+	lst_parser = NULL;
+	lst_parser2 = NULL;
+	ft_create_lst_parser(lst, &lst_parser2);
+	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(NULL, "|", PIPE));
+	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("grep l", ' '), NULL, CMD));
+	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(NULL, "|", PIPE));
+	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
 
-	//	ft_print_lst_parse(lst1);
+	//	ft_print_lst_parse(lst_parser);
 	//	printf("\n\n");
-	//	ft_print_lst_parse_reverse(lst1);
-	int bubule[2];
+	//	ft_print_lst_parse_reverse(lst_parser);
 
-	pipe(bubule);
-	ft_read_lst(lst1, st, bubule[0], bubule[1]);
-	//ft_read_lst(lst1, st, NULL);
+	//ft_print_lst_parse(lst_parser);
+	//printf("--------------\n");
+	//ft_print_lst_parse(lst_parser2);
+	pipe(pip);
+	ft_read_lst(lst_parser2, st, pip[0], pip[1]);
+	//ft_read_lst(lst_parser, st, NULL);
 
 	(void)lst;
 	return (0);
