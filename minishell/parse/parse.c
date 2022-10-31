@@ -214,7 +214,5 @@ int		ft_parse(t_list *lst, t_List st)
 	pipe(pip);
 	ft_read_lst(lst_parser, st, pip[0], pip[1]);
 	//ft_read_lst(lst_parser, st, NULL);
-
-	(void)lst;
 	return (0);
 }
