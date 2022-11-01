@@ -114,7 +114,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
 	{
-		if (lst->next)
+		if (lst->next && lst->prev)
 		{
 			pipe(pip);
 			if (!lst->next->next)
@@ -129,7 +129,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
 		}
 		else
 		{
-			ft_putstr_fd("Error |\n", STDERR_FILENO);
+			ft_putstr_fd("bash: syntax error near unexpected token `|'\n", STDERR_FILENO);
 			return (1);
 		}
 	}
