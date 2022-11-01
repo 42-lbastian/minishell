@@ -103,7 +103,13 @@ int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
 		lst = lst->next;
 	}
 	if (lst && lst->prev && lst->prev->type == ARG_FILE_IN && lst->type == CMD)
-		ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN);
+	{
+		if (!lst->next)
+			ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN_END);
+		else
+			ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN);
+		lst = lst->next;
+	}
 	else if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)

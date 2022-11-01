@@ -188,11 +188,11 @@ void	ft_main_exec_dumb(char **complete_cmd, t_List st, int read, int write, int 
 	else if (pid == 0)
 	{
 		dup2(read, STDIN_FILENO);
-		if (type == CMD_MIDDLE || type == CMD_BEGIN)
+		if (type == CMD_MIDDLE || type == CMD_BEGIN || type == CMD_FILE_IN)
 			dup2(write2, STDOUT_FILENO);
 		close(read2);
 		close(write2);
-		if (type != CMD_BEGIN && type != CMD_FILE_IN)
+		if (type != CMD_BEGIN && type != CMD_FILE_IN && type != CMD_FILE_IN_END)
 		{
 			close(read);
 			close(write);
@@ -214,7 +214,7 @@ void	ft_main_exec_dumb(char **complete_cmd, t_List st, int read, int write, int 
 			close(read2);
 			close(write2);
 		}
-		if (type == CMD_FILE_IN)
+		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END)
 			close(read);
 		waitpid(pid, NULL, 0);
 	}
