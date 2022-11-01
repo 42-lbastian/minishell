@@ -24,7 +24,8 @@
 
 #define CMD_BEGIN 0
 #define CMD_END 1
-#define CMD_MIDDLE 3
+#define CMD_MIDDLE 2
+#define CMD_FILE_IN 3
 
 #define CD 0
 #define ECHO 1
@@ -272,6 +273,7 @@ int		ft_parse(t_list *lst, t_List st);
 */
 void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
 void	ft_is_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
+void	ft_is_builtin_dumb(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
 //void	ft_main_exec(char **complete_cmd, t_List st, int pip[2], int pip2[2], int type);
 
 /*

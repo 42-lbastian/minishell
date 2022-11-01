@@ -129,6 +129,116 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 	}
 	else if (pid == 0)
 	{
+		//if (type == CMD_END)
+		dup2(read, STDIN_FILENO);
+		if (type == CMD_BEGIN)
+			dup2(write, STDOUT_FILENO);
+		else if (type == CMD_MIDDLE)
+		{
+			dup2(read, STDIN_FILENO);
+			dup2(write2, STDOUT_FILENO);
+		}
+		if (!read2 || !write2)
+		{
+			close(read2);
+			close(write2);
+		}
+		close(read);
+		if (write > 2)
+			close(write);
+		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
+			ft_putstr_fd("Error exec\n", STDERR_FILENO);
+		//printf("Error exec\n");
+	}
+	else
+	{
+		if (type == CMD_END || type == CMD_MIDDLE)
+		{
+			close(read);
+			if (write > 2)
+				close(write);
+		}
+		if (type == CMD_BEGIN)
+		{
+			close(read2);
+			close(write2);
+		}
+		waitpid(pid, NULL, 0);
+	}
+}
+
+
+void	ft_main_exec_dumb(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
+{
+	char	*path;
+	int		pid;
+
+	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
+	if (!path)
+	{
+		printf("Command not found\n");
+		return ;
+	}
+	pid = fork();
+	if (pid == -1)
+	{
+		printf("Error fork\n");
+		return ;
+	}
+	else if (pid == 0)
+	{
+		dup2(read, STDIN_FILENO);
+		if (type == CMD_MIDDLE || type == CMD_BEGIN)
+			dup2(write2, STDOUT_FILENO);
+		close(read2);
+		close(write2);
+		if (type != CMD_BEGIN && type != CMD_FILE_IN)
+		{
+			close(read);
+			close(write);
+		}
+		if (type == CMD_FILE_IN)
+			close(read);
+		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
+			ft_putstr_fd("Error exec\n", STDERR_FILENO);
+	}
+	else
+	{
+		if (type == CMD_END || type == CMD_MIDDLE)
+		{
+			close(read);
+			close(write);
+		}
+		if (type == CMD_END || type == CMD_FILE_IN)
+		{
+			close(read2);
+			close(write2);
+		}
+		if (type == CMD_FILE_IN)
+			close(read);
+		waitpid(pid, NULL, 0);
+	}
+}
+
+void	ft_exec_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type, int builtin)
+{
+	char	*path;
+	int		pid;
+
+	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
+	if (!path)
+	{
+		printf("Command not found\n");
+		return ;
+	}
+	pid = fork();
+	if (pid == -1)
+	{
+		printf("Error fork\n");
+		return ;
+	}
+	else if (pid == 0)
+	{
 		if (type == CMD_END)
 			dup2(read, STDIN_FILENO);
 		else if (type == CMD_BEGIN)
@@ -145,9 +255,10 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 		}
 		close(read);
 		close(write);
-		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
-			ft_putstr_fd("Error exec\n", STDERR_FILENO);
-		//printf("Error exec\n");
+		if (builtin == CD)
+			cd(st, complete_cmd[1]);
+		if (builtin == ECHO)
+			echo(complete_cmd);
 	}
 	else
 	{
@@ -165,32 +276,14 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 	}
 }
 
-void	ft_exec_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type, int builtin)
+void	ft_is_builtin_dumb(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
 {
-	if (type == CMD_END)
-		dup2(read, STDIN_FILENO);
-	else if (type == CMD_BEGIN)
-		dup2(write, STDOUT_FILENO);
+	if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
+		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
+	else if (ft_strcmp_2(complete_cmd[0], "echo") == 0)
+		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, ECHO);
 	else
-	{
-		dup2(read, STDIN_FILENO);
-		dup2(write2, STDOUT_FILENO);
-	}
-	if (!read2 || !write2)
-	{
-		close(read2);
-		close(write2);
-	}
-	close(read);
-	close(write);
-	if (builtin == CD)
-	{
-		printf("Start cd\n");
-		cd(st, complete_cmd[1]);
-		printf("Exit cd\n");
-	}
-	if (builtin == ECHO)
-		echo(complete_cmd);
+		ft_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);
 }
 
 void	ft_is_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
