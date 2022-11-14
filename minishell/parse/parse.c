@@ -238,16 +238,23 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		}
 		if (lst && lst->type == CMD && lst->next && lst->next->type == FILE_IN)
 		{
-			dprintf(STDERR_FILENO, "PRE FILE IN\n");
 			cmd = malloc(sizeof(char *) * 2);
 			cmd[0] = lst->content;
 			cmd[1] = NULL;
 			lst = lst->next;
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
-			lst = lst->next;
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			if (lst && lst->type == ARG_FILE_IN)
+			{
+				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+				lst = lst->next;
+				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			}
+			else
+			{
+				ft_putstr_fd("bash: syntax error near unexpected token\n", STDERR_FILENO);
+				return (1);
+			}
 			free(cmd);
 		}
 		if (lst && lst->type == PIPE)
@@ -260,18 +267,17 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
-			if (!lst)
+			if (lst && lst->type == ARG_FILE_IN)
 			{
-				ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", STDERR_FILENO);
+				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+				lst = lst->next;
+			}
+			else
+			{
+				ft_putstr_fd("bash: syntax error near unexpected token'\n", STDERR_FILENO);
 				return (1);
 			}
-			if (lst->type != ARG_FILE_IN)
-			{
-				ft_putstr_fd("bash: syntax error near unexpected token GNEH 2\n", STDERR_FILENO);
-				return (1);
-			}
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
-			lst = lst->next;
+
 		}
 	}
 	return (0);
@@ -314,7 +320,7 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 			}
 			else
 			{
-				ft_putstr_fd("bash: syntax error near unexpected token\n", STDERR_FILENO);
+				ft_putstr_fd("bash: syntax error near unexpected token WUT?\n", STDERR_FILENO);
 				return (1);			
 			}
 	//		ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
@@ -364,8 +370,8 @@ int		ft_parse(t_list *lst, t_List st)
 
 	lst_parser = NULL;
 	lst_parser_dumb = NULL;
-	if (ft_create_lst_parser(lst, &lst_parser))
-		return (1);
+	//if (ft_create_lst_parser(lst, &lst_parser))
+	//	return (1);
 	if (ft_create_lst_parser_dumb(lst, &lst_parser_dumb))
 		return (1);
 	
