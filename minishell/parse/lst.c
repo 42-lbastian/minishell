@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-char	*ft_find_var_path(char *str, t_List st)
+char	*ft_find_var_path(char *str, t_env *st)
 {
 	if (!str)
 		return (NULL);

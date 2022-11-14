@@ -49,7 +49,7 @@ void	ft_free_temp(t_struct *main_s)
 	free(main_s->temp_str);
 }
 
-int	ft_main_action(t_struct *main_s, char *str_read, t_List st)
+int	ft_main_action(t_struct *main_s, char *str_read, t_env *st)
 {
 	g_glob.ret = 0;
 	while (1)
@@ -63,15 +63,21 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_List st)
 		//str_read = readline(RED NAME NORMAL);
 		str_read = readline(NAME);
 		if (!str_read)
+		{
+			dprintf(STDERR_FILENO, "Read %s\n", str_read);
 			return (0);
+		}
 		if (ft_strcmp_2(str_read, "exit") == 0)
+		{
+			dprintf(STDERR_FILENO, "Exit\n");
 			break ;
+		}
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		if (ft_main_lexer(str_read, main_s, st))
 		{
 			//EXPLICIT ERROR MSG && NO EXIT OPER ERROR
-			ft_putstr_fd("Error Lexer\n", 2);
+			ft_putstr_fd("Error Lexer\n", STDERR_FILENO);
 			//ft_free_all(&main_s->lst);
 			break ;
 		}
@@ -94,13 +100,21 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*str_read;
 	t_struct	*main_s;
-	t_List		st;
+	t_env		*st;
 
 	st = NULL;
-	st = add_list(envp, st);
+	//st = add_list(envp, st);
+	if (ft_create_env(envp, &st))
+	{
+		ft_putstr_fd("Error Malloc env\n", STDERR_FILENO);
+		return (1);
+	}
 	main_s = malloc(sizeof(t_struct));
 	if (!main_s)
+	{
+		ft_putstr_fd("Error Malloc Main struct\n", STDERR_FILENO);
 		return (1);
+	}
 	str_read = NULL;
 	ft_init_struct(main_s, argc, argv);
 	ft_main_action(main_s, str_read, st);

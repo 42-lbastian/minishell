@@ -73,7 +73,7 @@ char	*ft_find_path(char *cmd, char **all_path)
 	return (NULL);
 }
 
-int		ft_env_size(t_List st)
+int		ft_env_size(t_env *st)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ int		ft_env_size(t_List st)
 	return (i);
 }
 
-char	**ft_env_array(t_List st)
+char	**ft_env_array(t_env *st)
 {
 	int		i;
 	char	**env_arr;
@@ -110,7 +110,7 @@ int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
 }
 
 
-void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
+void	ft_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
 	char	*path;
 	int		pid;
@@ -168,7 +168,7 @@ void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2
 }
 
 
-void	ft_main_exec_dumb(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
+void	ft_main_exec_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
 	char	*path;
 	int		pid;
@@ -220,7 +220,7 @@ void	ft_main_exec_dumb(char **complete_cmd, t_List st, int read, int write, int 
 	}
 }
 
-void	ft_exec_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type, int builtin)
+void	ft_exec_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type, int builtin)
 {
 	char	*path;
 	int		pid;
@@ -256,9 +256,9 @@ void	ft_exec_builtin(char **complete_cmd, t_List st, int read, int write, int re
 		close(read);
 		close(write);
 		if (builtin == CD)
-			cd(st, complete_cmd[1]);
+		{}	//cd(st, complete_cmd[1]);
 		if (builtin == ECHO)
-			echo(complete_cmd);
+		{}	//echo(complete_cmd);
 	}
 	else
 	{
@@ -276,7 +276,7 @@ void	ft_exec_builtin(char **complete_cmd, t_List st, int read, int write, int re
 	}
 }
 
-void	ft_is_builtin_dumb(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
+void	ft_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
 	//if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
 	//	ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
@@ -286,7 +286,7 @@ void	ft_is_builtin_dumb(char **complete_cmd, t_List st, int read, int write, int
 		ft_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);
 }
 
-void	ft_is_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type)
+void	ft_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
 	if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
 		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
@@ -297,7 +297,7 @@ void	ft_is_builtin(char **complete_cmd, t_List st, int read, int write, int read
 }
 
 /*
-   void	ft_main_exec(char **complete_cmd, t_List st, int pip[2], int pip2[2], int type)
+   void	ft_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type)
    {
    char	*path;
    int		pid;

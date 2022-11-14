@@ -41,12 +41,12 @@
 #include <sys/wait.h>
 #include "../libft/libft.h"
 
-typedef struct t_ListElement
+typedef struct s_env
 {
 	char			    	*var;
     char                    *value;
-	struct t_ListElement	*next;
-}t_ListElement,	*t_List;
+	struct s_env			*next;
+}				t_env;
 
 
 //Value for AST/LST_CMD
@@ -122,8 +122,8 @@ void	get_signal(int sig);
 /**
 **		builtins/unset.c
 **/
-void	ft_unset(t_List st, char **arg);
-int		is_in_env(t_List st, char *var_name, char *var_value);
+void	ft_unset(t_env *st, char **arg);
+int		is_in_env(t_env *st, char *var_name, char *var_value);
 
 /**
 **		builtins/pwd.c
@@ -138,7 +138,7 @@ int		echo(char **str);
 /**
 **		builtins/cd.c
 **/
-void	cd(t_List st, const char *path);
+void	cd(t_env *st, const char *path);
 
 /**
 **		builtins/utils_env.c
@@ -148,15 +148,15 @@ char	**ft_trim_equal(char const *s, char charset);
 /**
 **		builtins/export.c
 **/
-void    ft_export(t_List st, char **arg);
-void is_var(char *str, t_List st);
+void    ft_export(t_env *st, char **arg);
+void is_var(char *str, t_env *st);
 
 /**
 **		builtins/env.c
 **/
-void	push_list_back(t_List *st, char *var_name, char *var_value);
-t_List	add_list(char **tab, t_List sta);
-void print_env(t_List st);
+void	push_list_back(t_env **st, char *var_name, char *var_value);
+t_env	add_list(char **tab, t_env *sta);
+void print_env(t_env *st);
 
 
 
@@ -168,7 +168,12 @@ char	**ft_trim_equal(char const *s, char charset);
 /**
 **		lexer/lexer.c
 **/
-int	ft_main_lexer(char *str, t_struct *main_s, t_List st);
+int	ft_main_lexer(char *str, t_struct *main_s, t_env *st);
+
+/**
+**		lexer/create_env.c
+**/
+int	ft_create_env(char **envp, t_env **st);
 
 /*		
 **		lexer/char_check.c
@@ -197,7 +202,7 @@ int	ft_main_remove_quotes(t_list **lst);
 /*
 **		lexer/expand_var.c
 */
-int	ft_main_replace_env(t_list **lst, t_List st);
+int	ft_main_replace_env(t_list **lst, t_env *st);
 
 /**
 **		lexer/count.c
@@ -243,8 +248,9 @@ void	ft_print_lst(t_list *lst);
 int		ft_lst_size(t_list *lst);
 char	*ft_get_lst_str_index(t_list *lst, int index);
 int		ft_lstadd(t_list **lst, t_list *new);
-char	*ft_find_var(char *str, t_List st);
-char	*ft_find_var_path(char *str, t_List st);
+char	*ft_find_var(char *str, t_env *st);
+char	*ft_find_var_path(char *str, t_env *st);
+void	ft_print_env(t_env *st);
 
 /*
 **		lexer/free.c
@@ -267,15 +273,15 @@ int	ft_set_type_cmd(t_list **lst);
 /*
 **		parse/parse.c
 */
-int		ft_parse(t_list *lst, t_List st);
+int		ft_parse(t_list *lst, t_env *st);
 
 /*
 **		parse/exec.c
 */
-void	ft_main_exec(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
-void	ft_is_builtin(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
-void	ft_is_builtin_dumb(char **complete_cmd, t_List st, int read, int write, int read2, int write2, int type);
-//void	ft_main_exec(char **complete_cmd, t_List st, int pip[2], int pip2[2], int type);
+void	ft_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
+void	ft_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
+void	ft_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
+//void	ft_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type);
 
 /*
 **		parse/lst.c

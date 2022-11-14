@@ -81,6 +81,15 @@ void	ft_print_lst(t_list *lst)
 	}
 }
 
+void	ft_print_env(t_env *st)
+{
+	while (st)
+	{
+		printf("Var:%s\tValue:%s\n", st->var, st->value);
+		st = st->next;
+	}
+}
+
 int	ft_lst_size(t_list *lst)
 {
 	int	i;
@@ -107,7 +116,7 @@ char	*ft_get_lst_str_index(t_list *lst, int index)
 	return (lst->content);
 }
 
-char	*ft_find_var(char *str, t_List st)
+char	*ft_find_var(char *str, t_env *st)
 {
 	if (!str)
 		return (NULL);

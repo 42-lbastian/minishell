@@ -15,7 +15,7 @@ int		ft_print_cmd(char **str)
 }
 
 /*
-   int		ft_read_ast(t_List st, t_node *node)
+   int		ft_read_ast(t_env *st, t_node *node)
    {
    int	pip[2];
    int fd;
@@ -36,7 +36,7 @@ int		ft_print_cmd(char **str)
    }
  */
 
-int	ft_read_lst(t_lst_parser *lst, t_List st, int read, int write)
+int	ft_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
 {
 	int pip[2];
 	int fd;
@@ -92,13 +92,16 @@ int	ft_read_lst(t_lst_parser *lst, t_List st, int read, int write)
 }
 
 
-int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
+int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 {
 	int	pip[2];
 	int	fd;
 
 	if (lst && lst->prev == NULL && lst->next == NULL && lst->type == CMD)
+	{
+		pipe(pip);
 		ft_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+	}
 	else if (lst && lst->type == CMD && read == 3)
 	{
 		ft_is_builtin_dumb(lst->value.cmd, st, 0, 1, read, write, CMD_BEGIN);
@@ -168,7 +171,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
 
 
 /*
-int	ft_read_lst(t_lst_cmd *lst, t_List st, int pip2[2])
+int	ft_read_lst(t_lst_cmd *lst, t_env *st, int pip2[2])
 {
 	int pip[2];
 
@@ -359,7 +362,7 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 	return (0);
 }
 
-int		ft_parse(t_list *lst, t_List st)
+int		ft_parse(t_list *lst, t_env *st)
 {
 	int pip[2];
 	t_lst_parser *lst_parser;

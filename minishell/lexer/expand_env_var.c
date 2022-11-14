@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int	ft_size_env_var(t_List st, char *str, int index, int fact)
+int	ft_size_env_var(t_env *st, char *str, int index, int fact)
 {
 	int		lenght;
 	int		start;
@@ -35,7 +35,6 @@ int	ft_split_expand(t_list **lst, char **split)
 	i = 1;
 	if (!split)
 		return (1);
-	printf("Split %s\n", split[0]);
 	(*lst)->content = ft_strjoin_2(((*lst)->content), split[0]);
 	free(split[0]);
 	while (split[i])
@@ -56,7 +55,7 @@ int	ft_error_return(char *str)
 	return (1);
 }
 
-int	ft_replace(t_list **lst, t_List st)
+int	ft_replace(t_list **lst, t_env *st)
 {
 	char	*temp;
 	char	*str;
@@ -114,7 +113,7 @@ int	ft_replace(t_list **lst, t_List st)
 	return (0);
 }
 
-int	ft_main_replace_env(t_list **lst, t_List st)
+int	ft_main_replace_env(t_list **lst, t_env *st)
 {
 	t_list	*temp;
 
