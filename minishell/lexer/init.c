@@ -25,5 +25,5 @@ void	ft_init_struct(t_struct *main, int argc, char **argv)
 	main->char_check.error = 0;
 	main->char_check.last_double_q = 0;
 	main->char_check.last_simple_q = 0;
-	ft_fill_tab_char(main, "=/|<>.'\" $?-");
+	ft_fill_tab_char(main, "=/|<>.'\" $?-_");
 }

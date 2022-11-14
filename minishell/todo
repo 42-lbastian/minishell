@@ -5,4 +5,7 @@
 export ech="echo -n" -> $ech titi
 
 
-< infile cat
+big infile (see pipes - tester)
+
+cat < TATA todo
+cat < TATA tod

@@ -54,6 +54,7 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_List st)
 	g_glob.ret = 0;
 	while (1)
 	{
+		//dprintf(STDERR_FILENO, "Start READ CMD\n");
 		g_glob.pid = 0;
 		g_glob.sigint = 0;
 		g_glob.sigquit = 0;

@@ -5,7 +5,7 @@
 #define NORMAL "\1\x1b[0m\2"
 #define NAME "minishell> "
 
-#define NB_CHAR_VALID 12
+#define NB_CHAR_VALID 13
 
 #define SIMPLE 0
 #define DOUBLE 1
