@@ -137,21 +137,26 @@ int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
 	}
 	if (lst && lst->type == FILE_IN)
 	{
-		if (lst->next && lst->next->type == ARG_FILE_IN)
-		{
-			pipe(pip);
+		//if (lst->next && lst->next->type == ARG_FILE_IN)
+		//{
 			lst = lst->next;
 			fd = open(lst->value.oper, O_RDONLY);
 			close(read);
 			close(write);
+			if (fd == -1)
+			{
+				ft_putstr_fd("bash: No such file or directory\n", STDERR_FILENO);
+				return (1);
+			}
+			pipe(pip);
 			ft_read_dumb(lst->next, st, pip[0], pip[1], fd);
 
-		}
-		else
-		{
-			ft_putstr_fd("bash: syntax error near unexpected token HELLO\n", STDERR_FILENO);
-			return (1);
-		}	
+		//}
+		//else
+		//{
+		//	ft_putstr_fd("bash: syntax error near unexpected token HELLO\n", STDERR_FILENO);
+		//	return (1);
+		//}	
 	}
 //	if (lst && !lst->next && lst->type ==  CMD)
 //		ft_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
