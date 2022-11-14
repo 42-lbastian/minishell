@@ -119,12 +119,12 @@ int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
 		if (lst->next && lst->prev)
 		{
 			pipe(pip);
-			if (!lst->next->next)
+			if (!lst->next->next && lst->next->type == CMD)
 			{
 				ft_is_builtin_dumb(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 				return (0);
 			}
-			else
+			else if (lst->next->type == CMD)
 				ft_is_builtin_dumb(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_MIDDLE);
 			lst = lst->next;
 			ft_read_dumb(lst->next, st, pip[0], pip[1], 0);
@@ -139,16 +139,19 @@ int	ft_read_dumb(t_lst_parser *lst, t_List st, int read, int write, int fd2)
 	{
 		//if (lst->next && lst->next->type == ARG_FILE_IN)
 		//{
+
+			pipe(pip);
 			lst = lst->next;
 			fd = open(lst->value.oper, O_RDONLY);
 			close(read);
 			close(write);
 			if (fd == -1)
 			{
+				close(pip[0]);
+				close(pip[1]);
 				ft_putstr_fd("bash: No such file or directory\n", STDERR_FILENO);
 				return (1);
 			}
-			pipe(pip);
 			ft_read_dumb(lst->next, st, pip[0], pip[1], fd);
 
 		//}
