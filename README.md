@@ -9,9 +9,9 @@
 	- char *value
 	- t_list	*next
 - Make signals work
-	- CTRL-C	(New Prompt on a new line)
+	- CTRL-C	(New Prompt on a new line) -> need to execve "stty -echoctl" at start of minishell to avoid "^C"
 	- CTRL-D	(Exit the shell / only with an empty line)
-	- CTRL-\		(do nothing)
+	- ~~CTRL-\		(do nothing)~~
 
 ### FOLLOW:
 | builtins |
