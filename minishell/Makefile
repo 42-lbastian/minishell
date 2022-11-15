@@ -38,9 +38,9 @@ CC = cc
 
 RFLAG = -lreadline
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -lreadline
 
-FFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=address
 
 RM = rm -rf
 
