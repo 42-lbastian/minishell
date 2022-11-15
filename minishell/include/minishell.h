@@ -115,6 +115,7 @@ extern	t_sig g_glob;
 /**
 **		signal/signal.c
 **/
+void	signals_handler(void);
 void	get_signal(int sig);
 
 
