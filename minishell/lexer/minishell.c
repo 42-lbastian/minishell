@@ -1,21 +1,5 @@
 #include "../include/minishell.h"
 
-/*void	ft_cmd(t_struct *main_s, t_List st)
-{
-	if (ft_strcmp_2(main_s->temp_str[0], "echo") == 0)
-		echo(main_s->temp_str);
-	if (ft_strcmp_2(main_s->temp_str[0], "cd") == 0)
-		cd(st, main_s->temp_str[1]);
-	if (ft_strcmp_2(main_s->temp_str[0], "pwd") == 0)
-		pwd();
-	if (ft_strcmp_2(main_s->temp_str[0], "env") == 0)
-		print_env(st);
-	if (ft_strcmp_2(main_s->temp_str[0], "export") == 0)
-		ft_export(st, main_s->temp_str);
-	if (ft_strcmp_2(main_s->temp_str[0], "unset") == 0)
-		ft_unset(st, main_s->temp_str);
-}*/
-
 void	ft_temp_test_cmd(t_struct *main_s)
 {
 	int	i;
@@ -54,7 +38,6 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_env *st)
 	g_glob.ret = 0;
 	while (1)
 	{
-		//dprintf(STDERR_FILENO, "Start READ CMD\n");
 		g_glob.pid = 0;
 		g_glob.sigint = 0;
 		g_glob.sigquit = 0;
@@ -76,10 +59,6 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_env *st)
 			break ;
 		}
 		ft_parse(main_s->lst, st);
-		//parser
-		//ft_temp_test_cmd(main_s);
-		//ft_cmd(main_s, st);
-		//ft_free_temp(main_s);
 		//ft_print_lst(main_s->lst);
 		ft_free_lst(&main_s->lst);
 	}
@@ -97,7 +76,6 @@ int	main(int argc, char **argv, char **envp)
 	t_env		*st;
 
 	st = NULL;
-	//st = add_list(envp, st);
 	if (ft_create_env(envp, &st))
 	{
 		ft_putstr_fd("Error Malloc env\n", STDERR_FILENO);
