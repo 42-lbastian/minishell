@@ -124,10 +124,34 @@ int	ft_count_nb_cmd(t_list *lst)
 	return (i);
 }
 
+int	ft_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd)
+{
+	ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
+	(*lst) = (*lst)->next;
+	if ((*lst) && (*lst)->type == ARG_FILE_IN)
+	{
+		ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
+		(*lst) = (*lst)->next;
+		if (cmd)
+		{
+			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			return (1);
+		}
+		return (0);
+	}
+	else
+	{
+		ft_putstr_fd("bash: syntax error near unexpected token' UTOPIA\n", STDERR_FILENO);
+		return (2);
+	}
+
+}
+
 int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 {
 	char	**cmd;
 	int		i;
+	int		ret;
 
 	cmd = NULL;
 	while (lst)
@@ -148,48 +172,24 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 			//free(cmd);
 		}
 		//if (lst && lst->type == CMD && lst->next && lst->next->type == FILE_IN)
-		if (lst && lst->type == FILE_IN && cmd)
+		if (lst && lst->type == FILE_IN)
 		{
-			//cmd = malloc(sizeof(char *) * 2);
-			//cmd[0] = lst->content;
-			//cmd[1] = NULL;
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
-			lst = lst->next;
-			if (lst && lst->type == ARG_FILE_IN)
+			ret = ft_file_in(&lst, lst_parser, cmd);
+			if (ret == 2)
 			{
-				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
-				lst = lst->next;
-				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
-			}
-			else
-			{
-				ft_putstr_fd("bash: syntax error near unexpected token HELLO\n", STDERR_FILENO);
+				free(cmd);
 				return (1);
 			}
-			free(cmd);
-			cmd = NULL;
+			else if (ret == 1)
+			{
+				free(cmd);
+				cmd = NULL;
+			}
 		}
 		else if (lst && lst->type == PIPE && !cmd)
 		{
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
-		}
-		else if (lst && lst->type == FILE_IN && !cmd)
-		{
-
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
-			lst = lst->next;
-			if (lst && lst->type == ARG_FILE_IN)
-			{
-				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
-				lst = lst->next;
-			}
-			else
-			{
-				ft_putstr_fd("bash: syntax error near unexpected token'\n", STDERR_FILENO);
-				return (1);
-			}
-
 		}
 		if (cmd)
 		{
