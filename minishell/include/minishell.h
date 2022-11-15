@@ -27,6 +27,9 @@
 #define CMD_MIDDLE 2
 #define CMD_FILE_IN 3
 #define CMD_FILE_IN_END 4
+#define CMD_FILE_OUT 5
+#define CMD_FILE_OUT_END 6
+
 
 #define CD 0
 #define ECHO 1
