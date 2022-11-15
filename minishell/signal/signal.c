@@ -3,10 +3,10 @@
 
 void	parent_signal(int sig)
 {
-	if (sig == SIGQUIT)
+/* 	if (sig == SIGQUIT)
 	{
 		ft_putstr_fd("\b\b  \b\b", 2);
-	}
+	} */
 	if (sig == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
@@ -19,13 +19,13 @@ void	parent_signal(int sig)
 
 void	child_signal(int sig)
 {
-	if (sig == SIGQUIT)
+/* 	if (sig == SIGQUIT)
 	{
 		ft_putstr_fd("Quit: (core dumped)\n", 2);
 		g_glob.ret = 131;
 		g_glob.sigquit = 1;
-	}
-	else if (sig == SIGINT)
+	} */
+	if (sig == SIGINT)
 	{
 		ft_putstr_fd("\n", 2);
 		g_glob.ret = 130;
