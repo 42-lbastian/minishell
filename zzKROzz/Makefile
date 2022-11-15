@@ -9,7 +9,7 @@ OBJS = ${SRCS:.c=.o}
 
 LIBFT        = libft/libft.a
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -lreadline -g -I $(H_DIR)
 
