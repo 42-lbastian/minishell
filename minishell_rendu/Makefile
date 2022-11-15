@@ -20,15 +20,6 @@ SRCS =	lexer/minishell.c \
 		parse/exec.c \
 		parse/lst.c \
 		parse/tools.c \
-		signal/signal.c
-		#builtins/cd.c \
-		#builtins/pwd.c \
-		#builtins/echo.c \
-		#builtins/env.c \
-		#builtins/utils_env.c \
-		#builtins/export.c \
-		#builtins/unset.c \
-
 
 OBJS = ${SRCS:.c=.o}
 
