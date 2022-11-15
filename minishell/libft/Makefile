@@ -1,74 +1,79 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
- 
-NAME = libft.a
-SRCS =	ft_atoi.c \
-		ft_bzero.c \
-		ft_calloc.c \
-		ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isdigit.c \
-		ft_isprint.c \
-		ft_itoa.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_memset.c \
-		ft_putchar_fd.c \
-		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		ft_putstr_fd.c \
-		ft_strchr.c \
-		ft_strdup.c \
-		ft_striteri.c \
-		ft_strjoin.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strmapi.c \
-		ft_strncmp.c \
-		ft_strnstr.c \
-		ft_strrchr.c \
-		ft_strtrim.c \
-		ft_substr.c \
-		ft_tolower.c \
-		ft_toupper.c \
-		ft_putnbr.c \
-		ft_printf.c \
-		ft_split.c \
-		ft_split2.c \
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: krozis <krozis@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/19 20:20:34 by krozis            #+#    #+#              #
+#    Updated: 2022/11/15 15:36:17 by lbastian         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-OBJS = $(SRCS:.c=.o)
+#Name
+NAME 		= 	libft.a
 
-SRCS_BONUS = 	ft_lstadd_back.c \
-				ft_lstadd_front.c \
-				ft_lstclear.c \
-				ft_lstdelone.c \
-				ft_lstiter.c \
-				ft_lstlast.c \
-				ft_lstmap.c \
-				ft_lstnew.c \
-				ft_lstsize.c \
+#Commands
+CC			= 	cc
+DMK			=	mkdir -p
+RM			=	rm -rf
+AR			=	ar rc
 
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
+#Compilation flags
+INCLUDES	=	-I$(H_DIR)
+CFLAGS		=	-Wall -Werror -Wextra
 
-all: $(NAME)
+#Directories
+H_DIR		=	includes
+S_DIR		=	src
+O_DIR		=	obj
 
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I includes
+#Source files
+SRCS		=	00_is_something/00_00.c\
+				00_is_something/00_01.c\
+				00_is_something/00_02.c\
+				01_get_len/01_00.c\
+				02_numbers/02_00.c\
+				02_numbers/02_01.c\
+				03_bases/03_00.c\
+				03_bases/03_01.c\
+				04_put_something/04_00.c\
+				05_strings/05_00.c\
+				05_strings/05_01.c\
+				05_strings/05_02.c\
+				05_strings/05_03.c\
+				05_strings/05_04.c\
+				06_memory/06_00.c\
+				06_memory/06_01.c\
+				08_ft_printf/08_00.c\
+				08_ft_printf/08_01.c\
+				08_ft_printf/08_02.c\
+				08_ft_printf/08_03.c\
+				08_ft_printf/08_04.c\
+				08_ft_printf/08_05.c\
+				08_ft_printf/08_06.c\
+				09_gnl/09_00.c\
+				#07_chained_lists/07_00.c\
+				#07_chained_lists/07_01.c\
 
-${NAME}:	${OBJS}
-			ar rc $@ $^
 
-bonus:		${OBJS_BONUS}
-			ar rc ${NAME} $^
+OBJS		=	$(SRCS:%.c=$(O_DIR)/%.o)
+
+$(O_DIR)/%.o:	$(S_DIR)/%.c
+		$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+
+$(NAME):	$(OBJS)
+			$(AR) $(NAME) $(OBJS)
+
+all:	$(NAME)
+		
 
 clean:
-			${RM} ${OBJS} ${OBJS_BONUS}
+		$(RM) $(OBJS) $(OBJBONUS)
 
-fclean:		clean
-			rm -f ${NAME}
+fclean:	clean
+		$(RM) $(NAME)
 
-re:			fclean all
+re:	fclean all
+
+.PHONY: all clean fclean re

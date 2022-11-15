@@ -48,7 +48,7 @@ all:	$(NAME)
 
 $(NAME): ${OBJS}
 	$(MAKE) -C libft
-	$(CC) $(RFLAG) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT}
+	$(CC) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT} $(RFLAG)
 
 fsan: ${OBJS}
 	$(MAKE) -C libft

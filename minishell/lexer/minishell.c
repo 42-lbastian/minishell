@@ -63,15 +63,9 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_env *st)
 		//str_read = readline(RED NAME NORMAL);
 		str_read = readline(NAME);
 		if (!str_read)
-		{
-			dprintf(STDERR_FILENO, "Read %s\n", str_read);
 			return (0);
-		}
 		if (ft_strcmp_2(str_read, "exit") == 0)
-		{
-			dprintf(STDERR_FILENO, "Exit\n");
 			break ;
-		}
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		if (ft_main_lexer(str_read, main_s, st))

@@ -1,0 +1,2 @@
+# ignore all object files if not cleaned.
+*.o
