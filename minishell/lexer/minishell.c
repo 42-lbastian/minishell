@@ -59,7 +59,7 @@ int	ft_main_action(t_struct *main_s, char *str_read, t_env *st)
 		g_glob.sigint = 0;
 		g_glob.sigquit = 0;
 		signal(SIGINT, get_signal);
-		signal(SIGQUIT, get_signal);
+		signal(SIGQUIT, SIG_IGN);
 		//str_read = readline(RED NAME NORMAL);
 		str_read = readline(NAME);
 		if (!str_read)
