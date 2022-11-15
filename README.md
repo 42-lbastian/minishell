@@ -3,7 +3,8 @@
 |--|--|--|--|
 
 
-### TO-DO now : 
+### TO-DO now :
+- Makefile -> pass to CC instead of GCC
 - Linked list for ENV (format :
 	-  char	* var
 	- char *value
