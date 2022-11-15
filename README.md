@@ -8,9 +8,9 @@
 	-  char	* var
 	- char *value
 	- t_list	*next
-- Make signals work
-	- CTRL-C	(New Prompt on a new line) -> need to execve "stty -echoctl" at start of minishell to avoid "^C"
-	- CTRL-D	(Exit the shell / only with an empty line)
+- Make signals work (!) must work for child processes too!
+	- CTRL-C	(New Prompt on a new line) -> decided not to avoid "^C", to be faithful to bash.
+	- CTRL-D	(Exit the shell / only with an empty line) -> Not done yet.
 	- ~~CTRL-\		(do nothing)~~
 
 ### FOLLOW:
