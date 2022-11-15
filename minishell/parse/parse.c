@@ -172,10 +172,16 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 		//	return (1);
 		//}	
 	}
-	if (lst && lst->type == FILE_OUT_OVER)
+	if (lst && (lst->type == FILE_OUT_OVER || lst->type == FILE_OUT_APP))
 	{
 		lst = lst->next;
-		fd = open(lst->value.oper, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (lst->type == ARG_FILE_OUT_OVER)
+			fd = open(lst->value.oper, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		else
+		{
+			dprintf(STDERR_FILENO, "APP\n");
+			fd = open(lst->value.oper, O_WRONLY | O_CREAT, 0666);
+		}
 		if (fd == -1)
 		{
 			close(read);
