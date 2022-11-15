@@ -389,6 +389,7 @@ int		ft_parse(t_list *lst, t_env *st)
 
 
 	lst_parser = NULL;
+	(void)lst_parser;
 	lst_parser_dumb = NULL;
 	//if (ft_create_lst_parser(lst, &lst_parser))
 	//	return (1);
