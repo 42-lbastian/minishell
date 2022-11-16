@@ -115,7 +115,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 			ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN);
 		lst = lst->next;
 	}
-	else if (lst && lst->prev && lst->prev->type == ARG_FILE_OUT_OVER && lst->type == CMD)
+	else if (lst && lst->prev && lst->type == CMD && (lst->prev->type == ARG_FILE_OUT_OVER || lst->prev->type == ARG_FILE_OUT_APP))
 	{
 		if (!lst->next)
 			ft_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT_END);
@@ -178,10 +178,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 		if (lst->type == ARG_FILE_OUT_OVER)
 			fd = open(lst->value.oper, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		else
-		{
-			dprintf(STDERR_FILENO, "APP\n");
-			fd = open(lst->value.oper, O_WRONLY | O_CREAT, 0666);
-		}
+			fd = open(lst->value.oper, O_WRONLY | O_CREAT | O_APPEND, 0666);
 		if (fd == -1)
 		{
 			close(read);

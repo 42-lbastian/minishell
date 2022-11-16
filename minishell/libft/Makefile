@@ -6,7 +6,7 @@
 #    By: krozis <krozis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 20:20:34 by krozis            #+#    #+#              #
-#    Updated: 2022/11/15 15:36:17 by lbastian         ###   ########.fr        #
+#    Updated: 2022/11/16 16:04:33 by lbastian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRCS		=	00_is_something/00_00.c\
 				08_ft_printf/08_04.c\
 				08_ft_printf/08_05.c\
 				08_ft_printf/08_06.c\
-				09_gnl/09_00.c\
+				#09_gnl/09_00.c\
 				#07_chained_lists/07_00.c\
 				#07_chained_lists/07_01.c\
 

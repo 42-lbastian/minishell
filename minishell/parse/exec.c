@@ -213,12 +213,12 @@ void	ft_main_exec_dumb(char **complete_cmd, t_env *st, int read, int write, int 
 			close(read);
 			close(write);
 		}
-		if (type == CMD_END || type == CMD_FILE_IN)
+		if (type == CMD_END || type == CMD_FILE_IN || type == CMD_FILE_OUT_END || type == CMD_FILE_OUT)
 		{
 			close(read2);
 			close(write2);
 		}
-		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END)
+		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END || type == CMD_FILE_OUT_END || type == CMD_FILE_OUT)
 			close(read);
 		waitpid(pid, NULL, 0);
 	}
