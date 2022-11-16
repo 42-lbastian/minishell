@@ -59,16 +59,6 @@ typedef union	s_value
 	char	*oper;
 }				t_value;
 
-//AST?
-typedef struct	s_node
-{
-	struct s_node	*left;
-	struct s_node	*right;
-	t_value			value;
-	int				type;
-
-}				t_node;
-
 //LST_CMD
 typedef struct	s_lst_cmd
 {
