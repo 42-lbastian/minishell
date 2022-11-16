@@ -246,11 +246,13 @@ int	ft_count_nb_cmd(t_list *lst)
 	{
 		i++;
 		lst = lst->next;
+		if (lst && lst->type != PIPE && lst->type != CMD && lst->next)
+			lst = lst->next->next;
 	}
 	return (i);
 }
 
-int	ft_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd)
+int	ft_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd, int i)
 {
 	ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
 	(*lst) = (*lst)->next;
@@ -260,6 +262,12 @@ int	ft_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd)
 		(*lst) = (*lst)->next;
 		if (cmd)
 		{
+			while ((*lst) && (*lst)->type == CMD)
+			{
+				cmd[i] = (*lst)->content;
+				(*lst) = (*lst)->next;
+				i++;
+			}
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
 			return (1);
 		}
@@ -289,13 +297,13 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 			cmd = malloc(sizeof(char *) * (ft_count_nb_cmd(lst) + 1));
 			if (!cmd)
 				return (1);
+			cmd[ft_count_nb_cmd(lst)] = NULL;
 			while(lst && lst->type == CMD)
 			{
 				cmd[i] = lst->content;
 				i++;
 				lst = lst->next;
 			}
-			cmd[i] = NULL;
 			//ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
 			//free(cmd);
 		}
@@ -320,7 +328,7 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 			free(cmd);
 			cmd = NULL;
 			*/
-			ret = ft_file_in(&lst, lst_parser, cmd);
+			ret = ft_file_in(&lst, lst_parser, cmd, i);
 			if (ret == 2)
 			{
 				free(cmd);
