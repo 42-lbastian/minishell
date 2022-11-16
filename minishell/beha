@@ -11,3 +11,6 @@ Then
 
 cat < TATA todo
 cat < TATA tod
+cat < TATA todo tod
+cat < TATA tod todo
+cat < TATA todo to | wc -l

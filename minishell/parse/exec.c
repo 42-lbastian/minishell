@@ -187,17 +187,21 @@ void	ft_main_exec_dumb(char **complete_cmd, t_env *st, int read, int write, int 
 	}
 	else if (pid == 0)
 	{
+		//if (type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
+		//	dup2(read2, STDIN_FILENO);
+		//else
 		dup2(read, STDIN_FILENO);
-		if (type == CMD_MIDDLE || type == CMD_BEGIN || type == CMD_FILE_IN)
+		if (type == CMD_MIDDLE || type == CMD_BEGIN || type == CMD_FILE_IN || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
 			dup2(write2, STDOUT_FILENO);
 		close(read2);
 		close(write2);
-		if (type != CMD_BEGIN && type != CMD_FILE_IN && type != CMD_FILE_IN_END)
+		//if (type != CMD_BEGIN && type != CMD_FILE_IN && type != CMD_FILE_IN_END)
+		if (type == CMD_MIDDLE || type == CMD_END)
 		{
 			close(read);
 			close(write);
 		}
-		if (type == CMD_FILE_IN)
+		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
 			close(read);
 		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
 			ft_putstr_fd("Error exec\n", STDERR_FILENO);

@@ -27,6 +27,9 @@
 #define CMD_MIDDLE 2
 #define CMD_FILE_IN 3
 #define CMD_FILE_IN_END 4
+#define CMD_FILE_OUT 5
+#define CMD_FILE_OUT_END 6
+
 
 #define CD 0
 #define ECHO 1
@@ -39,7 +42,7 @@
 #include <readline/history.h>
 #include <signal.h>
 #include <sys/wait.h>
-#include "../libft/libft.h"
+#include "../libft/includes/libft.h"
 
 typedef struct s_env
 {
@@ -118,53 +121,6 @@ extern	t_sig g_glob;
 void	signals_handler(void);
 void	get_signal(int sig);
 
-
-
-/**
-**		builtins/unset.c
-**/
-void	ft_unset(t_env *st, char **arg);
-int		is_in_env(t_env *st, char *var_name, char *var_value);
-
-/**
-**		builtins/pwd.c
-**/
-void	pwd(void);
-
-/**
-**		builtins/echo.c
-**/
-int		echo(char **str);
-
-/**
-**		builtins/cd.c
-**/
-void	cd(t_env *st, const char *path);
-
-/**
-**		builtins/utils_env.c
-**/
-char	**ft_trim_equal(char const *s, char charset);
-
-/**
-**		builtins/export.c
-**/
-void    ft_export(t_env *st, char **arg);
-void is_var(char *str, t_env *st);
-
-/**
-**		builtins/env.c
-**/
-void	push_list_back(t_env **st, char *var_name, char *var_value);
-t_env	add_list(char **tab, t_env *sta);
-void print_env(t_env *st);
-
-
-
-/**
-**		utils_env.c
-**/
-char	**ft_trim_equal(char const *s, char charset);
 
 /**
 **		lexer/lexer.c

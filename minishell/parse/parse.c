@@ -102,7 +102,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 		pipe(pip);
 		ft_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	}
-	else if (lst && lst->type == CMD && read == 3)
+	else if (lst && lst->type == CMD && fd2 == 0)
 	{
 		ft_is_builtin_dumb(lst->value.cmd, st, 0, 1, read, write, CMD_BEGIN);
 		lst = lst->next;
@@ -113,6 +113,14 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 			ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN_END);
 		else
 			ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN);
+		lst = lst->next;
+	}
+	else if (lst && lst->prev && lst->prev->type == ARG_FILE_OUT_OVER && lst->type == CMD)
+	{
+		if (!lst->next)
+			ft_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT_END);
+		else
+			ft_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT);
 		lst = lst->next;
 	}
 	else if (lst && lst->next && lst->type == CMD)
@@ -130,7 +138,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 			else if (lst->next->type == CMD)
 				ft_is_builtin_dumb(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_MIDDLE);
 			lst = lst->next;
-			ft_read_dumb(lst->next, st, pip[0], pip[1], 0);
+			ft_read_dumb(lst->next, st, pip[0], pip[1], 1);
 		}
 		else
 		{
@@ -163,6 +171,25 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 		//	ft_putstr_fd("bash: syntax error near unexpected token HELLO\n", STDERR_FILENO);
 		//	return (1);
 		//}	
+	}
+	if (lst && (lst->type == FILE_OUT_OVER || lst->type == FILE_OUT_APP))
+	{
+		lst = lst->next;
+		if (lst->type == ARG_FILE_OUT_OVER)
+			fd = open(lst->value.oper, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		else
+		{
+			dprintf(STDERR_FILENO, "APP\n");
+			fd = open(lst->value.oper, O_WRONLY | O_CREAT, 0666);
+		}
+		if (fd == -1)
+		{
+			close(read);
+			close(write);
+			ft_putstr_fd("bash: No such file or directory\n", STDERR_FILENO);
+			return (1);
+		}
+		ft_read_dumb(lst->next, st, read, write, fd);
 	}
 //	if (lst && !lst->next && lst->type ==  CMD)
 //		ft_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
@@ -226,10 +253,34 @@ int	ft_count_nb_cmd(t_list *lst)
 	return (i);
 }
 
+int	ft_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd)
+{
+	ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
+	(*lst) = (*lst)->next;
+	if ((*lst) && (*lst)->type < PIPE)
+	{
+		ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
+		(*lst) = (*lst)->next;
+		if (cmd)
+		{
+			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			return (1);
+		}
+		return (0);
+	}
+	else
+	{
+		ft_putstr_fd("bash: syntax error near unexpected token'\n", STDERR_FILENO);
+		return (2);
+	}
+
+}
+
 int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 {
 	char	**cmd;
 	int		i;
+	int		ret;
 
 	cmd = NULL;
 	while (lst)
@@ -239,6 +290,8 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		{
 			i = 0;
 			cmd = malloc(sizeof(char *) * (ft_count_nb_cmd(lst) + 1));
+			if (!cmd)
+				return (1);
 			while(lst && lst->type == CMD)
 			{
 				cmd[i] = lst->content;
@@ -250,11 +303,10 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 			//free(cmd);
 		}
 		//if (lst && lst->type == CMD && lst->next && lst->next->type == FILE_IN)
-		if (lst && lst->type == FILE_IN && cmd)
+		//if (lst && lst->type == FILE_IN && cmd)
+		if (lst && (lst->type == FILE_IN || lst->type == FILE_OUT_OVER || lst->type == FILE_OUT_APP))
 		{
-			//cmd = malloc(sizeof(char *) * 2);
-			//cmd[0] = lst->content;
-			//cmd[1] = NULL;
+			/*
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
 			if (lst && lst->type == ARG_FILE_IN)
@@ -270,13 +322,26 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 			}
 			free(cmd);
 			cmd = NULL;
+			*/
+			ret = ft_file_in(&lst, lst_parser, cmd);
+			if (ret == 2)
+			{
+				free(cmd);
+				return (1);
+			}
+			else if (ret == 1)
+			{
+				free(cmd);
+				cmd = NULL;
+			}
+			
 		}
 		else if (lst && lst->type == PIPE && !cmd)
 		{
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
 		}
-		else if (lst && lst->type == FILE_IN && !cmd)
+		/*else if (lst && lst->type == FILE_IN && !cmd)
 		{
 
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
@@ -292,7 +357,10 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 				return (1);
 			}
 
-		}
+		}*/
+		//else if (lst && (lst->type == FILE_OUT_OVER || lst->type == FILE_OUT_APP))
+		//{
+		//}
 		if (cmd)
 		{
 			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
@@ -365,7 +433,6 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 int		ft_parse(t_list *lst, t_env *st)
 {
 	int pip[2];
-	t_lst_parser *lst_parser;
 	t_lst_parser *lst_parser_dumb;
 
 	/*t_node *node;
@@ -388,8 +455,11 @@ int		ft_parse(t_list *lst, t_env *st)
 	 */
 
 
+<<<<<<< HEAD
 	lst_parser = NULL;
 	(void)lst_parser;
+=======
+>>>>>>> lbastian
 	lst_parser_dumb = NULL;
 	//if (ft_create_lst_parser(lst, &lst_parser))
 	//	return (1);
