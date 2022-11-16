@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:08:08 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/16 20:08:09 by lbastian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	ft_count_remove_quotes(char *str)
@@ -37,10 +49,8 @@ int	ft_count_char(char *str)
 		if (str[i] == '$')
 		{
 			i++;
-			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i]
-				!= '$' && str[i] != ' ')
-				while (str[i] && str[i] != '\'' && str[i] != '"'
-					&& str[i] != '$' && str[i] != ' ')
+			if (str[i] && ft_count_check(str[i]))
+				while (str[i] && ft_count_check(str[i]))
 					i++;
 			else
 				size++;
@@ -71,7 +81,8 @@ int	ft_lenght_read_var(char *str, int index)
 		{
 			size++;
 			i++;
-			while (str[i] && str[i] != '"' && str[i] != '\'' && str[i] != '$' && str[i] != ' ')
+			while (str[i] && str[i] != '"' && str[i] != '\''
+				&& str[i] != '$' && str[i] != ' ')
 			{
 				size++;
 				i++;

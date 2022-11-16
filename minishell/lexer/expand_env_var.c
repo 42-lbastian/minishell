@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_env_var.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/16 20:08:45 by lbastian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	ft_size_env_var(t_env *st, char *str, int index, int fact)
@@ -30,7 +42,7 @@ int	ft_size_env_var(t_env *st, char *str, int index, int fact)
 
 int	ft_split_expand(t_list **lst, char **split)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (!split)
@@ -77,7 +89,8 @@ int	ft_replace(t_list **lst, t_env *st)
 			quotes = 1;
 		else if (str[i] == '"' && quotes == 0)
 			quotes = 2;
-		else if ((str[i] == '\'' && quotes == 1) || (str[i] == '"' && quotes == 2))
+		else if ((str[i] == '\'' && quotes == 1)
+			|| (str[i] == '"' && quotes == 2))
 			quotes = 0;
 		if (str[i] == '$' && quotes != 1)
 		{
@@ -123,9 +136,6 @@ int	ft_main_replace_env(t_list **lst, t_env *st)
 		if ((*lst)->type != LIMITOR)
 			if (ft_replace(lst, st) || !(*lst)->content)
 				return (1);
-		//(*lst)->content = ft_remove_quotes((*lst)->content);
-		//if (!(*lst)->content)
-		//	return (1);
 		(*lst) = (*lst)->next;
 	}
 	(*lst) = temp;

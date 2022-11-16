@@ -1,37 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/16 20:09:39 by lbastian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
-
-void	ft_temp_test_cmd(t_struct *main_s)
-{
-	int	i;
-	int	size;
-
-	size = ft_lst_size(main_s->lst);
-	i = 0;
-	main_s->temp_str = malloc(sizeof(char *) * (size + 1));
-	main_s->temp_str[size] = NULL;
-	while (i < size)
-	{
-		if (ft_strlen(ft_get_lst_str_index(main_s->lst, i)) == 0)
-			main_s->temp_str[i] = NULL;
-		else
-			main_s->temp_str[i]
-				= ft_strcpy_2(ft_get_lst_str_index(main_s->lst, i));
-		i++;
-	}
-}
-
-void	ft_free_temp(t_struct *main_s)
-{
-	int i;
-
-	i = 0;
-	while (main_s->temp_str[i])
-	{
-		free(main_s->temp_str[i]);
-		i++;
-	}
-	free(main_s->temp_str);
-}
 
 int	ft_main_action(t_struct *main_s, char *str_read, t_env *st)
 {

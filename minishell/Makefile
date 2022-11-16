@@ -2,6 +2,7 @@ NAME = minishell
 
 SRCS =	lexer/minishell.c \
 		lexer/create_env.c \
+		lexer/create_env_lst.c \
 		lexer/char_check.c \
 		lexer/char_check_special.c \
 		lexer/lexer.c \
@@ -9,7 +10,10 @@ SRCS =	lexer/minishell.c \
 		lexer/read_char.c \
 		lexer/unwanted.c \
 		lexer/utils.c \
+		lexer/utils_2.c \
 		lexer/lst.c \
+		lexer/lst_2.c \
+		lexer/lst_print.c \
 		lexer/free.c \
 		lexer/remove_spaces.c \
 		lexer/remove_quotes.c \

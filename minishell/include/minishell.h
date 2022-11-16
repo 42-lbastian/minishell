@@ -121,12 +121,19 @@ int	ft_main_lexer(char *str, t_struct *main_s, t_env *st);
 **/
 int	ft_create_env(char **envp, t_env **st);
 
+/**
+**		lexer/create_env_lst.c
+**/
+t_env	*ft_lst_new_env(char *var, char *value);
+int	ft_lst_add_back_env(t_env **st, t_env *new);
+
 /*		
 **		lexer/char_check.c
 */
 int	ft_belong_cmd_start(char c);
 int	ft_belong_cmd_end(char c);
 int	ft_is_alpha_numb(char c);
+int	ft_count_check(char c);
 
 /*
 **		lexer/char_check_special.c
@@ -162,13 +169,17 @@ int	ft_count_remove_quotes(char *str);
 /*
 **		lexer/utils.c
 */
-int		ft_strcmp_2(const char *str1, const char *str2);
-char	*ft_strcpy_2(char *str);
-int		ft_strlen(const char *str);
 int		ft_strjoin_3(char *dest, char *str, int start);
 char	*ft_strjoin_2(char *str1, char *str2);
 char	*ft_strjoin_c(char *str, char c);
 int		ft_have_space(char *str);
+
+/*
+**		lexer/utils_2.c
+*/
+int		ft_strcmp_2(const char *str1, const char *str2);
+char	*ft_strcpy_2(char *str);
+int		ft_strlen(const char *str);
 
 /*
 **		lexer/read_char.c
@@ -184,19 +195,27 @@ char *ft_check_quotes(char *str, t_struct *main);
 char *ft_remove_special(char *str, t_struct *main, int i);
 
 /*
-**		lexer/list.c
+**		lexer/lst.c
 */
-t_list	*ft_lst_new(char *content, int type);
-t_list	*ft_lst_new_join(char *content, int type);
-t_list *ft_lst_last(t_list *lst);
-int		ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_print_lst(t_list *lst);
 int		ft_lst_size(t_list *lst);
 char	*ft_get_lst_str_index(t_list *lst, int index);
 int		ft_lstadd(t_list **lst, t_list *new);
 char	*ft_find_var(char *str, t_env *st);
-char	*ft_find_var_path(char *str, t_env *st);
+
+/*
+**		lexer/lst_2.c
+*/
+t_list	*ft_lst_new_join(char *content, int type);
+t_list	*ft_lst_new(char *content, int type);
+t_list *ft_lst_last(t_list *lst);
+int		ft_lstadd_back(t_list **lst, t_list *new);
+
+
+/*
+**		lexer/lst_print.c
+*/
 void	ft_print_env(t_env *st);
+void	ft_print_lst(t_list *lst);
 
 /*
 **		lexer/free.c
@@ -237,6 +256,7 @@ int	ft_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new);
 int	ft_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new);
 void	ft_print_lst_parse(t_lst_parser *lst);
 void	ft_print_lst_parse_reverse(t_lst_parser *lst);
+char	*ft_find_var_path(char *str, t_env *st);
 
 /*
 **		parse/tools.c

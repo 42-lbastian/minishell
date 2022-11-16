@@ -1,15 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   remove_quotes.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:09:53 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/16 20:09:54 by lbastian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-char	*ft_remove_quotes(char *str)
+char	*ft_remove_quotes(char *str, int i, int j, int quotes)
 {
 	char	*temp;
-	int		i;
-	int		j;
-	int		quotes;
 
-	i = 0;
-	j = 0;
-	quotes = 0;
 	temp = malloc(sizeof(char) * (ft_count_remove_quotes(str) + 1));
 	if (!temp)
 		return (NULL);
@@ -36,12 +42,12 @@ char	*ft_remove_quotes(char *str)
 
 int	ft_main_remove_quotes(t_list **lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	temp = (*lst);
 	while (lst && (*lst))
 	{
-		(*lst)->content = ft_remove_quotes((*lst)->content);
+		(*lst)->content = ft_remove_quotes((*lst)->content, 0, 0, 0);
 		if (!(*lst)->content)
 			return (1);
 		(*lst) = (*lst)->next;

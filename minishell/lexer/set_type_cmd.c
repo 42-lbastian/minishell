@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_type_cmd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:10:11 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/16 20:10:12 by lbastian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	ft_set_type_cmd(t_list **lst)
@@ -19,14 +31,6 @@ int	ft_set_type_cmd(t_list **lst)
 		else if ((*lst)->next && (*lst)->next->type == CMD
 			&& (*lst)->type == HERE_DOC)
 			(*lst)->next->type = LIMITOR;
-		/*
-		else if ((*lst)->next && (*lst)->next->type >= PIPE
-			&& (*lst)->type >= PIPE)
-		{
-			(*lst) = temp;
-			return (1);
-		}
-		*/
 		(*lst) = (*lst)->next;
 	}
 	(*lst) = temp;
