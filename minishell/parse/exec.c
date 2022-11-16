@@ -34,7 +34,6 @@ int	ft_have_path(char *cmd)
 {
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (0);
-	printf("File not found/access denied\n");
 	return (1);
 }
 
@@ -118,7 +117,7 @@ void	ft_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2
 	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
 	if (!path)
 	{
-		printf("Command not found\n");
+		ft_putstr_fd("File not found/access denied\n", STDERR_FILENO);
 		return ;
 	}
 	pid = fork();
@@ -176,7 +175,7 @@ void	ft_main_exec_dumb(char **complete_cmd, t_env *st, int read, int write, int 
 	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
 	if (!path)
 	{
-		printf("Command not found\n");
+		ft_putstr_fd("File not found/access denied\n", STDERR_FILENO);
 		return ;
 	}
 	pid = fork();
