@@ -9,6 +9,7 @@
 # define VALID_CHAR "=/|<>.'\" $?-_"
 # define CMD_CHAR " ><|"
 # define C_CHECK_CHAR "\'\"$ "
+# define SPECIAL_CHAR "|<>"
 
 # define SIMPLE 0
 # define DOUBLE 1
@@ -143,7 +144,6 @@ int		ft_lst_add_back_env(t_env **st, t_env *new);
 /*
 **		lexer/char_check_special.c
 */
-int		ft_special_char(char c);
 int		ft_exclude_special(char c, t_struct *main);
 
 /*
