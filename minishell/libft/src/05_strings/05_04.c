@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:02:15 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/17 16:31:32 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:32:19 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ char	*ft_str_cut_after(char *src, char c)
 
 /*
  * @brief Compares two strings
- * @return returns an integer indicating the result of the comparison (*s1 - *s2).
+ * @return returns an integer indicating the result of
+ * the comparison (*s1 - *s2).
 */
 int	ft_strcmp(const char *s1, const char *s2)
 {
