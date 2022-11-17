@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:16 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:08:17 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:12:50 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_str_trim_env(char *str, t_env **st)
 		i++;
 	if (ft_lst_add_back_env(st, ft_lst_new_env(ft_substr(str, 0, i),
 				ft_substr(str, i + 1, ft_strlen(str) - i))))
-		return (1);
-	return (0);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 void	ft_clear_env(t_env **st)
@@ -50,9 +50,9 @@ int	ft_create_env(char **envp, t_env **st)
 		if (ft_str_trim_env(envp[i], st))
 		{
 			ft_clear_env(st);
-			return (1);
+			return (EXIT_FAILURE);
 		}
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
