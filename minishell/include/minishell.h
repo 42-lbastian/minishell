@@ -6,6 +6,9 @@
 # define NAME "minishell> "
 
 # define NB_CHAR_VALID 13
+# define VALID_CHAR "=/|<>.'\" $?-_"
+# define CMD_CHAR " ><|"
+# define C_CHECK_CHAR "\'\"$ "
 
 # define SIMPLE 0
 # define DOUBLE 1
@@ -36,6 +39,7 @@
 # define ERR_ENV_MALLOC "Error Malloc env\n"
 # define ERR_MAIN_MALLOC "Error Malloc Main struct\n"
 # define ERR_LEXER "Error Lexer\n"
+# define ERR_NB_CHAR "ERROR NB_CHAR\n"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -136,14 +140,6 @@ void	ms_clear_env(t_env **st);
 t_env	*ft_lst_new_env(char *var, char *value);
 int		ft_lst_add_back_env(t_env **st, t_env *new);
 
-/*		
-**		lexer/char_check.c
-*/
-int		ft_belong_cmd_start(char c);
-int		ft_belong_cmd_end(char c);
-int		ft_is_alpha_numb(char c);
-int		ft_count_check(char c);
-
 /*
 **		lexer/char_check_special.c
 */
@@ -154,7 +150,6 @@ int		ft_exclude_special(char c, t_struct *main);
 **		lexer/init.c
 */
 void	ms_init_struct(t_struct *main, int argc, char **argv);
-void	ft_fill_tab_char(t_struct *main, char *str);
 
 /*
 **		lexer/remove_quotes.c

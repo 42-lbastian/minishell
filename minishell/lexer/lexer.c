@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:09:04 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:06:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_lexer(char *str, t_struct *main_s)
 	main_s->is_arg = 0;
 	while (str[main_s->i])
 	{
-		if (str[main_s->i] && ft_belong_cmd_start(str[main_s->i]))
+		if (str[main_s->i] && !ft_incharset(str[main_s->i], CMD_CHAR))
 			ft_read_cmd(str, main_s);
 		if (str[main_s->i] && ft_special_char(str[main_s->i]))
 			ft_read_special(str, main_s);

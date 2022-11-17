@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:44 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:09:46 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:06:03 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_read_cmd(char *str, t_struct *main)
 	{
 		if (str[main->i + y] == '"' || str[main->i + y] == '\'')
 			y += ft_count_read_quotes(str, main->i + y);
-		if (!(str[main->i + y]) || ft_belong_cmd_end(str[main->i + y]) == 0)
+		if (!(str[main->i + y]) || ft_incharset(str[main->i + y], CMD_CHAR))
 			break ;
 		y++;
 	}
