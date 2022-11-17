@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:40 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:10:41 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:46:31 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	ft_strcmp_2(const char *str1, const char *str2)
-{
-	int	i;
-
-	i = 0;
-	if (!str1)
-		return (1);
-	while (str1[i] && str2[i])
-	{
-		if (str1[i] != str2[i])
-			return (1);
-		i++;
-	}
-	if (i < ft_strlen(str1) || i < ft_strlen(str2))
-		return (1);
-	return (0);
-}
 
 char	*ft_strcpy_2(char *str)
 {
