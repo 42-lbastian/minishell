@@ -33,6 +33,10 @@
 # define CD 0
 # define ECHO 1
 
+# define ERR_ENV_MALLOC "Error Malloc env\n"
+# define ERR_MAIN_MALLOC "Error Malloc Main struct\n"
+# define ERR_LEXER "Error Lexer\n"
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -43,6 +47,12 @@
 # include <sys/wait.h>
 # include "../libft/includes/libft.h"
 
+/*
+ * @brief Environnement variable structure
+ * @param var: (char *) name of the environnement variable
+ * @param value: (char *) what the var contains
+ * @param next: (t_env *) address to the next t_env variable
+*/
 typedef struct s_env
 {
 	char			*var;
@@ -103,10 +113,11 @@ typedef struct s_sig
 
 extern t_sig	g_glob;
 
-/**
-**		signal/signal.c
-**/
-void	global_signals_handler();
+/*
+ * @file main/signal.c
+ * @brief signal handler for main process
+*/
+void	global_signals_handler(void);
 
 /**
 **		lexer/lexer.c
@@ -117,6 +128,7 @@ int		ft_main_lexer(char *str, t_struct *main_s, t_env *st);
 **		lexer/create_env.c
 **/
 int		ft_create_env(char **envp, t_env **st);
+void	ft_clear_env(t_env **st);
 
 /**
 **		lexer/create_env_lst.c
