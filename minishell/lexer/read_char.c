@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:44 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 15:21:46 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:38:14 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_set_type_oper(t_struct *main)
 {
-	if (ft_strcmp_2(ft_lst_last(main->lst)->content, "|") == 0)
+	if (ft_strcmp(ft_lst_last(main->lst)->content, "|") == 0)
 		ft_lst_last(main->lst)->type = PIPE;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, "<") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, "<") == 0)
 		ft_lst_last(main->lst)->type = FILE_IN;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, ">") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, ">") == 0)
 		ft_lst_last(main->lst)->type = FILE_OUT_OVER;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, ">>") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, ">>") == 0)
 		ft_lst_last(main->lst)->type = FILE_OUT_APP;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, "<<") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, "<<") == 0)
 		ft_lst_last(main->lst)->type = HERE_DOC;
 	else
 		main->char_check.error = 1;

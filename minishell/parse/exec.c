@@ -281,9 +281,9 @@ void	ft_exec_builtin(char **complete_cmd, t_env *st, int read, int write, int re
 
 void	ft_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
-	//if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
+	//if (ft_strcmp(complete_cmd[0], "cd") == 0)
 	//	ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
-	//else if (ft_strcmp_2(complete_cmd[0], "echo") == 0)
+	//else if (ft_strcmp(complete_cmd[0], "echo") == 0)
 	//	ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, ECHO);
 	//else
 		ft_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);
@@ -291,9 +291,9 @@ void	ft_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int
 
 void	ft_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
-	if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
+	if (ft_strcmp(complete_cmd[0], "cd") == 0)
 		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
-	else if (ft_strcmp_2(complete_cmd[0], "echo") == 0)
+	else if (ft_strcmp(complete_cmd[0], "echo") == 0)
 		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, ECHO);
 	else
 		ft_main_exec(complete_cmd, st, read, write, read2, write2, type);

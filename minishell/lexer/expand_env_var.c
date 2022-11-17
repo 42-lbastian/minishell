@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:08:45 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:38:14 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_size_env_var(t_env *st, char *str, int index, int fact)
 	temp = ft_substr(str, start + 1, lenght);
 	while (st)
 	{
-		if (ft_strcmp_2(st->var, temp) == 0)
+		if (ft_strcmp(st->var, temp) == 0)
 		{
 			size = ft_strlen(st->value);
 			break ;
