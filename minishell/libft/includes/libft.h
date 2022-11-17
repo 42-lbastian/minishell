@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/17 11:29:36 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 15:52:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_fid
 /*
 00_is_something
 */
+
 t_bool			ft_incharset(char c, const char *charset);
 t_bool			ft_isalnum(int c);
 t_bool			ft_isalpha(int c);
@@ -85,6 +86,7 @@ t_bool			ft_isupper(int c);
 /*
 01_get_len
 */
+
 size_t			ft_hexalen(size_t nb);
 size_t			ft_intlen(int nb);
 size_t			ft_nbrlen(long nb);
@@ -93,6 +95,7 @@ size_t			ft_strlen_libft(const char *s);
 /*
 02_numbers
 */
+
 int				ft_atoi(const char *str);
 int				ft_max(int a, int b);
 int				ft_min(int a, int b);
@@ -102,6 +105,7 @@ char			*ft_itoa(int n);
 /*
 03_bases
 */
+
 int				ft_base_to_int_dec(char *base, char *bnbr);
 int				ft_bin_to_int_dec(char *bin);
 int				ft_hex_to_int_dec(char *hex);
@@ -110,6 +114,7 @@ int				ft_oct_to_int_dec(char *bin);
 /*
 04_put_something
 */
+
 void			ft_putchar_fd(char c, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
@@ -119,6 +124,7 @@ int				ft_putmsg_fd(char *msg, int fd, int ret);
 /*
 05_strings
 */
+
 char			**ft_split(char const *s, char c);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *s);
@@ -140,6 +146,7 @@ char			*ft_str_cut_after(char *src, char c);
 /*
 06_memory
 */
+
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t nmemb, size_t size);
 void			*ft_memchr(const void *s, int c, size_t n);
@@ -167,6 +174,7 @@ t_list_ft			*ft_lstmap(t_list_ft *lst, void *(*f)(void *),
 /*
 08_ft_printf
 */
+
 int				ft_printf(const char *format, ...);
 void			ft_pf_putnbr(int n);
 int				use_fid(va_list list, t_fid *fid);
@@ -179,6 +187,7 @@ int				pf_ptr(uintptr_t addr, t_fid *fid);
 /*
 09_gnl
 */
+
 char			*get_next_line(int fd);
 
 #endif
