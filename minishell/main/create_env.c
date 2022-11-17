@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:16 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 14:12:54 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:26:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ms_str_trim_env(char *str, t_env **st)
 	return (EXIT_SUCCESS);
 }
 
-void	ft_clear_env(t_env **st)
+void	ms_clear_env(t_env **st)
 {
 	t_env	*temp;
 
@@ -49,8 +49,6 @@ void	ft_clear_env(t_env **st)
 		free((*st));
 		(*st) = temp;
 	}
-	if (temp)
-		free(temp);
 }
 
 int	ms_create_env(char **envp, t_env **st)
@@ -62,7 +60,7 @@ int	ms_create_env(char **envp, t_env **st)
 	{
 		if (ms_str_trim_env(envp[i], st) == EXIT_FAILURE)
 		{
-			ft_clear_env(st);
+			ms_clear_env(st);
 			return (EXIT_FAILURE);
 		}
 		i++;
