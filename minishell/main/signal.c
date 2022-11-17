@@ -17,7 +17,7 @@ void	global_signal(int sig)
 }
 
 /*
- *@brief: signal handler for main process
+ *@brief signal handler for main process
 */
 void	global_signals_handler(void)
 {
