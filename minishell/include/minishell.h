@@ -46,6 +46,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
