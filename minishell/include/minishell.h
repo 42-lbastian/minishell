@@ -182,7 +182,6 @@ int		ft_have_space(char *str);
 /*
 **		lexer/utils_2.c
 */
-int		ft_strcmp_2(const char *str1, const char *str2);
 char	*ft_strcpy_2(char *str);
 int		ft_strlen(const char *str);
 
