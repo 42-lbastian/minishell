@@ -2,8 +2,8 @@ NAME = minishell
 
 SRCS =	main/minishell.c \
 		main/signal.c \
-		lexer/create_env.c \
-		lexer/create_env_lst.c \
+		main/create_env.c \
+		main/create_env_lst.c \
 		lexer/char_check.c \
 		lexer/char_check_special.c \
 		lexer/lexer.c \
