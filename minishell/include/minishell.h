@@ -106,7 +106,7 @@ extern t_sig	g_glob;
 /**
 **		signal/signal.c
 **/
-void	get_signal(int sig);
+void	global_signals_handler();
 
 /**
 **		lexer/lexer.c
