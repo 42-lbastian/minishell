@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 15:12:58 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:43:57 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,17 @@ int	ms_routine(t_struct *main_s, t_env *st)
 
 	str_read = NULL;
 	g_glob.ret = 0;
-	while (1)
+	while (true)
 	{
 		g_glob.pid = 0;
 		g_glob.sigint = 0;
 		g_glob.sigquit = 0;
-		//str_read = readline(RED NAME NORMAL);
 		str_read = readline(NAME);
 		if (!str_read)
-			return (0);
-		if (ft_strcmp_2(str_read, "exit") == 0)
-			break ;
-		if (ft_strlen(str_read) != 0)
+			return (EXIT_FAILURE);
+		if (ft_strcmp(str_read, "exit") == 0)
+			break ;	//NEED TO ADD THE EXIT MESSAGE SEQUENCE
+		if (ft_strlen(str_read) != 0)	//check if cant use libft strlen
 			add_history(str_read);
 		if (ft_main_lexer(str_read, main_s, st))
 		{
