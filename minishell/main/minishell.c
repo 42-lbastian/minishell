@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 14:17:31 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:25:55 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 
 	st = NULL;
 	global_signals_handler();
-	if (ms_create_env(envp, &st))	//MALLOC BUT NOT FREED + FT_CLEAR_ENV LEAKS ANYWAY
+	if (ms_create_env(envp, &st))	//MALLOC BUT NOT FREED + ms_clear_env LEAKS ANYWAY
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	main_s = malloc(sizeof(t_struct));
 	if (!main_s)
