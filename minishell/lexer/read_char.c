@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:44 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 15:06:03 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 15:21:46 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_read_special(char *str, t_struct *main)
 
 	y = 0;
 	main->is_arg = 0;
-	while (str[main->i + y] && ft_special_char(str[main->i + y]))
+	while (str[main->i + y] && ft_incharset(str[main->i + y], SPECIAL_CHAR))
 		y++;
 	error = ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y),
 				DEFAULT));
