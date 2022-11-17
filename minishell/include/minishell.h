@@ -127,8 +127,8 @@ int		ft_main_lexer(char *str, t_struct *main_s, t_env *st);
 /**
 **		lexer/create_env.c
 **/
-int		ft_create_env(char **envp, t_env **st);
-void	ft_clear_env(t_env **st);
+int		ms_create_env(char **envp, t_env **st);
+void	ms_clear_env(t_env **st);
 
 /**
 **		lexer/create_env_lst.c
