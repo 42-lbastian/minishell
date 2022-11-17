@@ -1,3 +1,0 @@
-int ft_strlen()
-{
-	
