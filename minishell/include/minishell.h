@@ -153,7 +153,7 @@ int		ft_exclude_special(char c, t_struct *main);
 /*
 **		lexer/init.c
 */
-void	ft_init_struct(t_struct *main, int argc, char **argv);
+void	ms_init_struct(t_struct *main, int argc, char **argv);
 void	ft_fill_tab_char(t_struct *main, char *str);
 
 /*

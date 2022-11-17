@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:54 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:08:55 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:29:58 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_fill_tab_char(t_struct *main, char *str)
 	}
 }
 
-void	ft_init_struct(t_struct *main, int argc, char **argv)
+void	ms_init_struct(t_struct *main, int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;

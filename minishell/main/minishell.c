@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 14:25:55 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:29:58 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	main_s = malloc(sizeof(t_struct));
 	if (!main_s)
 		return (ft_putmsg_fd(ERR_MAIN_MALLOC, STDERR_FILENO, EXIT_FAILURE));
-	ft_init_struct(main_s, argc, argv);
+	ms_init_struct(main_s, argc, argv);
 	ms_routine(main_s, st);
 	free(main_s);
 	clear_history();
