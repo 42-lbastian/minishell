@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   00_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:18:34 by stelie            #+#    #+#             */
-/*   Updated: 2022/04/19 20:45:22 by krozis           ###   ########.fr       */
+/*   Updated: 2022/11/17 15:57:54 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+ * @brief Looks for a character in a given character set.
+ * @param c: the char that you search
+ * @param charset: the character set where you try to find c
+ * @return returns TRUE if c is found in the character set, FALSE if not.
+*/
 t_bool	ft_incharset(char c, const char *charset)
 {
 	while (*charset)
@@ -23,6 +29,10 @@ t_bool	ft_incharset(char c, const char *charset)
 	return (FALSE);
 }
 
+/*
+ * @brief Tells if a character is alphanumeric.
+ * @return returns TRUE if c is an alphanumeric character, FALSE if not.
+*/
 t_bool	ft_isalnum(int c)
 {
 	if (ft_isdigit(c))
@@ -32,6 +42,10 @@ t_bool	ft_isalnum(int c)
 	return (FALSE);
 }
 
+/*
+ * @brief Tells if a character is a alphabetic (lowercase and uppercase).
+ * @return returns TRUE if c is an alphabetic character, FALSE if not.
+*/
 t_bool	ft_isalpha(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
