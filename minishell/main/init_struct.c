@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:54 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 14:47:31 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:48:09 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	ms_init_struct(t_struct *main, int argc, char **argv)
 	main->char_check.error = 0;
 	main->char_check.last_double_q = 0;
 	main->char_check.last_simple_q = 0;
-	ms_fill_tab_char(main);						//ft_strdup(VALID_CHAR)   ??
+	ms_fill_tab_char(main);						// = ft_strdup(VALID_CHAR)   ??
 }
