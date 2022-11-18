@@ -25,7 +25,6 @@ SRCS =	main/minishell.c \
 		main/signal.c \
 		main/create_env.c \
 		main/create_env_lst.c \
-		main/init_struct.c \
 		lexer/char_check_special.c \
 		lexer/lexer.c \
 		lexer/read_char.c \

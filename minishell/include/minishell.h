@@ -95,7 +95,7 @@ typedef struct s_char_check
 {
 	int		last_simple_q;
 	int		last_double_q;
-	char	char_valid[NB_CHAR_VALID];
+	char	*char_valid;
 	int		error;
 }				t_char_check;
 
@@ -105,7 +105,6 @@ typedef struct s_struct
 	int				is_arg;
 	t_list			*lst;
 	t_char_check	char_check;
-	char			**temp_str;
 }		t_struct;
 
 //SIGNAL + RET FUNC
@@ -146,11 +145,6 @@ int		ft_lst_add_back_env(t_env **st, t_env *new);
 **		lexer/char_check_special.c
 */
 int		ft_exclude_special(char c, t_struct *main);
-
-/*
-**		lexer/init.c
-*/
-void	ms_init_struct(t_struct *main, int argc, char **argv);
 
 /*
 **		lexer/remove_quotes.c
