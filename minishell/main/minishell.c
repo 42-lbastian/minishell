@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 18:34:51 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:44:22 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	_basic_checks(void)
 }
 
 /*
- * @todo Verifier si le FT_STRDUP a bien reussi et free main le cas echeant
+ * FAIT @todo Verifier si le FT_STRDUP a bien reussi et free main le cas echeant
 */
 void	ms_init_struct(t_struct *main, int argc, char **argv)
 {
@@ -35,7 +35,7 @@ void	ms_init_struct(t_struct *main, int argc, char **argv)
 	main->char_check.error = 0;
 	main->char_check.last_double_q = 0;
 	main->char_check.last_simple_q = 0;
-	main->char_check.char_valid = ft_strdup(VALID_CHAR);  //NEED CHECK IF FT_STRDUP FAILED
+	main->char_check.char_valid = ft_strdup(VALID_CHAR);
 }
 
 int	ms_routine(t_struct *main_s, t_env *st)

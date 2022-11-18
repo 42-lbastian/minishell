@@ -25,7 +25,7 @@ t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type)
 	if (type == CMD)
 		new->value.cmd = ms_strcpy_cmd(cmd);
 	else
-		new->value.oper = oper;
+		new->value.oper = ft_strdup(oper);
 	new->type = type;
 	return (new);
 }
