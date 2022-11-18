@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 16:43:58 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 16:46:59 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	ms_routine(t_struct *main_s, t_env *st)
 
 t_sig	g_glob;
 
+/*
+ *@todo: free 'env_t *st'
+ */
 int	main(int argc, char **argv, char **envp)
 {
 	t_struct	*main_s;
@@ -82,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 	_basic_checks();
 	st = NULL;
 	global_signals_handler();
-	if (ms_create_env(envp, &st))	//MALLOC BUT NOT FREED + ms_clear_env LEAKS ANYWAY
+	if (ms_create_env(envp, &st))
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	main_s = malloc(sizeof(t_struct));
 	if (!main_s)
