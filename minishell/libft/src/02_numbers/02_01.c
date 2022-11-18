@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   02_01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:32:02 by stelie            #+#    #+#             */
-/*   Updated: 2022/04/19 20:23:46 by krozis           ###   ########.fr       */
+/*   Updated: 2022/11/18 11:24:00 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	def_full_len(long nb)
+static unsigned int	_def_full_len(long nb)
 {
 	unsigned int	len;
 
@@ -32,12 +32,16 @@ static unsigned int	def_full_len(long nb)
 	return (len);
 }
 
-static char	*nb_zero(char *res)
+static char	*_nb_zero(char *res)
 {
 	res[0] = '0';
 	return (res);
 }
 
+/*
+ * @brief Transform a given int n into a string.
+ * @return returns the string created from the given int n.
+*/
 char	*ft_itoa(int n)
 {
 	unsigned int	fulllen;
@@ -45,13 +49,13 @@ char	*ft_itoa(int n)
 	char			*res;
 
 	nb = n;
-	fulllen = def_full_len(nb);
+	fulllen = _def_full_len(nb);
 	res = malloc(sizeof(char) * (fulllen + 1));
 	if (res == NULL)
 		return (NULL);
 	res[fulllen--] = '\0';
 	if (nb == 0)
-		return (nb_zero(res));
+		return (_nb_zero(res));
 	if (nb < 0)
 	{
 		nb = -nb;

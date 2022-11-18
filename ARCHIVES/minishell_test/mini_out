@@ -1,0 +1,4 @@
+minishell> pwd oi
+pwd: ignoring non-option arguments
+/mnt/nfs/homes/lbastian/Documents/minishell/minishell/minishell_test
+minishell> 

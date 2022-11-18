@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   05_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:46:53 by stelie            #+#    #+#             */
-/*   Updated: 2022/04/19 22:29:00 by krozis           ###   ########.fr       */
+/*   Updated: 2022/11/18 11:58:05 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	get_word_size(char const *s, char c)
+/*
+ * FT_SPLIT 
+*/
+
+static size_t	_get_word_size(char const *s, char c)
 {
 	size_t	size;
 
@@ -25,7 +29,7 @@ static size_t	get_word_size(char const *s, char c)
 	return (size);
 }
 
-static size_t	get_word_nbr(char const *s, char c)
+static size_t	_get_word_nbr(char const *s, char c)
 {
 	size_t	wd_nbr;
 
@@ -47,14 +51,14 @@ static size_t	get_word_nbr(char const *s, char c)
 	return (wd_nbr);
 }
 
-static char	*get_wd(const char *s, char c)
+static char	*_get_wd(const char *s, char c)
 {
 	int		size;
 	int		j;
 	char	*str;
 
 	j = 0;
-	size = get_word_size(s, c);
+	size = _get_word_size(s, c);
 	str = malloc(sizeof(char) * (size + 1));
 	if (str == NULL)
 		return (NULL);
@@ -68,20 +72,27 @@ static char	*get_wd(const char *s, char c)
 	return (str);
 }
 
+/*
+ * @brief Splits the given string into differents strings,
+ * with a given delimiter
+ * @param s: the string to split
+ * @param c: the delimiter
+ * @return Returns a char** containing all the substrings from splitting
+*/
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 	int		i;
 
 	i = 0;
-	tab = malloc(sizeof(char *) * (get_word_nbr(s, c) + 1));
+	tab = malloc(sizeof(char *) * (_get_word_nbr(s, c) + 1));
 	if (tab == NULL)
 		return (NULL);
 	while (*s)
 	{
 		if (*s != c)
 		{
-			tab[i] = get_wd(s, c);
+			tab[i] = _get_wd(s, c);
 			if (tab[i] == NULL)
 				return (NULL);
 			i++;

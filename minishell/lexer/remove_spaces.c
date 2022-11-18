@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   remove_spaces.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:10:04 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/18 14:55:24 by stelie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-int	ft_count_spaces(char *str)
+int	ms_count_spaces(char *str)
 {
 	int	size;
 	int	i;
@@ -12,7 +24,7 @@ int	ft_count_spaces(char *str)
 	{
 		if (str[i] && (str[i] == '"' || str[i] == '\''))
 		{
-			ret = ft_count_read_quotes(str, i);
+			ret = ms_count_read_quotes(str, i);
 			i += ret + 1;
 			size += ret + 1;
 		}
@@ -37,7 +49,7 @@ char	*ft_spaces_flag(char *str)
 
 	i = 0;
 	j = 0;
-	size = ft_count_spaces(str);
+	size = ms_count_spaces(str);
 	temp = malloc(sizeof(char) * (size + 1));
 	if (!temp)
 		return (NULL);
@@ -73,7 +85,7 @@ char	*ft_spaces_flag(char *str)
 	return (temp);
 }
 
-int	ft_remove_spaces(t_list **lst)
+int	ms_remove_spaces(t_list **lst)
 {
 	t_list	*temp;
 

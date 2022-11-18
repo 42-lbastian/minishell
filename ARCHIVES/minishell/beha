@@ -1,0 +1,19 @@
+echo tutu | > toto cat		//Store tutu to toto
+
+//FIX
+< toto cat 					// Print content of toto
+cat < TATA
+
+//FIX
+< cat TATA
+Then
+< TATA cat
+
+cat < TATA todo
+cat < TATA tod
+cat < TATA todo tod
+cat < TATA tod todo
+cat < TATA todo to | wc -l
+
+echo toto > 1 2 3
+grep > 1 void include/minishell.h

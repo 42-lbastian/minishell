@@ -1,0 +1,15 @@
+void	get_signal(int sig);
+void	ft_init_struct(t_struct *main, int argc, char **argv);
+void	ft_fill_tab_char(t_struct *main, char *str);
+void	ft_read_special(char *str, t_struct *main);
+void	ft_read_cmd(char *str, t_struct *main);
+void	ft_print_lst(t_list *lst);
+void	ft_print_env(t_env *st);
+void	ft_free_lst(t_list **lst);
+void	ft_free_all(t_list **lst);
+void	ft_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
+void	ft_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
+void	ft_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
+//void	ft_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type);
+void	ft_print_lst_parse(t_lst_parser *lst);
+void	ft_print_lst_parse_reverse(t_lst_parser *lst);

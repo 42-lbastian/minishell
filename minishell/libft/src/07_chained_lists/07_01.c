@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   07_01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:10:14 by stelie            #+#    #+#             */
-/*   Updated: 2022/04/19 20:42:22 by krozis           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:08:04 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+ * FT_LSTLAST
+ * FT_LSTNEW
+ * FT_LSTSIZE
+ * FT_LSTMAP
+*/
+
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst == NULL)
@@ -21,6 +31,9 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 t_list	*ft_lstnew(void	*content)
 {
 	t_list	*new;
@@ -33,6 +46,9 @@ t_list	*ft_lstnew(void	*content)
 	return (new);
 }
 
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 int	ft_lstsize(t_list *lst)
 {
 	int	size;
@@ -48,6 +64,9 @@ int	ft_lstsize(t_list *lst)
 	return (size);
 }
 
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*list;

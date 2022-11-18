@@ -1,52 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:10:46 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/18 14:58:09 by stelie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-int	ft_strcmp_2(const char *str1, const char *str2)
-{
-	int	i;
-
-	i = 0;
-	if (!str1)
-		return (1);
-	while (str1[i] && str2[i])
-	{
-		if (str1[i] != str2[i])
-			return (1);
-		i++;
-	}
-	if (i < ft_strlen(str1) || i < ft_strlen(str2))
-		return (1);
-	return (0);
-}
-
-char	*ft_strcpy_2(char *str)
-{
-	char	*ret;
-	int		i;
-
-	i = 0;
-	ret = malloc(sizeof(char) * (ft_strlen(str) + 1));
-	if (!ret)
-		return (NULL);
-	while (str[i])
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	ret[i] = '\0';
-	return (ret);
-}
-
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int		ft_have_space(char *str)
+int	ms_have_space(char *str)
 {
 	int	i;
 
@@ -60,7 +26,7 @@ int		ft_have_space(char *str)
 	return (0);
 }
 
-char	*ft_strjoin_c(char *str, char c)
+char	*ms_strjoin_c(char *str, char c)
 {
 	int		i;
 	int		size;
@@ -68,7 +34,7 @@ char	*ft_strjoin_c(char *str, char c)
 
 	i = 0;
 	if (str)
-		size = ft_strlen(str);
+		size = ms_strlen(str);
 	else
 		size = 0;
 	dest = malloc(sizeof(char) * (size + 2));
@@ -86,7 +52,20 @@ char	*ft_strjoin_c(char *str, char c)
 	return (dest);
 }
 
-char	*ft_strjoin_2(char *str1, char *str2)
+char	*ms_malloc_strjoin_2(char *str1, char *str2)
+{
+	char	*dest;
+
+	if (!str1)
+		dest = malloc(sizeof(char) * (ms_strlen(str2) + 1));
+	else
+		dest = malloc(sizeof(char) * (ms_strlen(str1) + ms_strlen(str2) + 1));
+	if (!dest)
+		return (NULL);
+	return (dest);
+}
+
+char	*ms_strjoin_2(char *str1, char *str2)
 {
 	char	*dest;
 	int		i;
@@ -94,10 +73,7 @@ char	*ft_strjoin_2(char *str1, char *str2)
 
 	i = 0;
 	j = 0;
-	if (!str1)
-		dest = malloc(sizeof(char) * (ft_strlen(str2) + 1));
-	else
-		dest = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
+	dest = ms_malloc_strjoin_2(str1, str2);
 	if (!dest)
 		return (NULL);
 	while (str1 && str1[i])
@@ -113,11 +89,10 @@ char	*ft_strjoin_2(char *str1, char *str2)
 	dest[i + j] = '\0';
 	if (str1)
 		free(str1);
-	//free(str2);
 	return (dest);
 }
 
-int	ft_strjoin_3(char *dest, char *str, int start)
+int	ms_strjoin_3(char *dest, char *str, int start)
 {
 	int	i;
 	int	j;

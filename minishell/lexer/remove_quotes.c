@@ -1,19 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   remove_quotes.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:09:53 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/18 14:58:09 by stelie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-char	*ft_remove_quotes(char *str)
+char	*ms_remove_quotes(char *str, int i, int j, int quotes)
 {
 	char	*temp;
-	int		i;
-	int		j;
-	int		quotes;
 
-	i = 0;
-	j = 0;
-	quotes = 0;
-	temp = malloc(sizeof(char) * (ft_count_remove_quotes(str) + 1));
+	temp = malloc(sizeof(char) * (ms_count_remove_quotes(str) + 1));
 	if (!temp)
 		return (NULL);
-	temp[ft_count_remove_quotes(str)] = '\0';
+	temp[ms_count_remove_quotes(str)] = '\0';
 	while (str[i])
 	{
 		if (str[i] == '"' && quotes == 0)
@@ -34,14 +40,14 @@ char	*ft_remove_quotes(char *str)
 	return (temp);
 }
 
-int	ft_main_remove_quotes(t_list **lst)
+int	ms_main_remove_quotes(t_list **lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	temp = (*lst);
 	while (lst && (*lst))
 	{
-		(*lst)->content = ft_remove_quotes((*lst)->content);
+		(*lst)->content = ms_remove_quotes((*lst)->content, 0, 0, 0);
 		if (!(*lst)->content)
 			return (1);
 		(*lst) = (*lst)->next;

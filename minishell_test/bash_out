@@ -1,3 +1,0 @@
-minishell> echo hi < ../minishell_test/test_files/infile bye bye
-hi bye bye
-minishell> 

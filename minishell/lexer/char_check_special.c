@@ -1,11 +1,16 @@
-#include "../include/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   char_check_special.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:08:00 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/18 14:57:49 by stelie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	ft_special_char(char c)
-{
-	if (c == '|' || c == '<' || c == '>')
-		return (1);
-	return (0);
-}
+#include "../include/minishell.h"
 
 int	ft_belong_good_special(char c, t_struct *main)
 {
@@ -21,9 +26,9 @@ int	ft_belong_good_special(char c, t_struct *main)
 	return (0);
 }
 
-int	ft_exclude_special(char c, t_struct *main)
+int	ms_exclude_special(char c, t_struct *main)
 {
-	if (ft_is_alpha_numb(c) || ft_belong_good_special(c, main))
+	if (ft_isalnum(c) || ft_belong_good_special(c, main))
 		return (1);
 	return (0);
 }

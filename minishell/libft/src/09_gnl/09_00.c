@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   09_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 13:45:06 by krozis            #+#    #+#             */
-/*   Updated: 2022/11/15 15:38:59 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:32:35 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	update_aloc(char **aloc, char *new_aloc)
+static void	_update_aloc(char **aloc, char *new_aloc)
 {
 	char	*temp;
 
@@ -21,7 +21,7 @@ static void	update_aloc(char **aloc, char *new_aloc)
 	free(temp);
 }
 
-static char	*get_line(char **acc)
+static char	*_get_line(char **acc)
 {
 	size_t	c;
 	char	*s;
@@ -30,30 +30,35 @@ static char	*get_line(char **acc)
 		return (NULL);
 	c = (size_t)(ft_strchr(*acc, '\n') - *acc) + 1;
 	s = ft_substr(*acc, 0, c);
-	update_aloc(acc, ft_substr(*acc, c, ft_strlen_libft(*acc)));
+	_update_aloc(acc, ft_substr(*acc, c, ft_strlen(*acc)));
 	if (*acc[0] == '\0')
-		update_aloc(acc, NULL);
+		_update_aloc(acc, NULL);
 	return (s);
 }
 
-static void	read_line(int fd, char **acc, char *buffer, int *read_bytes)
+static void	_read_line(int fd, char **acc, char *buffer, int *read_bytes)
 {
 	*read_bytes = read(fd, buffer, BUFFER_SIZE);
 	if (*read_bytes > 0)
 	{
 		if (*acc == NULL)
-			update_aloc(acc, ft_strdup(""));
+			_update_aloc(acc, ft_strdup(""));
 		buffer[*read_bytes] = '\0';
-		update_aloc(acc, ft_strjoin(*acc, buffer));
+		_update_aloc(acc, ft_strjoin(*acc, buffer));
 		while (*read_bytes > 0 && ft_strchr(buffer, '\n') == NULL)
 		{
 			*read_bytes = read(fd, buffer, BUFFER_SIZE);
 			buffer[*read_bytes] = '\0';
-			update_aloc(acc, ft_strjoin(*acc, buffer));
+			_update_aloc(acc, ft_strjoin(*acc, buffer));
 		}
 	}
 }
 
+/*
+ * @brief Returns a line ended by a carriage return read
+ * in the given file descriptor fd.
+ * Successive calls of gnl permit to read the full text in the fd.
+*/
 char	*get_next_line(int fd)
 {
 	static char	*acc = NULL;
@@ -63,7 +68,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0)
 	{
-		update_aloc(&acc, NULL);
+		_update_aloc(&acc, NULL);
 		return (NULL);
 	}
 	if (BUFFER_SIZE <= 0)
@@ -71,8 +76,8 @@ char	*get_next_line(int fd)
 	buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
 		return (NULL);
-	read_line(fd, &acc, buffer, &read_bytes);
-	line = get_line(&acc);
+	_read_line(fd, &acc, buffer, &read_bytes);
+	line = _get_line(&acc);
 	free(buffer);
 	return (line);
 }

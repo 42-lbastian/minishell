@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   07_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:16:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/15 15:34:41 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:07:07 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+ * FT_LSTADD_BACK  --  NOT DOCUMENTED
+ * FT_LSTADD_FRONT  --  NOT DOCUMENTED
+ * FT_LSTCLEAR  --  NOT DOCUMENTED
+ * FT_LSTDELONE  --  NOT DOCUMENTED
+ * FT_LSTITER  --  NOT DOCUMENTED
+*/
+
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
 	t_list	*start;
@@ -28,6 +39,9 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 	}
 }
 
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 void	ft_lstadd_front(t_list **alst, t_list *new)
 {
 	if (*alst == NULL)
@@ -35,6 +49,9 @@ void	ft_lstadd_front(t_list **alst, t_list *new)
 	*alst = new;
 }
 
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
@@ -52,6 +69,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	}
 }
 
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (del && lst)
@@ -61,6 +81,9 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	}
 }
 
+/*
+ * @brief  --  NOT DOCUMENTED
+*/
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	while (lst && (*f))

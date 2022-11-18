@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 20:08:08 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/18 14:58:20 by stelie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-int	ft_count_remove_quotes(char *str)
+int	ms_count_remove_quotes(char *str)
 {
 	int	i;
 	int	size;
@@ -25,7 +37,7 @@ int	ft_count_remove_quotes(char *str)
 	return (size);
 }
 
-int	ft_count_char(char *str)
+int	ms_count_char(char *str)
 {
 	int	i;
 	int	size;
@@ -37,10 +49,8 @@ int	ft_count_char(char *str)
 		if (str[i] == '$')
 		{
 			i++;
-			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i]
-				!= '$' && str[i] != ' ')
-				while (str[i] && str[i] != '\'' && str[i] != '"'
-					&& str[i] != '$' && str[i] != ' ')
+			if (str[i] && !ft_incharset(str[i], C_CHECK_CHAR))
+				while (str[i] && !ft_incharset(str[i], C_CHECK_CHAR))
 					i++;
 			else
 				size++;
@@ -56,14 +66,14 @@ int	ft_count_char(char *str)
 	return (size);
 }
 
-int	ft_lenght_read_var(char *str, int index)
+int	ms_lenght_read_var(char *str, int index)
 {
 	int	i;
 	int	size;
 
 	i = index;
 	size = 0;
-	while (i < ft_strlen(str))
+	while (i < ms_strlen(str))
 	{
 		while (str[i] == '"' || str[i] == '\'')
 			i++;
@@ -71,7 +81,8 @@ int	ft_lenght_read_var(char *str, int index)
 		{
 			size++;
 			i++;
-			while (str[i] && str[i] != '"' && str[i] != '\'' && str[i] != '$' && str[i] != ' ')
+			while (str[i] && str[i] != '"' && str[i] != '\''
+				&& str[i] != '$' && str[i] != ' ')
 			{
 				size++;
 				i++;
@@ -84,7 +95,7 @@ int	ft_lenght_read_var(char *str, int index)
 	return (size);
 }
 
-int	ft_start_read_var(char *str, int index)
+int	ms_start_read_var(char *str, int index)
 {
 	int	i;
 
@@ -94,7 +105,7 @@ int	ft_start_read_var(char *str, int index)
 	return (i);
 }
 
-int	ft_count_nb_quotes(char *str)
+int	ms_count_nb_quotes(char *str)
 {
 	int	i;
 	int	nb;

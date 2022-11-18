@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/15 15:49:07 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:14:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 # define ERROR -1
 # define TYPESET "csiduxXp"
@@ -34,17 +35,14 @@
 #  define BUFFER_SIZE 5
 # endif
 
-typedef enum e_bool
+/*
+ * CONFLICT WITH MINISHELL'S VERSION
+typedef struct s_list
 {
-	FALSE,
-	TRUE
-}				t_bool;
-
-typedef struct s_list_ft
-{
-	void				*content;
-	struct s_list_ft	*next;
-}				t_list_ft;
+	void			*content;
+	struct s_list	*next;
+}				t_list;
+*/
 
 typedef enum e_flags
 {
@@ -52,7 +50,7 @@ typedef enum e_flags
 	SHARP,
 	MINUS,
 	PLUS,
-	SPACES,
+	SPAC,
 	M_WIDTH,
 	PREC,
 	FID_ERROR
@@ -63,36 +61,39 @@ typedef struct s_fid
 	int		flag[8];
 	char	conv;
 	int		fid_len;
-	t_bool	def_pre;
+	bool	def_pre;
 }				t_fid;
 
 /*
 00_is_something
 */
-t_bool			ft_incharset(char c, const char *charset);
-t_bool			ft_isalnum(int c);
-t_bool			ft_isalpha(int c);
-t_bool			ft_isascii(int c);
-t_bool			ft_isbinary(char *str);
-t_bool			ft_isdigit(int c);
-t_bool			ft_ishexa(char *nbr);
-t_bool			ft_islower(int c);
-t_bool			ft_isoctal(char *str);
-t_bool			ft_isprint(int c);
-t_bool			ft_isspace(int c);
-t_bool			ft_isupper(int c);
+
+bool			ft_incharset(char c, const char *charset);
+bool			ft_isalnum(int c);
+bool			ft_isalpha(int c);
+bool			ft_isascii(int c);
+bool			ft_isbinary(char *str);
+bool			ft_isdigit(int c);
+bool			ft_ishexa(char *nbr);
+bool			ft_islower(int c);
+bool			ft_isoctal(char *str);
+bool			ft_isprint(int c);
+bool			ft_isspace(int c);
+bool			ft_isupper(int c);
 
 /*
 01_get_len
 */
+
 size_t			ft_hexalen(size_t nb);
 size_t			ft_intlen(int nb);
 size_t			ft_nbrlen(long nb);
-size_t			ft_strlen_libft(const char *s);
+size_t			ft_strlen(const char *s);
 
 /*
 02_numbers
 */
+
 int				ft_atoi(const char *str);
 int				ft_max(int a, int b);
 int				ft_min(int a, int b);
@@ -102,6 +103,7 @@ char			*ft_itoa(int n);
 /*
 03_bases
 */
+
 int				ft_base_to_int_dec(char *base, char *bnbr);
 int				ft_bin_to_int_dec(char *bin);
 int				ft_hex_to_int_dec(char *hex);
@@ -110,16 +112,20 @@ int				ft_oct_to_int_dec(char *bin);
 /*
 04_put_something
 */
+
 void			ft_putchar_fd(char c, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr_fd(char *s, int fd);
+int				ft_putmsg_fd(char *msg, int fd, int ret);
 
 /*
 05_strings
 */
+
 char			**ft_split(char const *s, char c);
 char			*ft_strchr(const char *s, int c);
+int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strdup(const char *s);
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 char			*ft_strjoin(char const *s1, char const *s2);
@@ -139,6 +145,7 @@ char			*ft_str_cut_after(char *src, char c);
 /*
 06_memory
 */
+
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t nmemb, size_t size);
 void			*ft_memchr(const void *s, int c, size_t n);
@@ -149,23 +156,24 @@ void			*ft_memmove(void *dst, const void *src, size_t n);
 
 /*
 07_chained_lists
-*/
-/*
-t_list_ft			*ft_lstnew(void *content);
-void			ft_lstadd_front(t_list_ft **alst, t_list_ft *new);
-int				ft_lstsize(t_list_ft *lst);
-t_list_ft			*ft_lstlast(t_list_ft *lst);
-void			ft_lstadd_back(t_list_ft **alst, t_list_ft *new);
-void			ft_lstdelone(t_list_ft *lst, void (*del)(void *));
-void			ft_lstclear(t_list_ft **lst, void (*del)(void*));
+
+
+t_list			*ft_lstnew(void *content);
+void			ft_lstadd_front(t_list **alst, t_list *new);
+int				ft_lstsize(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
+void			ft_lstadd_back(t_list **alst, t_list *new);
+void			ft_lstdelone(t_list *lst, void (*del)(void *));
+void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
-t_list_ft			*ft_lstmap(t_list_ft *lst, void *(*f)(void *),
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 */
 
 /*
 08_ft_printf
 */
+
 int				ft_printf(const char *format, ...);
 void			ft_pf_putnbr(int n);
 int				use_fid(va_list list, t_fid *fid);
@@ -178,6 +186,7 @@ int				pf_ptr(uintptr_t addr, t_fid *fid);
 /*
 09_gnl
 */
+
 char			*get_next_line(int fd);
 
 #endif

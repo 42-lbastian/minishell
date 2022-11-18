@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-char	*ft_strjoin_env(char *str1, char *str2, char c)
+char	*ms_strjoin_env(char *str1, char *str2, char c)
 {
 	char	*dst;
 	int		i;
@@ -8,7 +8,7 @@ char	*ft_strjoin_env(char *str1, char *str2, char c)
 
 	i = 0;
 	y = 0;
-	dst = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 2));
+	dst = malloc(sizeof(char) * (ms_strlen(str1) + ms_strlen(str2) + 2));
 	if (!dst)
 		return (NULL);
 	while (str1[i])
@@ -30,15 +30,14 @@ char	*ft_strjoin_env(char *str1, char *str2, char c)
 	return (dst);
 }
 
-int	ft_have_path(char *cmd)
+int	ms_have_path(char *cmd)
 {
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (0);
-	printf("File not found/access denied\n");
 	return (1);
 }
 
-char	*ft_find_path(char *cmd, char **all_path)
+char	*ms_find_path(char *cmd, char **all_path)
 {
 	int		i;
 	char	*good_path;
@@ -50,7 +49,7 @@ char	*ft_find_path(char *cmd, char **all_path)
 		return (NULL);
 	if (cmd[0] == '.' || cmd[0] == '/')
 	{
-		if (ft_have_path(cmd) == 0)
+		if (ms_have_path(cmd) == 0)
 			return (cmd);
 		else
 			return (NULL);
@@ -59,7 +58,7 @@ char	*ft_find_path(char *cmd, char **all_path)
 	{
 		while (all_path[i])
 		{
-			good_path = ft_strjoin_env(all_path[i], cmd, '/');
+			good_path = ms_strjoin_env(all_path[i], cmd, '/');
 			if (access(good_path, F_OK | X_OK) == 0)
 				return (good_path);
 			else
@@ -96,7 +95,7 @@ char	**ft_env_array(t_env *st)
 	env_arr[ft_env_size(st)] = NULL;
 	while (st)
 	{
-		env_arr[i] = ft_strjoin_env(st->var, st->value, '=');
+		env_arr[i] = ms_strjoin_env(st->var, st->value, '=');
 		st = st->next;
 		i++;
 	}
@@ -110,15 +109,15 @@ int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
 }
 
 
-void	ft_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
+void	ms_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
 	char	*path;
 	int		pid;
 
-	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
+	path = ms_find_path(complete_cmd[0], ft_split(ms_find_var_path("PATH", st), ':'));
 	if (!path)
 	{
-		printf("Command not found\n");
+		ft_putstr_fd("File not found/access denied\n", STDERR_FILENO);
 		return ;
 	}
 	pid = fork();
@@ -168,15 +167,15 @@ void	ft_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2
 }
 
 
-void	ft_main_exec_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
+void	ms_main_exec_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
 	char	*path;
 	int		pid;
 
-	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
+	path = ms_find_path(complete_cmd[0], ft_split(ms_find_var_path("PATH", st), ':'));
 	if (!path)
 	{
-		printf("Command not found\n");
+		ft_putstr_fd("File not found/access denied\n", STDERR_FILENO);
 		return ;
 	}
 	pid = fork();
@@ -213,12 +212,12 @@ void	ft_main_exec_dumb(char **complete_cmd, t_env *st, int read, int write, int 
 			close(read);
 			close(write);
 		}
-		if (type == CMD_END || type == CMD_FILE_IN)
+		if (type == CMD_END || type == CMD_FILE_IN || type == CMD_FILE_OUT_END || type == CMD_FILE_OUT)
 		{
 			close(read2);
 			close(write2);
 		}
-		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END)
+		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END || type == CMD_FILE_OUT_END || type == CMD_FILE_OUT)
 			close(read);
 		waitpid(pid, NULL, 0);
 	}
@@ -229,7 +228,7 @@ void	ft_exec_builtin(char **complete_cmd, t_env *st, int read, int write, int re
 	char	*path;
 	int		pid;
 
-	path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
+	path = ms_find_path(complete_cmd[0], ft_split(ms_find_var_path("PATH", st), ':'));
 	if (!path)
 	{
 		printf("Command not found\n");
@@ -280,33 +279,33 @@ void	ft_exec_builtin(char **complete_cmd, t_env *st, int read, int write, int re
 	}
 }
 
-void	ft_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
+void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
-	//if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
+	//if (ft_strcmp(complete_cmd[0], "cd") == 0)
 	//	ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
-	//else if (ft_strcmp_2(complete_cmd[0], "echo") == 0)
+	//else if (ft_strcmp(complete_cmd[0], "echo") == 0)
 	//	ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, ECHO);
 	//else
-		ft_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);
+		ms_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);
 }
 
-void	ft_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
+void	ms_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type)
 {
-	if (ft_strcmp_2(complete_cmd[0], "cd") == 0)
+	if (ft_strcmp(complete_cmd[0], "cd") == 0)
 		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, CD);
-	else if (ft_strcmp_2(complete_cmd[0], "echo") == 0)
+	else if (ft_strcmp(complete_cmd[0], "echo") == 0)
 		ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type, ECHO);
 	else
-		ft_main_exec(complete_cmd, st, read, write, read2, write2, type);
+		ms_main_exec(complete_cmd, st, read, write, read2, write2, type);
 }
 
 /*
-   void	ft_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type)
+   void	ms_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type)
    {
    char	*path;
    int		pid;
 
-   path = ft_find_path(complete_cmd[0], ft_split(ft_find_var_path("PATH", st), ':'));
+   path = ms_find_path(complete_cmd[0], ft_split(ms_find_var_path("PATH", st), ':'));
    if (!path)
    {
    printf("Command not found\n");
