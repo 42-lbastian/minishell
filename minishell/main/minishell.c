@@ -6,12 +6,27 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:59:03 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 16:43:58 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/*
+ * @name: _basic_check()
+ * @brief sert a verifier les constantes, defines etc.. (A supprimer plus tard)
+ * @return Retourne EXIT_SUCCESS ou EXIT_FAILURE.
+*/
+static int	_basic_checks(void)
+{
+	if (ms_strlen(VALID_CHAR) != NB_CHAR_VALID)
+		return (ft_putmsg_fd(ERR_NB_CHAR, STDERR_FILENO, EXIT_FAILURE));
+	return (EXIT_SUCCESS);
+}
+
+/*
+ * @todo Verifier si le FT_STRDUP a bien reussi et free main le cas echeant
+*/
 void	ms_init_struct(t_struct *main, int argc, char **argv)
 {
 	(void)argc;
@@ -20,10 +35,7 @@ void	ms_init_struct(t_struct *main, int argc, char **argv)
 	main->char_check.error = 0;
 	main->char_check.last_double_q = 0;
 	main->char_check.last_simple_q = 0;
-	if (ms_strlen(VALID_CHAR) == NB_CHAR_VALID)
-		main->char_check.char_valid = ft_strdup(VALID_CHAR);
-	else
-		exit (EXIT_FAILURE);     // PAS DE FREE!!
+	main->char_check.char_valid = ft_strdup(VALID_CHAR);  //NEED CHECK IF FT_STRDUP FAILED
 }
 
 int	ms_routine(t_struct *main_s, t_env *st)
@@ -67,6 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	t_struct	*main_s;
 	t_env		*st;
 
+	_basic_checks();
 	st = NULL;
 	global_signals_handler();
 	if (ms_create_env(envp, &st))	//MALLOC BUT NOT FREED + ms_clear_env LEAKS ANYWAY
