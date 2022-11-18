@@ -74,9 +74,7 @@ OBJ_BUILT	=	$(addprefix $(O_DIR)/, $(SRC_BUILT:.c=.o))
 $(O_DIR)/%.o:	./*/%.c
 				@echo $(Y)Compiling [$@]...$(X)
 				@$(MKD) $(O_DIR)
-				@echo $(B)
 				@$(CC) $(CFLAGS) $(RFLAGS) -o $@ -c $<
-				@echo $(X)
 				@printf $(UP) $(CUT)
 
 $(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
