@@ -1,2 +1,4 @@
-minishell> echo hi < ../minishell_test/test_files/infile bye bye
+minishell> pwd oi
+pwd: ignoring non-option arguments
+/mnt/nfs/homes/lbastian/Documents/minishell/minishell/minishell_test
 minishell> 

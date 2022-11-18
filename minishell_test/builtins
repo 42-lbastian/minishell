@@ -23,6 +23,12 @@ echo a"'$USER"
 echo a'$USER'
 echo a'"$USER'
 
+echo $USER
+echo $USER$USER
+echo $USER$PAGER$USER
+echo $USER$PAGE$USER
+
+
 echo "$USER"a
 echo "'$USER"a
 echo '$USER'a
