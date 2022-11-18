@@ -256,6 +256,6 @@ char	*ms_find_var_path(char *str, t_env *st);
 /*
 **		parse/tools.c
 */
-char	**ms_strcpy_cmd(char **arr);
+char	**ms_strcpy_cmd(char **arr); 
 
 #endif
