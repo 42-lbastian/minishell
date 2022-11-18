@@ -6,7 +6,7 @@
 #    By: stelie <stelie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 20:20:34 by stelie            #+#    #+#              #
-#    Updated: 2022/11/18 13:35:34 by stelie           ###   ########.fr        #
+#    Updated: 2022/11/18 16:12:38 by stelie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,20 @@
 NAME 		= 	libft.a
 
 #Colors
-Y = "\033[33m"
-R = "\033[31m"
-G = "\033[32m"
-B = "\033[34m"
-X = "\033[0m"
-UP = "\033[A"
-CUT = "\033[K"
+Y			=	"\033[33m"
+R			=	"\033[31m"
+G			=	"\033[32m"
+B			=	"\033[34m"
+X			=	"\033[0m"
+UP			=	"\033[A"
+CUT			=	"\033[K"
 
 #Commands
 CC			= 	gcc
-DMK			=	mkdir -p
+DMK			=	$(MKD)
 RM			=	rm -rf
 AR			=	ar rc
+MKD			=	mkdir -p
 
 #Compilation flags
 INCLUDES	=	-I$(H_DIR)
@@ -77,6 +78,7 @@ SRC_PTF		=	08_00.c\
 SRC_GNL		=	09_00.c\
 
 #Objects
+
 OBJ_ISS		=	$(addprefix $(O_DIR)/, $(SRC_ISS:.c=.o))
 OBJ_LEN		=	$(addprefix $(O_DIR)/, $(SRC_LEN:.c=.o))
 OBJ_NBR		=	$(addprefix $(O_DIR)/, $(SRC_NBR:.c=.o))
@@ -90,7 +92,7 @@ OBJ_GNL		=	$(addprefix $(O_DIR)/, $(SRC_GNL:.c=.o))
 
 $(O_DIR)/%.o:	./$(S_DIR)/*/%.c
 				@echo $(Y)Compiling [$@]...$(X)
-				@mkdir -p $(O_DIR)
+				@$(MKD) $(O_DIR)
 				@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 				@printf $(UP) $(CUT)
 
@@ -98,7 +100,7 @@ $(NAME):	$(OBJ_ISS) $(OBJ_LEN) $(OBJ_NBR) $(OBJ_BAS) $(OBJ_PUT) $(OBJ_STR) $(OBJ
 			@echo $(Y)Compiling [$(NAME)]...$(X)
 			@$(AR) $(NAME) $(OBJ_ISS) $(OBJ_LEN) $(OBJ_NBR) $(OBJ_BAS) $(OBJ_PUT) $(OBJ_STR) $(OBJ_MEM) $(OBJ_PTF) $(OBJ_GNL)
 			@printf $(UP)$(CUT)
-			@echo $(G)Finished [$(NAME)]$(X)
+			@echo $(G)Compiled: [$(NAME)]$(X)
 			
 
 all:	$(NAME)
