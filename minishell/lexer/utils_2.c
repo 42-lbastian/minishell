@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:40 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:56:48 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*ft_strcpy_2(char *str)
+char	*ms_strcpy_2(char *str)
 {
 	char	*ret;
 	int		i;

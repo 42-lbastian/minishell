@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:46 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:58:09 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_have_space(char *str)
+int	ms_have_space(char *str)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	ft_have_space(char *str)
 	return (0);
 }
 
-char	*ft_strjoin_c(char *str, char c)
+char	*ms_strjoin_c(char *str, char c)
 {
 	int		i;
 	int		size;
@@ -52,7 +52,7 @@ char	*ft_strjoin_c(char *str, char c)
 	return (dest);
 }
 
-char	*ft_malloc_strjoin_2(char *str1, char *str2)
+char	*ms_malloc_strjoin_2(char *str1, char *str2)
 {
 	char	*dest;
 
@@ -65,7 +65,7 @@ char	*ft_malloc_strjoin_2(char *str1, char *str2)
 	return (dest);
 }
 
-char	*ft_strjoin_2(char *str1, char *str2)
+char	*ms_strjoin_2(char *str1, char *str2)
 {
 	char	*dest;
 	int		i;
@@ -73,7 +73,7 @@ char	*ft_strjoin_2(char *str1, char *str2)
 
 	i = 0;
 	j = 0;
-	dest = ft_malloc_strjoin_2(str1, str2);
+	dest = ms_malloc_strjoin_2(str1, str2);
 	if (!dest)
 		return (NULL);
 	while (str1 && str1[i])
@@ -92,7 +92,7 @@ char	*ft_strjoin_2(char *str1, char *str2)
 	return (dest);
 }
 
-int	ft_strjoin_3(char *dest, char *str, int start)
+int	ms_strjoin_3(char *dest, char *str, int start)
 {
 	int	i;
 	int	j;

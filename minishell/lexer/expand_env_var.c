@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:58:36 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_size_env_var(t_env *st, char *str, int index, int fact)
 	int		size;
 
 	size = 0;
-	start = ft_start_read_var(str, index);
-	lenght = ft_lenght_read_var(str, index);
+	start = ms_start_read_var(str, index);
+	lenght = ms_lenght_read_var(str, index);
 	if (lenght == 0 && fact == 1)
 		return (index + 1);
 	if (fact == 1)
@@ -47,11 +47,11 @@ int	ft_split_expand(t_list **lst, char **split)
 	i = 1;
 	if (!split)
 		return (1);
-	(*lst)->content = ft_strjoin_2(((*lst)->content), split[0]);
+	(*lst)->content = ms_strjoin_2(((*lst)->content), split[0]);
 	free(split[0]);
 	while (split[i])
 	{
-		if (ft_lstadd(lst, ft_lst_new_join(split[i], CMD)))
+		if (ms_lstadd(lst, ms_lst_new_join(split[i], CMD)))
 			return (1);
 		(*lst) = (*lst)->next;
 		free(split[i]);
@@ -77,7 +77,7 @@ int	ft_replace(t_list **lst, t_env *st)
 
 	i = 0;
 	quotes = 0;
-	str = ft_strcpy_2((*lst)->content);
+	str = ms_strcpy_2((*lst)->content);
 	if (!str)
 		return (1);
 	free((*lst)->content);
@@ -102,21 +102,21 @@ int	ft_replace(t_list **lst, t_env *st)
 				while (str[i] && str[i] != '\'' && str[i] != '"'
 					&& str[i] != '$' && str[i] != ' ')
 					i++;
-				temp = ft_find_var((ft_substr(str, j, i - j)), st);
+				temp = ms_find_var((ft_substr(str, j, i - j)), st);
 				if (!temp)
 					return (ft_error_return(str));
 				if (quotes == 2 || ms_strlen(temp) == 0)
-					(*lst)->content = ft_strjoin_2((*lst)->content, temp);
+					(*lst)->content = ms_strjoin_2((*lst)->content, temp);
 				else
 					if (ft_split_expand(lst, ft_split(temp, ' ')))
 						return (ft_error_return(str));
 			}
 			else
-				(*lst)->content = ft_strjoin_c((*lst)->content, '$');
+				(*lst)->content = ms_strjoin_c((*lst)->content, '$');
 		}
 		else
 		{
-			(*lst)->content = ft_strjoin_c((*lst)->content, str[i]);
+			(*lst)->content = ms_strjoin_c((*lst)->content, str[i]);
 			i++;
 		}
 		if (!(*lst)->content)
@@ -126,7 +126,7 @@ int	ft_replace(t_list **lst, t_env *st)
 	return (0);
 }
 
-int	ft_main_replace_env(t_list **lst, t_env *st)
+int	ms_main_replace_env(t_list **lst, t_env *st)
 {
 	t_list	*temp;
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_env_lst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:23 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:08:24 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:53:53 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_env	*ft_lst_new_env(char *var, char *value)
+t_env	*ms_lst_new_env(char *var, char *value)
 {
 	t_env	*env;
 
@@ -35,19 +35,19 @@ t_env	*ft_lst_new_env(char *var, char *value)
 	return (env);
 }
 
-t_env	*ft_lst_last_env(t_env *st)
+t_env	*ms_lst_last_env(t_env *st)
 {
 	while (st && st->next)
 		st = st->next;
 	return (st);
 }
 
-int	ft_lst_add_back_env(t_env **st, t_env *new)
+int	ms_lst_add_back_env(t_env **st, t_env *new)
 {
 	if (!new)
 		return (1);
 	if (st && (*st))
-		ft_lst_last_env((*st))->next = new;
+		ms_lst_last_env((*st))->next = new;
 	else
 		(*st) = new;
 	return (0);

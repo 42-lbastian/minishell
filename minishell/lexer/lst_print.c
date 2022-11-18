@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:30 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:09:31 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:55:47 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_print_lst(t_list *lst)
+void	ms_print_lst(t_list *lst)
 {
 	while (lst)
 	{
@@ -40,7 +40,7 @@ void	ft_print_lst(t_list *lst)
 	}
 }
 
-void	ft_print_env(t_env *st)
+void	ms_print_env(t_env *st)
 {
 	while (st)
 	{

@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-char	*ft_find_var_path(char *str, t_env *st)
+char	*ms_find_var_path(char *str, t_env *st)
 {
 	if (!str)
 		return (NULL);
@@ -13,7 +13,7 @@ char	*ft_find_var_path(char *str, t_env *st)
 	return ("");
 }
 
-t_lst_parser	*ft_lst_parse_new(char **cmd, char *oper, int type)
+t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type)
 {
 	t_lst_parser	*new;
 
@@ -23,35 +23,35 @@ t_lst_parser	*ft_lst_parse_new(char **cmd, char *oper, int type)
 	new->next = NULL;
 	new->prev = NULL;
 	if (type == CMD)
-		new->value.cmd = ft_strcpy_cmd(cmd);
+		new->value.cmd = ms_strcpy_cmd(cmd);
 	else
 		new->value.oper = oper;
 	new->type = type;
 	return (new);
 }
 
-t_lst_parser	*ft_lst_parse_last(t_lst_parser *lst)
+t_lst_parser	*ms_lst_parse_last(t_lst_parser *lst)
 {
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
 }
 
-int	ft_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new)
+int	ms_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new)
 {
 	if (!new)
 		return (1);
 	if (lst && (*lst))
 	{
-		new->prev = ft_lst_parse_last((*lst));
-		ft_lst_parse_last((*lst))->next = new;
+		new->prev = ms_lst_parse_last((*lst));
+		ms_lst_parse_last((*lst))->next = new;
 	}
 	else
 		(*lst) = new;
 	return (0);
 }
 
-int	ft_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new)
+int	ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new)
 {
 	if (!new)
 		return (1);
@@ -65,7 +65,7 @@ int	ft_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new)
 }
 
 
-void	ft_print_lst_parse(t_lst_parser *lst)
+void	ms_print_lst_parse(t_lst_parser *lst)
 {
 	int i;
 
@@ -87,11 +87,11 @@ void	ft_print_lst_parse(t_lst_parser *lst)
 	}
 }
 
-void	ft_print_lst_parse_reverse(t_lst_parser *lst)
+void	ms_print_lst_parse_reverse(t_lst_parser *lst)
 {
 	int i;
 
-	lst = ft_lst_parse_last(lst);
+	lst = ms_lst_parse_last(lst);
 	while (lst)
 	{
 		i = 0;

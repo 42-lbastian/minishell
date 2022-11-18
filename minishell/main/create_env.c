@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:16 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 14:33:47 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:53:53 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ms_str_trim_env(char *str, t_env **st)
 	i = 0;
 	while (str[i] != '=')
 		i++;
-	if (ft_lst_add_back_env(st, ft_lst_new_env(ft_substr(str, 0, i),
+	if (ms_lst_add_back_env(st, ms_lst_new_env(ft_substr(str, 0, i),
 				ft_substr(str, i + 1, ft_strlen(str) - i))))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

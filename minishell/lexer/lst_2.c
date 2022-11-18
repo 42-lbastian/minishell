@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:10 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:09:13 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:56:48 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_list	*ft_lst_new_join(char *content, int type)
+t_list	*ms_lst_new_join(char *content, int type)
 {
 	t_list	*new;
 
@@ -20,12 +20,12 @@ t_list	*ft_lst_new_join(char *content, int type)
 	if (!new)
 		return (NULL);
 	new->next = NULL;
-	new->content = ft_strcpy_2(content);
+	new->content = ms_strcpy_2(content);
 	new->type = type;
 	return (new);
 }
 
-t_list	*ft_lst_new(char *content, int type)
+t_list	*ms_lst_new(char *content, int type)
 {
 	t_list	*new;
 
@@ -38,19 +38,19 @@ t_list	*ft_lst_new(char *content, int type)
 	return (new);
 }
 
-t_list	*ft_lst_last(t_list *lst)
+t_list	*ms_lst_last(t_list *lst)
 {
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
 }
 
-int	ft_lstadd_back(t_list **lst, t_list *new)
+int	ms_lstadd_back(t_list **lst, t_list *new)
 {
 	if (!new)
 		return (1);
 	if (lst && (*lst))
-		ft_lst_last((*lst))->next = new;
+		ms_lst_last((*lst))->next = new;
 	else
 		(*lst) = new;
 	return (0);

@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:08 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:58:20 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_count_remove_quotes(char *str)
+int	ms_count_remove_quotes(char *str)
 {
 	int	i;
 	int	size;
@@ -37,7 +37,7 @@ int	ft_count_remove_quotes(char *str)
 	return (size);
 }
 
-int	ft_count_char(char *str)
+int	ms_count_char(char *str)
 {
 	int	i;
 	int	size;
@@ -66,7 +66,7 @@ int	ft_count_char(char *str)
 	return (size);
 }
 
-int	ft_lenght_read_var(char *str, int index)
+int	ms_lenght_read_var(char *str, int index)
 {
 	int	i;
 	int	size;
@@ -95,7 +95,7 @@ int	ft_lenght_read_var(char *str, int index)
 	return (size);
 }
 
-int	ft_start_read_var(char *str, int index)
+int	ms_start_read_var(char *str, int index)
 {
 	int	i;
 
@@ -105,7 +105,7 @@ int	ft_start_read_var(char *str, int index)
 	return (i);
 }
 
-int	ft_count_nb_quotes(char *str)
+int	ms_count_nb_quotes(char *str)
 {
 	int	i;
 	int	nb;

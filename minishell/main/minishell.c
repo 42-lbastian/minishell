@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 16:43:57 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:59:03 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ int	ms_routine(t_struct *main_s, t_env *st)
 			break ;	//NEED TO ADD THE EXIT MESSAGE SEQUENCE
 		if (ft_strlen(str_read) != 0)	//check if cant use libft strlen
 			add_history(str_read);
-		if (ft_main_lexer(str_read, main_s, st))
+		if (ms_main_lexer(str_read, main_s, st))
 		{
 			//EXPLICIT ERROR MSG && NO EXIT OPER ERROR
 			ft_putstr_fd(ERR_LEXER, STDERR_FILENO);
-			//ft_free_all(&main_s->lst);
+			//ms_free_all(&main_s->lst);
 			break ;
 		}
-		ft_parse(main_s->lst, st);
-		//ft_print_lst(main_s->lst);
-		ft_free_lst(&main_s->lst);
+		ms_parse(main_s->lst, st);
+		//ms_print_lst(main_s->lst);
+		ms_free_lst(&main_s->lst);
 	}
-	ft_free_all(&main_s->lst);
+	ms_free_all(&main_s->lst);
 	free(str_read);
 	return (g_glob.ret);
 }

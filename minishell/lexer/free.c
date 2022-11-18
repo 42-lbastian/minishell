@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:49 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:08:50 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:55:58 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_free_all(t_list **lst)
+void	ms_free_all(t_list **lst)
 {
-	ft_free_lst(lst);
+	ms_free_lst(lst);
 }
 
-void	ft_free_lst(t_list **lst)
+void	ms_free_lst(t_list **lst)
 {
 	t_list	*temp;
 

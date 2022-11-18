@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:21 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 16:38:14 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:58:36 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_lstadd(t_list **lst, t_list *new)
+int	ms_lstadd(t_list **lst, t_list *new)
 {
 	if (!new)
 		return (1);
@@ -21,7 +21,7 @@ int	ft_lstadd(t_list **lst, t_list *new)
 	return (0);
 }
 
-int	ft_lst_size(t_list *lst)
+int	ms_lst_size(t_list *lst)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	ft_lst_size(t_list *lst)
 	return (i);
 }
 
-char	*ft_get_lst_str_index(t_list *lst, int index)
+char	*ms_get_lst_str_index(t_list *lst, int index)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ char	*ft_get_lst_str_index(t_list *lst, int index)
 	return (lst->content);
 }
 
-char	*ft_find_var(char *str, t_env *st)
+char	*ms_find_var(char *str, t_env *st)
 {
 	if (!str)
 		return (NULL);

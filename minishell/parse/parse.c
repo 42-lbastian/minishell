@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int		ft_print_cmd(char **str)
+int		ms_print_cmd(char **str)
 {
 	int i;
 
@@ -15,19 +15,19 @@ int		ft_print_cmd(char **str)
 }
 
 /*
-   int		ft_read_ast(t_env *st, t_node *node)
+   int		ms_read_ast(t_env *st, t_node *node)
    {
    int	pip[2];
    int fd;
 
    pipe(pip);
    if (node->left)
-   fd = ft_read_ast(st, node->left);
+   fd = ms_read_ast(st, node->left);
    if (node->right)
-   fd = ft_read_ast(st, node->right);
+   fd = ms_read_ast(st, node->right);
    if (!node->right)
    {
-   ft_is_builtin(node->value.cmd, st);
+   ms_is_builtin(node->value.cmd, st);
    return (pip[0]);
    }
    else
@@ -36,7 +36,7 @@ int		ft_print_cmd(char **str)
    }
  */
 
-int	ft_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
+int	ms_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
 {
 	int pip[2];
 	int fd;
@@ -53,20 +53,20 @@ int	ft_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
 				printf("Pipe Fail\n");
 				return (1);
 			}
-			if (ft_read_lst(lst->next, st, pip[0], pip[1]))
+			if (ms_read_lst(lst->next, st, pip[0], pip[1]))
 				return (1);
 			if (lst->next->next == NULL || write == -1)
-				ft_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
+				ms_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
 			else if (lst->prev)
-				ft_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
+				ms_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			/*
 			if (strcmp(lst->next->value.cmd[0], "grep") == 0)
-				ft_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
+				ms_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "ls") == 0)
-				ft_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
+				ms_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
 			*/
 			//else
-			//	ft_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
+			//	ms_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 			//printf("CMD %s-%s\n", lst->value.oper, lst->next->value.cmd[0]);
 			//printf("OPER %s-%s-%s\n", lst->next->value.cmd[0], lst->value.oper, lst->prev->value.cmd[0]);
 		
@@ -80,19 +80,19 @@ int	ft_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
 		lst = lst->next;
 		fd = open(lst->value.oper, O_RDONLY);
 		if (lst->next)
-			ft_read_lst(lst->next, st, fd, -1);
+			ms_read_lst(lst->next, st, fd, -1);
 		else
 			read = fd;
 	}
 	if (lst && lst->prev == NULL && lst->next == NULL)
-		ft_is_builtin(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+		ms_is_builtin(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	else if (lst && read == 3)
-		ft_is_builtin(lst->prev->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+		ms_is_builtin(lst->prev->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	return (0);
 }
 
 
-int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
+int	ms_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 {
 	int	pip[2];
 	int	fd;
@@ -100,27 +100,27 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 	if (lst && lst->prev == NULL && lst->next == NULL && lst->type == CMD)
 	{
 		pipe(pip);
-		ft_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+		ms_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	}
 	else if (lst && lst->type == CMD && fd2 == 0)
 	{
-		ft_is_builtin_dumb(lst->value.cmd, st, 0, 1, read, write, CMD_BEGIN);
+		ms_is_builtin_dumb(lst->value.cmd, st, 0, 1, read, write, CMD_BEGIN);
 		lst = lst->next;
 	}
 	else if (lst && lst->prev && lst->prev->type == ARG_FILE_IN && lst->type == CMD)
 	{
 		if (!lst->next)
-			ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN_END);
+			ms_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN_END);
 		else
-			ft_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN);
+			ms_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN);
 		lst = lst->next;
 	}
 	else if (lst && lst->prev && lst->type == CMD && (lst->prev->type == ARG_FILE_OUT_OVER || lst->prev->type == ARG_FILE_OUT_APP))
 	{
 		if (!lst->next)
-			ft_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT_END);
+			ms_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT_END);
 		else
-			ft_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT);
+			ms_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT);
 		lst = lst->next;
 	}
 	else if (lst && lst->next && lst->type == CMD)
@@ -132,13 +132,13 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 			pipe(pip);
 			if (!lst->next->next && lst->next->type == CMD)
 			{
-				ft_is_builtin_dumb(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+				ms_is_builtin_dumb(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 				return (0);
 			}
 			else if (lst->next->type == CMD)
-				ft_is_builtin_dumb(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_MIDDLE);
+				ms_is_builtin_dumb(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_MIDDLE);
 			lst = lst->next;
-			ft_read_dumb(lst->next, st, pip[0], pip[1], 1);
+			ms_read_dumb(lst->next, st, pip[0], pip[1], 1);
 		}
 		else
 		{
@@ -163,7 +163,7 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 				ft_putstr_fd("bash: No such file or directory\n", STDERR_FILENO);
 				return (1);
 			}
-			ft_read_dumb(lst->next, st, pip[0], pip[1], fd);
+			ms_read_dumb(lst->next, st, pip[0], pip[1], fd);
 
 		//}
 		//else
@@ -186,16 +186,16 @@ int	ft_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 			ft_putstr_fd("bash: No such file or directory\n", STDERR_FILENO);
 			return (1);
 		}
-		ft_read_dumb(lst->next, st, read, write, fd);
+		ms_read_dumb(lst->next, st, read, write, fd);
 	}
 //	if (lst && !lst->next && lst->type ==  CMD)
-//		ft_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
+//		ms_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	return (0);
 }
 
 
 /*
-int	ft_read_lst(t_lst_cmd *lst, t_env *st, int pip2[2])
+int	ms_read_lst(t_lst_cmd *lst, t_env *st, int pip2[2])
 {
 	int pip[2];
 
@@ -212,18 +212,18 @@ int	ft_read_lst(t_lst_cmd *lst, t_env *st, int pip2[2])
 				printf("Pipe Fail\n");
 				return (1);
 			}
-			//ft_is_builtin(lst->next->value.cmd, st, pip, CMD_BEGIN);
-			//ft_is_builtin(lst->prev->value.cmd, st, pip, CMD_END);
+			//ms_is_builtin(lst->next->value.cmd, st, pip, CMD_BEGIN);
+			//ms_is_builtin(lst->prev->value.cmd, st, pip, CMD_END);
 			printf("PREPIPE %s\t%d-%d\n", lst->next->value.cmd[0], pip[0], pip[1]);
 			
-			if (ft_read_lst(lst->next, st, pip))
+			if (ms_read_lst(lst->next, st, pip))
 				return (1);
 			if (strcmp(lst->next->value.cmd[0], "ls") == 0)
-				ft_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
+				ms_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "cat") == 0)
-				ft_is_builtin(lst->next->value.cmd, st, pip2, pip, CMD_BEGIN);
+				ms_is_builtin(lst->next->value.cmd, st, pip2, pip, CMD_BEGIN);
 			//else
-			//	ft_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
+			//	ms_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 		
 		}
 		else
@@ -232,12 +232,12 @@ int	ft_read_lst(t_lst_cmd *lst, t_env *st, int pip2[2])
 	if (lst && !pip2)
 	{
 		printf("END %s\n", lst->prev->value.cmd[0]);
-		ft_is_builtin(lst->prev->value.cmd, st, pip, NULL, CMD_END);
+		ms_is_builtin(lst->prev->value.cmd, st, pip, NULL, CMD_END);
 	}
 	return (0);
 }*/
 
-int	ft_count_nb_cmd(t_list *lst)
+int	ms_count_nb_cmd(t_list *lst)
 {
 	int i;
 
@@ -252,13 +252,13 @@ int	ft_count_nb_cmd(t_list *lst)
 	return (i);
 }
 
-int	ft_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd, int i)
+int	ms_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd, int i)
 {
-	ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
+	ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
 	(*lst) = (*lst)->next;
 	if ((*lst) && (*lst)->type < PIPE)
 	{
-		ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
+		ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, (*lst)->content, (*lst)->type));
 		(*lst) = (*lst)->next;
 		if (cmd)
 		{
@@ -268,7 +268,7 @@ int	ft_file_in(t_list **lst, t_lst_parser **lst_parser, char **cmd, int i)
 				(*lst) = (*lst)->next;
 				i++;
 			}
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(cmd, NULL, CMD));
 			return (1);
 		}
 		return (0);
@@ -294,17 +294,17 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		if (lst && lst->type == CMD)
 		{
 			i = 0;
-			cmd = malloc(sizeof(char *) * (ft_count_nb_cmd(lst) + 1));
+			cmd = malloc(sizeof(char *) * (ms_count_nb_cmd(lst) + 1));
 			if (!cmd)
 				return (1);
-			cmd[ft_count_nb_cmd(lst)] = NULL;
+			cmd[ms_count_nb_cmd(lst)] = NULL;
 			while(lst && lst->type == CMD)
 			{
 				cmd[i] = lst->content;
 				i++;
 				lst = lst->next;
 			}
-			//ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			//ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(cmd, NULL, CMD));
 			//free(cmd);
 		}
 		//if (lst && lst->type == CMD && lst->next && lst->next->type == FILE_IN)
@@ -312,13 +312,13 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		if (lst && (lst->type == FILE_IN || lst->type == FILE_OUT_OVER || lst->type == FILE_OUT_APP))
 		{
 			/*
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+			ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
 			if (lst && lst->type == ARG_FILE_IN)
 			{
-				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+				ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 				lst = lst->next;
-				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+				ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(cmd, NULL, CMD));
 			}
 			else
 			{
@@ -328,7 +328,7 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 			free(cmd);
 			cmd = NULL;
 			*/
-			ret = ft_file_in(&lst, lst_parser, cmd, i);
+			ret = ms_file_in(&lst, lst_parser, cmd, i);
 			if (ret == 2)
 			{
 				free(cmd);
@@ -343,17 +343,17 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		}
 		else if (lst && lst->type == PIPE && !cmd)
 		{
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+			ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
 		}
 		/*else if (lst && lst->type == FILE_IN && !cmd)
 		{
 
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+			ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
 			if (lst && lst->type == ARG_FILE_IN)
 			{
-				ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+				ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 				lst = lst->next;
 			}
 			else
@@ -368,7 +368,7 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		//}
 		if (cmd)
 		{
-			ft_lst_parse_add_back(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(cmd, NULL, CMD));
 			free(cmd);
 			cmd = NULL;
 		}
@@ -387,7 +387,7 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 		if (lst && lst->type == CMD)
 		{
 			i = 0;
-			cmd = malloc(sizeof(char *) * (ft_count_nb_cmd(lst) + 1));
+			cmd = malloc(sizeof(char *) * (ms_count_nb_cmd(lst) + 1));
 			while(lst && lst->type == CMD)
 			{
 				cmd[i] = lst->content;
@@ -395,20 +395,20 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 				lst = lst->next;
 			}
 			cmd[i] = NULL;
-			ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(cmd, NULL, CMD));
+			ms_lst_parse_add_front(lst_parser, ms_lst_parse_new(cmd, NULL, CMD));
 			free(cmd);
 		}
 		if (lst && lst->type == PIPE)
 		{
-			ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+			ms_lst_parse_add_front(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 			lst = lst->next;
 		}
 		if (lst && lst->type == FILE_IN)
 		{
 			if (lst->next && lst->next->type == ARG_FILE_IN)
 			{
-				ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(NULL, lst->next->content, lst->next->type));
-				ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+				ms_lst_parse_add_front(lst_parser, ms_lst_parse_new(NULL, lst->next->content, lst->next->type));
+				ms_lst_parse_add_front(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 				lst = lst->next->next;
 			}
 			else
@@ -416,7 +416,7 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 				ft_putstr_fd("bash: syntax error near unexpected token WUT?\n", STDERR_FILENO);
 				return (1);			
 			}
-	//		ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+	//		ms_lst_parse_add_front(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 	//		lst = lst->next;
 	//		if (!lst)
 	//		{
@@ -428,14 +428,14 @@ int	ft_create_lst_parser(t_list *lst, t_lst_parser **lst_parser)
 	//			ft_putstr_fd("bash: syntax error near unexpected token\n", STDERR_FILENO);
 	//			return (1);
 	//		}
-	//		ft_lst_parse_add_front(lst_parser, ft_lst_parse_new(NULL, lst->content, lst->type));
+	//		ms_lst_parse_add_front(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
 	//		lst = lst->next;
 		}
 	}
 	return (0);
 }
 
-int		ft_parse(t_list *lst, t_env *st)
+int		ms_parse(t_list *lst, t_env *st)
 {
 	int pip[2];
 	t_lst_parser *lst_parser_dumb;
@@ -456,7 +456,7 @@ int		ft_parse(t_list *lst, t_env *st)
 	  node->right->left = NULL;
 	  node->right->right = NULL;
 	  node->right->value.cmd = ft_split("echo lbastian" ,' ');
-	  ft_read_ast(st, node);
+	  ms_read_ast(st, node);
 	 */
 
 
@@ -467,22 +467,22 @@ int		ft_parse(t_list *lst, t_env *st)
 		return (1);
 	
 	/*
-	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
-	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(NULL, "|", PIPE));
-	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("grep l", ' '), NULL, CMD));
-	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(NULL, "|", PIPE));
-	ft_lst_parse_add_back(&lst_parser, ft_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
+	ms_lst_parse_add_back(&lst_parser, ms_lst_parse_new(ft_split("wc -l", ' '), NULL, CMD));
+	ms_lst_parse_add_back(&lst_parser, ms_lst_parse_new(NULL, "|", PIPE));
+	ms_lst_parse_add_back(&lst_parser, ms_lst_parse_new(ft_split("grep l", ' '), NULL, CMD));
+	ms_lst_parse_add_back(&lst_parser, ms_lst_parse_new(NULL, "|", PIPE));
+	ms_lst_parse_add_back(&lst_parser, ms_lst_parse_new(ft_split("ls", ' '), NULL, CMD));
 	*/
-	//	ft_print_lst_parse(lst_parser);
+	//	ms_print_lst_parse(lst_parser);
 	//	printf("\n\n");
-	//	ft_print_lst_parse_reverse(lst_parser);
+	//	ms_print_lst_parse_reverse(lst_parser);
 
-	//ft_print_lst_parse(lst_parser_dumb);
+	//ms_print_lst_parse(lst_parser_dumb);
 	//printf("--------------\n");
-	//ft_print_lst_parse(lst_parser2);
+	//ms_print_lst_parse(lst_parser2);
 	pipe(pip);
-	ft_read_dumb(lst_parser_dumb, st, pip[0], pip[1], 0);
-	//ft_read_lst(lst_parser, st, pip[0], pip[1]);
-	//ft_read_lst(lst_parser, st, NULL);
+	ms_read_dumb(lst_parser_dumb, st, pip[0], pip[1], 0);
+	//ms_read_lst(lst_parser, st, pip[0], pip[1]);
+	//ms_read_lst(lst_parser, st, NULL);
 	return (0);
 }

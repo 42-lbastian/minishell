@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_type_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:11 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:10:12 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:58:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_set_type_cmd(t_list **lst)
+int	ms_set_type_cmd(t_list **lst)
 {
 	t_list	*temp;
 
