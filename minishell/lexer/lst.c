@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:21 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:09:24 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:38:14 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_find_var(char *str, t_env *st)
 		return (NULL);
 	while (st)
 	{
-		if (ft_strcmp_2(st->var, str) == 0)
+		if (ft_strcmp(st->var, str) == 0)
 		{
 			free(str);
 			return (st->value);

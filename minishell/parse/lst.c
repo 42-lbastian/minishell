@@ -6,7 +6,7 @@ char	*ft_find_var_path(char *str, t_env *st)
 		return (NULL);
 	while (st)
 	{
-		if (ft_strcmp_2(st->var, str) == 0)
+		if (ft_strcmp(st->var, str) == 0)
 			return (st->value);
 		st = st->next;
 	}

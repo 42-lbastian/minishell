@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:44 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:09:46 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:38:14 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_set_type_oper(t_struct *main)
 {
-	if (ft_strcmp_2(ft_lst_last(main->lst)->content, "|") == 0)
+	if (ft_strcmp(ft_lst_last(main->lst)->content, "|") == 0)
 		ft_lst_last(main->lst)->type = PIPE;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, "<") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, "<") == 0)
 		ft_lst_last(main->lst)->type = FILE_IN;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, ">") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, ">") == 0)
 		ft_lst_last(main->lst)->type = FILE_OUT_OVER;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, ">>") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, ">>") == 0)
 		ft_lst_last(main->lst)->type = FILE_OUT_APP;
-	else if (ft_strcmp_2(ft_lst_last(main->lst)->content, "<<") == 0)
+	else if (ft_strcmp(ft_lst_last(main->lst)->content, "<<") == 0)
 		ft_lst_last(main->lst)->type = HERE_DOC;
 	else
 		main->char_check.error = 1;
@@ -35,7 +35,7 @@ void	ft_read_special(char *str, t_struct *main)
 
 	y = 0;
 	main->is_arg = 0;
-	while (str[main->i + y] && ft_special_char(str[main->i + y]))
+	while (str[main->i + y] && ft_incharset(str[main->i + y], SPECIAL_CHAR))
 		y++;
 	error = ft_lstadd_back(&(main->lst), ft_lst_new(ft_substr(str, main->i, y),
 				DEFAULT));
@@ -68,7 +68,7 @@ void	ft_read_cmd(char *str, t_struct *main)
 	{
 		if (str[main->i + y] == '"' || str[main->i + y] == '\'')
 			y += ft_count_read_quotes(str, main->i + y);
-		if (!(str[main->i + y]) || ft_belong_cmd_end(str[main->i + y]) == 0)
+		if (!(str[main->i + y]) || ft_incharset(str[main->i + y], CMD_CHAR))
 			break ;
 		y++;
 	}

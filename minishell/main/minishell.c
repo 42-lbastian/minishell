@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:09:39 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:43:57 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_main_action(t_struct *main_s, char *str_read, t_env *st)
+int	ms_routine(t_struct *main_s, t_env *st)
 {
+	char	*str_read;
+
+	str_read = NULL;
 	g_glob.ret = 0;
-	while (1)
+	while (true)
 	{
 		g_glob.pid = 0;
 		g_glob.sigint = 0;
 		g_glob.sigquit = 0;
-		signal(SIGINT, get_signal);
-		signal(SIGQUIT, get_signal);
-		//str_read = readline(RED NAME NORMAL);
 		str_read = readline(NAME);
 		if (!str_read)
-			return (0);
-		if (ft_strcmp_2(str_read, "exit") == 0)
-			break ;
-		if (ft_strlen(str_read) != 0)
+			return (EXIT_FAILURE);
+		if (ft_strcmp(str_read, "exit") == 0)
+			break ;	//NEED TO ADD THE EXIT MESSAGE SEQUENCE
+		if (ft_strlen(str_read) != 0)	//check if cant use libft strlen
 			add_history(str_read);
 		if (ft_main_lexer(str_read, main_s, st))
 		{
 			//EXPLICIT ERROR MSG && NO EXIT OPER ERROR
-			ft_putstr_fd("Error Lexer\n", STDERR_FILENO);
+			ft_putstr_fd(ERR_LEXER, STDERR_FILENO);
 			//ft_free_all(&main_s->lst);
 			break ;
 		}
@@ -50,26 +50,19 @@ t_sig	g_glob;
 
 int	main(int argc, char **argv, char **envp)
 {
-	char		*str_read;
 	t_struct	*main_s;
 	t_env		*st;
 
 	st = NULL;
-	if (ft_create_env(envp, &st))
-	{
-		ft_putstr_fd("Error Malloc env\n", STDERR_FILENO);
-		return (1);
-	}
+	global_signals_handler();
+	if (ms_create_env(envp, &st))	//MALLOC BUT NOT FREED + ms_clear_env LEAKS ANYWAY
+		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	main_s = malloc(sizeof(t_struct));
 	if (!main_s)
-	{
-		ft_putstr_fd("Error Malloc Main struct\n", STDERR_FILENO);
-		return (1);
-	}
-	str_read = NULL;
-	ft_init_struct(main_s, argc, argv);
-	ft_main_action(main_s, str_read, st);
+		return (ft_putmsg_fd(ERR_MAIN_MALLOC, STDERR_FILENO, EXIT_FAILURE));
+	ms_init_struct(main_s, argc, argv);
+	ms_routine(main_s, st);
 	free(main_s);
 	clear_history();
-	return (0);
+	return (EXIT_SUCCESS);
 }

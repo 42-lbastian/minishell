@@ -1,7 +1,37 @@
 #include "../include/minishell.h"
 
+/*
+ * @brief handle the CTRL+C signal for the main process
+ * @param sig: the signal (here SIGINT)
+ * @todo set the error code (130)
+ */
+void	global_signal(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
-void	parent_signal(int sig)
+/*
+ *@brief signal handler for main process
+*/
+void	global_signals_handler(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, global_signal);
+}
+
+/*
+ * @brief: old signal handler
+ * @author: hspriet
+ * 
+ *
+ void	parent_signal(int sig)
 {
 	if (sig == SIGQUIT)
 	{
@@ -40,3 +70,4 @@ void	get_signal(int sig)
 	else
 		parent_signal(sig);
 }
+*/

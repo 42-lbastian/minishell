@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   04_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 17:15:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/04/19 20:29:04 by krozis           ###   ########.fr       */
+/*   Updated: 2022/11/17 11:29:03 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,17 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n / 10, fd);
 		ft_putnbr_fd(n % 10, fd);
 	}
+}
+
+/*
+ * @brief Put a message on the chosen fd and return the value needed
+ * @param msg: the message to put
+ * @param fd: the file descriptor of the output
+ * @param ret: the return value needed
+ * @author stelie
+*/
+int	ft_putmsg_fd(char *msg, int fd, int ret)
+{
+	ft_putstr_fd(msg, fd);
+	return (ret);
 }

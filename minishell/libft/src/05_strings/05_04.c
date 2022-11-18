@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_04.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:02:15 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/15 15:30:44 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:32:19 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,31 @@ char	*ft_str_cut_after(char *src, char c)
 		dest[j++] = src[i];
 	dest[j] = '\0';
 	return (dest);
+}
+
+/*
+ * @brief Compares two strings
+ * @return returns an integer indicating the result of
+ * the comparison (*s1 - *s2).
+*/
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	if (!s1 && !s2)
+		return (0);
+	if (!s1)
+		return (-*s2);
+	if (!s2)
+		return (*s1);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	if (*s1 == 0 && *s2 == 0)
+		return (0);
+	else if (*s2 == 0)
+		return (*s1);
+	else if (*s1 == 0)
+		return (-*s2);
+	return (*s1 - *s2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:08 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:08:09 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:10:58 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	ft_count_char(char *str)
 		if (str[i] == '$')
 		{
 			i++;
-			if (str[i] && ft_count_check(str[i]))
-				while (str[i] && ft_count_check(str[i]))
+			if (str[i] && !ft_incharset(str[i], C_CHECK_CHAR))
+				while (str[i] && !ft_incharset(str[i], C_CHECK_CHAR))
 					i++;
 			else
 				size++;

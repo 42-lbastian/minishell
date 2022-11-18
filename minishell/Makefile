@@ -1,12 +1,12 @@
 NAME = minishell
 
-SRCS =	lexer/minishell.c \
-		lexer/create_env.c \
-		lexer/create_env_lst.c \
-		lexer/char_check.c \
+SRCS =	main/minishell.c \
+		main/signal.c \
+		main/create_env.c \
+		main/create_env_lst.c \
+		main/init_struct.c \
 		lexer/char_check_special.c \
 		lexer/lexer.c \
-		lexer/init.c \
 		lexer/read_char.c \
 		lexer/unwanted.c \
 		lexer/utils.c \
@@ -24,7 +24,6 @@ SRCS =	lexer/minishell.c \
 		parse/exec.c \
 		parse/lst.c \
 		parse/tools.c \
-		signal/signal.c
 		#builtins/cd.c \
 		#builtins/pwd.c \
 		#builtins/echo.c \
