@@ -1,77 +1,104 @@
 #Name
-NAME = minishell
+NAME		=	minishell
 
 #Colors
-Y = "\033[33m"
-R = "\033[31m"
-G = "\033[32m"
-B = "\033[34m"
-X = "\033[0m"
-UP = "\033[A"
-CUT = "\033[K"
+Y			=	"\033[33m"
+R			=	"\033[31m"
+G			=	"\033[32m"
+B			=	"\033[34m"
+X			=	"\033[0m"
+UP			=	"\033[A"
+CUT			=	"\033[K"
 
 #Commands
-CC = cc
-RM = rm -rf
-RFLAG = -lreadline
-CFLAGS = -Wall -Wextra -Werror -g
-FFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CC			=	cc
+RM			=	rm -rf
+MAKE		=	make
+MKD			=	mkdir -p
+RFLAG		=	-lreadline
+CFLAGS		=	-Wall -Wextra -Werror -g
+FFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 
 #Libft
-LIBFT        = libft/libft.a
+LFT_DIR		=	libft
+LIBFT		=	libft/libft.a
+
+#Directories
+H_DIR		=	include
+O_DIR		=	obj
 
 #Source Files
-SRCS =	main/minishell.c \
-		main/signal.c \
-		main/create_env.c \
-		main/create_env_lst.c \
-		lexer/char_check_special.c \
-		lexer/lexer.c \
-		lexer/read_char.c \
-		lexer/unwanted.c \
-		lexer/utils.c \
-		lexer/utils_2.c \
-		lexer/lst.c \
-		lexer/lst_2.c \
-		lexer/lst_print.c \
-		lexer/free.c \
-		lexer/remove_spaces.c \
-		lexer/remove_quotes.c \
-		lexer/expand_env_var.c \
-		lexer/count.c \
-		lexer/set_type_cmd.c \
-		parse/parse.c \
-		parse/exec.c \
-		parse/lst.c \
-		parse/tools.c \
-		#builtins/cd.c \
-		#builtins/pwd.c \
-		#builtins/echo.c \
-		#builtins/env.c \
-		#builtins/utils_env.c \
-		#builtins/export.c \
-		#builtins/unset.c \
+
+SRC_MAIN	=	minishell.c\
+				signal.c\
+				create_env.c\
+				create_env_lst.c\
+
+SRC_LEXER	=	char_check_special.c\
+				lexer.c\
+				read_char.c\
+				unwanted.c\
+				utils.c\
+				utils_2.c\
+				lst.c\
+				lst_2.c\
+				lst_print.c\
+				free.c\
+				remove_spaces.c\
+				remove_quotes.c\
+				expand_env_var.c\
+				count.c\
+				set_type_cmd.c\
+
+SRC_PARSER	=	parse.c\
+				exec.c\
+				lst_parse.c\
+				tools.c\
+
+SRC_BUILT	=	#cd.c\
+				#pwd.c\
+				#echo.c\
+				#env.c\
+				#utils_env.c\
+				#export.c\
+				#unset.c\
+
+#Objects
+
+OBJ_MAIN	=	$(addprefix $(O_DIR)/, $(SRC_MAIN:.c=.o))
+OBJ_LEXER	=	$(addprefix $(O_DIR)/, $(SRC_LEXER:.c=.o))
+OBJ_PARSER	=	$(addprefix $(O_DIR)/, $(SRC_PARSER:.c=.o))
+OBJ_BUILT	=	$(addprefix $(O_DIR)/, $(SRC_BUILT:.c=.o))
 
 
-OBJS = ${SRCS:.c=.o}
+$(O_DIR)/%.o:	./*/%.c
+				@echo $(Y)Compiling [$@]...$(X)
+				@$(MKD) $(O_DIR)
+				@echo $(B)
+				@$(CC) $(CFLAGS) $(RFLAGS) -o $@ -c $<
+				@echo $(X)
+				@printf $(UP) $(CUT)
+
+$(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+			$(MAKE) -C $(LFT_DIR)
+			@echo $(Y)Compiling [$(NAME)]...$(X)
+			@$(CC) -o $(NAME) $(CFLAGS) $(RFLAG) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT)
+			@printf $(UP)$(CUT)
+			@echo $(G)Compiled : [$(NAME)]$(X)
 
 all:	$(NAME)
 
-$(NAME): ${OBJS}
-	$(MAKE) -C libft
-	$(CC) -o $(NAME) ${OBJS} $(CFLAGS) ${LIBFT} $(RFLAG)
-
-fsan: ${OBJS}
-	$(MAKE) -C libft
-	$(CC) $(RFLAG) -o $(NAME) ${OBJS} $(FFLAGS) ${LIBFT}
+#fsan: $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+#	$(MAKE) -C $(LFT_DIR)
+#	$(CC) $(RFLAG) -o $(NAME) $(FFLAGS) $(LIBFT) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 	
 clean:
 	$(MAKE) clean -C libft
-	@${RM} ${OBJS}
+	@$(RM) $(OBJS)
 	@echo $(R) removed $(NAME) obj files $(X)
 
 fclean:	clean
-		@${RM} ${NAME}
+		@$(RM) $(NAME)
 		@echo $(R) removed $(NAME) executable $(X)
 		@$(RM) -rf $(LIBFT)
 		@echo $(R) removed libft.a $(X)
@@ -80,4 +107,4 @@ re:		fclean all
 
 resan: fclean fsan
 
-.PHONY:	all clean fclean re
+.PHONY:	fsan all clean fclean re
