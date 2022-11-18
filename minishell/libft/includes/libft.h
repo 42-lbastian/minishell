@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/17 16:19:26 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:14:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 # define ERROR -1
 # define TYPESET "csiduxXp"
@@ -34,17 +35,14 @@
 #  define BUFFER_SIZE 5
 # endif
 
-typedef enum e_bool
+/*
+ * CONFLICT WITH MINISHELL'S VERSION
+typedef struct s_list
 {
-	FALSE,
-	TRUE
-}				t_bool;
-
-typedef struct s_list_ft
-{
-	void				*content;
-	struct s_list_ft	*next;
-}				t_list_ft;
+	void			*content;
+	struct s_list	*next;
+}				t_list;
+*/
 
 typedef enum e_flags
 {
@@ -52,7 +50,7 @@ typedef enum e_flags
 	SHARP,
 	MINUS,
 	PLUS,
-	SPACES,
+	SPAC,
 	M_WIDTH,
 	PREC,
 	FID_ERROR
@@ -63,25 +61,25 @@ typedef struct s_fid
 	int		flag[8];
 	char	conv;
 	int		fid_len;
-	t_bool	def_pre;
+	bool	def_pre;
 }				t_fid;
 
 /*
 00_is_something
 */
 
-t_bool			ft_incharset(char c, const char *charset);
-t_bool			ft_isalnum(int c);
-t_bool			ft_isalpha(int c);
-t_bool			ft_isascii(int c);
-t_bool			ft_isbinary(char *str);
-t_bool			ft_isdigit(int c);
-t_bool			ft_ishexa(char *nbr);
-t_bool			ft_islower(int c);
-t_bool			ft_isoctal(char *str);
-t_bool			ft_isprint(int c);
-t_bool			ft_isspace(int c);
-t_bool			ft_isupper(int c);
+bool			ft_incharset(char c, const char *charset);
+bool			ft_isalnum(int c);
+bool			ft_isalpha(int c);
+bool			ft_isascii(int c);
+bool			ft_isbinary(char *str);
+bool			ft_isdigit(int c);
+bool			ft_ishexa(char *nbr);
+bool			ft_islower(int c);
+bool			ft_isoctal(char *str);
+bool			ft_isprint(int c);
+bool			ft_isspace(int c);
+bool			ft_isupper(int c);
 
 /*
 01_get_len
@@ -90,7 +88,7 @@ t_bool			ft_isupper(int c);
 size_t			ft_hexalen(size_t nb);
 size_t			ft_intlen(int nb);
 size_t			ft_nbrlen(long nb);
-size_t			ft_strlen_libft(const char *s);
+size_t			ft_strlen(const char *s);
 
 /*
 02_numbers
@@ -127,13 +125,13 @@ int				ft_putmsg_fd(char *msg, int fd, int ret);
 
 char			**ft_split(char const *s, char c);
 char			*ft_strchr(const char *s, int c);
+int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strdup(const char *s);
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 char			*ft_strjoin(char const *s1, char const *s2);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *s1, const char *s2, size_t len);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
@@ -158,17 +156,17 @@ void			*ft_memmove(void *dst, const void *src, size_t n);
 
 /*
 07_chained_lists
-*/
-/*
-t_list_ft			*ft_lstnew(void *content);
-void			ft_lstadd_front(t_list_ft **alst, t_list_ft *new);
-int				ft_lstsize(t_list_ft *lst);
-t_list_ft			*ft_lstlast(t_list_ft *lst);
-void			ft_lstadd_back(t_list_ft **alst, t_list_ft *new);
-void			ft_lstdelone(t_list_ft *lst, void (*del)(void *));
-void			ft_lstclear(t_list_ft **lst, void (*del)(void*));
+
+
+t_list			*ft_lstnew(void *content);
+void			ft_lstadd_front(t_list **alst, t_list *new);
+int				ft_lstsize(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
+void			ft_lstadd_back(t_list **alst, t_list *new);
+void			ft_lstdelone(t_list *lst, void (*del)(void *));
+void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
-t_list_ft			*ft_lstmap(t_list_ft *lst, void *(*f)(void *),
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 */
 

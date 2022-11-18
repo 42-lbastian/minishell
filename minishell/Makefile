@@ -1,5 +1,26 @@
+#Name
 NAME = minishell
 
+#Colors
+Y = "\033[33m"
+R = "\033[31m"
+G = "\033[32m"
+B = "\033[34m"
+X = "\033[0m"
+UP = "\033[A"
+CUT = "\033[K"
+
+#Commands
+CC = cc
+RM = rm -rf
+RFLAG = -lreadline
+CFLAGS = -Wall -Wextra -Werror -g
+FFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+
+#Libft
+LIBFT        = libft/libft.a
+
+#Source Files
 SRCS =	main/minishell.c \
 		main/signal.c \
 		main/create_env.c \
@@ -35,18 +56,6 @@ SRCS =	main/minishell.c \
 
 OBJS = ${SRCS:.c=.o}
 
-LIBFT        = libft/libft.a
-
-CC = cc
-
-RFLAG = -lreadline
-
-CFLAGS = -Wall -Wextra -Werror -g
-
-FFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-
-RM = rm -rf
-
 all:	$(NAME)
 
 $(NAME): ${OBJS}
@@ -59,11 +68,14 @@ fsan: ${OBJS}
 	
 clean:
 	$(MAKE) clean -C libft
-	${RM} ${OBJS}
+	@${RM} ${OBJS}
+	@echo $(R) removed $(NAME) obj files $(X)
 
 fclean:	clean
-		${RM} ${NAME}
-		${RM} libft/libft.a
+		@${RM} ${NAME}
+		@echo $(R) removed $(NAME) executable $(X)
+		@$(RM) -rf $(LIBFT)
+		@echo $(R) removed libft.a $(X)
 
 re:		fclean all
 

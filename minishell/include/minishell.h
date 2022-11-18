@@ -183,7 +183,7 @@ int		ft_have_space(char *str);
 **		lexer/utils_2.c
 */
 char	*ft_strcpy_2(char *str);
-int		ft_strlen(const char *str);
+int		ms_strlen(const char *str);
 
 /*
 **		lexer/read_char.c

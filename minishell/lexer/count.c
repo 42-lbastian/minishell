@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:08 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 15:10:58 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_lenght_read_var(char *str, int index)
 
 	i = index;
 	size = 0;
-	while (i < ft_strlen(str))
+	while (i < ms_strlen(str))
 	{
 		while (str[i] == '"' || str[i] == '\'')
 			i++;
