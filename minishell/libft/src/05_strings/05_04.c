@@ -6,12 +6,25 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:02:15 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/17 16:32:19 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 12:36:55 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+ * FT_CTOLOWER
+ * FT_CTOUPPER
+ * FT_STR_CUT_BEFORE  --  NOT DOCUMENTED 
+ * FT_STR_CUT_AFTER  --  NOT DOCUMENTED 
+ * FT_STRCMP
+ */
+
+/*
+ * @brief Transform an uppercase letter character to his lowercase equivalent.
+ * Does nothing if the given character is not an uppercase letter.
+ * @return returns the corresponding lowercase character.
+*/
 int	ft_ctolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
@@ -19,6 +32,11 @@ int	ft_ctolower(int c)
 	return (c);
 }
 
+/*
+ * @brief Transform a lowercase letter character to his uppercase equivalent.
+ * Does nothing if the given character is not an lowercase letter.
+ * @return returns the corresponding uppercase character.
+*/
 int	ft_ctoupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
@@ -59,7 +77,7 @@ char	*ft_str_cut_after(char *src, char c)
 		return (dest);
 	}
 	else
-		dest = malloc(sizeof(char) * ((ft_strlen_libft(src) - i) + 1));
+		dest = malloc(sizeof(char) * ((ft_strlen(src) - i) + 1));
 	if (dest == NULL)
 		return (NULL);
 	while (src[++i])
@@ -69,7 +87,7 @@ char	*ft_str_cut_after(char *src, char c)
 }
 
 /*
- * @brief Compares two strings
+ * @brief Compares two strings.
  * @return returns an integer indicating the result of
  * the comparison (*s1 - *s2).
 */

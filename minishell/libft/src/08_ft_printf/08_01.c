@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   08_01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:05:59 by stelie            #+#    #+#             */
-/*   Updated: 2022/04/19 22:35:00 by krozis           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:16:07 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_pf_putnbr(int n)
 	}
 }
 
-static int	pf_char(int c, t_fid *fid)
+static int	_pf_char(int c, t_fid *fid)
 {
 	int	res;
 
@@ -61,7 +61,7 @@ static int	pf_char(int c, t_fid *fid)
 int	use_fid(va_list list, t_fid *fid)
 {
 	if (fid->conv == 'c')
-		return (pf_char(va_arg(list, int), fid));
+		return (_pf_char(va_arg(list, int), fid));
 	if (fid->conv == 's')
 		return (pf_string(va_arg(list, char *), fid));
 	if (fid->conv == 'i' || fid->conv == 'd')

@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   05_02.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 20:26:37 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/15 15:30:11 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:24:02 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+ * FT_STRLCPY
+ * FT_STRMAPI  --  NOT DOCUMENTED
+ * FT_STRNCMP
+ * FT_STRNSTR  --  NOT DOCUMENTED
+ * FT_SUBSTR  --  NOT DOCUMENTED
+*/
+
+/*
+ * @brief Copy up to size - 1 characters from the NUL-terminated string src
+ * to dst, NUL-terminating the result.
+ * @return Returns the total length of the string it tried to create (it
+ * means the length of the string 'src').
+*/
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
@@ -28,7 +42,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		}
 		dst[i] = '\0';
 	}
-	return (ft_strlen_libft(src));
+	return (ft_strlen(src));
 }
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
@@ -38,7 +52,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s)
 		return (NULL);
-	res = malloc(sizeof(char) * (ft_strlen_libft(s) + 1));
+	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (res == NULL)
 		return (NULL);
 	i = 0;
@@ -51,6 +65,11 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (res);
 }
 
+/*
+ * @brief Compares the n characters of two strings.
+ * @return returns an integer indicating the result of
+ * the comparison (s1[i] - s2[i] where i < n).
+*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
@@ -96,9 +115,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen_libft(s))
+	if (start >= ft_strlen(s))
 		return (ft_strdup(""));
-	size = ft_strlen_libft(s + start);
+	size = ft_strlen(s + start);
 	if (len > size)
 		len = size;
 	sub = malloc(sizeof(char) * (len + 1));

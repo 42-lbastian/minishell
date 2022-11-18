@@ -6,17 +6,23 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 17:15:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/17 11:29:03 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 11:52:22 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+ * @brief Puts a given character in the given fd.
+*/
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
 
+/*
+ * @brief Puts a given string in the given fd.
+*/
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (s)
@@ -29,12 +35,18 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
+/*
+ * @brief Puts a given string adding a line return '\n' in the given fd.
+*/
 void	ft_putendl_fd(char *s, int fd)
 {
 	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }
 
+/*
+ * @brief Puts the given int number in the given fd.
+*/
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)

@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   05_03.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:06:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/15 15:30:23 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:31:56 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	end_checker(char const *s1, char const *set)
+/*
+ * FT_STRTRIM
+ * FT_STRRCHR
+*/
+
+static unsigned int	_end_checker(char const *s1, char const *set)
 {
 	unsigned int	len;
 
-	len = ft_strlen_libft(s1);
+	len = ft_strlen(s1);
 	while (ft_incharset(s1[len - 1], set))
 		len--;
 	return (len);
 }
 
-static char	*fill_trim(char const *s1, char const *set, unsigned int i)
+static char	*_fill_trim(char const *s1, char const *set, unsigned int i)
 {
 	unsigned int	len;
 	unsigned int	j;
 	char			*trim;
 
-	len = end_checker(s1, set);
+	len = _end_checker(s1, set);
 	trim = malloc(sizeof(char) * ((len - i) + 1));
 	if (trim == NULL)
 		return (NULL);
@@ -39,6 +44,13 @@ static char	*fill_trim(char const *s1, char const *set, unsigned int i)
 	return (trim);
 }
 
+/*
+ * @brief Create a new string which is a given string without the given
+ * characters.
+ * @param s1: the source string
+ * @param set: the characters to trim
+ * @return returns a pointer to the newly created string.
+*/
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	unsigned int	i;
@@ -55,10 +67,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 		if (!s1[i])
 			return (ft_strdup(""));
 	}
-	return (fill_trim(s1, set, i));
+	return (_fill_trim(s1, set, i));
 }
 
-static char	*sub_strrchr(const char *s, int c, size_t i, t_bool t)
+static char	*_sub_strrchr(const char *s, int c, size_t i, bool t)
 {
 	char	*str;
 
@@ -84,14 +96,21 @@ static char	*sub_strrchr(const char *s, int c, size_t i, t_bool t)
 	return (str);
 }
 
+/*
+ * @brief Find the last occurence of the given character int the given string
+ * @param s: the string where we search
+ * @param c: the character to find
+ * @return Returns a pointer to the last occurence of the character
+ * c in the string s.
+*/
 char	*ft_strrchr(const char *s, int c)
 {
 	if (s[0] == '\0' && c == 0)
 		return ((char *)s);
 	if (c == 0 && s[0])
-		return (&((char *)s)[ft_strlen_libft(s)]);
+		return (&((char *)s)[ft_strlen(s)]);
 	if (c == 0)
-		return (sub_strrchr(s, c, ft_strlen_libft(s), FALSE));
+		return (_sub_strrchr(s, c, ft_strlen(s), false));
 	else
-		return (sub_strrchr(s, c, 0, TRUE));
+		return (_sub_strrchr(s, c, 0, true));
 }
