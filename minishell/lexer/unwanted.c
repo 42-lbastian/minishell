@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unwanted.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:17 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:10:19 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_remove_char(char *str, int index)
 
 	i = 0;
 	y = 0;
-	res = malloc(sizeof(char) * ft_strlen(str));
+	res = malloc(sizeof(char) * ms_strlen(str));
 	if (!res)
 		return (NULL);
 	while (str[i])

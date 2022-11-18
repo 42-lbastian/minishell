@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:46 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/16 20:10:47 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strjoin_c(char *str, char c)
 
 	i = 0;
 	if (str)
-		size = ft_strlen(str);
+		size = ms_strlen(str);
 	else
 		size = 0;
 	dest = malloc(sizeof(char) * (size + 2));
@@ -57,9 +57,9 @@ char	*ft_malloc_strjoin_2(char *str1, char *str2)
 	char	*dest;
 
 	if (!str1)
-		dest = malloc(sizeof(char) * (ft_strlen(str2) + 1));
+		dest = malloc(sizeof(char) * (ms_strlen(str2) + 1));
 	else
-		dest = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
+		dest = malloc(sizeof(char) * (ms_strlen(str1) + ms_strlen(str2) + 1));
 	if (!dest)
 		return (NULL);
 	return (dest);

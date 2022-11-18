@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/17 16:38:14 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:11:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_size_env_var(t_env *st, char *str, int index, int fact)
 	{
 		if (ft_strcmp(st->var, temp) == 0)
 		{
-			size = ft_strlen(st->value);
+			size = ms_strlen(st->value);
 			break ;
 		}
 		st = st->next;
@@ -105,7 +105,7 @@ int	ft_replace(t_list **lst, t_env *st)
 				temp = ft_find_var((ft_substr(str, j, i - j)), st);
 				if (!temp)
 					return (ft_error_return(str));
-				if (quotes == 2 || ft_strlen(temp) == 0)
+				if (quotes == 2 || ms_strlen(temp) == 0)
 					(*lst)->content = ft_strjoin_2((*lst)->content, temp);
 				else
 					if (ft_split_expand(lst, ft_split(temp, ' ')))

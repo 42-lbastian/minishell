@@ -8,7 +8,7 @@ char	*ft_strjoin_env(char *str1, char *str2, char c)
 
 	i = 0;
 	y = 0;
-	dst = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 2));
+	dst = malloc(sizeof(char) * (ms_strlen(str1) + ms_strlen(str2) + 2));
 	if (!dst)
 		return (NULL);
 	while (str1[i])
