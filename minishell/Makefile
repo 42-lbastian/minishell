@@ -78,7 +78,7 @@ $(O_DIR)/%.o:	./*/%.c
 				@printf $(UP) $(CUT)
 
 $(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
-			$(MAKE) -C $(LFT_DIR)
+			@$(MAKE) -C $(LFT_DIR)
 			@echo $(Y)Compiling [$(NAME)]...$(X)
 			@$(CC) -o $(NAME) $(CFLAGS) $(RFLAG) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT)
 			@printf $(UP)$(CUT)
@@ -91,7 +91,7 @@ all:	$(NAME)
 #	$(CC) $(RFLAG) -o $(NAME) $(FFLAGS) $(LIBFT) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 	
 clean:
-	$(MAKE) clean -C libft
+	@$(MAKE) clean -C libft
 	@$(RM) $(OBJS)
 	@echo $(R) removed $(NAME) obj files $(X)
 
