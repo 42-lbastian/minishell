@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 16:46:59 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:34:51 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	ms_routine(t_struct *main_s, t_env *st)
 		ms_parse(main_s->lst, st);
 		//ms_print_lst(main_s->lst);
 		ms_free_lst(&main_s->lst);
+		free(str_read);
 	}
-	ms_free_all(&main_s->lst);
 	free(str_read);
 	return (g_glob.ret);
 }
@@ -89,10 +89,18 @@ int	main(int argc, char **argv, char **envp)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	main_s = malloc(sizeof(t_struct));
 	if (!main_s)
+	{
+		ms_clear_env(&st);
 		return (ft_putmsg_fd(ERR_MAIN_MALLOC, STDERR_FILENO, EXIT_FAILURE));
+	}
 	ms_init_struct(main_s, argc, argv);
+	if (!main_s->char_check.char_valid)
+	{
+		ms_free_all(main_s, &st);
+		return (ft_putmsg_fd(ERR_MAIN_MALLOC, STDERR_FILENO, EXIT_FAILURE));
+	}
 	ms_routine(main_s, st);
-	free(main_s);
+	ms_free_all(main_s, &st);
 	clear_history();
 	return (EXIT_SUCCESS);
 }

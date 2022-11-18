@@ -4,6 +4,7 @@
 # define RED "\1\033[1;31m\2"
 # define NORMAL "\1\x1b[0m\2"
 # define NAME "minishell> "
+# define NAMEC RED "minishell> " NORMAL
 
 # define NB_CHAR_VALID 13
 # define VALID_CHAR "=/|<>.'\" $?-_"
@@ -218,7 +219,8 @@ void	ms_print_lst(t_list *lst);
 **		lexer/free.c
 */
 void	ms_free_lst(t_list **lst);
-void	ms_free_all(t_list **lst);
+void	ms_free_all(t_struct *main, t_env **st);
+void	ms_free_parse(t_lst_parser **lst_parser);
 
 /*
 **		lexer/remove_spaces.c

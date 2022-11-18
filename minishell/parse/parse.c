@@ -36,6 +36,7 @@ int		ms_print_cmd(char **str)
    }
  */
 
+/*
 int	ms_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
 {
 	int pip[2];
@@ -59,12 +60,12 @@ int	ms_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
 				ms_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
 			else if (lst->prev)
 				ms_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
-			/*
+			
 			if (strcmp(lst->next->value.cmd[0], "grep") == 0)
 				ms_is_builtin(lst->next->value.cmd, st, pip[0], pip[1], read, write, CMD_MIDDLE);
 			else if (strcmp(lst->next->value.cmd[0], "ls") == 0)
 				ms_is_builtin(lst->next->value.cmd, st, read, write, pip[0], pip[1], CMD_BEGIN);
-			*/
+			
 			//else
 			//	ms_is_builtin(lst->next->value.cmd, st, pip, pip2, CMD_MIDDLE);
 			//printf("CMD %s-%s\n", lst->value.oper, lst->next->value.cmd[0]);
@@ -90,7 +91,7 @@ int	ms_read_lst(t_lst_parser *lst, t_env *st, int read, int write)
 		ms_is_builtin(lst->prev->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
 	return (0);
 }
-
+*/
 
 int	ms_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 {
@@ -343,7 +344,8 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		}
 		else if (lst && lst->type == PIPE && !cmd)
 		{
-			ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type));
+			if (ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(NULL, lst->content, lst->type)))
+				return (1);
 			lst = lst->next;
 		}
 		/*else if (lst && lst->type == FILE_IN && !cmd)
@@ -368,7 +370,12 @@ int	ft_create_lst_parser_dumb(t_list *lst, t_lst_parser **lst_parser)
 		//}
 		if (cmd)
 		{
-			ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(cmd, NULL, CMD));
+			if (ms_lst_parse_add_back(lst_parser, ms_lst_parse_new(cmd, NULL, CMD)))
+			{
+				free(cmd);
+				cmd = NULL;
+				return (1);
+			}
 			free(cmd);
 			cmd = NULL;
 		}
@@ -482,6 +489,7 @@ int		ms_parse(t_list *lst, t_env *st)
 	//ms_print_lst_parse(lst_parser2);
 	pipe(pip);
 	ms_read_dumb(lst_parser_dumb, st, pip[0], pip[1], 0);
+	ms_free_parse(&lst_parser_dumb);
 	//ms_read_lst(lst_parser, st, pip[0], pip[1]);
 	//ms_read_lst(lst_parser, st, NULL);
 	return (0);

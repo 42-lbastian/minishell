@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:16 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:53:53 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/18 17:51:33 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ms_clear_env(t_env **st)
 		temp = (*st)->next;
 		free((*st)->value);
 		free((*st)->var);
-		(*st) = (*st)->next;
 		free((*st));
+		(*st) = NULL;
 		(*st) = temp;
 	}
 }
