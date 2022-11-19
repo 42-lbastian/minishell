@@ -80,7 +80,7 @@ $(O_DIR)/%.o:	./*/%.c
 $(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 			@$(MAKE) -C $(LFT_DIR)
 			@echo $(Y)Compiling [$(NAME)]...$(X)
-			@$(CC) -o $(NAME) $(CFLAGS) $(RFLAG) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT)
+			@$(CC) -o $(NAME) $(CFLAGS) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT) $(RFLAG)
 			@printf $(UP)$(CUT)
 			@echo $(G)Compiled : [$(NAME)]$(X)
 
