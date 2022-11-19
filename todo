@@ -9,3 +9,5 @@ big infile (see pipes - tester)
 
 cat < TATA todo
 cat < TATA tod
+
+cat < include/minishell.h //fd still open

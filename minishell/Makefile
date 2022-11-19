@@ -93,16 +93,16 @@ RM = rm -rf
 $(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 			@$(MAKE) -C $(LFT_DIR)
 			@echo $(Y)Compiling [$(NAME)]...$(X)
-			@$(CC) -o $(NAME) $(CFLAGS) $(RFLAG) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT)
+			@$(CC) -o $(NAME) $(CFLAGS) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT) $(RFLAG)
 			@printf $(UP)$(CUT)
 			@echo $(G)Compiled : [$(NAME)]$(X)
 >>>>>>> cleaned
 
 all:	$(NAME)
 
-#fsan: $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
-#	$(MAKE) -C $(LFT_DIR)
-#	$(CC) $(RFLAG) -o $(NAME) $(FFLAGS) $(LIBFT) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+fsan: $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+	$(MAKE) -C $(LFT_DIR)
+	$(CC) -o $(NAME) $(FFLAGS) $(RFLAG) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT)
 	
 clean:
 	@$(MAKE) clean -C libft

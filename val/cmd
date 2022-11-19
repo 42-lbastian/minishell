@@ -1,0 +1,1 @@
+valgrind --tool=memcheck --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=../val/readline.supp ./minishell
