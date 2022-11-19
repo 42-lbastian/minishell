@@ -117,17 +117,7 @@ typedef struct s_sig
 	pid_t		pid;
 }				t_sig;
 
-<<<<<<< HEAD
-extern	t_sig g_glob;
-
-/**
-**		signal/signal.c
-**/
-void	signals_handler(void);
-void	get_signal(int sig);
-=======
 extern t_sig	g_glob;
->>>>>>> cleaned
 
 /*
  * @file main/signal.c

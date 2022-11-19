@@ -77,26 +77,12 @@ $(O_DIR)/%.o:	./*/%.c
 				@$(CC) $(CFLAGS) $(RFLAGS) -o $@ -c $<
 				@printf $(UP) $(CUT)
 
-<<<<<<< HEAD
-LIBFT        = libft/libft.a
-
-CC = cc
-
-RFLAG = -lreadline
-
-CFLAGS = -Wall -Wextra -Werror -g -lreadline
-
-FFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=address
-
-RM = rm -rf
-=======
 $(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 			@$(MAKE) -C $(LFT_DIR)
 			@echo $(Y)Compiling [$(NAME)]...$(X)
 			@$(CC) -o $(NAME) $(CFLAGS) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT) $(RFLAG)
 			@printf $(UP)$(CUT)
 			@echo $(G)Compiled : [$(NAME)]$(X)
->>>>>>> cleaned
 
 all:	$(NAME)
 
