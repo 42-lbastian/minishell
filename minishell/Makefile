@@ -100,9 +100,9 @@ $(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 
 all:	$(NAME)
 
-#fsan: $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
-#	$(MAKE) -C $(LFT_DIR)
-#	$(CC) $(RFLAG) -o $(NAME) $(FFLAGS) $(LIBFT) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+fsan: $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+	$(MAKE) -C $(LFT_DIR)
+	$(CC) -o $(NAME) $(FFLAGS) $(RFLAG) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT)
 	
 clean:
 	@$(MAKE) clean -C libft
