@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/18 14:14:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/21 10:41:13 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,11 @@
 #  define BUFFER_SIZE 5
 # endif
 
-/*
- * CONFLICT WITH MINISHELL'S VERSION
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
-*/
 
 typedef enum e_flags
 {
@@ -141,6 +138,8 @@ int				ft_ctoupper(int c);
 int				ft_ctolower(int c);
 char			*ft_str_cut_before(char *src, char c);
 char			*ft_str_cut_after(char *src, char c);
+size_t			ft_str_arr_len(char **arr);
+char			**ft_str_arr_dup(char **arr);
 
 /*
 06_memory
@@ -156,7 +155,7 @@ void			*ft_memmove(void *dst, const void *src, size_t n);
 
 /*
 07_chained_lists
-
+*/
 
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
@@ -168,7 +167,6 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-*/
 
 /*
 08_ft_printf
