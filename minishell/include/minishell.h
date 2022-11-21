@@ -4,7 +4,6 @@
 # define RED "\1\033[1;31m\2"
 # define NORMAL "\1\x1b[0m\2"
 # define NAME "minishell> "
-# define NAMEC RED "minishell> " NORMAL
 
 # define NB_CHAR_VALID 13
 # define VALID_CHAR "=/|<>.'\" $?-_"
@@ -121,45 +120,52 @@ extern t_sig	g_glob;
 
 /*
  * @file main/signal.c
- * @brief signal handler for main process
 */
+
 void	global_signals_handler(void);
 
 /**
 **		lexer/lexer.c
 **/
+
 int		ms_main_lexer(char *str, t_struct *main_s, t_env *st);
 
 /**
-**		lexer/create_env.c
+**		main/create_env.c
 **/
+
 int		ms_create_env(char **envp, t_env **st);
 void	ms_clear_env(t_env **st);
 
 /**
-**		lexer/create_env_lst.c
+**		main/create_env_lst.c
 **/
+
 t_env	*ms_lst_new_env(char *var, char *value);
 int		ms_lst_add_back_env(t_env **st, t_env *new);
 
 /*
 **		lexer/char_check_special.c
 */
+
 int		ms_exclude_special(char c, t_struct *main);
 
 /*
 **		lexer/remove_quotes.c
 */
+
 int		ms_main_remove_quotes(t_list **lst);
 
 /*
 **		lexer/expand_var.c
 */
+
 int		ms_main_replace_env(t_list **lst, t_env *st);
 
 /**
 **		lexer/count.c
 **/
+
 int		ms_start_read_var(char *str, int index);
 int		ms_lenght_read_var(char *str, int index);
 int		ms_count_char(char *str);
@@ -169,6 +175,7 @@ int		ms_count_remove_quotes(char *str);
 /*
 **		lexer/utils.c
 */
+
 int		ms_strjoin_3(char *dest, char *str, int start);
 char	*ms_strjoin_2(char *str1, char *str2);
 char	*ms_strjoin_c(char *str, char c);
@@ -177,12 +184,14 @@ int		ms_have_space(char *str);
 /*
 **		lexer/utils_2.c
 */
+
 char	*ms_strcpy_2(char *str);
 int		ms_strlen(const char *str);
 
 /*
 **		lexer/read_char.c
 */
+
 void	ms_read_special(char *str, t_struct *main);
 void	ms_read_cmd(char *str, t_struct *main);
 int		ms_count_read_quotes(char *str, int start);
@@ -190,12 +199,14 @@ int		ms_count_read_quotes(char *str, int start);
 /*
 **		lexer/unwanted.c
 */
+
 char	*ms_check_quotes(char *str, t_struct *main);
 char	*ms_remove_special(char *str, t_struct *main, int i);
 
 /*
 **		lexer/lst.c
 */
+
 int		ms_lst_size(t_list *lst);
 char	*ms_get_lst_str_index(t_list *lst, int index);
 int		ms_lstadd(t_list **lst, t_list *new);
@@ -204,6 +215,7 @@ char	*ms_find_var(char *str, t_env *st);
 /*
 **		lexer/lst_2.c
 */
+
 t_list	*ms_lst_new_join(char *content, int type);
 t_list	*ms_lst_new(char *content, int type);
 t_list	*ms_lst_last(t_list *lst);
@@ -212,34 +224,39 @@ int		ms_lstadd_back(t_list **lst, t_list *new);
 /*
 **		lexer/lst_print.c
 */
+
 void	ms_print_env(t_env *st);
 void	ms_print_lst(t_list *lst);
 
 /*
 **		lexer/free.c
 */
+
 void	ms_free_lst(t_list **lst);
-void	ms_free_all(t_struct *main, t_env **st);
-void	ms_free_parse(t_lst_parser **lst_parser);
+void	ms_free_all(t_list **lst);
 
 /*
 **		lexer/remove_spaces.c
 */
+
 int		ms_remove_spaces(t_list **lst);
 
 /*
 **		lexer/set_type_cmd.c
 */
+
 int		ms_set_type_cmd(t_list **lst);
 
 /*
 **		parse/parse.c
 */
+
 int		ms_parse(t_list *lst, t_env *st);
 
 /*
 **		parse/exec.c
 */
+
 void	ms_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
 void	ms_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
 void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
@@ -248,6 +265,7 @@ void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int
 /*
 **		parse/lst.c
 */
+
 t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type);
 int		ms_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new);
 int		ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new);
@@ -258,6 +276,7 @@ char	*ms_find_var_path(char *str, t_env *st);
 /*
 **		parse/tools.c
 */
-char	**ms_strcpy_cmd(char **arr); 
+
+char	**ms_strcpy_cmd(char **arr);
 
 #endif
