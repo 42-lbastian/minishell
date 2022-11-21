@@ -88,7 +88,7 @@ all:	$(NAME)
 
 fsan: $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 	$(MAKE) -C $(LFT_DIR)
-	$(CC) -o $(NAME) $(FFLAGS) $(RFLAG) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT)
+	$(CC) -o $(NAME) $(FFLAGS)  $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT) $(RFLAG)
 	
 clean:
 	@$(MAKE) clean -C libft
