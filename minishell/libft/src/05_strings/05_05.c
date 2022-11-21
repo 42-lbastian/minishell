@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:36:30 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/21 10:51:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/21 12:07:19 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t	ft_str_arr_len(char **array)
  * @param array: the str array to duplicate
  * @return Returns a pointer to the duplicated array.
 */
-char	ft_str_arr_dup(char	**array)
+char	**ft_str_arr_dup(char	**array)
 {
 	char	**copy;
 	int		i;
