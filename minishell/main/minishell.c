@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 19:44:22 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:51:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ int	ms_routine(t_struct *main_s, t_env *st)
 	char	*str_read;
 
 	str_read = NULL;
-	g_glob.ret = 0;
 	while (true)
 	{
-		g_glob.pid = 0;
-		g_glob.sigint = 0;
-		g_glob.sigquit = 0;
 		str_read = readline(NAME);
 		if (!str_read)
 			return (EXIT_FAILURE);
@@ -69,10 +65,8 @@ int	ms_routine(t_struct *main_s, t_env *st)
 		free(str_read);
 	}
 	free(str_read);
-	return (g_glob.ret);
+	return (EXIT_SUCCESS);
 }
-
-t_sig	g_glob;
 
 /*
  *@todo: free 'env_t *st'
