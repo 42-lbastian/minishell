@@ -1,17 +1,2 @@
-minishell> echo hello world
-hello world
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
-TOOT
+minishell> grep hi <../minishell_test/test_files/infile_big <../minishell_test/test_files/infile
 minishell> 

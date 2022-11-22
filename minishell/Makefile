@@ -52,8 +52,11 @@ SRC_LEXER	=	char_check_special.c\
 				set_type_cmd.c\
 
 SRC_PARSER	=	parse.c\
+				create_lst_parser.c \
+				create_lst_parser_utils.c \
 				exec.c\
 				lst_parse.c\
+				lst_parse_print.c\
 				tools.c\
 
 SRC_BUILT	=	#cd.c\

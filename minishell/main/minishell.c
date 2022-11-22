@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 19:44:22 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:10:22 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ms_routine(t_struct *main_s, t_env *st)
 		g_glob.sigint = 0;
 		g_glob.sigquit = 0;
 		str_read = readline(NAME);
+		//str_read = readline(RED NAME NORMAL);
 		if (!str_read)
 			return (EXIT_FAILURE);
 		if (ft_strcmp(str_read, "exit") == 0)
@@ -97,7 +98,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!main_s->char_check.char_valid)
 	{
 		ms_free_all(main_s, &st);
-		return (ft_putmsg_fd(ERR_MAIN_MALLOC, STDERR_FILENO, EXIT_FAILURE));
+		return (ft_putmsg_fd(ERR_CHAR_VALID_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	}
 	ms_routine(main_s, st);
 	ms_free_all(main_s, &st);

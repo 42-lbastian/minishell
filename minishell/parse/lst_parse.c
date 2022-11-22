@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_parse.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/22 15:07:57 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/22 15:09:57 by lbastian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 char	*ms_find_var_path(char *str, t_env *st)
@@ -62,50 +74,4 @@ int	ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new)
 	}
 	(*lst) = new;
 	return (0);
-}
-
-
-void	ms_print_lst_parse(t_lst_parser *lst)
-{
-	int i;
-
-	while (lst)
-	{
-		i = 0;
-		if (lst->type == CMD)
-		{
-			while (lst->value.cmd[i])
-			{
-				printf("%s-[%d]\t", lst->value.cmd[i], lst->type);
-				i++;
-			}
-			printf("\n");
-		}
-		else
-			printf("%s-[%d]\n", lst->value.oper, lst->type);
-		lst = lst->next;
-	}
-}
-
-void	ms_print_lst_parse_reverse(t_lst_parser *lst)
-{
-	int i;
-
-	lst = ms_lst_parse_last(lst);
-	while (lst)
-	{
-		i = 0;
-		if (lst->type == CMD)
-		{
-			while (lst->value.cmd[i])
-			{
-				printf("%s\t", lst->value.cmd[i]);
-				i++;
-			}
-			printf("\n");
-		}
-		else
-			printf("%s\n", lst->value.oper);
-		lst = lst->prev;
-	}
 }
