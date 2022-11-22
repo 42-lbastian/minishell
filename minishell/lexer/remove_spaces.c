@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:04 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:55:24 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/21 16:18:21 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,51 +39,109 @@ int	ms_count_spaces(char *str)
 	return (size);
 }
 
+int	*ms_spaces_flag_loop(int *count, char *str, char **temp, char c)
+{
+	if (str[count[0]] && (str[count[0]] == '"' || str[count[0]] == '\''))
+	{
+		c = str[count[0]];
+		(*temp)[count[1]] = str[count[0]];
+		count[1]++;
+		count[0]++;
+		while (str[count[0]] != c)
+		{
+			(*temp)[count[1]] = str[count[0]];
+			count[0]++;
+			count[1]++;
+		}
+		(*temp)[count[1]] = str[count[0]];
+		count[0]++;
+		count[1]++;
+	}
+	else if (str[count[0]] && str[count[0]] != ' ')
+	{
+		(*temp)[count[1]] = str[count[0]];
+		count[1]++;
+		count[0]++;
+	}
+	else
+		count[0]++;
+	return (count);
+}
+
 char	*ft_spaces_flag(char *str)
 {
-	int		i;
-	int		j;
+	int		*count;
 	int		size;
 	char	*temp;
 	char	c;
 
-	i = 0;
-	j = 0;
+	c = 0;
+	count = malloc(sizeof(int) * 2);
+	if (!count)
+		return (NULL);
+	count[0] = 0;
+	count[1] = 0;
 	size = ms_count_spaces(str);
 	temp = malloc(sizeof(char) * (size + 1));
 	if (!temp)
-		return (NULL);
-	temp[size] = '\0';
-	while (str[i])
 	{
-		if (str[i] && (str[i] == '"' || str[i] == '\''))
-		{
-			c = str[i];
-			temp[j] = str[i];
-			j++;
-			i++;
-			while (str[i] != c)
-			{
-				temp[j] = str[i];
-				i++;
-				j++;
-			}
-			temp[j] = str[i];
-			i++;
-			j++;
-		}
-		else if (str[i] && str[i] != ' ')
-		{
-			temp[j] = str[i];
-			j++;
-			i++;
-		}
-		else
-			i++;
+		free(count);
+		return (NULL);
 	}
+	temp[size] = '\0';
+	while (str[count[0]])
+		count = ms_spaces_flag_loop(count, str, &temp, c);
 	free(str);
+	free(count);
 	return (temp);
 }
+
+/*
+   char	*ft_spaces_flag(char *str)
+   {
+   int		i;
+   int		j;
+   int		size;
+   char	*temp;
+   char	c;
+
+   i = 0;
+   j = 0;
+   size = ms_count_spaces(str);
+   temp = malloc(sizeof(char) * (size + 1));
+   if (!temp)
+   return (NULL);
+   temp[size] = '\0';
+   while (str[i])
+   {
+   if (str[i] && (str[i] == '"' || str[i] == '\''))
+   {
+   c = str[i];
+   temp[j] = str[i];
+   j++;
+   i++;
+   while (str[i] != c)
+   {
+   temp[j] = str[i];
+   i++;
+   j++;
+   }
+   temp[j] = str[i];
+   i++;
+   j++;
+   }
+   else if (str[i] && str[i] != ' ')
+   {
+   temp[j] = str[i];
+   j++;
+   i++;
+   }
+   else
+   i++;
+   }
+   free(str);
+   return (temp);
+   }*/
 
 int	ms_remove_spaces(t_list **lst)
 {

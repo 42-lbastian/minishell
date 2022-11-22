@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:58:36 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/21 16:58:28 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,52 +67,61 @@ int	ft_error_return(char *str)
 	return (1);
 }
 
-int	ft_replace(t_list **lst, t_env *st)
+int	ms_set_quotes(char *str, int i, int quotes)
 {
-	char	*temp;
-	char	*str;
-	int		i;
-	int		j;
-	int		quotes;
+	if (str[i] == '\'' && quotes == 0)
+		quotes = 1;
+	else if (str[i] == '"' && quotes == 0)
+		quotes = 2;
+	else if ((str[i] == '\'' && quotes == 1)
+		|| (str[i] == '"' && quotes == 2))
+		quotes = 0;
+	return (quotes);
+}
 
-	i = 0;
-	quotes = 0;
+int	ms_replace_loop(t_list **lst, t_env *st, char *str, int *i, int quotes)
+{
+	int		j;
+	char	*temp;
+
+	(*i)++;
+	if (str[(*i)] && str[(*i)] != '\'' && str[(*i)] != '"' && str[(*i)] != '$'
+		&& str[(*i)] != ' ')
+	{
+		j = (*i);
+		while (str[(*i)] && str[(*i)] != '\'' && str[(*i)] != '"'
+			&& str[(*i)] != '$' && str[(*i)] != ' ')
+			(*i)++;
+		temp = ms_find_var((ft_substr(str, j, (*i) - j)), st);
+		if (!temp)
+			return (ft_error_return(str));
+		if (quotes == 2 || ms_strlen(temp) == 0)
+			(*lst)->content = ms_strjoin_2((*lst)->content, temp);
+		else
+			if (ft_split_expand(lst, ft_split(temp, ' ')))
+				return (ft_error_return(str));
+	}
+	else
+		(*lst)->content = ms_strjoin_c((*lst)->content, '$');
+	return (0);
+}
+
+int	ft_replace(t_list **lst, t_env *st, int i, int quotes)
+{
+	char	*str;
+
 	str = ms_strcpy_2((*lst)->content);
 	if (!str)
 		return (1);
 	free((*lst)->content);
 	(*lst)->content = NULL;
-	temp = NULL;
 	while (str[i])
 	{
-		if (str[i] == '\'' && quotes == 0)
-			quotes = 1;
-		else if (str[i] == '"' && quotes == 0)
-			quotes = 2;
-		else if ((str[i] == '\'' && quotes == 1)
-			|| (str[i] == '"' && quotes == 2))
-			quotes = 0;
+		quotes = ms_set_quotes(str, i, quotes);
 		if (str[i] == '$' && quotes != 1)
 		{
-			i++;
-			if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$'
-				&& str[i] != ' ')
-			{
-				j = i;
-				while (str[i] && str[i] != '\'' && str[i] != '"'
-					&& str[i] != '$' && str[i] != ' ')
-					i++;
-				temp = ms_find_var((ft_substr(str, j, i - j)), st);
-				if (!temp)
-					return (ft_error_return(str));
-				if (quotes == 2 || ms_strlen(temp) == 0)
-					(*lst)->content = ms_strjoin_2((*lst)->content, temp);
-				else
-					if (ft_split_expand(lst, ft_split(temp, ' ')))
-						return (ft_error_return(str));
-			}
-			else
-				(*lst)->content = ms_strjoin_c((*lst)->content, '$');
+			if (ms_replace_loop(lst, st, str, &i, quotes))
+				return (1);
 		}
 		else
 		{
@@ -125,6 +134,59 @@ int	ft_replace(t_list **lst, t_env *st)
 	free(str);
 	return (0);
 }
+/*
+   int	ft_replace(t_list **lst, t_env *st)
+   {
+   char	*temp;
+   char	*str;
+   int		i;
+   int		j;
+   int		quotes;
+
+   i = 0;
+   quotes = 0;
+   str = ms_strcpy_2((*lst)->content);
+   if (!str)
+   return (1);
+   free((*lst)->content);
+   (*lst)->content = NULL;
+   temp = NULL;
+   while (str[i])
+   {
+   quotes = ms_set_quotes(str, i, quotes);
+   if (str[i] == '$' && quotes != 1)
+   {
+   i++;
+   if (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$'
+   && str[i] != ' ')
+   {
+   j = i;
+   while (str[i] && str[i] != '\'' && str[i] != '"'
+   && str[i] != '$' && str[i] != ' ')
+   i++;
+   temp = ms_find_var((ft_substr(str, j, i - j)), st);
+   if (!temp)
+   return (ft_error_return(str));
+   if (quotes == 2 || ms_strlen(temp) == 0)
+   (*lst)->content = ms_strjoin_2((*lst)->content, temp);
+   else
+   if (ft_split_expand(lst, ft_split(temp, ' ')))
+   return (ft_error_return(str));
+   }
+   else
+   (*lst)->content = ms_strjoin_c((*lst)->content, '$');
+   }
+   else
+   {
+   (*lst)->content = ms_strjoin_c((*lst)->content, str[i]);
+   i++;
+   }
+   if (!(*lst)->content)
+   return (ft_error_return(str));
+   }
+   free(str);
+   return (0);
+   }*/
 
 int	ms_main_replace_env(t_list **lst, t_env *st)
 {
@@ -134,7 +196,7 @@ int	ms_main_replace_env(t_list **lst, t_env *st)
 	while (lst && (*lst))
 	{
 		if ((*lst)->type != LIMITOR)
-			if (ft_replace(lst, st) || !(*lst)->content)
+			if (ft_replace(lst, st, 0, 0) || !(*lst)->content)
 				return (1);
 		(*lst) = (*lst)->next;
 	}
