@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/21 10:41:13 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 11:33:27 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@
 #  define BUFFER_SIZE 5
 # endif
 
+/* 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
-
+ */
 typedef enum e_flags
 {
 	ZERO,
@@ -155,7 +156,7 @@ void			*ft_memmove(void *dst, const void *src, size_t n);
 
 /*
 07_chained_lists
-*/
+
 
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
@@ -167,6 +168,7 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+*/
 
 /*
 08_ft_printf
