@@ -107,17 +107,6 @@ typedef struct s_struct
 	t_char_check	char_check;
 }		t_struct;
 
-//SIGNAL + RET FUNC
-typedef struct s_sig
-{
-	int			ret;
-	int			sigint;
-	int			sigquit;
-	pid_t		pid;
-}				t_sig;
-
-extern t_sig	g_glob;
-
 /*
  * @file main/signal.c
 */

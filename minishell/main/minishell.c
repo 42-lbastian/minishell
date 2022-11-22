@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 12:51:01 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 13:58:13 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int	ms_routine(t_struct *main_s, t_env *st)
 			add_history(str_read);
 		if (ms_main_lexer(str_read, main_s, st))
 		{
-			//EXPLICIT ERROR MSG && NO EXIT OPER ERROR
-			ft_putstr_fd(ERR_LEXER, STDERR_FILENO);
+			ft_putstr_fd(ERR_LEXER, STDERR_FILENO);  //EXPLICIT ERROR MSG && NO EXIT OPER ERROR
 			//ms_free_all(&main_s->lst);
 			break ;
 		}
