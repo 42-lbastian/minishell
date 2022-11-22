@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:49 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 16:19:43 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:49:28 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ms_free_main_s(t_struct *main_s)
 void	ms_free_all(t_struct *main_s, t_env *st)
 {
 	ms_free_main_s(main_s);
-	ms_clear_env(st);
+	ms_clear_env(&st);
 }
 
 void	ms_free_lst(t_list *lst)
