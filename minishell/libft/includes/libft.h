@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/22 11:33:27 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 13:55:50 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
  */
+
 typedef enum e_flags
 {
 	ZERO,
@@ -141,6 +142,8 @@ char			*ft_str_cut_before(char *src, char c);
 char			*ft_str_cut_after(char *src, char c);
 size_t			ft_str_arr_len(char **arr);
 char			**ft_str_arr_dup(char **arr);
+void			ft_str_arr_free(char **array);
+void			ft_str_free(char *str);
 
 /*
 06_memory
@@ -148,6 +151,7 @@ char			**ft_str_arr_dup(char **arr);
 
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t nmemb, size_t size);
+void			ft_free(void *p);
 void			*ft_memchr(const void *s, int c, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -156,8 +160,8 @@ void			*ft_memmove(void *dst, const void *src, size_t n);
 
 /*
 07_chained_lists
-
-
+*/
+/* 
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
 int				ft_lstsize(t_list *lst);
@@ -168,8 +172,7 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-*/
-
+ */
 /*
 08_ft_printf
 */
