@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:00 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:57:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:31:03 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_belong_good_special(char c, t_struct *main)
+static int	ft_belong_good_special(char c, t_struct *main)
 {
 	int	i;
 

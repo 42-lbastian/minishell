@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 13:59:49 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:35:30 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ms_lexer(char *str, t_struct *main_s)
+static int	ms_lexer(char *str, t_struct *main_s)
 {
 	main_s->i = 0;
 	main_s->is_arg = 0;

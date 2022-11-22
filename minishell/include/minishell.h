@@ -160,8 +160,8 @@ int		ms_main_replace_env(t_list **lst, t_env *st);
 /*
 **		lexer/expand_env_var_2.c
 */
-int	ft_split_expand(t_list **lst, char **split);
-int	ft_error_return(char *str);
+int	ms_split_expand(t_list **lst, char **split);
+int	ms_error_return(char *str);
 
 /**
 **		lexer/count.c

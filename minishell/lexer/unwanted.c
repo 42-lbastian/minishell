@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:17 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:57:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:44:06 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*ms_remove_char(char *str, int index)
+static char	*ms_remove_char(char *str, int index)
 {
 	char	*res;
 	int		i;
@@ -37,7 +37,7 @@ char	*ms_remove_char(char *str, int index)
 	return (res);
 }
 
-int	ms_count_quotes(int i, int quotes, t_struct *main, int fact)
+static int	ms_count_quotes(int i, int quotes, t_struct *main, int fact)
 {
 	if (fact == SIMPLE)
 		main->char_check.last_simple_q = i;
@@ -78,7 +78,7 @@ char	*ms_check_quotes(char *str, t_struct *main)
 	return (str);
 }
 
-int	ms_count_quotes_unwanted(int quotes)
+static int	ms_count_quotes_unwanted(int quotes)
 {
 	if (quotes == 0)
 		quotes++;

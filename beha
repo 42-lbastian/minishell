@@ -15,5 +15,8 @@ cat < TATA todo tod
 cat < TATA tod todo
 cat < TATA todo to | wc -l
 
+//FIX
 echo toto > 1 2 3
 grep > 1 void include/minishell.h
+
+cat

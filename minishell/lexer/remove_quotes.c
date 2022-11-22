@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:53 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:58:09 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:40:08 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*ms_remove_quotes(char *str, int i, int j, int quotes)
+static char	*ms_remove_quotes(char *str, int i, int j, int quotes)
 {
 	char	*temp;
 

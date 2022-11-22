@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:44 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:58:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:39:15 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ms_set_type_oper(t_struct *main)
+static void	ms_set_type_oper(t_struct *main)
 {
 	if (ft_strcmp(ms_lst_last(main->lst)->content, "|") == 0)
 		ms_lst_last(main->lst)->type = PIPE;

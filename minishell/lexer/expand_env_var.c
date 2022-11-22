@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 14:22:23 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:35:12 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ms_set_quotes(char *str, int i, int quotes)
+static int	ms_set_quotes(char *str, int i, int quotes)
 {
 	if (str[i] == '\'' && quotes == 0)
 		quotes = 1;
@@ -24,7 +24,7 @@ int	ms_set_quotes(char *str, int i, int quotes)
 	return (quotes);
 }
 
-int	ms_replace_loop(t_list **lst, t_env *st, char *str, int **count)
+static int	ms_replace_loop(t_list **lst, t_env *st, char *str, int **count)
 {
 	int		j;
 	char	*temp;
@@ -53,7 +53,7 @@ int	ms_replace_loop(t_list **lst, t_env *st, char *str, int **count)
 	return (0);
 }
 
-int	ft_replace(t_list **lst, t_env *st, int *count)
+static int	ms_replace(t_list **lst, t_env *st, int *count)
 {
 	char	*str;
 
@@ -97,7 +97,7 @@ int	ms_main_replace_env(t_list **lst, t_env *st)
 		count[1] = 0;
 		if ((*lst)->type != LIMITOR)
 		{
-			if (ft_replace(lst, st, count) || !(*lst)->content)
+			if (ms_replace(lst, st, count) || !(*lst)->content)
 			{
 				free(count);
 				return (1);
