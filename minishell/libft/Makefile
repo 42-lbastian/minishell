@@ -6,7 +6,7 @@
 #    By: stelie <stelie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 20:20:34 by stelie            #+#    #+#              #
-#    Updated: 2022/11/21 10:38:33 by stelie           ###   ########.fr        #
+#    Updated: 2022/11/22 12:09:47 by stelie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ OBJ_BAS		=	$(addprefix $(O_DIR)/, $(SRC_BAS:.c=.o))
 OBJ_PUT		=	$(addprefix $(O_DIR)/, $(SRC_PUT:.c=.o))
 OBJ_STR		=	$(addprefix $(O_DIR)/, $(SRC_STR:.c=.o))
 OBJ_MEM		=	$(addprefix $(O_DIR)/, $(SRC_MEM:.c=.o))
-OBJ_LST		=	$(addprefix $(O_DIR)/, $(SRC_LST:.c=.o))
+#OBJ_LST		=	$(addprefix $(O_DIR)/, $(SRC_LST:.c=.o))
 OBJ_PTF		=	$(addprefix $(O_DIR)/, $(SRC_PTF:.c=.o))
 OBJ_GNL		=	$(addprefix $(O_DIR)/, $(SRC_GNL:.c=.o))
 
