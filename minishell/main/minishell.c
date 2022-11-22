@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 13:58:13 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:11:44 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,22 @@ static int	_basic_checks(void)
 }
 
 /*
- * FAIT @todo Verifier si le FT_STRDUP a bien reussi et free main le cas echeant
+ * @brief Ending function for ms_routine.
+ * @param to_free: the buffer read allocated in ms_routine -> str_read
+ * @param exit_code: the wanted exit code in return
+ * @return Returns the exit code passed in argument.
+ * @todo:	Once exit_inbuilt is done, add here an 'if(exit_code == 130)'make
+ * 
 */
-void	ms_init_struct(t_struct *main, int argc, char **argv)
+static int	_exit_routine(void *to_free, int exit_code)
 {
-	(void)argc;
-	(void)argv;
-	main->lst = NULL;
-	main->char_check.error = 0;
-	main->char_check.last_double_q = 0;
-	main->char_check.last_simple_q = 0;
-	main->char_check.char_valid = ft_strdup(VALID_CHAR);
+	ft_free(to_free);
+	printf("exit\n");
+	rl_clear_history();
+	return (exit_code);
 }
 
-int	ms_routine(t_struct *main_s, t_env *st)
+static int	ms_routine(t_env *ms_env)
 {
 	char	*str_read;
 
@@ -47,24 +49,16 @@ int	ms_routine(t_struct *main_s, t_env *st)
 	{
 		str_read = readline(NAME);
 		if (!str_read)
-			return (EXIT_FAILURE);
-		if (ft_strcmp(str_read, "exit") == 0)
-			break ;	//NEED TO ADD THE EXIT MESSAGE SEQUENCE
-		if (ft_strlen(str_read) != 0)	//check if cant use libft strlen
+			return (_exit_routine(str_read, 130));
+		if (ft_strcmp(str_read, "exit") == 0) // /!\ Temporary : remplacer par le builtin exit dans _exit_routine
+			return (_exit_routine(str_read, EXIT_SUCCESS));
+		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
-		if (ms_main_lexer(str_read, main_s, st))
-		{
-			ft_putstr_fd(ERR_LEXER, STDERR_FILENO);  //EXPLICIT ERROR MSG && NO EXIT OPER ERROR
-			//ms_free_all(&main_s->lst);
-			break ;
-		}
-		ms_parse(main_s->lst, st);
-		//ms_print_lst(main_s->lst);
-		ms_free_lst(&main_s->lst);
+		if (ms_main_lexer(str_read, ms_env) == EXIT_FAILURE)
+			return (_exit_routine(str_read, EXIT_FAILURE));
 		free(str_read);
 	}
-	free(str_read);
-	return (EXIT_SUCCESS);
+	return (_exit_routine(str_read, EXIT_SUCCESS));
 }
 
 /*
@@ -72,28 +66,12 @@ int	ms_routine(t_struct *main_s, t_env *st)
  */
 int	main(int argc, char **argv, char **envp)
 {
-	t_struct	*main_s;
-	t_env		*st;
+	t_env		*ms_env;
 
 	_basic_checks();
-	st = NULL;
-	global_signals_handler();
-	if (ms_create_env(envp, &st))
+	ms_env = NULL;
+	global_signals_handler(argc, argv);
+	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
-	main_s = malloc(sizeof(t_struct));
-	if (!main_s)
-	{
-		ms_clear_env(&st);
-		return (ft_putmsg_fd(ERR_MAIN_MALLOC, STDERR_FILENO, EXIT_FAILURE));
-	}
-	ms_init_struct(main_s, argc, argv);
-	if (!main_s->char_check.char_valid)
-	{
-		ms_free_all(main_s, &st);
-		return (ft_putmsg_fd(ERR_MAIN_MALLOC, STDERR_FILENO, EXIT_FAILURE));
-	}
-	ms_routine(main_s, st);
-	ms_free_all(main_s, &st);
-	clear_history();
-	return (EXIT_SUCCESS);
+	return (ms_routine(ms_env));
 }

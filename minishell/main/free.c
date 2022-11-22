@@ -6,33 +6,38 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:49 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 19:23:08 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:19:43 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ms_free_all(t_struct *main, t_env **st)
+void	ms_free_main_s(t_struct *main_s)
 {
-	ms_free_lst(&(main->lst));
-	ms_clear_env(st);
-	if (main->char_check.char_valid)
-		free(main->char_check.char_valid);
-	free(main);
+	ft_str_free(main_s->char_check.char_valid);
+	ft_free(&(main_s->char_check));
+	ms_free_lst(main_s->lst);
+	ft_free(main_s);
 }
 
-void	ms_free_lst(t_list **lst)
+void	ms_free_all(t_struct *main_s, t_env *st)
+{
+	ms_free_main_s(main_s);
+	ms_clear_env(st);
+}
+
+void	ms_free_lst(t_list *lst)
 {
 	t_list	*temp;
 
-	while ((*lst))
+	while (lst)
 	{
-		temp = ((*lst)->next);
-		if ((*lst)->content)
-			free((*lst)->content);
-		free((*lst));
-		(*lst) = NULL;
-		(*lst) = temp;
+		temp = (lst->next);
+		if (lst->content)
+			free(lst->content);
+		free(lst);
+		lst = NULL;
+		lst = temp;
 	}
 }
 

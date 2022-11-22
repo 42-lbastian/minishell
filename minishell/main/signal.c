@@ -19,8 +19,10 @@ void	global_signal(int sig)
 /*
  *@brief signal handler for main process
 */
-void	global_signals_handler(void)
+void	global_signals_handler(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGINT, global_signal);

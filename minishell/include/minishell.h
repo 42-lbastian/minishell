@@ -111,13 +111,13 @@ typedef struct s_struct
  * @file main/signal.c
 */
 
-void	global_signals_handler(void);
+void	global_signals_handler(int argc, char **argv);
 
 /**
 **		lexer/lexer.c
 **/
 
-int		ms_main_lexer(char *str, t_struct *main_s, t_env *st);
+int		ms_main_lexer(char *str, t_env *st);
 
 /**
 **		main/create_env.c
@@ -221,8 +221,8 @@ void	ms_print_lst(t_list *lst);
 **		lexer/free.c
 */
 
-void	ms_free_lst(t_list **lst);
-void	ms_free_all(t_struct *main, t_env **st);
+void	ms_free_lst(t_list *lst);
+void	ms_free_all(t_struct *main, t_env *st);
 void	ms_free_parse(t_lst_parser **lst_parser);
 
 /*

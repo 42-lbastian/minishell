@@ -6,11 +6,28 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:58:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:12:13 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/*
+ * FAIT @todo Verifier si le FT_STRDUP a bien reussi et free main le cas echeant
+*/
+t_struct	*ms_init_struct(void)
+{
+	t_struct	*main_s;
+
+	main_s = NULL;
+	main_s = malloc(sizeof(t_struct));
+	if (main_s == NULL)
+		return (NULL);
+	ft_bzero(main_s, sizeof(t_struct));
+	main_s->char_check.char_valid = ft_strdup(VALID_CHAR);
+	return (main_s);
+}
+
 
 int	ms_lexer(char *str, t_struct *main_s)
 {
@@ -30,10 +47,12 @@ int	ms_lexer(char *str, t_struct *main_s)
 	return (0);
 }
 
-int	ms_main_lexer(char *str, t_struct *main_s, t_env *st)
+int	ms_main_lexer(char *str, t_env *st)
 {	
-	int		ret;
+	int			ret;
+	t_struct	*main_s;
 
+	main_s = ms_init_struct();
 	str = ms_check_quotes(str, main_s);
 	str = ms_check_quotes(str, main_s);
 	str = ms_remove_special(str, main_s, 0);
@@ -46,6 +65,12 @@ int	ms_main_lexer(char *str, t_struct *main_s, t_env *st)
 		ret = ms_main_replace_env(&main_s->lst, st);
 	if (ret == 0)
 		ret = ms_main_remove_quotes(&main_s->lst);
-	//free(str);
+	if (ret == EXIT_FAILURE)
+	{
+		ms_free_all(main_s, st);
+		return (EXIT_FAILURE);
+	}
+	//ms_print_lst(main_s->lst);
+	return (ms_parse(main_s->lst, st));
 	return (ret);
 }

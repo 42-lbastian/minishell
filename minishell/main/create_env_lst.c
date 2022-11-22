@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:23 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:53:53 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:10:26 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_env	*ms_lst_last_env(t_env *st)
 int	ms_lst_add_back_env(t_env **st, t_env *new)
 {
 	if (!new)
-		return (1);
+		return (EXIT_FAILURE);
 	if (st && (*st))
 		ms_lst_last_env((*st))->next = new;
 	else
 		(*st) = new;
-	return (0);
+	return (EXIT_SUCCESS);
 }

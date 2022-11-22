@@ -492,5 +492,5 @@ int		ms_parse(t_list *lst, t_env *st)
 	ms_free_parse(&lst_parser_dumb);
 	//ms_read_lst(lst_parser, st, pip[0], pip[1]);
 	//ms_read_lst(lst_parser, st, NULL);
-	return (0);
+	return (EXIT_SUCCESS);
 }
