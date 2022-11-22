@@ -47,6 +47,7 @@ SRC_LEXER	=	char_check_special.c\
 				remove_spaces.c\
 				remove_quotes.c\
 				expand_env_var.c\
+				expand_env_var_2.c\
 				count.c\
 				set_type_cmd.c\
 

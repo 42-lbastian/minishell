@@ -153,9 +153,15 @@ int		ms_exclude_special(char c, t_struct *main);
 int		ms_main_remove_quotes(t_list **lst);
 
 /*
-**		lexer/expand_var.c
+**		lexer/expand_env_var.c
 */
 int		ms_main_replace_env(t_list **lst, t_env *st);
+
+/*
+**		lexer/expand_env_var_2.c
+*/
+int	ft_split_expand(t_list **lst, char **split);
+int	ft_error_return(char *str);
 
 /**
 **		lexer/count.c
