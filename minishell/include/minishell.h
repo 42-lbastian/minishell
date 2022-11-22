@@ -233,7 +233,8 @@ void	ms_print_lst(t_list *lst);
 */
 
 void	ms_free_lst(t_list **lst);
-void	ms_free_all(t_list **lst);
+void	ms_free_all(t_struct *main, t_env **st);
+void	ms_free_parse(t_lst_parser **lst_parser);
 
 /*
 **		lexer/remove_spaces.c
