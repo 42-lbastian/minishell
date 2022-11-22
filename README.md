@@ -4,15 +4,14 @@
 
 
 ### TO-DO now :
-- Makefile -> pass to CC instead of GCC
-- Linked list for ENV (format :
-	-  char	* var
-	- char *value
-	- t_list	*next
 - Make signals work (!) must work for child processes too!
-	- CTRL-C	(New Prompt on a new line) -> decided not to avoid "^C", to be faithful to bash.
-	- CTRL-D	(Exit the shell / only with an empty line) -> Not done yet.
+	- ~~CTRL-C	(New Prompt on a new line)~~
+	- CTRL-D	(Exit the shell) -> Need error code + child processus gestion + fix bug when buffer is not empty (exit written but not leaving)
 	- ~~CTRL-\		(do nothing)~~
+
+### ON WORK :
+- pass static var for ms_env in order to access it from everywhere
+- Can it work for exit_code ??
 
 ### FOLLOW:
 | builtins |
