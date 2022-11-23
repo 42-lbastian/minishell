@@ -155,6 +155,7 @@ void	set_err_code(int err_code);
 */
 
 int		pwd_builtin(void);
+int		exit_builtin(char **args);
 
 /*
 **		lexer/char_check_special.c
