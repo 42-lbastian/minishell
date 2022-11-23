@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 15:54:22 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 16:02:48 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,12 @@ int		ms_parse(t_list *lst, t_env *st);
 /*
 **		parse/create_lst_parser.c
 */
-int		ft_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser);
+int		ms_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser);
+
+/*
+**		parse/read_lst_parser.c
+*/
+int		ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int fd2);
 
 /*
 **		parse/create_lst_parser_utils.c
@@ -307,7 +312,7 @@ void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int
 */
 
 t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type);
-int		ms_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new);
+int		ms_lst_p_addback(t_lst_parser **lst, t_lst_parser *new);
 int		ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new);
 char	*ms_find_var_path(char *str, t_env *st);
 t_lst_parser	*ms_lst_parse_last(t_lst_parser *lst);

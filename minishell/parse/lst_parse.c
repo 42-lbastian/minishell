@@ -6,7 +6,7 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:07:57 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 15:09:57 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:05:51 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_lst_parser	*ms_lst_parse_last(t_lst_parser *lst)
 	return (lst);
 }
 
-int	ms_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new)
+int	ms_lst_p_addback(t_lst_parser **lst, t_lst_parser *new)
 {
 	if (!new)
 		return (1);

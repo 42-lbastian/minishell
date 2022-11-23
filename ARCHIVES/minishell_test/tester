@@ -9,9 +9,9 @@ if [[ $1 ]]; then
 	)
 else
 	test_lists=(
+		"builtins"
 		"redirects"
 		"pipes"
-		"builtins"
 		"extras"
 	)
 fi
@@ -32,6 +32,7 @@ chmod 000 ./test_files/invalid_permission
 mkdir ./outfiles
 mkdir ./mini_outfiles
 mkdir ./bash_outfiles
+rm -rf ./val
 
 printf $RED
 echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥";
@@ -60,7 +61,7 @@ for testfile in ${test_lists[*]}; do
 		printf "minishell> %s\n" "$teste" > bash_out
 		echo -e "$teste" | bash &>> bash_out
 		printf "minishell> " >> bash_out
-
+		
 		DIFF=$(diff mini_out bash_out)
 		if [ "$DIFF" == "" ]; then
 			((ok++))
