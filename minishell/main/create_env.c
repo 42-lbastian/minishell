@@ -6,22 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:16 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 17:10:46 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 11:48:40 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	_display_env(t_env *env)
-{
-	while (env->var && env->value)
-	{
-		printf("\n\nvar = %s\nvalue = %s\n", env->var, env->value);
-		if (env->next == NULL)
-			break ;
-		env = env->next;
-	}
-}
 
 static int	ms_str_trim_env(char *str, t_env **st)
 {
