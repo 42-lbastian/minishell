@@ -6,7 +6,7 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:21:56 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 17:02:01 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:17:58 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ms_count_nb_cmd(t_list *lst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (lst && lst->type == CMD)
@@ -29,10 +29,10 @@ int	ms_count_nb_cmd(t_list *lst)
 
 int	ms_free_cmd(char ***cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while ((*cmd)[i])
+	while ((*cmd) && (*cmd)[i])
 	{
 		free((*cmd)[i]);
 		(*cmd)[i] = NULL;
@@ -45,7 +45,7 @@ int	ms_free_cmd(char ***cmd)
 
 int	ms_is_type_in_out(int type)
 {
-	if (type == FILE_IN || type == FILE_OUT_OVER || type == FILE_OUT_APP)\
+	if (type == FILE_IN || type == FILE_OUT_OVER || type == FILE_OUT_APP)
 		return (1);
 	return (0);
 }
