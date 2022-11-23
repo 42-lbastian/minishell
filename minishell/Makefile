@@ -56,6 +56,7 @@ SRC_PARSER	=	parse.c\
 				tools.c\
 
 SRC_BUILT	=	pwd_builtin.c\
+				exit_builtin.c\
 				#cd.c\
 				#echo.c\
 				#env.c\
