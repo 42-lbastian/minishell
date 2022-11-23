@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_print.c                                        :+:      :+:    :+:   */
+/*   debug_00.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:30 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:55:47 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 11:35:24 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ms_print_lst(t_list *lst)
+/*
+ * @name: _basic_check()
+ * @brief sert a verifier les constantes, defines etc.. (A supprimer plus tard)
+ * @return Retourne EXIT_SUCCESS ou EXIT_FAILURE.
+*/
+int	_basic_checks(void)
+{
+	if (ms_strlen(VALID_CHAR) != NB_CHAR_VALID)
+		return (ft_putmsg_fd(ERR_NB_CHAR, STDERR_FILENO, EXIT_FAILURE));
+	return (EXIT_SUCCESS);
+}
+
+void	_ms_print_lst(t_list *lst)
 {
 	while (lst)
 	{
@@ -40,11 +52,15 @@ void	ms_print_lst(t_list *lst)
 	}
 }
 
-void	ms_print_env(t_env *st)
+/*
+ * @name: _ms_print_env()
+ * @brief Sert à afficher le t_env cree (equivault a 'env')
+*/
+void	_ms_print_env(t_env *ms_env)
 {
-	while (st)
+	while (ms_env)
 	{
-		printf("Var:%s\tValue:%s\n", st->var, st->value);
-		st = st->next;
+		printf("Var:%s\tValue:%s\n", ms_env->var, ms_env->value);
+		ms_env = ms_env->next;
 	}
 }

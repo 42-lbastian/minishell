@@ -6,23 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 17:11:44 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 11:40:21 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
- * @name: _basic_check()
- * @brief sert a verifier les constantes, defines etc.. (A supprimer plus tard)
- * @return Retourne EXIT_SUCCESS ou EXIT_FAILURE.
-*/
-static int	_basic_checks(void)
-{
-	if (ms_strlen(VALID_CHAR) != NB_CHAR_VALID)
-		return (ft_putmsg_fd(ERR_NB_CHAR, STDERR_FILENO, EXIT_FAILURE));
-	return (EXIT_SUCCESS);
-}
 
 /*
  * @brief Ending function for ms_routine.
@@ -68,7 +56,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_env		*ms_env;
 
-	_basic_checks();
 	ms_env = NULL;
 	global_signals_handler(argc, argv);
 	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)

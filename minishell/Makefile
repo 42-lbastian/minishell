@@ -13,7 +13,7 @@ CUT			=	"\033[K"
 #Commands
 CC			=	cc
 RM			=	rm -rf
-MAKE		=	make
+MAKE		=	make --no-print-directory
 MKD			=	mkdir -p
 RFLAG		=	-lreadline
 CFLAGS		=	-Wall -Wextra -Werror -g
@@ -42,7 +42,6 @@ SRC_LEXER	=	char_check_special.c\
 				utils_2.c\
 				lst.c\
 				lst_2.c\
-				lst_print.c\
 				free.c\
 				remove_spaces.c\
 				remove_quotes.c\
@@ -59,9 +58,11 @@ SRC_BUILT	=	#cd.c\
 				#pwd.c\
 				#echo.c\
 				#env.c\
-				#utils_env.c\
 				#export.c\
 				#unset.c\
+				#utils_env.c\
+
+SRC_DEBUG	=	debug_00.c\
 
 #Objects
 
@@ -69,7 +70,8 @@ OBJ_MAIN	=	$(addprefix $(O_DIR)/, $(SRC_MAIN:.c=.o))
 OBJ_LEXER	=	$(addprefix $(O_DIR)/, $(SRC_LEXER:.c=.o))
 OBJ_PARSER	=	$(addprefix $(O_DIR)/, $(SRC_PARSER:.c=.o))
 OBJ_BUILT	=	$(addprefix $(O_DIR)/, $(SRC_BUILT:.c=.o))
-
+OBJ_DEBUG	=	$(addprefix $(O_DIR)/, $(SRC_DEBUG:.c=.o))
+OBJ_ALL		=	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(OBJ_DEBUG)
 
 $(O_DIR)/%.o:	./*/%.c
 				@echo $(Y)Compiling [$@]...$(X)
@@ -77,22 +79,22 @@ $(O_DIR)/%.o:	./*/%.c
 				@$(CC) $(CFLAGS) $(RFLAGS) -o $@ -c $<
 				@printf $(UP) $(CUT)
 
-$(NAME):	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+$(NAME):	$(OBJ_ALL)
 			@$(MAKE) -C $(LFT_DIR)
 			@echo $(Y)Compiling [$(NAME)]...$(X)
-			@$(CC) -o $(NAME) $(CFLAGS) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT) $(RFLAG)
+			@$(CC) -o $(NAME) $(CFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
 			@printf $(UP)$(CUT)
-			@echo $(G)Compiled : [$(NAME)]$(X)
+			@echo $(G)Compiled [$(NAME)]$(X)
 
 all:	$(NAME)
 
-fsan: $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
+fsan: $(OBJ_ALL)
 	$(MAKE) -C $(LFT_DIR)
-	$(CC) -o $(NAME) $(FFLAGS) $(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(LIBFT) $(RFLAG)
+	$(CC) -o $(NAME) $(FFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
 	
 clean:
 	@$(MAKE) clean -C libft
-	@$(RM) $(OBJS)
+	@$(RM) $(O_DIR)
 	@echo $(R) removed $(NAME) obj files $(X)
 
 fclean:	clean
