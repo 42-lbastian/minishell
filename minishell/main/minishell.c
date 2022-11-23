@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 12:14:34 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 12:47:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	_exit_routine(void *to_free, int exit_code)
 	ft_free(to_free);
 	printf("exit\n");
 	rl_clear_history();
+	free_env(get_env());
 	return (exit_code);
 }
 
