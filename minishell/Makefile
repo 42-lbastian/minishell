@@ -90,8 +90,11 @@ $(NAME):	$(OBJ_ALL)
 all:	$(NAME)
 
 fsan: $(OBJ_ALL)
-	$(MAKE) -C $(LFT_DIR)
-	$(CC) -o $(NAME) $(FFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
+	@$(MAKE) -C $(LFT_DIR)
+	@echo $(Y)Compiling [$(NAME)] with fsanitize=address flag...$(X)
+	@$(CC) -o $(NAME) $(FFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
+	@printf $(UP)$(CUT)
+	@echo $(G)Compiled [$(NAME)] with fsanitize=address flag...$(X)
 	
 clean:
 	@$(MAKE) clean -C libft
