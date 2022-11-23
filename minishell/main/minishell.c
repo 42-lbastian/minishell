@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 12:47:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:34:35 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ static int	ms_routine(void)
 	while (true)
 	{
 		str_read = readline(NAME);
-		if (!str_read)
-			return (_exit_routine(str_read, 130));
+		if (str_read == NULL)
+			return (_exit_routine(str_read, ERR_CODE_CTRL_D));
 		if (ft_strcmp(str_read, "exit") == 0) // /!\ Temporary : remplacer par le builtin exit dans _exit_routine
-			return (_exit_routine(str_read, EXIT_SUCCESS));
+			return (_exit_routine(str_read, get_err_code()));
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
 		if (ms_main_lexer(str_read, get_env()) == EXIT_FAILURE)
 			return (_exit_routine(str_read, EXIT_FAILURE));
 		free(str_read);
 	}
-	return (_exit_routine(str_read, EXIT_SUCCESS));
+	return (_exit_routine(str_read, EXIT_FAILURE));
 }
 
 /*

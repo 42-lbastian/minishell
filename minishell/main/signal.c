@@ -9,6 +9,7 @@ void	global_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
+		set_err_code(ERR_CODE_CTRL_D);
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

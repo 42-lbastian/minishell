@@ -10,6 +10,7 @@
 # define CMD_CHAR " ><|"
 # define C_CHECK_CHAR "\'\"$ "
 # define SPECIAL_CHAR "|<>"
+# define ERR_CODE_CTRL_D 130
 
 # define SIMPLE 0
 # define DOUBLE 1
@@ -140,6 +141,13 @@ int		ms_lst_add_back_env(t_env **st, t_env *new);
 void	set_env(t_env *env);
 t_env	*get_env(void);
 void	free_env(t_env *env);
+
+/**
+**		main/errors.c
+**/
+
+int		get_err_code(void);
+void	set_err_code(int err_code);
 
 
 /*
