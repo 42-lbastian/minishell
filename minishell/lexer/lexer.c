@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 17:12:13 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:43:44 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * FAIT @todo Verifier si le FT_STRDUP a bien reussi et free main le cas echeant
 */
-t_struct	*ms_init_struct(void)
+static t_struct	*ms_init_struct(void)
 {
 	t_struct	*main_s;
 
@@ -28,8 +28,7 @@ t_struct	*ms_init_struct(void)
 	return (main_s);
 }
 
-
-int	ms_lexer(char *str, t_struct *main_s)
+static int	ms_lexer(char *str, t_struct *main_s)
 {
 	main_s->i = 0;
 	main_s->is_arg = 0;
@@ -70,7 +69,6 @@ int	ms_main_lexer(char *str, t_env *st)
 		ms_free_all(main_s, st);
 		return (EXIT_FAILURE);
 	}
-	//ms_print_lst(main_s->lst);
 	return (ms_parse(main_s->lst, st));
 	return (ret);
 }

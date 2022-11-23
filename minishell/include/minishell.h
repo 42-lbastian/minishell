@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
+/*   Updated: 2022/11/23 15:44:32 by stelie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -39,9 +51,14 @@
 # define ECHO 1
 
 # define ERR_ENV_MALLOC "Error Malloc env\n"
+# define ERR_CHAR_VALID_MALLOC "Error Malloc Char Valid\n"
 # define ERR_MAIN_MALLOC "Error Malloc Main struct\n"
 # define ERR_LEXER "Error Lexer\n"
 # define ERR_NB_CHAR "ERROR NB_CHAR\n"
+# define ERR_PIPE "Error Pipe Creation\n"
+# define ERR_LST_PARSER_CREATION "Error lst parser Creation\n"
+# define ERR_FILE_IN_OUT_ARG "bash: syntax error near unexpected token'\n"
+# define ERR_CMD_MALLOC "Error Malloc cmd parser\n"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -149,7 +166,6 @@ void	free_env(t_env *env);
 int		get_err_code(void);
 void	set_err_code(int err_code);
 
-
 /*
  * BUILTINS
 */
@@ -170,10 +186,15 @@ int		ms_exclude_special(char c, t_struct *main);
 int		ms_main_remove_quotes(t_list **lst);
 
 /*
-**		lexer/expand_var.c
+**		lexer/expand_env_var.c
 */
-
 int		ms_main_replace_env(t_list **lst, t_env *st);
+
+/*
+**		lexer/expand_env_var_2.c
+*/
+int		ms_split_expand(t_list **lst, char **split);
+int		ms_error_return(char *str);
 
 /**
 **		lexer/count.c
@@ -235,12 +256,6 @@ t_list	*ms_lst_last(t_list *lst);
 int		ms_lstadd_back(t_list **lst, t_list *new);
 
 /*
-**		lexer/lst_print.c
-*/
-
-
-
-/*
 **		lexer/free.c
 */
 
@@ -267,6 +282,20 @@ int		ms_set_type_cmd(t_list **lst);
 int		ms_parse(t_list *lst, t_env *st);
 
 /*
+**		parse/create_lst_parser.c
+*/
+
+int		ft_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser);
+
+/*
+**		parse/create_lst_parser_utils.c
+*/
+
+int		ms_count_nb_cmd(t_list *lst);
+int		ms_free_cmd(char ***cmd);
+int		ms_is_type_in_out(int type);
+
+/*
 **		parse/exec.c
 */
 
@@ -276,15 +305,21 @@ void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int
 //void	ms_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type);
 
 /*
-**		parse/lst.c
+**		parse/lst_parse.c
 */
 
 t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type);
 int		ms_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new);
 int		ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new);
+char	*ms_find_var_path(char *str, t_env *st);
+t_lst_parser	*ms_lst_parse_last(t_lst_parser *lst);
+
+/**
+**		parse/lst_parse_print.c
+**/
+
 void	ms_print_lst_parse(t_lst_parser *lst);
 void	ms_print_lst_parse_reverse(t_lst_parser *lst);
-char	*ms_find_var_path(char *str, t_env *st);
 
 /*
 **		parse/tools.c
