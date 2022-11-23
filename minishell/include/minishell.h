@@ -126,16 +126,10 @@ void	global_signals_handler(int argc, char **argv);
 int		ms_main_lexer(char *str, t_env *st);
 
 /**
-**		main/create_env.c
+**		main/env_create.c
 **/
 
 int		ms_create_env(char **envp, t_env **st);
-void	ms_clear_env(t_env **st);
-
-/**
-**		main/create_env_lst.c
-**/
-
 t_env	*ms_lst_new_env(char *var, char *value);
 int		ms_lst_add_back_env(t_env **st, t_env *new);
 
@@ -290,5 +284,6 @@ char	**ms_strcpy_cmd(char **arr);
 void	_ms_print_env(t_env *ms_env);
 void	_ms_print_lst(t_list *lst);
 int		_basic_checks(void);
+void	ms_clear_env(t_env **st);
 
 #endif

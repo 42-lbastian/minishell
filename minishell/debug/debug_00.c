@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:30 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 11:35:24 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:01:24 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,25 @@ void	_ms_print_env(t_env *ms_env)
 	{
 		printf("Var:%s\tValue:%s\n", ms_env->var, ms_env->value);
 		ms_env = ms_env->next;
+	}
+}
+
+/*
+ * @brief [DEPRECATED] clear and free the given t_env.
+ * Kept for "in case of" reasons only.
+ * @todo: delete when finished.
+*/
+void	ms_clear_env(t_env **st)
+{
+	t_env	*temp;
+
+	while ((*st))
+	{
+		temp = (*st)->next;
+		free((*st)->value);
+		free((*st)->var);
+		free((*st));
+		(*st) = NULL;
+		(*st) = temp;
 	}
 }

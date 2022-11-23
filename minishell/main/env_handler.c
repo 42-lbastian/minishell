@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:30:37 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 12:42:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 12:57:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_env	*get_env(void)
 	return (_get_env(NULL));
 }
 
+/*
+ * @brief Frees and NULLifies the given t_env.
+*/
 void	free_env(t_env *env)
 {
 	t_env	*temp;
