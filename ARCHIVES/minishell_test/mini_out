@@ -1,2 +1,4 @@
-minishell> grep hi <../minishell_test/test_files/infile_big <../minishell_test/test_files/infile
+minishell> pwd oi
+pwd: ignoring non-option arguments
+/home/l/Documents/42/minishell/ARCHIVES/minishell_test
 minishell> 
