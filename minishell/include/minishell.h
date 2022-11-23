@@ -145,6 +145,7 @@ int		ms_lst_add_back_env(t_env **st, t_env *new);
 
 void	set_env(t_env *env);
 t_env	*get_env(void);
+void	free_env(t_env *env);
 
 
 /*
