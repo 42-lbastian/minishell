@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 15:57:56 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 16:47:05 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ int	ms_main_lexer(char *str, t_env *st)
 		ret = ms_main_remove_quotes(&main_s->lst);
 	if (ret == EXIT_FAILURE)
 	{
-		ms_free_all(main_s, st);
+		ms_free_main_s(main_s);
 		return (EXIT_FAILURE);
 	}
-	return (ms_parse(main_s->lst, st));
-	return (ret);
+	return (ms_parse(main_s, st));
 }

@@ -113,21 +113,22 @@ int	ms_read_dumb(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
 	return (0);
 }
 
-int		ms_parse(t_list *lst, t_env *st)
+int	ms_parse(t_struct *main_s, t_env *st)
 {
-	int pip[2];
-	int	fd_pipe;
+	int				pip[2];
+	int				fd_pipe;
+	t_lst_parser	*lst_parser_dumb;
 
-	t_lst_parser *lst_parser_dumb;
 	lst_parser_dumb = NULL;
-	if (ft_create_lst_parser_main(lst, &lst_parser_dumb))
-		return (ft_putmsg_fd(ERR_LST_PARSER_CREATION, STDERR_FILENO,
-			EXIT_FAILURE));
+	if (ft_create_lst_parser_main(main_s->lst, &lst_parser_dumb))
+		return (ft_putmsg_fd(ERR_LST_PARSER_CREATION,
+				STDERR_FILENO, EXIT_FAILURE));
 	fd_pipe = pipe(pip);
 	if (fd_pipe == -1)
 		return (ft_putmsg_fd(ERR_PIPE, STDERR_FILENO, EXIT_FAILURE));
 	if (ms_read_dumb(lst_parser_dumb, st, pip[0], pip[1], 0))
 		return (1);
 	ms_free_parse(&lst_parser_dumb);
+	ms_free_main_s(main_s);
 	return (EXIT_SUCCESS);
 }

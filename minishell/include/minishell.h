@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 15:54:22 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 16:50:51 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,15 @@ void	free_env(t_env *env);
 int		get_err_code(void);
 void	set_err_code(int err_code);
 
+
+/*
+**		main/free.c
+*/
+
+void	ms_free_main_s(t_struct *main_s);
+void	ms_free_lst(t_list *lst);
+void	ms_free_parse(t_lst_parser **lst_parser);
+
 /*
  * BUILTINS
 */
@@ -256,14 +265,6 @@ t_list	*ms_lst_last(t_list *lst);
 int		ms_lstadd_back(t_list **lst, t_list *new);
 
 /*
-**		lexer/free.c
-*/
-
-void	ms_free_lst(t_list *lst);
-void	ms_free_all(t_struct *main, t_env *st);
-void	ms_free_parse(t_lst_parser **lst_parser);
-
-/*
 **		lexer/remove_spaces.c
 */
 
@@ -279,7 +280,7 @@ int		ms_set_type_cmd(t_list **lst);
 **		parse/parse.c
 */
 
-int		ms_parse(t_list *lst, t_env *st);
+int		ms_parse(t_struct *main_s, t_env *st);
 
 /*
 **		parse/create_lst_parser.c
