@@ -18,6 +18,7 @@ void	global_signal(int sig)
 
 /*
  *@brief signal handler for main process
+ *@param ARGS: just here to avoid "not used variable" error
 */
 void	global_signals_handler(int argc, char **argv)
 {
