@@ -1,52 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   expand_env_var_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 15:02:05 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 15:07:25 by lbastian         ###   ########.fr       */
+/*   Created: 2022/11/22 14:22:41 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/22 14:40:42 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	ms_free_strcpy_cmd(char **ret)
+int	ms_split_expand(t_list **lst, char **split)
 {
 	int	i;
 
-	i = 0;
-	while (ret[i])
+	i = 1;
+	if (!split)
+		return (1);
+	(*lst)->content = ms_strjoin_2(((*lst)->content), split[0]);
+	free(split[0]);
+	while (split[i])
 	{
-		free (ret[i]);
+		if (ms_lstadd(lst, ms_lst_new_join(split[i], CMD)))
+			return (1);
+		(*lst) = (*lst)->next;
+		free(split[i]);
 		i++;
 	}
-	free (ret);
+	free(split);
+	return (0);
 }
 
-char	**ms_strcpy_cmd(char **arr)
+int	ms_error_return(char *str)
 {
-	char	**ret;
-	int		i;
-
-	i = 0;
-	while (arr[i])
-		i++;
-	ret = malloc(sizeof(char *) * (i + 1));
-	if (!ret)
-		return (NULL);
-	ret[i] = NULL;
-	i = 0;
-	while (arr[i])
-	{
-		ret[i] = ms_strcpy_2(arr[i]);
-		if (!ret[i])
-		{
-			ms_free_strcpy_cmd(ret);
-			return (NULL);
-		}
-		i++;
-	}
-	return (ret);
+	free(str);
+	return (1);
 }

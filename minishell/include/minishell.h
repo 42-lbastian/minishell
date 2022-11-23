@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 15:44:32 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:54:22 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,13 +284,11 @@ int		ms_parse(t_list *lst, t_env *st);
 /*
 **		parse/create_lst_parser.c
 */
-
 int		ft_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser);
 
 /*
 **		parse/create_lst_parser_utils.c
 */
-
 int		ms_count_nb_cmd(t_list *lst);
 int		ms_free_cmd(char ***cmd);
 int		ms_is_type_in_out(int type);

@@ -1,52 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   create_lst_parser_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 15:02:05 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 15:07:25 by lbastian         ###   ########.fr       */
+/*   Created: 2022/11/22 16:21:56 by lbastian          #+#    #+#             */
+/*   Updated: 2022/11/22 17:02:01 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	ms_free_strcpy_cmd(char **ret)
+int	ms_count_nb_cmd(t_list *lst)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	while (ret[i])
+	while (lst && lst->type == CMD)
 	{
-		free (ret[i]);
 		i++;
+		lst = lst->next;
+		if (lst && lst->type != PIPE && lst->type != CMD && lst->next)
+			lst = lst->next->next;
 	}
-	free (ret);
+	return (i);
 }
 
-char	**ms_strcpy_cmd(char **arr)
+int	ms_free_cmd(char ***cmd)
 {
-	char	**ret;
-	int		i;
+	int i;
 
 	i = 0;
-	while (arr[i])
-		i++;
-	ret = malloc(sizeof(char *) * (i + 1));
-	if (!ret)
-		return (NULL);
-	ret[i] = NULL;
-	i = 0;
-	while (arr[i])
+	while ((*cmd)[i])
 	{
-		ret[i] = ms_strcpy_2(arr[i]);
-		if (!ret[i])
-		{
-			ms_free_strcpy_cmd(ret);
-			return (NULL);
-		}
+		free((*cmd)[i]);
+		(*cmd)[i] = NULL;
 		i++;
 	}
-	return (ret);
+	free((*cmd));
+	(*cmd) = NULL;
+	return (1);
+}
+
+int	ms_is_type_in_out(int type)
+{
+	if (type == FILE_IN || type == FILE_OUT_OVER || type == FILE_OUT_APP)\
+		return (1);
+	return (0);
 }
