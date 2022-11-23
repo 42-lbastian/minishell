@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 11:40:21 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/23 12:14:34 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	_exit_routine(void *to_free, int exit_code)
 	return (exit_code);
 }
 
-static int	ms_routine(t_env *ms_env)
+static int	ms_routine(void)
 {
 	char	*str_read;
 
@@ -42,7 +42,7 @@ static int	ms_routine(t_env *ms_env)
 			return (_exit_routine(str_read, EXIT_SUCCESS));
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
-		if (ms_main_lexer(str_read, ms_env) == EXIT_FAILURE)
+		if (ms_main_lexer(str_read, get_env()) == EXIT_FAILURE)
 			return (_exit_routine(str_read, EXIT_FAILURE));
 		free(str_read);
 	}
@@ -60,5 +60,6 @@ int	main(int argc, char **argv, char **envp)
 	global_signals_handler(argc, argv);
 	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
-	return (ms_routine(ms_env));
+	set_env(ms_env);
+	return (ms_routine());
 }

@@ -33,6 +33,7 @@ SRC_MAIN	=	minishell.c\
 				signal.c\
 				create_env.c\
 				create_env_lst.c\
+				env_handler.c\
 
 SRC_LEXER	=	char_check_special.c\
 				lexer.c\

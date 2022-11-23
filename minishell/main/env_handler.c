@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_handler.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/23 11:30:37 by stelie            #+#    #+#             */
+/*   Updated: 2022/11/23 11:58:01 by stelie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/minishell.h"
+
+static t_env	*_get_env(t_env *env)
+{
+	static t_env	*static_env = NULL;
+
+	if (env != NULL)
+		static_env = env;
+	return (static_env);
+}
+
+/*
+ * @brief Allows to update the existing t_env.
+*/
+void	set_env(t_env *env)
+{
+	_get_env(env);
+}
+
+/*
+ * @brief Returns the actual t_env existing.
+ */
+t_env	*get_env(void)
+{
+	return (_get_env(NULL));
+}

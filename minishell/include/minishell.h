@@ -73,7 +73,13 @@ typedef union s_value
 	char	*oper;
 }				t_value;
 
-//LST_CMD
+/*
+ * @brief t_lst_parser - double way list of Commands
+ * @param next: s_lst_cmd *
+ * @param prev: s_lst_cmd *
+ * @param value: t_value
+ * @param type: int
+*/
 typedef struct s_lst_cmd
 {
 	struct s_lst_cmd	*next;
@@ -132,6 +138,14 @@ void	ms_clear_env(t_env **st);
 
 t_env	*ms_lst_new_env(char *var, char *value);
 int		ms_lst_add_back_env(t_env **st, t_env *new);
+
+/**
+**		main/env_handler.c
+**/
+
+void	set_env(t_env *env);
+t_env	*get_env(void);
+
 
 /*
 **		lexer/char_check_special.c
@@ -214,8 +228,7 @@ int		ms_lstadd_back(t_list **lst, t_list *new);
 **		lexer/lst_print.c
 */
 
-void	ms_print_env(t_env *st);
-void	ms_print_lst(t_list *lst);
+
 
 /*
 **		lexer/free.c
@@ -268,5 +281,13 @@ char	*ms_find_var_path(char *str, t_env *st);
 */
 
 char	**ms_strcpy_cmd(char **arr);
+
+/*
+ *  ------- DEBUG FUNCTIONS ----------
+*/
+
+void	_ms_print_env(t_env *ms_env);
+void	_ms_print_lst(t_list *lst);
+int		_basic_checks(void);
 
 #endif
