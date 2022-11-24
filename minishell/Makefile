@@ -35,8 +35,7 @@ SRC_MAIN	=	minishell.c\
 				env_handler.c\
 				errors.c\
 
-SRC_LEXER	=	char_check_special.c\
-				lexer.c\
+SRC_LEXER	=	lexer.c\
 				read_char.c\
 				unwanted.c\
 				utils.c\
