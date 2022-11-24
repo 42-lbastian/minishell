@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/24 13:14:03 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 14:13:04 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	_exit_routine(void *to_free, int exit_code)
 	return (exit_code);
 }
 
-static int	ms_routine(void)
+static int	_routine(void)
 {
 	char	*str_read;
 
@@ -43,6 +43,8 @@ static int	ms_routine(void)
 			return (_exit_routine(str_read, get_err_code()));
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
+		while (*str_read == ' ')
+			str_read = ft_str_rm_char(str_read, 0);
 		if (ms_main_lexer(str_read, get_env()) == EXIT_FAILURE)
 			return (_exit_routine(str_read, EXIT_FAILURE));
 		ft_free(str_read);
@@ -50,9 +52,6 @@ static int	ms_routine(void)
 	return (_exit_routine(str_read, EXIT_FAILURE));
 }
 
-/*
- *@todo: free 'env_t *st'
- */
 int	main(int argc, char **argv, char **envp)
 {
 	t_env		*ms_env;
@@ -62,5 +61,5 @@ int	main(int argc, char **argv, char **envp)
 	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	set_env(ms_env);
-	return (ms_routine());
+	return (_routine());
 }
