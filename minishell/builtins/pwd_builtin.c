@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:52:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 14:01:01 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 11:19:33 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	pwd_builtin(void)
 		return (EXIT_FAILURE);
 	}
 	printf("%s\n", result);
-	ft_str_free(result);
+	ft_free(result);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/22 13:55:50 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 11:16:36 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ char			*ft_str_cut_after(char *src, char c);
 size_t			ft_str_arr_len(char **arr);
 char			**ft_str_arr_dup(char **arr);
 void			ft_str_arr_free(char **array);
-void			ft_str_free(char *str);
+char			*ft_str_rm_fst_occ(char *src, char c);
+char			*ft_str_rm_last_occ(char *src, char c);
 
 /*
 06_memory
