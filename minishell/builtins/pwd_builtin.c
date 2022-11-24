@@ -6,12 +6,16 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:52:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/24 11:19:33 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 11:24:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/*
+ * @brief The pwd builtin mandatory in the project
+ * @return Returns EXIT_SUCCESS or EXIT_FAILURE.
+*/
 int	pwd_builtin(void)
 {
 	char	*result;
