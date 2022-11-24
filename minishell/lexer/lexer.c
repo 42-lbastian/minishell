@@ -6,14 +6,14 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 16:47:05 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 13:10:24 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /*
- * FAIT @todo Verifier si le FT_STRDUP a bien reussi et free main le cas echeant
+ * @brief Allocates then fills with zeros
 */
 static t_struct	*ms_init_struct(void)
 {
@@ -24,7 +24,6 @@ static t_struct	*ms_init_struct(void)
 	if (main_s == NULL)
 		return (NULL);
 	ft_bzero(main_s, sizeof(t_struct));
-	main_s->char_check.char_valid = ft_strdup(VALID_CHAR);
 	return (main_s);
 }
 
@@ -54,7 +53,7 @@ int	ms_main_lexer(char *str, t_env *st)
 	main_s = ms_init_struct();
 	str = ms_check_quotes(str, main_s);
 	str = ms_check_quotes(str, main_s);
-	str = ms_remove_special(str, main_s, 0);
+	str = ms_remove_special(str, 0);
 	ret = ms_lexer(str, main_s);
 	if (ret == 0)
 		ret = ms_set_type_cmd(&main_s->lst);

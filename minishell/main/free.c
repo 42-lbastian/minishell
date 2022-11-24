@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:49 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/24 11:19:48 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 12:40:43 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ms_free_main_s(t_struct *main_s)
 {
-	ft_free(main_s->char_check.char_valid);
 	ms_free_lst(main_s->lst);
 	ft_free(main_s);
 }

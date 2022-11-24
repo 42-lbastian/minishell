@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 16:50:51 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 12:49:56 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ typedef struct s_char_check
 {
 	int		last_simple_q;
 	int		last_double_q;
-	char	*char_valid;
 	int		error;
 }				t_char_check;
 
@@ -166,7 +165,6 @@ void	free_env(t_env *env);
 int		get_err_code(void);
 void	set_err_code(int err_code);
 
-
 /*
 **		main/free.c
 */
@@ -181,12 +179,6 @@ void	ms_free_parse(t_lst_parser **lst_parser);
 
 int		pwd_builtin(void);
 int		exit_builtin(char **args);
-
-/*
-**		lexer/char_check_special.c
-*/
-
-int		ms_exclude_special(char c, t_struct *main);
 
 /*
 **		lexer/remove_quotes.c
@@ -244,7 +236,7 @@ int		ms_count_read_quotes(char *str, int start);
 */
 
 char	*ms_check_quotes(char *str, t_struct *main);
-char	*ms_remove_special(char *str, t_struct *main, int i);
+char	*ms_remove_special(char *str, int i);
 
 /*
 **		lexer/lst.c
@@ -285,11 +277,13 @@ int		ms_parse(t_struct *main_s, t_env *st);
 /*
 **		parse/create_lst_parser.c
 */
+
 int		ft_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser);
 
 /*
 **		parse/create_lst_parser_utils.c
 */
+
 int		ms_count_nb_cmd(t_list *lst);
 int		ms_free_cmd(char ***cmd);
 int		ms_is_type_in_out(int type);
