@@ -9,9 +9,9 @@ if [[ $1 ]]; then
 	)
 else
 	test_lists=(
+		"pipes"
 		"builtins"
 		"redirects"
-		"pipes"
 		"extras"
 	)
 fi
@@ -60,7 +60,7 @@ for testfile in ${test_lists[*]}; do
 
 		printf "minishell> %s\n" "$teste" > bash_out
 		echo -e "$teste" | bash &>> bash_out
-		printf "minishell> " >> bash_out
+		printf "minishell> exit\n" >> bash_out
 		
 		DIFF=$(diff mini_out bash_out)
 		if [ "$DIFF" == "" ]; then

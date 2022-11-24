@@ -14,7 +14,7 @@ int		ms_parse(t_list *lst, t_env *st)
 	if (fd_pipe == -1)
 		return (ft_putmsg_fd(ERR_PIPE, STDERR_FILENO, EXIT_FAILURE));
 	if (ms_read_lst_parser(lst_parser_dumb, st, pip[0], pip[1], 0))
-		return (1);
+		return (EXIT_FAILURE);
 	ms_free_parse(&lst_parser_dumb);
 	return (EXIT_SUCCESS);
 }

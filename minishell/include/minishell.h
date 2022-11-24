@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 16:02:48 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 16:17:52 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@
 # define ERR_LST_PARSER_CREATION "Error lst parser Creation\n"
 # define ERR_FILE_IN_OUT_ARG "bash: syntax error near unexpected token'\n"
 # define ERR_CMD_MALLOC "Error Malloc cmd parser\n"
+# define ERR_WRONG_FILE_IN "bash: No such file or directory\n"
+# define ERR_WRONG_FILE_OUT "Wrong file or access denied\n"
+# define ERR_PIPE_CMD "bash: syntax error near unexpected token `|'\n"
 
 # include <stdlib.h>
 # include <unistd.h>

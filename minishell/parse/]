@@ -6,7 +6,7 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:20:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/24 16:27:38 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:22:06 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,7 @@ static int	ms_read_pipe(t_lst_parser *lst, t_env *st, int read, int write)
 		ms_read_lst_parser(lst->next, st, pip[0], pip[1], 1);
 	}
 	else
-	{
-		close (read);
-		close (write);
 		return (ft_putmsg_fd(ERR_PIPE_CMD, STDERR_FILENO, EXIT_FAILURE));
-	}
-	return (EXIT_SUCCESS);
 }
 
 int	ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int fd2)
@@ -91,14 +86,13 @@ int	ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int fd
 	{
 		pipe(pip);
 		ms_is_builtin_dumb(lst->value.cmd, st, read, write, pip[0], pip[1], CMD_END);
-		return (EXIT_SUCCESS);
 	}
-	if (lst && lst->type == CMD && fd2 == 0)
+	else if (lst && lst->type == CMD && fd2 == 0)
 	{
 		ms_is_builtin_dumb(lst->value.cmd, st, 0, 1, read, write, CMD_BEGIN);
 		lst = lst->next;
 	}
-	if (lst && lst->prev && lst->prev->type == ARG_FILE_IN && lst->type == CMD)
+	else if (lst && lst->prev && lst->prev->type == ARG_FILE_IN && lst->type == CMD)
 	{
 		if (!lst->next)
 			ms_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN_END);
@@ -106,7 +100,7 @@ int	ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int fd
 			ms_is_builtin_dumb(lst->value.cmd, st, fd2, 1, read, write, CMD_FILE_IN);
 		lst = lst->next;
 	}
-	if (lst && lst->prev && lst->type == CMD && (lst->prev->type == ARG_FILE_OUT_OVER || lst->prev->type == ARG_FILE_OUT_APP))
+	else if (lst && lst->prev && lst->type == CMD && (lst->prev->type == ARG_FILE_OUT_OVER || lst->prev->type == ARG_FILE_OUT_APP))
 	{
 		if (!lst->next)
 			ms_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT_END);
@@ -114,7 +108,7 @@ int	ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int fd
 			ms_is_builtin_dumb(lst->value.cmd, st, read, 1, write, fd2, CMD_FILE_OUT);
 		lst = lst->next;
 	}
-	if (lst && lst->next && lst->type == CMD)
+	else if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
 		if (ms_read_pipe(lst, st, read, write) == EXIT_FAILURE)
