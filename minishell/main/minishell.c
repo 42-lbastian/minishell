@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/24 12:19:23 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 13:14:03 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ms_routine(void)
 		str_read = readline(NAME);
 		if (str_read == NULL)
 			return (_exit_routine(str_read, ERR_CODE_CTRL_D));
-		if (ft_strcmp(str_read, "exit") == 0) // /!\ Temporary : remplacer par le builtin exit dans _exit_routine
+		if (ft_strcmp(str_read, "exit") == 0)
 			return (_exit_routine(str_read, get_err_code()));
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
