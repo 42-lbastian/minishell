@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:17 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/24 13:08:23 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 13:42:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,6 @@ static int	ms_count_quotes(int i, int quotes, t_struct *main, int fact)
 	else if (quotes == 1)
 		quotes--;
 	return (quotes);
-}
-
-char	*ms_check_quotes(char *str, t_struct *main)
-{
-	int	i;
-	int	simple_quotes;
-	int	double_quotes;
-
-	double_quotes = 0;
-	simple_quotes = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '"' && simple_quotes == 0)
-			double_quotes = ms_count_quotes(i, double_quotes, main, DOUBLE);
-		if (str[i] == '\'' && double_quotes == 0)
-			simple_quotes = ms_count_quotes(i, simple_quotes, main, SIMPLE);
-		i++;
-	}
-	if (simple_quotes == 1)
-	{
-		str = ft_str_rm_char(str, main->char_check.last_simple_q);
-		if (main->char_check.last_double_q > main->char_check.last_simple_q)
-			main->char_check.last_double_q--;
-	}
-	if (double_quotes == 1)
-		str = ft_str_rm_char(str, main->char_check.last_double_q);
-	return (str);
 }
 
 static int	ms_count_quotes_unwanted(int quotes)
@@ -88,5 +60,33 @@ char	*ms_remove_special(char *str, int i)
 		}
 		i++;
 	}
+	return (str);
+}
+
+char	*ms_check_quotes(char *str, t_struct *main)
+{
+	int	i;
+	int	simple_quotes;
+	int	double_quotes;
+
+	double_quotes = 0;
+	simple_quotes = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '"' && simple_quotes == 0)
+			double_quotes = ms_count_quotes(i, double_quotes, main, DOUBLE);
+		if (str[i] == '\'' && double_quotes == 0)
+			simple_quotes = ms_count_quotes(i, simple_quotes, main, SIMPLE);
+		i++;
+	}
+	if (simple_quotes == 1)
+	{
+		str = ft_str_rm_char(str, main->char_check.last_simple_q);
+		if (main->char_check.last_double_q > main->char_check.last_simple_q)
+			main->char_check.last_double_q--;
+	}
+	if (double_quotes == 1)
+		str = ft_str_rm_char(str, main->char_check.last_double_q);
 	return (str);
 }
