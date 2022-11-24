@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:30:54 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/24 11:09:28 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/24 12:04:28 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,28 @@ static void	_ft_fill(char *dest, char *src, int is_c)
 	while (src[++i])
 		dest[i - 1] = src[i];
 	dest[i - 1] = '\0';
+}
+
+/*
+ * @brief Removes the character in the given string at index given.
+ * @param src: the string where to remove a char
+ * @param index: the index of the char to remove
+ * @return Returns a pointer to the newly created string.
+ * \/!\ CARE, THE SOURCE STRING IS FREED !
+ */
+char	*ft_str_rm_char(char *src, int index)
+{
+	char	*dest;
+
+	dest = NULL;
+	if (index < 0 || (size_t)index >= ft_strlen(src))
+		return (src);
+	dest = malloc(sizeof(char) * ft_strlen(src));
+	if (dest == NULL)
+		return (NULL);
+	_ft_fill(dest, src, index);
+	ft_free(src);
+	return (dest);
 }
 
 /*
