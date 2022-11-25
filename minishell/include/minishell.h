@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/24 12:49:56 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/25 10:39:44 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@
 # define ERR_LST_PARSER_CREATION "Error lst parser Creation\n"
 # define ERR_FILE_IN_OUT_ARG "bash: syntax error near unexpected token'\n"
 # define ERR_CMD_MALLOC "Error Malloc cmd parser\n"
+# define ERR_WRONG_FILE_IN "bash: No such file or directory\n"
+# define ERR_WRONG_FILE_OUT "Wrong file or access denied\n"
+# define ERR_PIPE_CMD "bash: syntax error near unexpected token `|'\n"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -277,8 +280,12 @@ int		ms_parse(t_struct *main_s, t_env *st);
 /*
 **		parse/create_lst_parser.c
 */
+int		ms_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser);
 
-int		ft_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser);
+/*
+**		parse/read_lst_parser.c
+*/
+int		ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int fd2);
 
 /*
 **		parse/create_lst_parser_utils.c
@@ -302,7 +309,7 @@ void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int
 */
 
 t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type);
-int		ms_lst_parse_add_back(t_lst_parser **lst, t_lst_parser *new);
+int		ms_lst_p_addback(t_lst_parser **lst, t_lst_parser *new);
 int		ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new);
 char	*ms_find_var_path(char *str, t_env *st);
 t_lst_parser	*ms_lst_parse_last(t_lst_parser *lst);
