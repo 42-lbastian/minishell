@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/25 10:39:44 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/25 10:46:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define C_CHECK_CHAR "\'\"$ "
 # define SPECIAL_CHAR "|<>"
 # define ERR_CODE_CTRL_D 130
+# define ERR_CODE_INVALID 2
 
 # define SIMPLE 0
 # define DOUBLE 1
@@ -275,7 +276,7 @@ int		ms_set_type_cmd(t_list **lst);
 **		parse/parse.c
 */
 
-int		ms_parse(t_struct *main_s, t_env *st);
+int		ms_parse(t_list *lst, t_env *st);
 
 /*
 **		parse/create_lst_parser.c

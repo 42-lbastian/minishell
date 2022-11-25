@@ -9,13 +9,12 @@ int		ms_parse(t_list *lst, t_env *st)
 	lst_parser_dumb = NULL;
 	if (ms_create_lst_parser_main(lst, &lst_parser_dumb))
 		return (ft_putmsg_fd(ERR_LST_PARSER_CREATION, STDERR_FILENO,
-			EXIT_FAILURE));
+			ERR_CODE_INVALID));
 	fd_pipe = pipe(pip);
 	if (fd_pipe == -1)
 		return (ft_putmsg_fd(ERR_PIPE, STDERR_FILENO, EXIT_FAILURE));
 	if (ms_read_lst_parser(lst_parser_dumb, st, pip[0], pip[1], 0))
-		return (EXIT_FAILURE);
+		return (ERR_CODE_INVALID);
 	ms_free_parse(&lst_parser_dumb);
-	ms_free_main_s(main_s);
 	return (EXIT_SUCCESS);
 }
