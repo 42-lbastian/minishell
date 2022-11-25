@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/18 11:15:25 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/25 12:25:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,20 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i])
+		i++;
+	return (i);
+}
+
+/*
+ * @brief Gives the size of a string array.
+ * @return returns the size of the array a size_t format.
+*/
+size_t	ft_arrlen(char **array)
+{
+	size_t	i;
+
+	i = 0;
+	while (array && array[i])
 		i++;
 	return (i);
 }

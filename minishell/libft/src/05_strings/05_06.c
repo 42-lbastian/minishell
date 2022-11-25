@@ -6,18 +6,24 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:30:54 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/24 12:04:28 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/25 11:28:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	_ft_fill(char *dest, char *src, int is_c)
+/*
+ * FT_STR_RM_CHAR
+ * FT_STR_RM_FST_OCC
+ * FT_STR_RM_LAST_OCC
+*/
+
+static void	_ft_fill(char *dest, char *src, int index)
 {
 	int	i;
 
 	i = 0;
-	while (i != is_c)
+	while (i != index)
 	{
 		dest[i] = src[i];
 		i++;

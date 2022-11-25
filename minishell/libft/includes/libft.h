@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/24 12:04:09 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/25 13:05:44 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ size_t			ft_hexalen(size_t nb);
 size_t			ft_intlen(int nb);
 size_t			ft_nbrlen(long nb);
 size_t			ft_strlen(const char *s);
+size_t			ft_arrlen(char **array);
 
 /*
 02_numbers
@@ -142,6 +143,7 @@ char			*ft_str_cut_before(char *src, char c);
 char			*ft_str_cut_after(char *src, char c);
 size_t			ft_str_arr_len(char **arr);
 char			**ft_str_arr_dup(char **arr);
+char			**ft_str_arr_ndup(char **array, int n);
 void			ft_str_arr_free(char **array);
 char			*ft_str_rm_char(char *src, int index);
 char			*ft_str_rm_fst_occ(char *src, char c);
