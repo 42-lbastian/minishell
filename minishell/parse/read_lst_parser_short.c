@@ -6,36 +6,30 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:20:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 20:15:45 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 20:57:08 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-static int	ms_read_file_in_short(t_lst_parser *lst, t_env *st, int *pip)
-{
-	int	pip2[2];
-	int	fd;
-	int	fd_pipe;
 
-	fd_pipe = pipe(pip2);
-	close(pip[0]);
-	close(pip[1]);
-	if (fd_pipe == -1)
-		return (ft_putmsg_fd(ERR_PIPE, STDERR_FILENO, EXIT_FAILURE));
+static int	ms_read_file_in_short(t_lst_parser *lst, t_env *st, int pip[2][2])
+{
+	int	fd;
+
 	lst = lst->next;
 	fd = open(lst->value.oper, O_RDONLY);
 	if (fd == -1)
 	{
-		close(pip2[0]);
-		close(pip2[1]);
+		close(pip[1][0]);
+		close(pip[1][1]);
 		return (ft_putmsg_fd(ERR_WRONG_FILE_IN, STDERR_FILENO, EXIT_FAILURE));
 	}
-	ms_read_lst_parser_short(lst->next, st, pip2, fd);
+	pip[0][0] = fd;
+	ms_read_lst_parser_short(lst->next, st, pip);
 	return (EXIT_SUCCESS);
 }
-*/
+
 
 static int	ms_read_file_out_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 {
@@ -94,8 +88,6 @@ static int	ms_read_pipe_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 
 int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 {
-	//int	pip2[2][2];
-
 	if (lst && lst->prev == NULL && lst->next == NULL && lst->type == CMD)
 	{
 		ms_is_builtin_short(lst->value.cmd, st, pip, CMD_ALONE);
@@ -127,11 +119,9 @@ int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 	if (lst && lst->type == PIPE)
 		if (ms_read_pipe_short(lst, st, pip) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-	/*
 	if (lst && lst->type == FILE_IN)
 		if (ms_read_file_in_short(lst, st, pip) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		*/
 	if (lst && (lst->type == FILE_OUT_OVER || lst->type == FILE_OUT_APP))
 		if (ms_read_file_out_short(lst, st, pip) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
