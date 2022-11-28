@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:52:01 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 15:05:10 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:40:19 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	echo_builtin(char **args)
 
 	newline = true;
 	args++;
-	if (*args && ft_strncmp(*args, "-n", 2) == 0)
+	if (*args && ft_strcmp(*args, "-n") == 0)
 	{
 		newline = false;
 		args++;
