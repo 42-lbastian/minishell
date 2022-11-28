@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 19:23:19 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:32:38 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,16 +329,8 @@ void	ms_main_exec_short(char **complete_cmd, t_env *st,
 void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 		int read2, int write2, int type)
 {
-	char	*path;
 	int		pid;
 
-	path = ms_find_path(complete_cmd[0],
-		ft_split(ms_find_var_path("PATH", st), ':'));
-	if (!path)
-	{
-		printf("Command not found\n");
-		return ;
-	}
 	pid = fork();
 	if (pid == -1)
 	{
@@ -363,8 +355,7 @@ void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 		}
 		close(read);
 		close(write);
-		//if (ft_strcmp(complete_cmd[0], "cd") == 0)
-		//{}	//cd(st, complete_cmd[1]);
+		(void)st;
 		if (ft_strcmp(complete_cmd[0], "echo") == 0)
 			echo_builtin(complete_cmd);
 		if (ft_strcmp(complete_cmd[0], "cd") == 0)

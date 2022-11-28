@@ -6,7 +6,7 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:20:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 19:23:18 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:40:51 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	ms_read_pipe_short(t_lst_parser *lst, t_env *st, int *pip)
 */
 int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2], int fd2)
 {
-	int	pip2[2];
+	//int	pip2[2][2];
 
 	if (lst && lst->prev == NULL && lst->next == NULL && lst->type == CMD)
 	{
@@ -118,6 +118,7 @@ int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2], int fd
 	}
 	if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
+	(void)st;
 	/*
 	if (lst && lst->type == PIPE)
 		if (ms_read_pipe_short(lst, st, pip) == EXIT_FAILURE)
