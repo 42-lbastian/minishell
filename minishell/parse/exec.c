@@ -6,7 +6,7 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/26 00:52:39 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:26:38 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,8 +312,10 @@ void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 	}
 }
 
-void	ms_is_builtin_short(char **complete_cmd, t_env *st)
-{}
+void	ms_is_builtin_short(char **complete_cmd, t_env *st, int *pipe, int *pipe2, int type)
+{
+	ms_main_exec_short(complete_cmd, st, pipe, pipe2, type);
+}
 
 void	ms_is_builtin_dumb(char **complete_cmd, t_env *st,
 		int read, int write, int read2, int write2, int type)
