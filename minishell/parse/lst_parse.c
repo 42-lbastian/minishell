@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:07:57 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 char	*ms_find_var_path(char *str, t_env *st)
 {

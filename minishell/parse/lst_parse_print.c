@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:09:28 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 void	ms_print_lst_parse(t_lst_parser *lst)
 {

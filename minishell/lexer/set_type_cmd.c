@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:11 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 13:54:41 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	ms_set_type_cmd(t_mslist **lst)
 {

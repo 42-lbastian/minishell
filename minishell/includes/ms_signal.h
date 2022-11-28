@@ -6,14 +6,14 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:45:14 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:45:55 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_SIGNAL_H
 # define MS_SIGNAL_H
 
-# include "minishell.h"
+# include "../includes/minishell.h"
 
 /*
  * @file main/signal.c

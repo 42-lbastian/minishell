@@ -86,13 +86,13 @@ OBJ_ALL		=	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(OBJ_DEBUG)
 $(O_DIR)/%.o:	./*/%.c
 				@echo $(Y)Compiling [$@]...$(X)
 				@$(MKD) $(O_DIR)
-				@$(CC) $(CFLAGS) $(RFLAGS) $(INCLUDES) -o $@ -c $<
+				@$(CC) $(CFLAGS) $(RFLAGS) -o $@ -c $<
 				@printf $(UP) $(CUT)
 
 $(NAME):	$(OBJ_ALL)
 			@$(MAKE) -C $(LFT_DIR)
 			@echo $(Y)Compiling [$(NAME)]...$(X)
-			@$(CC) -o $(NAME) $(INCLUDES) $(CFLAGS) $(INCLUDES) $(OBJ_ALL) $(LIBFT) $(RFLAG)
+			@$(CC) -o $(NAME) $(CFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
 			@printf $(UP)$(CUT)
 			@echo $(G)Compiled [$(NAME)]$(X)
 
@@ -101,7 +101,7 @@ all:	$(NAME)
 fsan: $(OBJ_ALL)
 	@$(MAKE) -C $(LFT_DIR)
 	@echo $(Y)Compiling [$(NAME)] with fsanitize=address flag...$(X)
-	@$(CC) -o $(NAME) $(FFLAGS) $(INCLUDES) $(OBJ_ALL) $(LIBFT) $(RFLAG)
+	@$(CC) -o $(NAME) $(FFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
 	@printf $(UP)$(CUT)
 	@echo $(G)Compiled [$(NAME)] with fsanitize=address flag...$(X)
 	
