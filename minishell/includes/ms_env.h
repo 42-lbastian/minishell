@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:23:41 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:47:20 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 15:23:35 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_env
 void	set_env(t_env *env);
 t_env	*get_env(void);
 void	free_env(t_env *env);
+char	*get_env_value(t_env *env, char *var);
 
 /*
  *		main/env_create.c

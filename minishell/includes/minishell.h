@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:57:29 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 15:27:07 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define ERR_WRONG_FILE_IN "bash: No such file or directory\n"
 # define ERR_WRONG_FILE_OUT "Wrong file or access denied\n"
 # define ERR_PIPE_CMD "bash: syntax error near unexpected token `|'\n"
+# define ERR_HOME_NOT_SET "cd: HOME not set\n"
 
 # include <stdlib.h>
 # include <unistd.h>
