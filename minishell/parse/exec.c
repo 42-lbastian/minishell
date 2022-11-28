@@ -6,11 +6,24 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 17:12:25 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static bool	_is_builtin(char *cmd)
+{
+	if (ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "exit") == 0)
+		return (true);
+	if (ft_strcmp(cmd, "echo") == 0 || ft_strcmp(cmd, "pwd") == 0)
+		return (true);
+	if (ft_strcmp(cmd, "env") == 0 || ft_strcmp(cmd, "export") == 0)
+		return (false);
+	if (ft_strcmp(cmd, "unset") == 0)
+		return (false);
+	return (false);
+}
 
 char	*ms_strjoin_env(char *str1, char *str2, char c, int i)
 {
@@ -291,8 +304,6 @@ void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 		}
 		close(read);
 		close(write);
-		//if (ft_strcmp(complete_cmd[0], "cd") == 0)
-		//{}	//cd(st, complete_cmd[1]);
 		if (ft_strcmp(complete_cmd[0], "echo") == 0)
 			echo_builtin(complete_cmd);
 		if (ft_strcmp(complete_cmd[0], "cd") == 0)
@@ -326,13 +337,7 @@ void	ms_is_builtin_short(char **complete_cmd, t_env *st, int *pipe, int *pipe2, 
 void	ms_is_builtin_dumb(char **complete_cmd, t_env *st,
 		int read, int write, int read2, int write2, int type)
 {
-	if (ft_strcmp(complete_cmd[0], "cd") == 0)
-		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
-	else if (ft_strcmp(complete_cmd[0], "exit") == 0)
-		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
-	else if (ft_strcmp(complete_cmd[0], "echo") == 0)
-		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
-	else if (ft_strcmp(complete_cmd[0], "pwd") == 0)
+	if (_is_builtin(complete_cmd[0]))
 		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
 	else
 		ms_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);

@@ -1,13 +1,10 @@
 minishell
 *.out
 *.o
-<<<<<<< HEAD
-a.out
-libft/libft.a
-=======
 *.a
 libft/libft.a
 *.tmp
 *.swp
 .nfs*
->>>>>>> cleaned
+.vscode/
+obj/
