@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_builtin.c                                      :+:      :+:    :+:   */
+/*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:52:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
+/*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
+/*   Updated: 2022/11/28 15:34:52 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
- * @brief The pwd builtin mandatory in the project
- * @return Returns EXIT_SUCCESS or EXIT_FAILURE.
-*/
-int	pwd_builtin(void)
+int	_cd_home(t_env *env)
 {
-	char	*result;
+	char	*home_path;
+	int		err_code;
 
-	result = NULL;
-	result = getcwd(result, 0);
-	if (result == NULL)
-	{
-		perror("Error");
+	err_code = 0;
+	home_path = get_env_value(env, "HOME");
+	if (ft_strlen(home_path) == 0)
+		err_code = ft_putmsg_fd(ERR_HOME_NOT_SET, STDERR_FILENO, EXIT_FAILURE);
+	else
+		err_code = chdir(home_path);
+	ft_free(home_path);
+	return (EXIT_SUCCESS);
+}
+
+int	cd_builtin(char	**args)
+{
+	t_env	*env;
+
+	env = get_env();
+	if (args == NULL || env == NULL)
 		return (EXIT_FAILURE);
-	}
-	printf("%s\n", result);
-	ft_free(result);
+	if (args[1] == NULL)
+		return (_cd_home(env));
 	return (EXIT_SUCCESS);
 }

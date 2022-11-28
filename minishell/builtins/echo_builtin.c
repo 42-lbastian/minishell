@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_check_special.c                               :+:      :+:    :+:   */
+/*   echo_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 20:08:00 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 14:31:03 by lbastian         ###   ########.fr       */
+/*   Created: 2022/11/28 14:52:01 by stelie            #+#    #+#             */
+/*   Updated: 2022/11/28 15:05:10 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-static int	ft_belong_good_special(char c, t_struct *main)
+int	echo_builtin(char **args)
 {
-	int	i;
+	bool	newline;
 
-	i = 0;
-	while (i < NB_CHAR_VALID)
+	newline = true;
+	args++;
+	if (*args && ft_strncmp(*args, "-n", 2) == 0)
 	{
-		if (c == main->char_check.char_valid[i])
-			return (1);
-		i++;
+		newline = false;
+		args++;
 	}
-	return (0);
-}
-
-int	ms_exclude_special(char c, t_struct *main)
-{
-	if (ft_isalnum(c) || ft_belong_good_special(c, main))
-		return (1);
-	return (0);
+	while (*args)
+	{
+		printf("%s", *args);
+		if (ft_strlen(*args) != 0 && *(args + 1) != NULL)
+			printf(" ");
+		args++;
+	}
+	if (newline)
+		printf("\n");
+	return (EXIT_SUCCESS);
 }

@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:30:37 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 12:57:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 15:23:11 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static t_env	*_get_env(t_env *env)
 {
@@ -53,4 +53,24 @@ void	free_env(t_env *env)
 		env = NULL;
 		env = temp;
 	}
+}
+
+/*
+ * @brief Get the value of the given env variable.
+ * @return Returns a pointer to the newly created string.
+*/
+char	*get_env_value(t_env *env, char *var)
+{
+	char	*value;
+	t_env	*tmp;
+
+	value = NULL;
+	tmp = env;
+	while (tmp && tmp->var)
+	{
+		if (ft_strcmp(var, tmp->var) == 0)
+			value = ft_strdup(tmp->value);
+		tmp = tmp->next;
+	}
+	return (value);
 }

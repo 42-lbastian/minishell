@@ -10,7 +10,6 @@
 	- ~~CTRL-\		(do nothing)~~
 
 ### ON WORK :
-- pass static var for ms_env in order to access it from everywhere
 - Can it work for exit_code ??
 
 ### FOLLOW:

@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:04 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 14:42:52 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static int	ms_count_spaces(char *str)
 {
@@ -96,9 +96,9 @@ static char	*ms_spaces_flag(char *str)
 	return (temp);
 }
 
-int	ms_remove_spaces(t_list **lst)
+int	ms_remove_spaces(t_mslist **lst)
 {
-	t_list	*temp;
+	t_mslist	*temp;
 
 	temp = (*lst);
 	while (lst && (*lst))

@@ -6,17 +6,17 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:10 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:56:48 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-t_list	*ms_lst_new_join(char *content, int type)
+t_mslist	*ms_lst_new_join(char *content, int type)
 {
-	t_list	*new;
+	t_mslist	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_mslist));
 	if (!new)
 		return (NULL);
 	new->next = NULL;
@@ -25,11 +25,11 @@ t_list	*ms_lst_new_join(char *content, int type)
 	return (new);
 }
 
-t_list	*ms_lst_new(char *content, int type)
+t_mslist	*ms_lst_new(char *content, int type)
 {
-	t_list	*new;
+	t_mslist	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_mslist));
 	if (!new)
 		return (NULL);
 	new->next = NULL;
@@ -38,14 +38,14 @@ t_list	*ms_lst_new(char *content, int type)
 	return (new);
 }
 
-t_list	*ms_lst_last(t_list *lst)
+t_mslist	*ms_lst_last(t_mslist *lst)
 {
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
 }
 
-int	ms_lstadd_back(t_list **lst, t_list *new)
+int	ms_lstadd_back(t_mslist **lst, t_mslist *new)
 {
 	if (!new)
 		return (1);

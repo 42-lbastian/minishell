@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_lst_parser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:18:50 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 11:49:40 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-static int	ms_file_in_out(t_list **lst, t_lst_parser **lst_parser,
+static int	ms_file_in_out(t_mslist **lst, t_lst_parser **lst_parser,
 	char ***cmd, int i)
 {
 	ms_lst_p_addback(lst_parser, ms_lst_parse_new(NULL, (*lst)->content,
@@ -42,7 +42,7 @@ static int	ms_file_in_out(t_list **lst, t_lst_parser **lst_parser,
 		return (ft_putmsg_fd(ERR_FILE_IN_OUT_ARG, STDERR_FILENO, 2));
 }
 
-static int	ms_create_cmd(int *i, t_list **lst, char ***cmd)
+static int	ms_create_cmd(int *i, t_mslist **lst, char ***cmd)
 {	
 	(*i) = 0;
 	(*cmd) = malloc(sizeof(char *) * (ms_count_nb_cmd((*lst)) + 1));
@@ -60,7 +60,7 @@ static int	ms_create_cmd(int *i, t_list **lst, char ***cmd)
 	return (0);
 }
 
-static int	ms_add_pipe(t_list **lst, t_lst_parser **lst_parser, char **cmd)
+static int	ms_add_pipe(t_mslist **lst, t_lst_parser **lst_parser, char **cmd)
 {
 	if (ms_lst_p_addback(lst_parser, ms_lst_parse_new(NULL,
 				(*lst)->content, (*lst)->type)))
@@ -80,7 +80,7 @@ static int	ms_add_cmd(t_lst_parser **lst_parser, char ***cmd)
 	return (0);
 }
 
-int	ms_create_lst_parser_main(t_list *lst, t_lst_parser **lst_parser)
+int	ms_create_lst_parser_main(t_mslist *lst, t_lst_parser **lst_parser)
 {
 	char	**cmd;
 	int		i;

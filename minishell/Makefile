@@ -15,6 +15,7 @@ CC			=	cc
 RM			=	rm -rf
 MAKE		=	make --no-print-directory
 MKD			=	mkdir -p
+INCLUDES	=	-I $(H_DIR)/
 RFLAG		=	-lreadline
 CFLAGS		=	-Wall -Wextra -Werror -g
 FFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
@@ -24,7 +25,7 @@ LFT_DIR		=	libft
 LIBFT		=	libft/libft.a
 
 #Directories
-H_DIR		=	include
+H_DIR		=	includes
 O_DIR		=	obj
 
 #Source Files
@@ -35,8 +36,7 @@ SRC_MAIN	=	minishell.c\
 				env_handler.c\
 				errors.c\
 
-SRC_LEXER	=	char_check_special.c\
-				lexer.c\
+SRC_LEXER	=	lexer.c\
 				read_char.c\
 				unwanted.c\
 				utils.c\
@@ -60,7 +60,9 @@ SRC_PARSER	=	parse.c\
 				lst_parse_print.c\
 				tools.c\
 
-SRC_BUILT	=	pwd_builtin.c\
+SRC_BUILT	=	echo_builtin.c\
+				cd_builtin.c\
+				pwd_builtin.c\
 				exit_builtin.c\
 				#cd.c\
 				#echo.c\
@@ -83,13 +85,13 @@ OBJ_ALL		=	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(OBJ_DEBUG)
 $(O_DIR)/%.o:	./*/%.c
 				@echo $(Y)Compiling [$@]...$(X)
 				@$(MKD) $(O_DIR)
-				@$(CC) $(CFLAGS) $(RFLAGS) -o $@ -c $<
+				@$(CC) $(CFLAGS) $(RFLAGS) $(INCLUDES) -o $@ -c $<
 				@printf $(UP) $(CUT)
 
 $(NAME):	$(OBJ_ALL)
 			@$(MAKE) -C $(LFT_DIR)
 			@echo $(Y)Compiling [$(NAME)]...$(X)
-			@$(CC) -o $(NAME) $(CFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
+			@$(CC) -o $(NAME) $(INCLUDES) $(CFLAGS) $(INCLUDES) $(OBJ_ALL) $(LIBFT) $(RFLAG)
 			@printf $(UP)$(CUT)
 			@echo $(G)Compiled [$(NAME)]$(X)
 
@@ -98,7 +100,7 @@ all:	$(NAME)
 fsan: $(OBJ_ALL)
 	@$(MAKE) -C $(LFT_DIR)
 	@echo $(Y)Compiling [$(NAME)] with fsanitize=address flag...$(X)
-	@$(CC) -o $(NAME) $(FFLAGS) $(OBJ_ALL) $(LIBFT) $(RFLAG)
+	@$(CC) -o $(NAME) $(FFLAGS) $(INCLUDES) $(OBJ_ALL) $(LIBFT) $(RFLAG)
 	@printf $(UP)$(CUT)
 	@echo $(G)Compiled [$(NAME)] with fsanitize=address flag...$(X)
 	

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_lst_parser_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:21:56 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 15:17:58 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int	ms_count_nb_cmd(t_list *lst)
+int	ms_count_nb_cmd(t_mslist *lst)
 {
 	int	i;
 

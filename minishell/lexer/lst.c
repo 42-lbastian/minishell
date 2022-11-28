@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:21 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:58:36 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int	ms_lstadd(t_list **lst, t_list *new)
+int	ms_lstadd(t_mslist **lst, t_mslist *new)
 {
 	if (!new)
 		return (1);
@@ -21,7 +21,7 @@ int	ms_lstadd(t_list **lst, t_list *new)
 	return (0);
 }
 
-int	ms_lst_size(t_list *lst)
+int	ms_lst_size(t_mslist *lst)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	ms_lst_size(t_list *lst)
 	return (i);
 }
 
-char	*ms_get_lst_str_index(t_list *lst, int index)
+char	*ms_get_lst_str_index(t_mslist *lst, int index)
 {
 	int	i;
 

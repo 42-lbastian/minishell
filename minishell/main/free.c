@@ -6,29 +6,21 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:49 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 17:49:28 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 void	ms_free_main_s(t_struct *main_s)
 {
-	ft_str_free(main_s->char_check.char_valid);
-	ft_free(&(main_s->char_check));
 	ms_free_lst(main_s->lst);
 	ft_free(main_s);
 }
 
-void	ms_free_all(t_struct *main_s, t_env *st)
+void	ms_free_lst(t_mslist *lst)
 {
-	ms_free_main_s(main_s);
-	ms_clear_env(&st);
-}
-
-void	ms_free_lst(t_list *lst)
-{
-	t_list	*temp;
+	t_mslist	*temp;
 
 	while (lst)
 	{

@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_builtin.c                                      :+:      :+:    :+:   */
+/*   ms_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:52:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
+/*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
+/*   Updated: 2022/11/28 15:11:36 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MS_BUILTINS_H
+# define MS_BUILTINS_H
+
+# include "minishell.h"
 
 /*
- * @brief The pwd builtin mandatory in the project
- * @return Returns EXIT_SUCCESS or EXIT_FAILURE.
+ * BUILTINS
 */
-int	pwd_builtin(void)
-{
-	char	*result;
 
-	result = NULL;
-	result = getcwd(result, 0);
-	if (result == NULL)
-	{
-		perror("Error");
-		return (EXIT_FAILURE);
-	}
-	printf("%s\n", result);
-	ft_free(result);
-	return (EXIT_SUCCESS);
-}
+int		echo_builtin(char **args);
+int		cd_builtin(char **args);
+int		pwd_builtin(void);
+int		exit_builtin(char **args);
+
+#endif

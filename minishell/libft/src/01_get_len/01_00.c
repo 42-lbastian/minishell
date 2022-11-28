@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/18 11:15:25 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/27 20:13:40 by krozis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t	ft_intlen(int nb)
  * @brief Gives the size in characters of a long number.
  * @return returns the size of nb in a size_t format.
 */
-size_t	ft_nbrlen(long nb)
+size_t	ft_nbrlen(long long nb)
 {
 	size_t	len;
 
@@ -79,6 +79,20 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i])
+		i++;
+	return (i);
+}
+
+/*
+ * @brief Gives the size of a string array.
+ * @return returns the size of the array a size_t format.
+*/
+size_t	ft_arrlen(char **array)
+{
+	size_t	i;
+
+	i = 0;
+	while (array && array[i])
 		i++;
 	return (i);
 }

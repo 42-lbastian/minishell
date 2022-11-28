@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 16:02:58 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 /*
  * @brief Ending function for ms_routine.
@@ -29,7 +29,7 @@ static int	_exit_routine(void *to_free, int exit_code)
 	return (exit_code);
 }
 
-static int	ms_routine(void)
+static int	_routine(void)
 {
 	char	*str_read;
 
@@ -39,20 +39,19 @@ static int	ms_routine(void)
 		str_read = readline(NAME);
 		if (str_read == NULL)
 			return (_exit_routine(str_read, ERR_CODE_CTRL_D));
-		if (ft_strcmp(str_read, "exit") == 0) // /!\ Temporary : remplacer par le builtin exit dans _exit_routine
+		if (ft_strcmp(str_read, "exit") == 0)
 			return (_exit_routine(str_read, get_err_code()));
 		if (ft_strlen(str_read) != 0)
 			add_history(str_read);
+		while (*str_read == ' ')
+			str_read = ft_str_rm_char(str_read, 0);
 		if (ms_main_lexer(str_read, get_env()) == EXIT_FAILURE)
 			return (_exit_routine(str_read, EXIT_FAILURE));
-		free(str_read);
+		ft_free(str_read);
 	}
 	return (_exit_routine(str_read, EXIT_FAILURE));
 }
 
-/*
- *@todo: free 'env_t *st'
- */
 int	main(int argc, char **argv, char **envp)
 {
 	t_env		*ms_env;
@@ -62,5 +61,5 @@ int	main(int argc, char **argv, char **envp)
 	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	set_env(ms_env);
-	return (ms_routine());
+	return (_routine());
 }

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   02_01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:32:02 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/18 11:24:00 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/27 19:03:37 by krozis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+ * FT_ITOA
+*/
 
 static unsigned int	_def_full_len(long nb)
 {

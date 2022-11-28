@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:36:30 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/22 13:51:24 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/25 12:22:28 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /*
  * FT_STR_ARR_LEN
  * FT_STR_ARR_DUP
+ * FT_STR_ARR_NDUP
  * FT_STR_ARR_FREE
- * FT_STR_FREE
 */
 
 /*
@@ -38,7 +38,7 @@ size_t	ft_str_arr_len(char **array)
  * @param array: the str array to duplicate
  * @return Returns a pointer to the duplicated array.
 */
-char	**ft_str_arr_dup(char	**array)
+char	**ft_str_arr_dup(char **array)
 {
 	char	**copy;
 	int		i;
@@ -54,6 +54,35 @@ char	**ft_str_arr_dup(char	**array)
 		copy[i] = ft_strdup(array[i]);
 		i++;
 	}
+	copy[i] = NULL;
+	return (copy);
+}
+
+/*
+ * @brief Applies a ft_strdup for 'n' str of a given string array;
+ * @param array: the str array to duplicate
+ * @param n: the number of strings to dulicate
+ * @return Returns a pointer to the duplicated array.
+*/
+char	**ft_str_arr_ndup(char **array, int n)
+{
+	char	**copy;
+	int		i;
+
+	if (array == NULL || n < 1)
+		return (NULL);
+	if (ft_str_arr_len(array) < (size_t)n)
+		return (ft_str_arr_dup(array));
+	copy = malloc(sizeof(char *) * (ft_min(ft_str_arr_len(array), n) + 1));
+	if (copy == NULL)
+		return (NULL);
+	i = 0;
+	while (array[i] && i < n)
+	{
+		copy[i] = ft_strdup(array[i]);
+		i++;
+	}
+	copy[i] = NULL;
 	return (copy);
 }
 
@@ -68,19 +97,8 @@ void	ft_str_arr_free(char **array)
 	i = 0;
 	while (array && array[i])
 	{
-		ft_str_free((array)[i]);
-		array[i] = NULL;
+		ft_free((array)[i]);
 		i++;
 	}
-	free(array);
-	array = NULL;
-}
-
-/*
- * @brief Frees an allocated string and set pointer to NULL.
-*/
-void	ft_str_free(char *str)
-{
-	free(str);
-	str = NULL;
+	ft_free(array);
 }
