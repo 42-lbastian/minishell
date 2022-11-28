@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:10:17 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,10 +291,16 @@ void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 		}
 		close(read);
 		close(write);
-		if (ft_strcmp(complete_cmd[0], "cd") == 0)
-		{}	//cd(st, complete_cmd[1]);
+		//if (ft_strcmp(complete_cmd[0], "cd") == 0)
+		//{}	//cd(st, complete_cmd[1]);
 		if (ft_strcmp(complete_cmd[0], "echo") == 0)
-		{}	//echo(complete_cmd);
+			echo_builtin(complete_cmd);
+		if (ft_strcmp(complete_cmd[0], "cd") == 0)
+			cd_builtin(complete_cmd);
+		if (ft_strcmp(complete_cmd[0], "pwd") == 0)
+			pwd_builtin();
+		if (ft_strcmp(complete_cmd[0], "exit") == 0)
+			exit_builtin(complete_cmd);
 	}
 	else
 	{
@@ -320,10 +326,14 @@ void	ms_is_builtin_short(char **complete_cmd, t_env *st, int *pipe, int *pipe2, 
 void	ms_is_builtin_dumb(char **complete_cmd, t_env *st,
 		int read, int write, int read2, int write2, int type)
 {
-	//if (ft_strcmp(complete_cmd[0], "cd") == 0)
-	//	ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
-	//else if (ft_strcmp(complete_cmd[0], "echo") == 0)
-	//	ft_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
-	//else
+	if (ft_strcmp(complete_cmd[0], "cd") == 0)
+		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
+	else if (ft_strcmp(complete_cmd[0], "exit") == 0)
+		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
+	else if (ft_strcmp(complete_cmd[0], "echo") == 0)
+		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
+	else if (ft_strcmp(complete_cmd[0], "pwd") == 0)
+		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
+	else
 		ms_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);
 }
