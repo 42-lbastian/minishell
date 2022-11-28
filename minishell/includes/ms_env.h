@@ -6,14 +6,14 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:23:41 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 15:23:35 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_ENV_H
 # define MS_ENV_H
 
-# include "minishell.h"
+# include "../includes/minishell.h"
 
 /*
  * @brief Environnement variable structure

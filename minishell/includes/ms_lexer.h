@@ -6,14 +6,14 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:39:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:58:36 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_LEXER_H
 # define MS_LEXER_H
 
-# include "minishell.h"
+# include "../includes/minishell.h"
 
 /*
  *		lexer/lexer.c

@@ -6,14 +6,14 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:54:41 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_PARSE_H
 # define MS_PARSE_H
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 /*
  * @brief t_lst_parser - double way list of Commands

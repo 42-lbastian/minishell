@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int		ms_parse(t_mslist *lst, t_env *st)
 {
