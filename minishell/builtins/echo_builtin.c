@@ -6,11 +6,23 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:52:01 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:53:32 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+bool	_no_nl(char *str)
+{
+	if (ft_strncmp(str, "-n", 2) != 0)
+		return (false);
+	str += 2;
+	while (*str && *str == 'n')
+		str++;
+	if (*str == '\0')
+		return (true);
+	return (false);
+}
 
 int	echo_builtin(char **args)
 {
@@ -18,7 +30,7 @@ int	echo_builtin(char **args)
 
 	newline = true;
 	args++;
-	if (*args && ft_strcmp(*args, "-n") == 0)
+	if (*args && _no_nl(*args))
 	{
 		newline = false;
 		args++;
