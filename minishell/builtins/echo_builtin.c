@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:52:01 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 16:53:32 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 17:14:57 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	_no_nl(char *str)
+static bool	_no_nl(char *str)
 {
 	if (ft_strncmp(str, "-n", 2) != 0)
 		return (false);
