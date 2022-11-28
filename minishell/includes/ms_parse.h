@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 18:36:23 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int f
 /*
 **		parse/read_lst_parser_short.c
 */
-int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int *pip, int fd2);
+int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2], int fd2);
 
 /*
 **		parse/create_lst_parser_utils.c
@@ -67,7 +67,7 @@ int		ms_is_type_in_out(int type);
 void	ms_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
 void	ms_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
 void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
-void	ms_is_builtin_short(char **complete_cmd, t_env *st, int *pipe, int *pipe2, int type);
+void	ms_is_builtin_short(char **complete_cmd, t_env *st, int pipe[2][2], int type);
 
 //void	ms_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type);
 

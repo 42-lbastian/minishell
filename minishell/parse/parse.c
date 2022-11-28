@@ -2,7 +2,7 @@
 
 int		ms_parse(t_mslist *lst, t_env *st)
 {
-	int				pip[2];
+	int				pip[2][2];
 	int				fd_pipe;
 	t_lst_parser	*lst_parser_dumb;
 
@@ -10,7 +10,7 @@ int		ms_parse(t_mslist *lst, t_env *st)
 	if (ms_create_lst_parser_main(lst, &lst_parser_dumb))
 		return (ft_putmsg_fd(ERR_LST_PARSER_CREATION, STDERR_FILENO,
 			ERR_CODE_INVALID));
-	fd_pipe = pipe(pip);
+	fd_pipe = pipe(pip[1]);
 	if (fd_pipe == -1)
 		return (ft_putmsg_fd(ERR_PIPE, STDERR_FILENO, EXIT_FAILURE));
 	//if (ms_read_lst_parser(lst_parser_dumb, st, pip[0], pip[1], 0))
