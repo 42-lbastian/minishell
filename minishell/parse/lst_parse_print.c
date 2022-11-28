@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lst_parse_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:09:28 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 15:09:40 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 void	ms_print_lst_parse(t_lst_parser *lst)
 {

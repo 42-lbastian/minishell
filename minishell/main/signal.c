@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:14:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/24 13:14:13 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 /*
  * @brief handle the CTRL+C signal for the main process

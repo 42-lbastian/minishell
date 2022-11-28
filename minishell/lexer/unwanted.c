@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:17 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/24 13:42:01 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static int	ms_count_quotes(int i, int quotes, t_struct *main, int fact)
 {

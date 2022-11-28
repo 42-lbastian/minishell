@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:31:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/23 14:50:01 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static bool	_is_valid_exit_flag(char *arg)
 {

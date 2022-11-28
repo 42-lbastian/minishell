@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:30 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 13:01:24 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 /*
  * @name: _basic_check()
@@ -24,7 +24,7 @@ int	_basic_checks(void)
 	return (EXIT_SUCCESS);
 }
 
-void	_ms_print_lst(t_list *lst)
+void	_ms_print_lst(t_mslist *lst)
 {
 	while (lst)
 	{

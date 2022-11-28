@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_builtin.c                                      :+:      :+:    :+:   */
+/*   ms_signal.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:52:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
+/*   Created: 2022/11/28 13:45:14 by stelie            #+#    #+#             */
+/*   Updated: 2022/11/28 13:45:55 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MS_SIGNAL_H
+# define MS_SIGNAL_H
+
+# include "minishell.h"
 
 /*
- * @brief The pwd builtin mandatory in the project
- * @return Returns EXIT_SUCCESS or EXIT_FAILURE.
+ * @file main/signal.c
 */
-int	pwd_builtin(void)
-{
-	char	*result;
 
-	result = NULL;
-	result = getcwd(result, 0);
-	if (result == NULL)
-	{
-		perror("Error");
-		return (EXIT_FAILURE);
-	}
-	printf("%s\n", result);
-	ft_free(result);
-	return (EXIT_SUCCESS);
-}
+void	global_signals_handler(int argc, char **argv);
+
+#endif

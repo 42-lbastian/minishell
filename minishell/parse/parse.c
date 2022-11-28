@@ -1,6 +1,6 @@
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int		ms_parse(t_list *lst, t_env *st)
+int		ms_parse(t_mslist *lst, t_env *st)
 {
 	int				pip[2];
 	int				fd_pipe;

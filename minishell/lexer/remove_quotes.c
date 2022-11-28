@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:53 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 14:40:08 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static char	*ms_remove_quotes(char *str, int i, int j, int quotes)
 {
@@ -40,9 +40,9 @@ static char	*ms_remove_quotes(char *str, int i, int j, int quotes)
 	return (temp);
 }
 
-int	ms_main_remove_quotes(t_list **lst)
+int	ms_main_remove_quotes(t_mslist **lst)
 {
-	t_list	*temp;
+	t_mslist	*temp;
 
 	temp = (*lst);
 	while (lst && (*lst))

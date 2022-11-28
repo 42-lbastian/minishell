@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 15:46:56 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static int	ms_set_quotes(char *str, int i, int quotes)
 {
@@ -24,7 +24,7 @@ static int	ms_set_quotes(char *str, int i, int quotes)
 	return (quotes);
 }
 
-static int	ms_replace_loop(t_list **lst, t_env *st, char *str, int **count)
+static int	ms_replace_loop(t_mslist **lst, t_env *st, char *str, int **count)
 {
 	int		j;
 	char	*temp;
@@ -53,7 +53,7 @@ static int	ms_replace_loop(t_list **lst, t_env *st, char *str, int **count)
 	return (0);
 }
 
-static int	ms_replace(t_list **lst, t_env *st, int *count)
+static int	ms_replace(t_mslist **lst, t_env *st, int *count)
 {
 	char	*str;
 
@@ -82,9 +82,9 @@ static int	ms_replace(t_list **lst, t_env *st, int *count)
 	return (0);
 }
 
-int	ms_main_replace_env(t_list **lst, t_env *st)
+int	ms_main_replace_env(t_mslist **lst, t_env *st)
 {
-	t_list	*temp;
+	t_mslist	*temp;
 	int		*count;
 
 	count = malloc(sizeof(int) * 2);

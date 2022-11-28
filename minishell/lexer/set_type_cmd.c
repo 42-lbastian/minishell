@@ -6,15 +6,15 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:11 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/18 14:58:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int	ms_set_type_cmd(t_list **lst)
+int	ms_set_type_cmd(t_mslist **lst)
 {
-	t_list	*temp;
+	t_mslist	*temp;
 
 	temp = (*lst);
 	while (lst && (*lst))

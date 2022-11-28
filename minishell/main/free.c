@@ -6,11 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:49 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/24 12:40:43 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 void	ms_free_main_s(t_struct *main_s)
 {
@@ -18,9 +18,9 @@ void	ms_free_main_s(t_struct *main_s)
 	ft_free(main_s);
 }
 
-void	ms_free_lst(t_list *lst)
+void	ms_free_lst(t_mslist *lst)
 {
-	t_list	*temp;
+	t_mslist	*temp;
 
 	while (lst)
 	{

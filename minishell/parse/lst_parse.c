@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lst_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:07:57 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/23 11:05:51 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:32:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 char	*ms_find_var_path(char *str, t_env *st)
 {

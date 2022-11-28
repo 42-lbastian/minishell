@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:22:41 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/22 14:40:42 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int	ms_split_expand(t_list **lst, char **split)
+int	ms_split_expand(t_mslist **lst, char **split)
 {
 	int	i;
 
