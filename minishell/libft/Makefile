@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stelie <stelie@student.42.fr>              +#+  +:+       +#+         #
+#    By: krozis <krozis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 20:20:34 by stelie            #+#    #+#              #
-#    Updated: 2022/11/25 13:04:40 by stelie           ###   ########.fr        #
+#    Updated: 2022/11/27 19:20:18 by krozis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_BAS		=	03_00.c\
 				
 SRC_PUT		=	04_00.c\
 				04_01.c\
+				04_02.c\
 				
 SRC_STR		=	05_00.c\
 				05_01.c\
@@ -87,7 +88,7 @@ OBJ_BAS		=	$(addprefix $(O_DIR)/, $(SRC_BAS:.c=.o))
 OBJ_PUT		=	$(addprefix $(O_DIR)/, $(SRC_PUT:.c=.o))
 OBJ_STR		=	$(addprefix $(O_DIR)/, $(SRC_STR:.c=.o))
 OBJ_MEM		=	$(addprefix $(O_DIR)/, $(SRC_MEM:.c=.o))
-#OBJ_LST		=	$(addprefix $(O_DIR)/, $(SRC_LST:.c=.o))
+OBJ_LST		=	$(addprefix $(O_DIR)/, $(SRC_LST:.c=.o))
 OBJ_PTF		=	$(addprefix $(O_DIR)/, $(SRC_PTF:.c=.o))
 OBJ_GNL		=	$(addprefix $(O_DIR)/, $(SRC_GNL:.c=.o))
 

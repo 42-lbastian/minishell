@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/25 13:05:44 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/27 20:30:17 by krozis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@
 #  define BUFFER_SIZE 5
 # endif
 
-/* 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
- */
 
 typedef enum e_flags
 {
@@ -86,7 +84,7 @@ bool			ft_isupper(int c);
 
 size_t			ft_hexalen(size_t nb);
 size_t			ft_intlen(int nb);
-size_t			ft_nbrlen(long nb);
+size_t			ft_nbrlen(long long nb);
 size_t			ft_strlen(const char *s);
 size_t			ft_arrlen(char **array);
 
@@ -99,6 +97,7 @@ int				ft_max(int a, int b);
 int				ft_min(int a, int b);
 int				ft_power(int power, int nbr);
 char			*ft_itoa(int n);
+char			*ft_lltoa(long long int nb);
 
 /*
 03_bases
@@ -118,6 +117,8 @@ void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr_fd(char *s, int fd);
 int				ft_putmsg_fd(char *msg, int fd, int ret);
+void			ft_putarr_fd(char **array, int fd);
+void			ft_putlnbr_fd(long long nbr, int fd);
 
 /*
 05_strings
@@ -136,6 +137,7 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *s1, const char *s2, size_t len);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strrchr(const char *s, int c);
+char			*ft_strrev(char	*str);
 char			*ft_strtrim(char const *s1, char const *set);
 int				ft_ctoupper(int c);
 int				ft_ctolower(int c);
@@ -165,7 +167,7 @@ void			*ft_memmove(void *dst, const void *src, size_t n);
 /*
 07_chained_lists
 */
-/* 
+
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
 int				ft_lstsize(t_list *lst);
@@ -176,7 +178,7 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
- */
+
 /*
 08_ft_printf
 */

@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_01.c                                            :+:      :+:    :+:   */
+/*   04_02.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 10:57:06 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/27 18:42:14 by krozis           ###   ########.fr       */
+/*   Created: 2022/11/27 19:01:44 by krozis            #+#    #+#             */
+/*   Updated: 2022/11/27 19:23:05 by krozis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
- * FT_PUTARR_FD
-*/
-
-/*
- * @brief Puts a given string array in the given fd.
- * Each string is separated by a '\n'.
-*/
-void	ft_putarr_fd(char **array, int fd)
+void	ft_putlnbr_fd(long long nbr, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (array && array[i])
+	if (nbr == LLONG_MIN)
 	{
-		ft_putstr_fd(array[i], fd);
-		ft_putchar_fd('\n', fd);
-		i++;
+		ft_putchar_fd('-', fd);
+		ft_putlnbr_fd(922337203685477580, fd);
+		nbr = 8;
 	}
+	else if (nbr < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nbr = -nbr;
+	}
+	if (nbr >= 10)
+	{
+		ft_putlnbr_fd(nbr / 10, fd);
+		ft_putlnbr_fd(nbr % 10, fd);
+	}
+	else
+		ft_putchar_fd('0' + nbr, fd);
 }

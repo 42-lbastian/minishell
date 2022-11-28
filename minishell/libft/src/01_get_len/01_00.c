@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/25 12:25:30 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/27 20:13:40 by krozis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t	ft_intlen(int nb)
  * @brief Gives the size in characters of a long number.
  * @return returns the size of nb in a size_t format.
 */
-size_t	ft_nbrlen(long nb)
+size_t	ft_nbrlen(long long nb)
 {
 	size_t	len;
 

@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   02_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:08:02 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/18 11:21:34 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/27 19:03:20 by krozis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+ * FT_ATOI
+ * FT_MAX
+ * FT_MIN
+ * FT_POWER
+*/
 
 /*
  * @brief Transforms a digit constitued string into an int.

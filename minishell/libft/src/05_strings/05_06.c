@@ -3,20 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   05_06.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:30:54 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/25 11:28:41 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/27 20:05:03 by krozis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
+ * FT_STRREV
  * FT_STR_RM_CHAR
  * FT_STR_RM_FST_OCC
  * FT_STR_RM_LAST_OCC
 */
+
+/*
+ * @brief Creates a string which is the reverse of the given string.
+ * Example: "STRING" -> "GNIRTS"
+ * @return Returns a pointer to the newly created string.
+*/
+char	*ft_strrev(char	*str)
+{
+	char	*rev;
+	int		i;
+	int		j;
+
+	if (str == NULL)
+		return (str);
+	j = 0;
+	i = ft_strlen(str);
+	rev = malloc(sizeof(char) * (i + 1));
+	if (rev == NULL)
+		return (NULL);
+	i--;
+	while (j <= i)
+	{
+		rev[j] = str[i - j];
+		j++;
+	}
+	rev[j] = '\0';
+	return (rev);
+}
 
 static void	_ft_fill(char *dest, char *src, int index)
 {
