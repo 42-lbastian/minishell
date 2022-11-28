@@ -60,7 +60,8 @@ SRC_PARSER	=	parse.c\
 				lst_parse_print.c\
 				tools.c\
 
-SRC_BUILT	=	pwd_builtin.c\
+SRC_BUILT	=	echo_builtin.c\
+				pwd_builtin.c\
 				exit_builtin.c\
 				#cd.c\
 				#echo.c\

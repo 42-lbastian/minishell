@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_builtins.h                                      :+:      :+:    :+:   */
+/*   echo_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 15:00:55 by stelie           ###   ########.fr       */
+/*   Created: 2022/11/28 14:52:01 by stelie            #+#    #+#             */
+/*   Updated: 2022/11/28 15:05:10 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_BUILTINS_H
-# define MS_BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
+int	echo_builtin(char **args)
+{
+	bool	newline;
 
-/*
- * BUILTINS
-*/
-
-int		echo_builtin(char **args);
-int		pwd_builtin(void);
-int		exit_builtin(char **args);
-
-#endif
+	newline = true;
+	args++;
+	if (*args && ft_strncmp(*args, "-n", 2) == 0)
+	{
+		newline = false;
+		args++;
+	}
+	while (*args)
+	{
+		printf("%s", *args);
+		if (ft_strlen(*args) != 0 && *(args + 1) != NULL)
+			printf(" ");
+		args++;
+	}
+	if (newline)
+		printf("\n");
+	return (EXIT_SUCCESS);
+}
