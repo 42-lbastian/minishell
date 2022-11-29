@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 20:10:12 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:59:54 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_lst_cmd
 /*
 **		parse/parse.c
 */
-
 int		ms_parse(t_mslist *lst, t_env *st);
 
 /*
@@ -43,14 +42,14 @@ int		ms_parse(t_mslist *lst, t_env *st);
 int		ms_create_lst_parser_main(t_mslist *lst, t_lst_parser **lst_parser);
 
 /*
-**		parse/read_lst_parser.c
-*/
-int		ms_read_lst_parser(t_lst_parser *lst, t_env *st, int read, int write, int fd2);
-
-/*
 **		parse/read_lst_parser_short.c
 */
-int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2]);
+int		ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2]);
+
+/*
+**		parse/read_lst_parser_utils.c
+*/
+int		ms_close_return(char *msg, int pip[2][2]);
 
 /*
 **		parse/create_lst_parser_utils.c
@@ -63,13 +62,32 @@ int		ms_is_type_in_out(int type);
 /*
 **		parse/exec.c
 */
+int		ms_is_builtin_short(char **complete_cmd, t_env *st, int pipe[2][2], int type);
 
-void	ms_main_exec(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
-void	ms_is_builtin(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
-void	ms_is_builtin_dumb(char **complete_cmd, t_env *st, int read, int write, int read2, int write2, int type);
-void	ms_is_builtin_short(char **complete_cmd, t_env *st, int pipe[2][2], int type);
+/*
+**		parse/exec_dup_fd.c
+*/
+void	ms_set_dup2(int pip[2][2], int type);
+void	ms_close_fd_fork(int pip[2][2], int type);
+void	ms_close_fd_parent(int pip[2][2], int type);
 
-//void	ms_main_exec(char **complete_cmd, t_env *st, int pip[2], int pip2[2], int type);
+/*
+**		parse/exec_path.c
+*/
+char	*ms_find_path(char *cmd, char **all_path);
+char	**ms_env_array(t_env *st);
+
+/*
+**		parse/exec_path_utils.c
+*/
+int		ms_env_size(t_env *st);
+char	*ms_strjoin_env(char *str1, char *str2, char c, int i);
+
+/*
+**		parse/exec_path_free.c
+*/
+void	ms_free_split(char **all_path);
+char	**ms_free_env_arr(char **env_arr);
 
 /*
 **		parse/lst_parse.c

@@ -55,7 +55,12 @@ SRC_PARSER	=	parse.c\
 				create_lst_parser.c \
 				create_lst_parser_utils.c \
 				read_lst_parser_short.c \
+				read_lst_parser_utils.c \
 				exec.c\
+				exec_dup_fd.c\
+				exec_path.c \
+				exec_path_free.c \
+				exec_path_utils.c \
 				lst_parse.c\
 				lst_parse_print.c\
 				tools.c\
