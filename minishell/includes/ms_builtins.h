@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 15:26:51 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:48:38 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define ERR_CD_ARGS "cd: too many arguments\n"
 # define ERR_HOME_NOT_SET "cd: HOME not set\n"
+# define ERR_ENV_PERM ": Premission denied\n"
+# define ERR_ENV_NO_SUCH ": No such file or directory\n"
 
 /*
  * @brief structure for CD builtin.

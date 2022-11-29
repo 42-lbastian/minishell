@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:30 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:55:23 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	_basic_checks(void)
 	return (EXIT_SUCCESS);
 }
 
+/*
+ * @brief Prints the mslist
+*/
 void	_ms_print_lst(t_mslist *lst)
 {
 	while (lst)
@@ -49,19 +52,6 @@ void	_ms_print_lst(t_mslist *lst)
 		if (lst->type == LIMITOR)
 			printf("{%s}\t[LIMITOR]\n", lst->content);
 		lst = lst->next;
-	}
-}
-
-/*
- * @name: _ms_print_env()
- * @brief Sert à afficher le t_env cree (equivault a 'env')
-*/
-void	_ms_print_env(t_env *ms_env)
-{
-	while (ms_env)
-	{
-		printf("Var:%s\tValue:%s\n", ms_env->var, ms_env->value);
-		ms_env = ms_env->next;
 	}
 }
 
