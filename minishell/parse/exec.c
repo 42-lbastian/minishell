@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 17:12:25 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 12:25:10 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,76 @@ void	ms_main_exec_dumb(char **complete_cmd, t_env *st,
 	}
 }
 
+/*
+static void	ms_set_dup2(int *pip, int *pip2, int type)
+{
+	if (type == CMD_BEGIN || type == CMD_MIDDLE)
+		dup2(pip2[1], STDOUT_FILENO);
+	if (type == CMD_MIDDLE || type == CMD_END)
+		dup2(pip[0], STDIN_FILENO);
+}
+*/
+/*
+static void	ms_close_fd_fork(int *pip, int *pip2, int type)
+{
+	if (type == CMD_MIDDLE || type == CMD_END)
+		close(pip[0]);
+	if (type == CMD_MIDDLE || type == CMD_END)
+		close(pip[1]);
+	if (type == CMD_BEGIN || type == CMD_MIDDLE || type == CMD_END || type == CMD_ALONE)
+		close(pip2[0]);
+	if (type == CMD_BEGIN || type == CMD_MIDDLE || type == CMD_END || type == CMD_ALONE)
+		close(pip2[1]);
+}
+
+static void	ms_close_fd_parent(int *pip, int *pip2, int type)
+{
+	if (type == CMD_MIDDLE || type == CMD_END)
+		close(pip[0]);
+	if (type == CMD_MIDDLE || type == CMD_END)
+		close(pip[1]);
+	if (type == CMD_END || type == CMD_ALONE)
+		close(pip2[0]);
+	if (type == CMD_END || type == CMD_ALONE)
+		close(pip2[1]);
+}*/
+
+static void	ms_set_dup2(int pip[2][2], int type)
+{
+	if (type == CMD_BEGIN || type == CMD_MIDDLE || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END || type == CMD_FILE_IN || type == CMD_FILE_IN_END)
+		dup2(pip[1][1], STDOUT_FILENO);
+	if (type == CMD_MIDDLE || type == CMD_END || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END || type == CMD_FILE_IN || type == CMD_FILE_IN_END)
+		dup2(pip[0][0], STDIN_FILENO);
+	//if (type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
+	//	dup2(pip[1][1], STDOUT_FILENO);
+}
+
+static void	ms_close_fd_fork(int pip[2][2], int type)
+{
+	if (type == CMD_MIDDLE || type == CMD_END || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
+		close(pip[0][0]);
+	if (type == CMD_MIDDLE || type == CMD_END || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
+		close(pip[0][1]);
+	if (type == CMD_BEGIN || type == CMD_MIDDLE || type == CMD_END || type == CMD_ALONE)
+		close(pip[1][0]);
+	if (type == CMD_BEGIN || type == CMD_MIDDLE || type == CMD_END || type == CMD_ALONE || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
+		close(pip[1][1]);
+}
+
+static void	ms_close_fd_parent(int pip[2][2], int type)
+{
+	if (type == CMD_MIDDLE || type == CMD_END)
+		close(pip[0][0]);
+	if (type == CMD_MIDDLE || type == CMD_END)
+		close(pip[0][1]);
+	if (type == CMD_END || type == CMD_ALONE)
+		close(pip[1][0]);
+	if (type == CMD_END || type == CMD_ALONE)
+		close(pip[1][1]);
+}
+
 void	ms_main_exec_short(char **complete_cmd, t_env *st,
-	int *pip, int *pip2, int type)
+	int pip[2][2], int type)
 {
 	char	*path;
 	int		pid;
@@ -230,25 +298,30 @@ void	ms_main_exec_short(char **complete_cmd, t_env *st,
 		//if (type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
 		//	dup2(pip2[0], STDIN_FILENO);
 		//else
-		dup2(pip[0], STDIN_FILENO);
-		if (type == CMD_MIDDLE || type == CMD_BEGIN || type == CMD_FILE_IN
-			|| type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
-			dup2(pip2[1], STDOUT_FILENO);
-		close(pip2[0]);
-		close(pip2[1]);
-		if (type == CMD_MIDDLE || type == CMD_END)
-		{
-			close(pip[0]);
-			close(pip[1]);
-		}
-		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END
-			|| type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
-			close(pip[0]);
+		//if (pip)
+		//	dup2(pip[0], STDIN_FILENO);
+		//if (type == CMD_MIDDLE || type == CMD_BEGIN || type == CMD_FILE_IN
+		//	|| type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
+		//	dup2(pip2[1], STDOUT_FILENO);
+		ms_set_dup2(pip, type);
+		ms_close_fd_fork(pip, type);
+		//close(pip2[0]);
+		//close(pip2[1]);
+		//if (type == CMD_MIDDLE || type == CMD_END)
+		//{
+		//	close(pip[0]);
+		//	close(pip[1]);
+		//}
+		//if (type == CMD_FILE_IN || type == CMD_FILE_IN_END
+		//	|| type == CMD_FILE_OUT || type == CMD_FILE_OUT_END)
+		//	close(pip[0]);
 		if (ft_exec_cmd(path, complete_cmd, ft_env_array(st)) == 1)
 			ft_putstr_fd("Error exec\n", STDERR_FILENO);
 	}
 	else
 	{
+		ms_close_fd_parent(pip, type);
+		/*
 		if (type == CMD_END || type == CMD_MIDDLE)
 		{
 			close(pip[0]);
@@ -263,6 +336,38 @@ void	ms_main_exec_short(char **complete_cmd, t_env *st,
 		if (type == CMD_FILE_IN || type == CMD_FILE_IN_END
 			|| type == CMD_FILE_OUT_END || type == CMD_FILE_OUT)
 			close(pip[0]);
+		*/
+		waitpid(pid, NULL, 0);
+	}
+}
+
+void	ms_exec_builtin_short(char **complete_cmd, t_env *st, int pip[2][2], int type)
+{
+	int		pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		printf("Error fork\n");
+		return ;
+	}
+	else if (pid == 0)
+	{
+		ms_set_dup2(pip, type);
+		ms_close_fd_fork(pip, type);
+		(void)st;
+		if (ft_strcmp(complete_cmd[0], "echo") == 0)
+			echo_builtin(complete_cmd);
+		if (ft_strcmp(complete_cmd[0], "cd") == 0)
+			cd_builtin(complete_cmd);
+		if (ft_strcmp(complete_cmd[0], "pwd") == 0)
+			pwd_builtin();
+		if (ft_strcmp(complete_cmd[0], "exit") == 0)
+			exit_builtin(complete_cmd);
+	}
+	else
+	{
+		ms_close_fd_parent(pip, type);
 		waitpid(pid, NULL, 0);
 	}
 }
@@ -270,16 +375,8 @@ void	ms_main_exec_short(char **complete_cmd, t_env *st,
 void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 		int read2, int write2, int type)
 {
-	char	*path;
 	int		pid;
 
-	path = ms_find_path(complete_cmd[0],
-		ft_split(ms_find_var_path("PATH", st), ':'));
-	if (!path)
-	{
-		printf("Command not found\n");
-		return ;
-	}
 	pid = fork();
 	if (pid == -1)
 	{
@@ -304,6 +401,7 @@ void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 		}
 		close(read);
 		close(write);
+		(void)st;
 		if (ft_strcmp(complete_cmd[0], "echo") == 0)
 			echo_builtin(complete_cmd);
 		if (ft_strcmp(complete_cmd[0], "cd") == 0)
@@ -329,15 +427,32 @@ void	ms_exec_builtin(char **complete_cmd, t_env *st, int read, int write,
 	}
 }
 
-void	ms_is_builtin_short(char **complete_cmd, t_env *st, int *pipe, int *pipe2, int type)
+
+void	ms_is_builtin_short(char **complete_cmd, t_env *st, int pip[2][2], int type)
 {
-	ms_main_exec_short(complete_cmd, st, pipe, pipe2, type);
+	if (ft_strcmp(complete_cmd[0], "cd") == 0)
+		ms_exec_builtin_short(complete_cmd, st, pip, type);
+	else if (ft_strcmp(complete_cmd[0], "exit") == 0)
+		ms_exec_builtin_short(complete_cmd, st, pip, type);
+	else if (ft_strcmp(complete_cmd[0], "echo") == 0)
+		ms_exec_builtin_short(complete_cmd, st, pip, type);
+	else if (ft_strcmp(complete_cmd[0], "pwd") == 0)
+		ms_exec_builtin_short(complete_cmd, st, pip, type);
+	else
+	ms_main_exec_short(complete_cmd, st, pip, type);
 }
+
 
 void	ms_is_builtin_dumb(char **complete_cmd, t_env *st,
 		int read, int write, int read2, int write2, int type)
 {
-	if (_is_builtin(complete_cmd[0]))
+	if (ft_strcmp(complete_cmd[0], "cd") == 0)
+		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
+	else if (ft_strcmp(complete_cmd[0], "exit") == 0)
+		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
+	else if (ft_strcmp(complete_cmd[0], "echo") == 0)
+		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
+	else if (ft_strcmp(complete_cmd[0], "pwd") == 0)
 		ms_exec_builtin(complete_cmd, st, read, write, read2, write2, type);
 	else
 		ms_main_exec_dumb(complete_cmd, st, read, write, read2, write2, type);

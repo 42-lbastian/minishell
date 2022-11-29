@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:56:45 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 14:46:30 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 19:56:21 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ typedef struct s_lexer_token
 	int		type;
 }				t_lextok;
 */
+
+typedef	struct s_pipe
+{
+	int	pip1[2];
+	int	pip2[2];
+}				t_pipe;
 
 typedef struct s_char_check
 {
