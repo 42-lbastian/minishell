@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 20:54:59 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/29 14:52:36 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ static void	ms_close_fd_parent(int *pip, int *pip2, int type)
 
 static void	ms_set_dup2(int pip[2][2], int type)
 {
-	if (type == CMD_BEGIN || type == CMD_MIDDLE || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END || type == CMD_FILE_IN || type == CMD_FILE_IN_END)
+	if (type == CMD_BEGIN || type == CMD_MIDDLE || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END || type == CMD_FILE_IN)
 		dup2(pip[1][1], STDOUT_FILENO);
 	if (type == CMD_MIDDLE || type == CMD_END || type == CMD_FILE_OUT || type == CMD_FILE_OUT_END || type == CMD_FILE_IN || type == CMD_FILE_IN_END)
 		dup2(pip[0][0], STDIN_FILENO);
