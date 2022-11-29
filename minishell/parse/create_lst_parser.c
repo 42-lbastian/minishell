@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:18:50 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 14:45:33 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ms_file_in_out(t_mslist **lst, t_lst_parser **lst_parser,
 		ms_lst_p_addback(lst_parser, ms_lst_parse_new(NULL,
 				(*lst)->content, (*lst)->type));
 		(*lst) = (*lst)->next;
-		if (cmd)
+		if ((*cmd))
 		{
 			while ((*lst) && (*lst)->type == CMD)
 			{
