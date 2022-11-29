@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:11:04 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	ms_replace(t_mslist **lst, t_env *st, int *count)
 int	ms_main_replace_env(t_mslist **lst, t_env *st)
 {
 	t_mslist	*temp;
-	int		*count;
+	int			*count;
 
 	count = malloc(sizeof(int) * 2);
 	if (!count)
