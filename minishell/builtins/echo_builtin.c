@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:52:01 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 17:14:57 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:54:02 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ static bool	_no_nl(char *str)
 	return (false);
 }
 
+/*
+ * @brief the exit builtin mandatory in the project
+ * @param args: a string array where the first str is "echo"
+ * @return Returns the err_code.
+*/
 int	echo_builtin(char **args)
 {
 	bool	newline;
