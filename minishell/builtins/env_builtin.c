@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:43:58 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 16:53:32 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:00:31 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @name _env_err_msg()
  * @brief Print the error message and returns EXIT_FAILURE.
 */
-int	_env_err_msg(char *name, char err_msg)
+int	_env_err_msg(char *name, char *err_msg)
 {
 	ft_putstr_fd("env: ", 2);
 	ft_putstr_fd(name, 2);
