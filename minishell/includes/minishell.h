@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 16:37:24 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:59:04 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@
 # define ERR_WRONG_FILE_IN "bash: No such file or directory\n"
 # define ERR_WRONG_FILE_OUT "Wrong file or access denied\n"
 # define ERR_PIPE_CMD "bash: syntax error near unexpected token `|'\n"
-# define ERR_HOME_NOT_SET "cd: HOME not set\n"
 # define ERR_FORK "Error Fork\n"
 # define ERR_PATH "File not found/access denied\n"
 # define ERR_MALLOC_ENV_ARR "Error Malloc env array\n"
@@ -105,7 +104,7 @@ void	ms_free_parse(t_lst_parser **lst_parser);
  *  ------- DEBUG FUNCTIONS ----------
 */
 
-void	_ms_print_env(t_env *ms_env);
+int		_ms_print_env(t_env *ms_env);
 void	_ms_print_lst(t_mslist *lst);
 int		_basic_checks(void);
 void	ms_clear_env(t_env **st);

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 16:59:54 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:40:51 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct s_lst_cmd
 /*
 **		parse/parse.c
 */
-int		ms_parse(t_mslist *lst, t_env *st);
+
+int		ms_parse(t_struct *main_s, t_mslist *lst, t_env *st);
 
 /*
 **		parse/create_lst_parser.c

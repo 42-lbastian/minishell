@@ -34,6 +34,7 @@ SRC_MAIN	=	minishell.c\
 				signal.c\
 				env_create.c\
 				env_handler.c\
+				env_utils.c\
 				errors.c\
 
 SRC_LEXER	=	lexer.c\
@@ -68,6 +69,7 @@ SRC_PARSER	=	parse.c\
 SRC_BUILT	=	echo_builtin.c\
 				cd_builtin.c\
 				pwd_builtin.c\
+				env_builtin.c\
 				exit_builtin.c\
 				#cd.c\
 				#echo.c\

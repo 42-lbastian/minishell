@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:30:37 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/28 18:04:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,9 @@ void	free_env(t_env *env)
 	while (env)
 	{
 		temp = (env)->next;
-		free(env->value);
-		free(env->var);
-		free(env);
-		env = NULL;
+		ft_free(env->value);
+		ft_free(env->var);
+		ft_free(env);
 		env = temp;
 	}
-}
-
-/*
- * @brief Get the value of the given env variable.
- * @return Returns a pointer to the newly created string.
-*/
-char	*get_env_value(t_env *env, char *var)
-{
-	char	*value;
-	t_env	*tmp;
-
-	value = NULL;
-	tmp = env;
-	while (tmp && tmp->var)
-	{
-		if (ft_strcmp(var, tmp->var) == 0)
-			value = ft_strdup(tmp->value);
-		tmp = tmp->next;
-	}
-	return (value);
 }

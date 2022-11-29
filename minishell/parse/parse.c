@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int	ms_parse(t_mslist *lst, t_env *st)
+int		ms_parse(t_struct *main_s, t_mslist *lst, t_env *st)
 {
 	int				pip[2][2];
 	int				fd_pipe;
@@ -28,5 +28,6 @@ int	ms_parse(t_mslist *lst, t_env *st)
 	if (ms_read_lst_parser_short(lst_parser_dumb, st, pip))
 		return (ERR_CODE_INVALID);
 	ms_free_parse(&lst_parser_dumb);
+	ms_free_main_s(main_s);
 	return (EXIT_SUCCESS);
 }
