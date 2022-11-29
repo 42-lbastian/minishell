@@ -54,7 +54,6 @@ SRC_LEXER	=	lexer.c\
 SRC_PARSER	=	parse.c\
 				create_lst_parser.c \
 				create_lst_parser_utils.c \
-				read_lst_parser.c \
 				read_lst_parser_short.c \
 				exec.c\
 				lst_parse.c\
