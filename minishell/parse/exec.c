@@ -6,24 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 12:25:10 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 12:30:07 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static bool	_is_builtin(char *cmd)
-{
-	if (ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "exit") == 0)
-		return (true);
-	if (ft_strcmp(cmd, "echo") == 0 || ft_strcmp(cmd, "pwd") == 0)
-		return (true);
-	if (ft_strcmp(cmd, "env") == 0 || ft_strcmp(cmd, "export") == 0)
-		return (false);
-	if (ft_strcmp(cmd, "unset") == 0)
-		return (false);
-	return (false);
-}
 
 char	*ms_strjoin_env(char *str1, char *str2, char c, int i)
 {
