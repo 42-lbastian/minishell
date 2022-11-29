@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 14:29:38 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:59:04 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ms_free_parse(t_lst_parser **lst_parser);
  *  ------- DEBUG FUNCTIONS ----------
 */
 
-void	_ms_print_env(t_env *ms_env);
+int		_ms_print_env(t_env *ms_env);
 void	_ms_print_lst(t_mslist *lst);
 int		_basic_checks(void);
 void	ms_clear_env(t_env **st);
