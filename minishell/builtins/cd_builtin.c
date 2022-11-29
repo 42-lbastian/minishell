@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 14:30:31 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:37:34 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,33 @@
 /*
  * @brief initialisation if the t_wd structure.
 */
-static void	_init_pwd(t_env *env, t_wd **var)
+static void	_init_pwd(t_env *env, t_wd **wd)
 {
-	(*var) = malloc(sizeof(t_wd));
-	if ((*var) == NULL)
+	(*wd) = malloc(sizeof(t_wd));
+	if ((*wd) == NULL)
 		return ;
-	(*var)->cwd = NULL;
-	(*var)->home = get_env_value(env, "HOME");
-	(*var)->pwd = get_env_value(env, "PWD");
-	(*var)->oldpwd = get_env_value(env, "OLDPWD");
+	(*wd)->cwd = NULL;
+	(*wd)->home = get_env_value(env, "HOME");
+	(*wd)->pwd = get_env_value(env, "PWD");
+	(*wd)->oldpwd = get_env_value(env, "OLDPWD");
 }
 
 /*
  * @brief Exits and frees the wd structures.
 */
-static int	_exit_cd_builtin(t_wd *var, int exit_code)
+static int	_exit_cd_builtin(t_wd *wd, int exit_code)
 {
-	if (var)
+	if (wd)
 	{
-		if (var->home)
-			ft_free(var->home);
-		if (var->cwd)
-			ft_free(var->cwd);
-		if (var->pwd)
-			ft_free(var->pwd);
-		if (var->oldpwd)
-			ft_free(var->oldpwd);
-		ft_free(var);
+		if (wd->home)
+			ft_free(wd->home);
+		if (wd->cwd)
+			ft_free(wd->cwd);
+		if (wd->pwd)
+			ft_free(wd->pwd);
+		if (wd->oldpwd)
+			ft_free(wd->oldpwd);
+		ft_free(wd);
 	}
 	if (exit_code == EXIT_SUCCESS)
 		return (EXIT_SUCCESS);
@@ -77,6 +77,28 @@ static int	_cd_home(t_env *env)
 	return (_exit_cd_builtin(wd, err_code));
 }
 
+static int	_cd_to_path(char *path, t_env *env)
+{
+	t_wd	*wd;
+	DIR		*dir;
+
+	_init_pwd(env, &wd);
+	dir = opendir(path);
+	if (dir == NULL)
+		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+	else if (closedir(dir) != EXIT_SUCCESS)
+		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+	else if (chdir(path) != EXIT_SUCCESS)
+		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+	if (ms_env_update(env, "OLDPWD", wd->pwd) == EXIT_FAILURE)
+		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+	wd->cwd = getcwd(wd->cwd, 0);
+	if (ms_env_update(env, "PWD", wd->cwd) == EXIT_FAILURE)
+		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+	set_env(env);
+	return (_exit_cd_builtin(wd, EXIT_SUCCESS));
+}
+
 int	cd_builtin(char	**args)
 {
 	t_env	*env;
@@ -88,5 +110,7 @@ int	cd_builtin(char	**args)
 		return (ft_putmsg_fd(ERR_CD_ARGS, STDERR_FILENO, EXIT_FAILURE));
 	if (args[1] == NULL)
 		return (_cd_home(env));
+	else
+		return (_cd_to_path(args[1], env));
 	return (EXIT_SUCCESS);
 }
