@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 15:37:34 by stelie           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:41:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ static int	_exit_cd_builtin(t_wd *wd, int exit_code)
 }
 
 /*
- * @brief the cd builtin mandatory in the project
- * @param args: a string array where the first str is "cd"
- * @return Returns the err_code.
+ * @brief executes cd_builtin for no args given (~cd /home)
+ * @return Returns the error code.
 */
 static int	_cd_home(t_env *env)
 {
@@ -77,6 +76,10 @@ static int	_cd_home(t_env *env)
 	return (_exit_cd_builtin(wd, err_code));
 }
 
+/*
+ * @brief executes cd_builtin for given the path
+ * @return Returns EXIT_SUCCESS or EXIT_FAILURE.
+*/
 static int	_cd_to_path(char *path, t_env *env)
 {
 	t_wd	*wd;
@@ -99,6 +102,11 @@ static int	_cd_to_path(char *path, t_env *env)
 	return (_exit_cd_builtin(wd, EXIT_SUCCESS));
 }
 
+/*
+ * @brief the cd builtin mandatory in the project
+ * @param args: a string array where the first str is "cd"
+ * @return Returns the err_code.
+*/
 int	cd_builtin(char	**args)
 {
 	t_env	*env;
