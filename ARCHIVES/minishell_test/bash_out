@@ -1,3 +1,2 @@
-minishell> echo hello world
-hello world
+minishell> export hello
 minishell> exit
