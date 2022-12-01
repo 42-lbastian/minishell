@@ -6,18 +6,20 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 12:30:07 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/01 18:39:57 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
+static void	ms_exec_parent(int pip[2][2], int pid, int type)
 {
-	if (!env_arr)
-		return (ft_putmsg_fd(ERR_MALLOC_ENV_ARR, STDERR_FILENO, EXIT_FAILURE));
-	execve(path, complete_cmd, env_arr);
-	return (1);
+	int		status;
+
+	set_err_code(0);
+	ms_close_fd_parent(pip, type);
+	waitpid(pid, &status, 0);
+	set_err_code(WEXITSTATUS(status));
 }
 
 static int	ms_main_exec_short(char **complete_cmd, t_env *st,
@@ -42,8 +44,7 @@ static int	ms_main_exec_short(char **complete_cmd, t_env *st,
 	}
 	else
 	{
-		ms_close_fd_parent(pip, type);
-		waitpid(pid, NULL, 0);
+		ms_exec_parent(pip, pid, type);
 		free(path);
 	}
 	return (EXIT_SUCCESS);
@@ -64,6 +65,7 @@ static void	ms_exec_builtin_loop(char **complete_cmd)
 static int	ms_exec_builtin_short(char **complete_cmd, int pip[2][2], int type)
 {
 	int		pid;
+	int		status;
 
 	pid = fork();
 	if (pid == -1)
@@ -77,8 +79,9 @@ static int	ms_exec_builtin_short(char **complete_cmd, int pip[2][2], int type)
 	}
 	else
 	{
+		set_err_code(0);
 		ms_close_fd_parent(pip, type);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 	}
 	return (EXIT_SUCCESS);
 }

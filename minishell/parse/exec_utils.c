@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_lst_parser_utils.c                            :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 15:36:31 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/01 18:03:11 by lbastian         ###   ########.fr       */
+/*   Created: 2022/12/01 18:38:11 by lbastian          #+#    #+#             */
+/*   Updated: 2022/12/01 18:39:22 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ms_close_return(char *msg, int pip[2][2], int err)
+int	ft_exec_cmd(char *path, char **complete_cmd, char **env_arr)
 {
-	set_err_code(err);
-	close(pip[1][0]);
-	close(pip[1][1]);
-	return (ft_putmsg_fd(msg, STDERR_FILENO, EXIT_FAILURE));
+	if (!env_arr)
+		return (ft_putmsg_fd(ERR_MALLOC_ENV_ARR, STDERR_FILENO, EXIT_FAILURE));
+	execve(path, complete_cmd, env_arr);
+	return (1);
 }

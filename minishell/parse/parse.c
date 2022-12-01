@@ -6,13 +6,13 @@
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:04:34 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 15:29:56 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:59:55 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		ms_parse(t_struct *main_s, t_mslist *lst, t_env *st)
+int	ms_parse(t_struct *main_s, t_mslist *lst, t_env *st)
 {
 	int				pip[2][2];
 	int				fd_pipe;

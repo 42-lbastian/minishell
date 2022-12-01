@@ -6,7 +6,7 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:20:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 15:38:48 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:03:47 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ms_read_file_in_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 	lst = lst->next;
 	fd = open(lst->value.oper, O_RDONLY);
 	if (fd == -1)
-		return (ms_close_return(ERR_WRONG_FILE_IN, pip));
+		return (ms_close_return(ERR_WRONG_FILE_IN, pip, 1));
 	pip[0][0] = fd;
 	ms_read_lst_parser_short(lst->next, st, pip);
 	return (EXIT_SUCCESS);
@@ -37,7 +37,7 @@ static int	ms_read_file_out_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 	else
 		fd = open(lst->value.oper, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd == -1)
-		return (ms_close_return(ERR_WRONG_FILE_OUT, pip));
+		return (ms_close_return(ERR_WRONG_FILE_OUT, pip, 1));
 	pip[1][1] = fd;
 	ms_read_lst_parser_short(lst->next, st, pip);
 	return (EXIT_SUCCESS);
@@ -52,7 +52,7 @@ static int	ms_read_pipe_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 	{
 		fd_pipe = pipe(pip2[1]);
 		if (fd_pipe == -1)
-			return (ms_close_return(ERR_PIPE, pip));
+			return (ms_close_return(ERR_PIPE, pip, 1));
 		pip2[0][0] = pip[1][0];
 		pip2[0][1] = pip[1][1];
 		if (!lst->next->next && lst->next->type == CMD)
@@ -66,7 +66,7 @@ static int	ms_read_pipe_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 		ms_read_lst_parser_short(lst->next, st, pip2);
 	}
 	else
-		return (ms_close_return(ERR_PIPE_CMD, pip));
+		return (ms_close_return(ERR_PIPE_CMD, pip, 2));
 	return (EXIT_SUCCESS);
 }
 

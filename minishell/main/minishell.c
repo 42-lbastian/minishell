@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 20:29:04 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:34:32 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	main(int argc, char **argv, char **envp)
 	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	set_env(ms_env);
+	set_err_code(0);
 	return (_routine());
 }

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:18:50 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 15:30:02 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:59:22 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ms_file_in_out(t_mslist **lst, t_lst_parser **lst_parser,
 		return (0);
 	}
 	else
-		return (ft_putmsg_fd(ERR_FILE_IN_OUT_ARG, STDERR_FILENO, 2));
+		return (ms_set_err_int_out(ERR_FILE_IN_OUT_ARG, STDERR_FILENO));
 }
 
 static int	ms_create_cmd(int *i, t_mslist **lst, char ***cmd)

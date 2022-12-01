@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:21 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/01 17:43:54 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*ms_find_var(char *str, t_env *st)
 {
 	if (!str)
 		return (NULL);
+	if (ft_strcmp(str, "?") == 0)
+		return (ft_itoa(get_err_code()));
 	while (st)
 	{
 		if (ft_strcmp(st->var, str) == 0)

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:21:56 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/01 17:59:28 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,10 @@ int	ms_is_type_in_out(int type)
 	if (type == FILE_IN || type == FILE_OUT_OVER || type == FILE_OUT_APP)
 		return (1);
 	return (0);
+}
+
+int	ms_set_err_int_out(char *str, int fd)
+{
+	set_err_code(2);
+	return (ft_putmsg_fd(str, fd, 2));
 }

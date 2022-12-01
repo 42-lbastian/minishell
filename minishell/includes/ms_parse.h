@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 13:40:51 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/01 18:39:13 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2]);
 /*
 **		parse/read_lst_parser_utils.c
 */
-int		ms_close_return(char *msg, int pip[2][2]);
+int		ms_close_return(char *msg, int pip[2][2], int err);
 
 /*
 **		parse/create_lst_parser_utils.c
@@ -59,11 +59,18 @@ int		ms_close_return(char *msg, int pip[2][2]);
 int		ms_count_nb_cmd(t_mslist *lst);
 int		ms_free_cmd(char ***cmd);
 int		ms_is_type_in_out(int type);
+int		ms_set_err_int_out(char *str, int fd);
+
 
 /*
 **		parse/exec.c
 */
 int		ms_is_builtin_short(char **complete_cmd, t_env *st, int pipe[2][2], int type);
+
+/*
+**		parse/exec_utils.c
+*/
+int		ft_exec_cmd(char *path, char **complete_cmd, char **env_arr);
 
 /*
 **		parse/exec_dup_fd.c

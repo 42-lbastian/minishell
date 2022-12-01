@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 16:59:04 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/01 16:53:57 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define NORMAL "\1\x1b[0m\2"
 # define NAME "minishell> "
 
-# define NB_CHAR_VALID 13
-# define VALID_CHAR "=/|<>.'\" $?-_"
+# define NB_CHAR_VALID 14
+# define VALID_CHAR "=/|<>.'\" $?-_~"
 # define CMD_CHAR " ><|"
 # define C_CHECK_CHAR "\'\"$ "
 # define SPECIAL_CHAR "|<>"
@@ -77,6 +77,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/types.h>
 # include "../libft/includes/libft.h"
 # include "ms_structures.h"
 # include "ms_env.h"
@@ -84,6 +85,7 @@
 # include "ms_lexer.h"
 # include "ms_parse.h"
 # include "ms_builtins.h"
+
 
 /*
 *		main/errors.c

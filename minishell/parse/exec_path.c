@@ -6,7 +6,7 @@
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:40:05 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 16:59:56 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:42:35 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,19 @@ int	ms_have_path(char *cmd)
 {
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (0);
+	if (access(cmd, F_OK) == -1)
+		set_err_code(127);
+	else if (access(cmd, X_OK) == -1)
+		set_err_code(126);
 	return (1);
+}
+
+static void	ms_set_err_path(char *good_path)
+{
+	if (access(good_path, F_OK) == -1)
+		set_err_code(127);
+	else if (access(good_path, X_OK) == -1)
+		set_err_code(126);
 }
 
 static char	*ms_find_path_loop(char *cmd, char **all_path)
@@ -53,9 +65,13 @@ static char	*ms_find_path_loop(char *cmd, char **all_path)
 		if (!good_path)
 			return (NULL);
 		if (access(good_path, F_OK | X_OK) == 0)
+		{
+			set_err_code(0);
 			break ;
+		}
 		else
 		{
+			ms_set_err_path(good_path);
 			free(good_path);
 			good_path = NULL;
 		}
