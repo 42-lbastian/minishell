@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/01 17:34:32 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:29:24 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  * @brief Ending function for ms_routine.
- * @param to_free: the buffer read allocated in ms_routine -> str_read
+ * @param to_free: the buffer read allocated in ms_routine -> buf
  * @param exit_code: the wanted exit code in return
  * @return Returns the exit code passed in argument.
  * @todo:	Once exit_inbuilt is done, add here an 'if(exit_code == 130)'make
@@ -31,25 +31,25 @@ static int	_exit_routine(void *to_free, int exit_code)
 
 static int	_routine(void)
 {
-	char	*str_read;
+	char	*buf;
 
-	str_read = NULL;
+	buf = NULL;
 	while (true)
 	{
-		str_read = readline(NAME);
-		if (str_read == NULL)
-			return (_exit_routine(str_read, ERR_CODE_CTRL_D));
-		if (ft_strcmp(str_read, "exit") == 0)
-			return (_exit_routine(str_read, get_err_code()));
-		if (ft_strlen(str_read) != 0)
-			add_history(str_read);
-		while (*str_read == ' ')
-			str_read = ft_str_rm_char(str_read, 0);
-		if (ft_strlen(str_read) && ms_main_lexer(str_read, get_env()) == EXIT_FAILURE)
-			return (_exit_routine(str_read, EXIT_FAILURE));
-		ft_free(str_read);
+		buf = readline(NAME);
+		if (buf == NULL)
+			return (_exit_routine(buf, ERR_CODE_CTRL_D));
+		if (ft_strcmp(buf, "exit") == 0)
+			return (_exit_routine(buf, get_err_code()));
+		if (ft_strlen(buf) != 0)
+			add_history(buf);
+		while (*buf == ' ')
+			buf = ft_str_rm_char(buf, 0);
+		if (ft_strlen(buf) && ms_main_lexer(buf, get_env()) == EXIT_FAILURE)
+			return (_exit_routine(buf, EXIT_FAILURE));
+		ft_free(buf);
 	}
-	return (_exit_routine(str_read, EXIT_FAILURE));
+	return (_exit_routine(buf, EXIT_FAILURE));
 }
 
 int	main(int argc, char **argv, char **envp)
