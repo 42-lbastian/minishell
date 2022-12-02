@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:31:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/02 13:19:00 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/02 13:30:02 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int	exit_builtin(char **args)
 		exit_code = get_err_code();
 	if (_is_valid_exit_flag(args[1]) == false)
 	{
-		printf("exit: %s: numeric argument required\n", args[1]);
+		printf("exit: %s: %s", args[1], ERR_EXIT_VALID);
 		exit_code = 2;
 	}
 	else if (args[1] && args[2])
 	{
-		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd("%s", ERR_EXIT_ARGS, STDERR_FILENO);
 		return (ft_putmsg_fd("exit\n", STDERR_FILENO, EXIT_FAILURE));
 	}
 	ft_putstr_fd("exit\n", STDERR_FILENO);
