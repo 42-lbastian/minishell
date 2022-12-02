@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:23:41 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 14:52:31 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/02 16:43:05 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		ms_add_back_env(t_env **st, t_env *new);
  *		main/env_utils.c
 */
 
+bool	ms_env_var_exists(t_env *env, char *var);
 char	*get_env_value(t_env *env, char *var);
 void	ms_free_one_env(t_env *env, char *var);
 int		ms_env_update(t_env *env, char *var, char *new_value);

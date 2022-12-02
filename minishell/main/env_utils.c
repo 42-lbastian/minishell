@@ -6,11 +6,31 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:17:40 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 13:52:34 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/02 17:42:09 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+ * @brief Says if a variable exists in the given env.
+ * @return Returns true or false.
+*/
+bool	ms_env_var_exists(t_env *env, char *var)
+{
+	t_env	*tmp;
+
+	if (!env || !var)
+		return (false);
+	tmp = env;
+	while (tmp && tmp->var)
+	{
+		if (ft_strcmp(var, tmp->var) == 0)
+			return (true);
+		tmp = tmp->next;
+	}
+	return (false);
+}
 
 /*
  * @brief Liberates one t_env item.
