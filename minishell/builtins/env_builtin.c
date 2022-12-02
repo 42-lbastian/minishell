@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:43:58 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 17:00:31 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/02 14:01:00 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	_ms_print_env(t_env *ms_env)
 {
 	while (ms_env)
 	{
-		if (printf("Var:%s\tValue:%s\n", ms_env->var, ms_env->value) == 0)
+		if (printf("%s=%s\n", ms_env->var, ms_env->value) == 0)
 			return (EXIT_FAILURE);
 		ms_env = ms_env->next;
 	}
