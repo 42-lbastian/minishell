@@ -72,6 +72,7 @@ SRC_BUILT	=	echo_builtin.c\
 				pwd_builtin.c\
 				env_builtin.c\
 				exit_builtin.c\
+				unset_builtin.c\
 				#cd.c\
 				#echo.c\
 				#env.c\
