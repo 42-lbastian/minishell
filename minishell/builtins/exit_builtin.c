@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:31:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/02 13:30:02 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/02 13:43:08 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	exit_builtin(char **args)
 	}
 	else if (args[1] && args[2])
 	{
-		ft_putstr_fd("%s", ERR_EXIT_ARGS, STDERR_FILENO);
+		ft_putstr_fd(ERR_EXIT_ARGS, STDERR_FILENO);
 		return (ft_putmsg_fd("exit\n", STDERR_FILENO, EXIT_FAILURE));
 	}
 	ft_putstr_fd("exit\n", STDERR_FILENO);
