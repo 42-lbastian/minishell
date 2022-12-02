@@ -70,15 +70,10 @@ SRC_PARSER	=	parse.c\
 SRC_BUILT	=	echo_builtin.c\
 				cd_builtin.c\
 				pwd_builtin.c\
+				export_builtin.c\
+				unset_builtin.c\
 				env_builtin.c\
 				exit_builtin.c\
-				unset_builtin.c\
-				#cd.c\
-				#echo.c\
-				#env.c\
-				#export.c\
-				#unset.c\
-				#utils_env.c\
 
 SRC_DEBUG	=	debug_00.c\
 

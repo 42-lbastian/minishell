@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/02 13:42:04 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/02 13:55:51 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef struct s_wd
 int	echo_builtin(char **args);
 int	cd_builtin(char **args);
 int	pwd_builtin(void);
-int	exit_builtin(char **args);
+int	export_builtin(char **args);
 int	unset_builtin(char **args);
+int	env_builtin(char **args);
+int	exit_builtin(char **args);
 
 #endif
