@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 16:46:45 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:00:47 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	_export_one(char *arg, t_env *env, char *var)
 		return (exit_code);
 	i = 0;
 	var = ft_str_cut_before(arg, '=');
-	if (var != NULL && ft_strlen(arg) == ft_strlen(var) + 1)
-		ft_free(var);
+	if (var == NULL)
+		exit_code = EXIT_FAILURE;
 	else
 	{
 		value = ft_str_cut_after(arg, '=');
