@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 18:09:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:32:07 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define ERR_HOME_NOT_SET "cd: HOME not set\n"
 
 # define ERR_ENV_PERM ": Premission denied\n"
-# define ERR_ENV_NO_SUCH ": No such file or directory\n"
+# define ERR_NO_SUCH ": No such file or directory\n"
 
 # define ERR_EXIT_VALID ": numeric argument required\n"
 # define ERR_EXIT_ARGS "exit : too many arguments\n"
