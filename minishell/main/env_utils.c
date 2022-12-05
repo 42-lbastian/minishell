@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:17:40 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/02 17:42:09 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 13:54:00 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ char	*get_env_value(t_env *env, char *var)
 
 /*
  * @brief Search for the selected env variable and delete/free it.
+ * @return Returns a pointer to the 1st element of env;
 */
-void	ms_free_one_env(t_env *env, char *var)
+t_env	*ms_free_one_env(t_env *env, char *var)
 {
 	t_env	*temp;
 	t_env	*prev;
@@ -92,7 +93,7 @@ void	ms_free_one_env(t_env *env, char *var)
 		prev = temp;
 		temp = temp->next;
 	}
-	set_env(env);
+	return (env);
 }
 
 /*

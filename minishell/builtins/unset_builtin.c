@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:25:53 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/02 13:41:37 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 13:48:31 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	unset_builtin(char **args)
 	env = get_env();
 	while (args[i])
 	{
-		ms_free_one_env(env, args[i]);
+		env = ms_free_one_env(env, args[i]);
 		i++;
 	}
 	return (EXIT_SUCCESS);
