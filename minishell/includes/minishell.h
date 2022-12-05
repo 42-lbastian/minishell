@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/01 16:53:57 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:41:56 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ int		_ms_print_env(t_env *ms_env);
 void	_ms_print_lst(t_mslist *lst);
 int		_basic_checks(void);
 void	ms_clear_env(t_env **st);
+void	_display_env_pointers(void);
 
 #endif
