@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:17:40 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 13:54:00 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:12:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,16 @@ int	ms_env_update(t_env *env, char *var, char *new_value)
 		{
 			if (tmp->value)
 				ft_free(tmp->value);
-			if (new_value != NULL)
-			{
+			if (new_value == NULL)
+				tmp->value = ft_strdup("");
+			else
 				tmp->value = ft_strdup(new_value);
-				if (tmp->value == NULL)
-					return (EXIT_FAILURE);
-				else
-					return (EXIT_SUCCESS);
-			}
-			break ;
+			if (tmp->value == NULL)
+				return (EXIT_FAILURE);
+			else
+				return (EXIT_SUCCESS);
 		}
 		tmp = tmp->next;
 	}
-	set_env(env);
 	return (ms_add_back_env(&env, ms_new_env(var, new_value)));
 }

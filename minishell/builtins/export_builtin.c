@@ -6,40 +6,50 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 18:00:47 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:09:55 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	_env_update(t_env *env, char *var, char *new_value)
+/*
+ * @brief Prints the error for the wrong export arguments, 
+ * according to original bash behavior.
+*/
+static bool	_print_export_error(char *arg)
 {
-	t_env	*tmp;
-
-	tmp = env;
-	if (env == NULL || var == NULL)
-		return (EXIT_FAILURE);
-	while (tmp && tmp->var)
-	{
-		if (ft_strcmp(var, tmp->var) == 0)
-		{
-			if (tmp->value)
-				ft_free(tmp->value);
-			if (new_value == NULL)
-				tmp->value = ft_strdup("");
-			else
-				tmp->value = ft_strdup(new_value);
-			if (tmp->value == NULL)
-				return (EXIT_FAILURE);
-			else
-				return (EXIT_SUCCESS);
-		}
-		tmp = tmp->next;
-	}
-	return (ms_add_back_env(&env, ms_new_env(var, new_value)));
+	ft_putstr_fd("export: `", STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd(ERR_EXPORT, STDERR_FILENO);
+	return (false);
 }
 
-int	_export_one(char *arg, t_env *env, char *var)
+/*
+ * @brief Verifies if an arg is conform to export.
+ * @return Returns true if arg can be used, false if not.
+*/
+static bool	_check_export_arg(char	*arg)
+{
+	int	i;
+
+	if (ft_strlen(arg) == 0)
+		return (_print_export_error(NULL));
+	i = 1;
+	if (!ft_isalpha(arg[0]) && arg[0] != '_')
+		return (_print_export_error(arg));
+	while (arg[i] && arg[i] != '=')
+	{
+		if (!ft_isalnum(arg[i]) && arg[i] != '_')
+			return (_print_export_error(arg));
+		i++;
+	}
+	return (true);
+}
+
+/*
+ * @brief Exports one element.
+*/
+static int	_export_one(char *arg, t_env *env, char *var)
 {
 	char	*value;
 	int		i;
@@ -56,7 +66,7 @@ int	_export_one(char *arg, t_env *env, char *var)
 	else
 	{
 		value = ft_str_cut_after(arg, '=');
-		exit_code = _env_update(env, var, value);
+		exit_code = ms_env_update(env, var, value);
 	}
 	return (exit_code);
 }
@@ -77,6 +87,11 @@ static	int	_print_export_no_args(t_env *env)
 	return (EXIT_SUCCESS);
 }
 
+/*
+ * @brief the export builtin mandatory in the project
+ * @param args: a string array where the first str is "export"
+ * @return Returns the err_code.
+*/
 int	export_builtin(char **args)
 {
 	t_env	*env;

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 17:39:13 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:09:18 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,5 @@ int		export_builtin(char **args);
 int		unset_builtin(char **args);
 int		env_builtin(char **args);
 int		exit_builtin(char **args);
-
-/*
- * BUILTIN UTILS
-*/
-
-bool	_check_export_arg(char	*arg);
 
 #endif
