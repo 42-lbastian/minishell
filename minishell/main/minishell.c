@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/02 15:29:24 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 17:31:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static int	_routine(void)
 		buf = readline(NAME);
 		if (buf == NULL)
 			return (_exit_routine(buf, ERR_CODE_CTRL_D));
-		if (ft_strcmp(buf, "exit") == 0)
-			return (_exit_routine(buf, get_err_code()));
 		if (ft_strlen(buf) != 0)
 			add_history(buf);
 		while (*buf == ' ')
