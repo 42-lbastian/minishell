@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/02 15:25:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/05 16:46:45 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,34 @@ int	_env_update(t_env *env, char *var, char *new_value)
 	return (ms_add_back_env(&env, ms_new_env(var, new_value)));
 }
 
-int	_export_one(char *arg, t_env *env)
+int	_export_one(char *arg, t_env *env, char *var)
 {
-	char	*var;
 	char	*value;
 	int		i;
+	int		exit_code;
 
-	i = 0;
-	var = NULL;
 	value = NULL;
+	exit_code = EXIT_SUCCESS;
+	if (ft_incharset('=', arg) == false)
+		return (exit_code);
+	i = 0;
 	var = ft_str_cut_before(arg, '=');
-	if ((arg[ft_strlen(var)] && arg[ft_strlen(var)] == '='))
+	if (var != NULL && ft_strlen(arg) == ft_strlen(var) + 1)
+		ft_free(var);
+	else
 	{
 		value = ft_str_cut_after(arg, '=');
-		return (_env_update(env, var, value));
+		exit_code = _env_update(env, var, value);
 	}
-	return (EXIT_SUCCESS);
+	return (exit_code);
 }
 
-int	_print_export_no_args(t_env *env)
+/*
+ * @brief Copy the behavior of export with no args, adding 'declare -x'
+ * in front of env variables.
+ * man export says: "When no arguments are given, the results are unspecified"
+*/
+static	int	_print_export_no_args(t_env *env)
 {
 	while (env)
 	{
@@ -72,15 +81,19 @@ int	export_builtin(char **args)
 {
 	t_env	*env;
 	int		i;
+	int		exit_code;
+	char	*var;
 
+	exit_code = EXIT_SUCCESS;
 	i = 1;
+	var = NULL;
 	env = get_env();
-	if (args[i] == NULL || ft_strlen(args[i]) < 1)
+	if (args[i] == NULL)
 		return (_print_export_no_args(env));
-	while (args[i])
+	while (args[i] && exit_code == EXIT_SUCCESS)
 	{
-		if (_export_one(args[i], env) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+		if (_check_export_arg(args[i]) == true)
+			exit_code = _export_one(args[i], env, var);
 		i++;
 	}
 	return (EXIT_SUCCESS);
