@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 17:37:36 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:02:28 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@
 # include "ms_lexer.h"
 # include "ms_parse.h"
 # include "ms_builtins.h"
+# include <errno.h>
 
 /*
 *		main/errors.c
