@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/06 14:09:15 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/06 14:55:38 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../includes/minishell.h"
 # include <dirent.h>
 
-# define ERR_CD_ARGS "cd: too many arguments\n"
-# define ERR_HOME_NOT_SET "cd: HOME not set\n"
+# define ERR_CD_ARGS "too many arguments\n"
+# define ERR_HOME_NOT_SET "HOME not set\n"
 
 # define ERR_ENV_PERM ": Premission denied\n"
 # define ERR_NO_SUCH ": No such file or directory\n"

@@ -6,21 +6,30 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 18:48:43 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:10:23 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*
+ * @brief Prints the error asked error for cd and returns EXIT_FAILURE.
+*/
 static int	_print_cd_error(char *arg, char *error)
 {
-	if (ft_strcmp(error, ERR_HOME_NOT_SET) == 0)
-		ft_putstr_fd(error, STDERR_FILENO);
-	else
+	if (ft_strcmp(error, ERR_HOME_NOT_SET) == 0
+		|| ft_strcmp(error, ERR_CD_ARGS) == 0)
 	{
-		ft_putstr_fd("cd :", STDERR_FILENO);
+		ft_putstr_fd("cd: ", STDERR_FILENO);
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(error, STDERR_FILENO);
+	}
+	else
+	{
+		ft_putstr_fd("cd: ", STDERR_FILENO);
+		ft_putstr_fd(arg, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putendl_fd(error, STDERR_FILENO);
 	}
 	return (EXIT_FAILURE);
 }
@@ -71,11 +80,11 @@ static int	_cd_to_path(char *path, t_env *env)
 	_init_pwd(env, &wd);
 	dir = opendir(path);
 	if (dir == NULL)
-		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+		return (_exit_cd_builtin(wd, _print_cd_error(path, strerror(errno))));
 	else if (closedir(dir) != EXIT_SUCCESS)
-		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+		return (_exit_cd_builtin(wd, _print_cd_error(path, strerror(errno))));
 	else if (chdir(path) != EXIT_SUCCESS)
-		return (_exit_cd_builtin(wd, EXIT_FAILURE));
+		return (_exit_cd_builtin(wd, _print_cd_error(path, strerror(errno))));
 	if (ms_env_update(env, "OLDPWD", wd->pwd) == EXIT_FAILURE)
 		return (_exit_cd_builtin(wd, EXIT_FAILURE));
 	wd->cwd = getcwd(wd->cwd, 0);
