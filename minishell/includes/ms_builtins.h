@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 18:32:07 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/06 14:09:15 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ typedef struct s_wd
  * BUILTINS
 */
 
-int		echo_builtin(char **args);
-int		cd_builtin(char **args);
-int		pwd_builtin(void);
-int		export_builtin(char **args);
-int		unset_builtin(char **args);
-int		env_builtin(char **args);
-int		exit_builtin(char **args);
+int	echo_builtin(char **args);
+int	cd_builtin(char **args);
+int	pwd_builtin(void);
+int	export_builtin(char **args);
+int	unset_builtin(char **args);
+int	env_builtin(char **args);
+int	exit_builtin(char **args);
+
+/*
+ * UTILS
+*/
+
+int	_export_no_args(t_env *env);
 
 #endif

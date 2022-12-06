@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 18:09:55 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/06 14:08:34 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,6 @@ static int	_export_one(char *arg, t_env *env, char *var)
 }
 
 /*
- * @brief Copy the behavior of export with no args, adding 'declare -x'
- * in front of env variables.
- * man export says: "When no arguments are given, the results are unspecified"
-*/
-static	int	_print_export_no_args(t_env *env)
-{
-	while (env)
-	{
-		if (printf("declare -x %s=%s\n", env->var, env->value) == 0)
-			return (EXIT_FAILURE);
-		env = env->next;
-	}
-	return (EXIT_SUCCESS);
-}
-
-/*
  * @brief the export builtin mandatory in the project
  * @param args: a string array where the first str is "export"
  * @return Returns the err_code.
@@ -104,7 +88,7 @@ int	export_builtin(char **args)
 	var = NULL;
 	env = get_env();
 	if (args[i] == NULL)
-		return (_print_export_no_args(env));
+		return (_export_no_args(env));
 	while (args[i] && exit_code == EXIT_SUCCESS)
 	{
 		if (_check_export_arg(args[i]) == true)
