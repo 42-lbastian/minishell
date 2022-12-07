@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/06 14:08:34 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 14:07:57 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static int	_export_one(char *arg, t_env *env, char *var)
 	{
 		value = ft_str_cut_after(arg, '=');
 		exit_code = ms_env_update(env, var, value);
+		ft_free(var);
+		ft_free(value);
 	}
 	return (exit_code);
 }
