@@ -6,7 +6,7 @@
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:40:05 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/01 18:42:35 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:10:31 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,8 @@ static char	*ms_find_path_loop(char *cmd, char **all_path)
 
 char	*ms_find_path(char *cmd, char **all_path)
 {
-	int		i;
 	char	*good_path;
 
-	i = 0;
 	good_path = NULL;
 	if (!all_path)
 		return (NULL);

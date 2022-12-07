@@ -6,7 +6,7 @@
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:39:40 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 16:40:09 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:13:11 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ms_set_dup2(int pip[2][2], int type)
 		dup2(pip[1][1], STDOUT_FILENO);
 	if (type == CMD_MIDDLE || type == CMD_END || type == CMD_FILE_OUT
 		|| type == CMD_FILE_OUT_END || type == CMD_FILE_IN
-		|| type == CMD_FILE_IN_END)
+		|| type == CMD_FILE_IN_END || type == CMD_ALONE)
 		dup2(pip[0][0], STDIN_FILENO);
 }
 
