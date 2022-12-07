@@ -6,51 +6,63 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:14:47 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/07 12:41:00 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 17:54:53 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
- * save the values for PWD and OLDPWD (in that ORDER)
-*/
-static t_env	*_get_wd(t_env *wd)
+static char	**_get_wd(char **wd)
 {
-	static t_env	*static_wd = NULL;
+	static char	**static_wd = NULL;
 
 	if (wd != NULL)
 		static_wd = wd;
 	return (static_wd);
 }
 
-/*
- * @brief Allows to update the existing wd.
-*/
-void	set_wd(t_env *wd)
+void	set_wd(char **wd)
 {
 	_get_wd(wd);
 }
 
-/*
- * @brief Returns the actual wd existing.
- */
-t_env	*get_wd(void)
+char	**get_wd(void)
 {
 	return (_get_wd(NULL));
 }
 
-int	ms_init_wd(t_env **wd)
+int	ms_init_wd(void)
 {
 	char	*buf;
+	char	**wd;
 
-	buf = NULL;
-	buf = getcwd(buf, 0);
-	if (buf == NULL)
-		return (EXIT_FAILURE);
-	*wd = ms_new_env(ft_strdup(buf), ft_strdup(buf));
-	ft_free(buf);
+	wd = NULL;
+	wd = malloc(sizeof(char *) * 3);
 	if (wd == NULL)
 		return (EXIT_FAILURE);
+	buf = NULL;
+	buf = getcwd(buf, 0);
+	wd[PWD] = ft_strdup(buf);
+	if (wd[PWD] == NULL)
+	{
+		ft_free(wd);
+		return (EXIT_FAILURE);
+	}
+	wd[OLDPWD] = ft_strdup(buf);
+	if (wd[OLDPWD] == NULL)
+	{
+		ft_free(wd[PWD]);
+		ft_free(wd);
+		return (EXIT_FAILURE);
+	}
+	free(buf);
+	set_wd(wd);
 	return (EXIT_SUCCESS);
+}
+
+void	free_wd(char **wd)
+{
+	ft_free(wd[PWD]);
+	ft_free(wd[OLDPWD]);
+	ft_free(wd);
 }
