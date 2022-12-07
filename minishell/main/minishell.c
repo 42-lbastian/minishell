@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/05 17:31:30 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 12:42:40 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	_exit_routine(void *to_free, int exit_code)
 	printf("exit\n");
 	rl_clear_history();
 	free_env(get_env());
+	free_env(get_wd());
 	return (exit_code);
 }
 
@@ -53,12 +54,20 @@ static int	_routine(void)
 int	main(int argc, char **argv, char **envp)
 {
 	t_env		*ms_env;
+	t_env		*ms_wd;
 
 	ms_env = NULL;
+	ms_wd = NULL;
 	global_signals_handler(argc, argv);
 	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
+	if (ms_init_wd(&ms_wd) == EXIT_FAILURE)
+	{
+		free_env(ms_env);
+		return (ft_putmsg_fd("PROBLEM\n", STDERR_FILENO, EXIT_FAILURE));
+	}
 	set_env(ms_env);
-	set_err_code(0);
+	set_wd(ms_wd);
+	set_err_code(EXIT_SUCCESS);
 	return (_routine());
 }

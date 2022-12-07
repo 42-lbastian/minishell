@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:23:41 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 13:49:02 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 12:40:05 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,14 @@ bool	ms_env_var_exists(t_env *env, char *var);
 char	*get_env_value(t_env *env, char *var);
 t_env	*ms_free_one_env(t_env *env, char *var);
 int		ms_env_update(t_env *env, char *var, char *new_value);
+
+/*
+ *		main/wd_utils.c
+*/
+
+int		ms_init_wd(t_env **wd);
+void	set_wd(t_env *wd);
+t_env	*get_wd(void);
+void	free_wd(t_env *wd);
 
 #endif

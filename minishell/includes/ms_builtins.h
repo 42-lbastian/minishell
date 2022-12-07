@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/07 10:04:14 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 12:30:42 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@
 
 # define ERR_EXPORT "\': not a valid identifier\n"
 # define EXIT_MSG "exit\n"
-
-/*
- * @brief structure for CD builtin.
-*/
-typedef struct s_wd
-{
-	char	*cwd;
-	char	*pwd;
-	char	*oldpwd;
-}				t_wd;
 
 /*
  * BUILTINS
