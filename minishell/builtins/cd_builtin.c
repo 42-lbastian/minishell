@@ -6,20 +6,28 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/07 17:53:58 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 18:34:46 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*
+ * @brief Updates the PWD and OLDPWD (in tab, not in env).
+*/
 static int	_update_wd(char **wd)
 {
+	char	*buf;
+
+	buf = NULL;
 	ft_free(wd[OLDPWD]);
 	wd[OLDPWD] = ft_strdup(wd[PWD]);
 	if (wd[OLDPWD] == NULL)
 		return (EXIT_FAILURE);
 	ft_free(wd[PWD]);
-	wd[PWD] = getcwd(wd[PWD], 0);
+	buf = getcwd(buf, 0);
+	wd[PWD] = ft_strdup(buf);
+	ft_free(buf);
 	if (wd[PWD] == NULL)
 		return (EXIT_FAILURE);
 	set_wd(wd);
@@ -50,15 +58,25 @@ static int	_print_cd_error(char *arg, char *error)
 
 static int	_update_env_if(t_env *env, char **wd)
 {
+	int	exit_code;
+
+	exit_code = EXIT_SUCCESS;
 	if (ms_env_var_exists(env, "PWD") && ms_env_var_exists(env, "OLDPWD"))
-		return (ms_env_update(env, "PWD", wd[PWD])
-			&& ms_env_update(env, "OLDPWD", wd[OLDPWD]));
-	if (!(ms_env_var_exists(env, "PWD")) && !(ms_env_var_exists(env, "OLDPWD")))
-		return (EXIT_SUCCESS);
-	if (ms_env_var_exists(env, "PWD") && !(ms_env_var_exists(env, "OLDPWD")))
-		return (ms_env_update(env, "PWD", wd[PWD]));
-	return (ms_env_update(env, "OLDPWD", wd[OLDPWD]));
-	return (EXIT_SUCCESS);
+	{
+		exit_code = ms_env_update(env, "PWD", wd[PWD]);
+		if (exit_code == EXIT_SUCCESS)
+			exit_code = ms_env_update(env, "OLDPWD", wd[OLDPWD]);
+	}
+	else if (!(ms_env_var_exists(env, "PWD"))
+		&& !(ms_env_var_exists(env, "OLDPWD")))
+		exit_code = EXIT_SUCCESS;
+	else if (ms_env_var_exists(env, "PWD")
+		&& !(ms_env_var_exists(env, "OLDPWD")))
+		exit_code = ms_env_update(env, "PWD", wd[PWD]);
+	else
+		exit_code = ms_env_update(env, "OLDPWD", wd[OLDPWD]);
+	set_env(env);
+	return (exit_code);
 }
 
 /*
