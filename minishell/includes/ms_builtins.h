@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/06 14:55:38 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 10:04:14 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 */
 typedef struct s_wd
 {
-	char	*home;
 	char	*cwd;
 	char	*pwd;
 	char	*oldpwd;

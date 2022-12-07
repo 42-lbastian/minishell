@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/06 15:10:23 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 10:02:40 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	_init_pwd(t_env *env, t_wd **wd)
 	if ((*wd) == NULL)
 		return ;
 	(*wd)->cwd = NULL;
-	(*wd)->home = get_env_value(env, "HOME");
 	(*wd)->pwd = get_env_value(env, "PWD");
 	(*wd)->oldpwd = get_env_value(env, "OLDPWD");
 }
@@ -55,8 +54,6 @@ static int	_exit_cd_builtin(t_wd *wd, int exit_code)
 {
 	if (wd)
 	{
-		if (wd->home)
-			ft_free(wd->home);
 		if (wd->cwd)
 			ft_free(wd->cwd);
 		if (wd->pwd)
