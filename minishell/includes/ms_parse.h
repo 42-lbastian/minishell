@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/01 18:39:13 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:32:53 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2]);
 **		parse/read_lst_parser_utils.c
 */
 int		ms_close_return(char *msg, int pip[2][2], int err);
+char	*ms_strjoin_here_doc(char *str1, char *str2);
 
 /*
 **		parse/create_lst_parser_utils.c

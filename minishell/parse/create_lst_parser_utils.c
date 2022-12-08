@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:21:56 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/01 17:59:28 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:14:34 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	ms_free_cmd(char ***cmd)
 
 int	ms_is_type_in_out(int type)
 {
-	if (type == FILE_IN || type == FILE_OUT_OVER || type == FILE_OUT_APP)
+	if (type == FILE_IN || type == FILE_OUT_OVER || type == FILE_OUT_APP
+		|| type == HERE_DOC)
 		return (1);
 	return (0);
 }
