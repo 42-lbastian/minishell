@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:43:58 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/09 13:32:18 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/09 14:04:44 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int	env_builtin(char **args)
 	{
 		if (access(args[1], F_OK) != 0)
 			return (_env_err_msg(args[1], ERR_NO_SUCH));
-		return (_env_err_msg(args[1], ERR_ENV_PERM));
+		else if (access(args[1], R_OK) != 0)
+			return (_env_err_msg(args[1], ERR_ENV_PERM));
+		else
+			return (_env_err_msg(args[1], ERR_ENV_OPTION));
 	}
 	return (_ms_print_env(env));
 }
