@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/06 15:02:28 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/08 16:16:12 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 # define CMD_FILE_IN_END 4
 # define CMD_FILE_OUT 5
 # define CMD_FILE_OUT_END 6
+# define CMD_HERE_DOC 7
+# define CMD_HERE_DOC_END 8
 # define CMD_ALONE 9
 
 # define CD 0
