@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:31:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 17:28:40 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/09 18:39:24 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int	exit_builtin(char **args)
 	int	exit_code;
 
 	exit_code = EXIT_SUCCESS;
-	if (args[1] == NULL)
+	if (args && args[1] == NULL)
 		exit(get_err_code());
-	else if (args[2] != NULL)
+	else if (args && args[2] != NULL)
 		return (_display_exit_error(args[1], ERR_EXIT_ARGS, EXIT_FAILURE));
-	else if (_is_valid_exit_flag(args[1]) == false)
+	else if (args && _is_valid_exit_flag(args[1]) == false)
 		exit_code = _display_exit_error(args[1], ERR_EXIT_VALID, 2);
 	else
 		exit_code = ft_atoi(args[1]);
