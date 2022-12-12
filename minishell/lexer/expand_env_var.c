@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 15:11:04 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/12 18:04:50 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ms_replace_loop(t_mslist **lst, t_env *st, char *str, int **count)
 		if ((*count)[1] == 2 || ms_strlen(temp) == 0)
 			(*lst)->content = ms_strjoin_2((*lst)->content, temp);
 		else
-			if (ms_split_expand(lst, ft_split(temp, ' ')))
+			if (ms_split_expand(temp, lst, ft_split(temp, ' ')))
 				return (ms_error_return(str));
 	}
 	else

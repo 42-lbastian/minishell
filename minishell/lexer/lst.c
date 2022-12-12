@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:21 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/01 17:43:54 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:01:19 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,19 @@ char	*ms_find_var(char *str, t_env *st)
 	if (!str)
 		return (NULL);
 	if (ft_strcmp(str, "?") == 0)
+	{
+		free(str);
 		return (ft_itoa(get_err_code()));
+	}
 	while (st)
 	{
 		if (ft_strcmp(st->var, str) == 0)
 		{
 			free(str);
-			return (st->value);
+			return (ft_strdup(st->value));
 		}
 		st = st->next;
 	}
 	free(str);
-	return ("");
+	return (ft_strdup(""));
 }
