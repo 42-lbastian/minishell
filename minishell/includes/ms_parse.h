@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/12 16:42:38 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:34:10 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_lst_cmd
 /*
 **		parse/parse.c
 */
-
 int		ms_parse(t_struct *main_s, t_mslist *lst, t_env *st);
 
 /*
@@ -79,8 +78,7 @@ int		ms_is_builtin_short(char **complete_cmd, t_env *st, int pipe[2][2], int typ
 /*
 **		parse/exec_builtins.c
 */
-int	ms_exec_builtin_fork(char **complete_cmd, int pip[2][2], int type);
-int	ms_exec_builtin_env(char **complete_cmd, int pip[2][2], int type);
+int	ms_exec_builtin(char **complete_cmd, int pip[2][2], int type);
 
 /*
 **		parse/exec_utils.c
