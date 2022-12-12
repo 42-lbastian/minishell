@@ -6,7 +6,7 @@
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:40:22 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 16:41:13 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:14:35 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ms_here_doc(t_lst_parser *lst, t_env *st, int pip[2][2])
 	{
 		str_readline = readline("> ");
 		if (!str_readline)
-			write(1, ERR_SIGNAL_HERE_DOC, ft_strlen(ERR_SIGNAL_HERE_DOC));
+			write(1, ERR_SIGNAL_HD, ft_strlen(ERR_SIGNAL_HD));
 		if (!str_readline || strcmp(str_readline, lst->value.oper) == 0)
 			break ;
 		str = ms_strjoin_here_doc(str, str_readline);

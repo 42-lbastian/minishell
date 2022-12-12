@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:22:41 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 18:05:15 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:08:15 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ms_split_expand(char *temp, t_mslist **lst, char **split)
 	if (!split)
 		return (1);
 	(*lst)->content = ms_strjoin_2(((*lst)->content), split[0]);
-	//free(split[0]);
 	while (split[i])
 	{
 		if (ms_lstadd(lst, ms_lst_new_join(split[i], CMD)))
