@@ -35,6 +35,7 @@ SRC_MAIN	=	minishell.c\
 				env_create.c\
 				env_handler.c\
 				env_utils.c\
+				wd_utils.c\
 				errors.c\
 
 SRC_LEXER	=	lexer.c\

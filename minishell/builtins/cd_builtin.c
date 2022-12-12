@@ -6,11 +6,33 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/07 10:02:40 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/07 18:34:46 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+ * @brief Updates the PWD and OLDPWD (in tab, not in env).
+*/
+static int	_update_wd(char **wd)
+{
+	char	*buf;
+
+	buf = NULL;
+	ft_free(wd[OLDPWD]);
+	wd[OLDPWD] = ft_strdup(wd[PWD]);
+	if (wd[OLDPWD] == NULL)
+		return (EXIT_FAILURE);
+	ft_free(wd[PWD]);
+	buf = getcwd(buf, 0);
+	wd[PWD] = ft_strdup(buf);
+	ft_free(buf);
+	if (wd[PWD] == NULL)
+		return (EXIT_FAILURE);
+	set_wd(wd);
+	return (EXIT_SUCCESS);
+}
 
 /*
  * @brief Prints the error asked error for cd and returns EXIT_FAILURE.
@@ -34,34 +56,26 @@ static int	_print_cd_error(char *arg, char *error)
 	return (EXIT_FAILURE);
 }
 
-/*
- * @brief initialisation if the t_wd structure.
-*/
-static void	_init_pwd(t_env *env, t_wd **wd)
+static int	_update_env_if(t_env *env, char **wd)
 {
-	(*wd) = malloc(sizeof(t_wd));
-	if ((*wd) == NULL)
-		return ;
-	(*wd)->cwd = NULL;
-	(*wd)->pwd = get_env_value(env, "PWD");
-	(*wd)->oldpwd = get_env_value(env, "OLDPWD");
-}
+	int	exit_code;
 
-/*
- * @brief Exits and frees the wd structures.
-*/
-static int	_exit_cd_builtin(t_wd *wd, int exit_code)
-{
-	if (wd)
+	exit_code = EXIT_SUCCESS;
+	if (ms_env_var_exists(env, "PWD") && ms_env_var_exists(env, "OLDPWD"))
 	{
-		if (wd->cwd)
-			ft_free(wd->cwd);
-		if (wd->pwd)
-			ft_free(wd->pwd);
-		if (wd->oldpwd)
-			ft_free(wd->oldpwd);
-		ft_free(wd);
+		exit_code = ms_env_update(env, "PWD", wd[PWD]);
+		if (exit_code == EXIT_SUCCESS)
+			exit_code = ms_env_update(env, "OLDPWD", wd[OLDPWD]);
 	}
+	else if (!(ms_env_var_exists(env, "PWD"))
+		&& !(ms_env_var_exists(env, "OLDPWD")))
+		exit_code = EXIT_SUCCESS;
+	else if (ms_env_var_exists(env, "PWD")
+		&& !(ms_env_var_exists(env, "OLDPWD")))
+		exit_code = ms_env_update(env, "PWD", wd[PWD]);
+	else
+		exit_code = ms_env_update(env, "OLDPWD", wd[OLDPWD]);
+	set_env(env);
 	return (exit_code);
 }
 
@@ -71,24 +85,20 @@ static int	_exit_cd_builtin(t_wd *wd, int exit_code)
 */
 static int	_cd_to_path(char *path, t_env *env)
 {
-	t_wd	*wd;
+	char	**wd;
 	DIR		*dir;
 
-	_init_pwd(env, &wd);
+	wd = get_wd();
 	dir = opendir(path);
 	if (dir == NULL)
-		return (_exit_cd_builtin(wd, _print_cd_error(path, strerror(errno))));
+		return (_print_cd_error(path, strerror(errno)));
 	else if (closedir(dir) != EXIT_SUCCESS)
-		return (_exit_cd_builtin(wd, _print_cd_error(path, strerror(errno))));
+		return (_print_cd_error(path, strerror(errno)));
 	else if (chdir(path) != EXIT_SUCCESS)
-		return (_exit_cd_builtin(wd, _print_cd_error(path, strerror(errno))));
-	if (ms_env_update(env, "OLDPWD", wd->pwd) == EXIT_FAILURE)
-		return (_exit_cd_builtin(wd, EXIT_FAILURE));
-	wd->cwd = getcwd(wd->cwd, 0);
-	if (ms_env_update(env, "PWD", wd->cwd) == EXIT_FAILURE)
-		return (_exit_cd_builtin(wd, EXIT_FAILURE));
-	set_env(env);
-	return (_exit_cd_builtin(wd, EXIT_SUCCESS));
+		return (_print_cd_error(path, strerror(errno)));
+	if (_update_wd(wd) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	return (_update_env_if(env, wd));
 }
 
 /*

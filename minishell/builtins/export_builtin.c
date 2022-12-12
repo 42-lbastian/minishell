@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/08 15:54:42 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:03:38 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,17 @@ static bool	_check_export_arg(char	*arg)
 static int	_export_one(char *arg, t_env *env, char *var)
 {
 	char	*value;
-	//int		i;
 	int		exit_code;
 
 	value = NULL;
 	exit_code = EXIT_SUCCESS;
 	if (ft_incharset('=', arg) == false)
 		return (exit_code);
-	//i = 0;
-	var = ft_str_cut_before(arg, '=');
-	if (var == NULL)
-		exit_code = EXIT_FAILURE;
 	else
 	{
 		value = ft_str_cut_after(arg, '=');
 		exit_code = ms_env_update(env, var, value);
+		ft_free(value);
 	}
 	return (exit_code);
 }
@@ -91,9 +87,14 @@ int	export_builtin(char **args)
 		return (_export_no_args(env));
 	while (args[i] && exit_code == EXIT_SUCCESS)
 	{
+		var = ft_str_cut_before(args[i], '=');
+		if (var == NULL)
+			return (EXIT_FAILURE);
 		if (_check_export_arg(args[i]) == true)
 			exit_code = _export_one(args[i], env, var);
 		i++;
+		ft_free(var);
+		set_env(env);
 	}
-	return (EXIT_SUCCESS);
+	return (exit_code);
 }

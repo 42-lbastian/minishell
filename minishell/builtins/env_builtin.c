@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:43:58 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/05 18:32:07 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/09 18:09:32 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	_ms_print_env(t_env *ms_env)
 {
 	while (ms_env)
 	{
-		if (printf("%s=%s\n", ms_env->var, ms_env->value) == 0)
-			return (EXIT_FAILURE);
+		printf("%s=%s\n", ms_env->var, ms_env->value);
 		ms_env = ms_env->next;
 	}
 	return (EXIT_SUCCESS);
@@ -51,11 +50,14 @@ int	env_builtin(char **args)
 	env = get_env();
 	if (!env)
 		return (EXIT_FAILURE);
-	if (args[1] != NULL)
+	if (args && args[1] != NULL)
 	{
-		if (access(args[1], F_OK) == 0)
+		if (access(args[1], F_OK) != 0)
+			return (_env_err_msg(args[1], ERR_NO_SUCH));
+		else if (access(args[1], R_OK) != 0)
 			return (_env_err_msg(args[1], ERR_ENV_PERM));
-		return (_env_err_msg(args[1], ERR_NO_SUCH));
+		else
+			return (_env_err_msg(args[1], ERR_ENV_OPTION));
 	}
 	return (_ms_print_env(env));
 }
