@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/08 16:16:12 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:30:27 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@
 # define ERR_FORK "Error Fork\n"
 # define ERR_PATH "File not found/access denied\n"
 # define ERR_MALLOC_ENV_ARR "Error Malloc env array\n"
+# define ERR_SIGNAL_HERE_DOC "bash: warning: here-document delimited by end-of-file\n"
 
 # include <stdlib.h>
 # include <unistd.h>
