@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/08 15:58:10 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:25:51 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int	ms_main_lexer(char *str, t_env *st)
 		ms_free_main_s(main_s);
 		return (EXIT_FAILURE);
 	}
+	ft_free(str);
 	return (ms_parse(main_s, main_s->lst, st));
 }

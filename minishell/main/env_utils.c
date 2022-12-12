@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:17:40 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/12 11:02:36 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/12 17:14:25 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,15 @@ t_env	*ms_free_one_env(t_env *env, char *var)
  * @param new_value: the new value to 'var'
  * @return Returns EXIT_SUCCESS or EXIT_FAILURE.
 */
-int	ms_env_update(t_env *env, char *var, char *new_value)
+int	ms_env_update(t_env **env, char *var, char *new_value)
 {
 	t_env	*tmp;
 
-	tmp = env;
-	if (env == NULL || var == NULL)
+	tmp = (*env);
+	if (var == NULL)
 		return (EXIT_FAILURE);
-	if (ms_env_var_exists(env, var) == false)
-		return (ms_add_back_env(&env, ms_new_env(ft_strdup(var) \
+	if (env == NULL || ms_env_var_exists((*env), var) == false)
+		return (ms_add_back_env(env, ms_new_env(ft_strdup(var) \
 		, ft_strdup(new_value))));
 	while (tmp && tmp->var)
 	{

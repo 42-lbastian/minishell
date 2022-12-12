@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:23:41 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/07 17:54:50 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/12 17:13:54 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		ms_add_back_env(t_env **st, t_env *new);
 bool	ms_env_var_exists(t_env *env, char *var);
 char	*get_env_value(t_env *env, char *var);
 t_env	*ms_free_one_env(t_env *env, char *var);
-int		ms_env_update(t_env *env, char *var, char *new_value);
+int		ms_env_update(t_env **env, char *var, char *new_value);
 
 /*
  *		main/wd_utils.c
