@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/27 20:30:17 by krozis           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:50:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int				ft_min(int a, int b);
 int				ft_power(int power, int nbr);
 char			*ft_itoa(int n);
 char			*ft_lltoa(long long int nb);
+long long		ft_atoll(const char *str);
 
 /*
 03_bases

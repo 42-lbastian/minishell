@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_00.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:08:02 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/27 19:03:20 by krozis           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:50:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,30 @@ int	ft_power(int power, int nbr)
 	if (power == 1)
 		return (nbr);
 	return (nbr * ft_power(power - 1, nbr));
+}
+
+long long	ft_atoll(const char *str)
+{
+	long long	res;
+	int			sign;
+
+	if (ft_strcmp(str, "-9223372036854775808") == 0)
+		return (LLONG_MIN);
+	res = 0;
+	sign = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+')
+		str++;
+	else if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	while (*str && (*str < ':' && *str > '/'))
+	{
+		res = res * 10 + (*str - 48);
+		str++;
+	}
+	return (res * sign);
 }
