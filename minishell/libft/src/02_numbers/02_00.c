@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:08:02 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 15:50:30 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/13 16:27:48 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ long long	ft_atoll(const char *str)
 	long long	res;
 	int			sign;
 
+	if (ft_strcmp(str, "9223372036854775808") == 0)
+		return (0);
 	if (ft_strcmp(str, "-9223372036854775808") == 0)
 		return (LLONG_MIN);
 	res = 0;
