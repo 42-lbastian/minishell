@@ -6,11 +6,31 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:31:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 14:54:44 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/13 16:18:25 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static bool	_compare_limits(long long nb, char *str)
+{
+	int	i;
+	int	mod;
+
+	i = ft_strlen(str);
+	while (--i)
+	{
+		if (str[i == '-'] && nb == 0)
+			return (true);
+		mod = nb % 10;
+		if (mod < 0)
+			mod *= -1;
+		if (str[i] != ('0' + mod))
+			return (false);
+		nb = nb / 10;
+	}
+	return (true);
+}
 
 /*
  * @brief Displays the adequate error msg if exit is not used correctly.
@@ -73,7 +93,9 @@ int	exit_builtin(char **args)
 	else if (args && _is_valid_exit_flag(args[1]) == false)
 		exit_code = _display_exit_error(args[1], ERR_EXIT_VALID, 2);
 	else
-		exit_code = ft_atoi(args[1]);
+		exit_code = ft_atoll(args[1]);
+	if (_compare_limits(ft_atoll(args[1]), args[1]) == false)
+		exit_code = _display_exit_error(args[1], ERR_EXIT_VALID, 2);
 	ft_putstr_fd(EXIT_MSG, STDERR_FILENO);
 	set_err_code(exit_code);
 	return (-1);
