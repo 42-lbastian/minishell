@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:31:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 16:18:25 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/13 16:24:08 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	_compare_limits(long long nb, char *str)
 	i = ft_strlen(str);
 	while (--i)
 	{
-		if (str[i == '-'] && nb == 0)
+		if (str[i] == '-' && nb == 0)
 			return (true);
 		mod = nb % 10;
 		if (mod < 0)
