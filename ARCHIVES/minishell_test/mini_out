@@ -1,4 +1,2 @@
-minishell> export hello
-File not found/access denied
-minishell> exit
+minishell> grep hi <../minishell_test/test_files/infile_big <../minishell_test/test_files/infile
 minishell> exit

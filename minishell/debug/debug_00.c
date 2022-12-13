@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:30 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/05 16:45:05 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/13 16:39:34 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	_display_env_pointers(void)
 	env = get_env();
 	while (env)
 	{
-		printf("ENV %s - var=%p - value=%p\n", env->var, env->var,env->value);
+		printf("ENV %s - var=%p - value=%p\n", env->var, env->var, env->value);
 		env = env->next;
 	}
 }

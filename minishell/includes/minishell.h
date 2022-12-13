@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 15:40:27 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:32:02 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 # define ERR_WRONG_FILE_OUT "Wrong file or access denied\n"
 # define ERR_PIPE_CMD "bash: syntax error near unexpected token `|'\n"
 # define ERR_FORK "Error Fork\n"
-# define ERR_PATH "File not found/access denied\n"
+# define ERR_PATH "Command not found/access denied\n"
 # define ERR_MALLOC_ENV_ARR "Error Malloc env array\n"
 # define ERR_SIGNAL_HD "bash: warning: here-document delimited by end-of-file\n"
 

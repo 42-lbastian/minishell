@@ -9,9 +9,9 @@ if [[ $1 ]]; then
 	)
 else
 	test_lists=(
+		"redirects"
 		"builtins"
 		"pipes"
-		"redirects"
 		"extras"
 	)
 fi
