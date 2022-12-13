@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 14:47:02 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:40:27 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define NORMAL "\1\x1b[0m\2"
 # define NAME "minishell> "
 
-# define NB_CHAR_VALID 14
-# define VALID_CHAR "=/|<>.'\" $?-_~"
+# define NB_CHAR_VALID 15
+# define VALID_CHAR "=/|<>.'\" $?-_~+"
 # define CMD_CHAR " ><|"
 # define C_CHECK_CHAR "\'\"$ "
 # define SPECIAL_CHAR "|<>"

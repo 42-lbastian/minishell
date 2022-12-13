@@ -6,7 +6,7 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:20:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/13 15:20:55 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:38:31 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	ms_check_cmd_2(t_lst_parser **lst, t_env *st, int pip[2][2], int i)
 			== ARG_FILE_OUT_OVER || (*lst)->prev->type == ARG_FILE_OUT_APP))
 	{
 		if (!(*lst)->next)
-			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_OUT_END);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip,
+					CMD_FILE_OUT_END);
 		else
 			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_OUT);
 		(*lst) = (*lst)->next;
@@ -27,7 +28,8 @@ static int	ms_check_cmd_2(t_lst_parser **lst, t_env *st, int pip[2][2], int i)
 		== LIMITOR)
 	{
 		if (!(*lst)->next)
-			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_HERE_DOC_END);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip,
+					CMD_HERE_DOC_END);
 		else
 			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_HERE_DOC);
 		(*lst) = (*lst)->next;
@@ -37,7 +39,7 @@ static int	ms_check_cmd_2(t_lst_parser **lst, t_env *st, int pip[2][2], int i)
 
 static int	ms_check_cmd(t_lst_parser **lst, t_env *st, int pip[2][2])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if ((*lst) && (*lst)->type == CMD && pip[0][0] == -1)
@@ -49,7 +51,8 @@ static int	ms_check_cmd(t_lst_parser **lst, t_env *st, int pip[2][2])
 		== ARG_FILE_IN && (*lst)->type == CMD)
 	{
 		if (!(*lst)->next)
-			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_IN_END);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip,
+					CMD_FILE_IN_END);
 		else
 			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_IN);
 		(*lst) = (*lst)->next;
