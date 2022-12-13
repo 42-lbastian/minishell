@@ -6,7 +6,7 @@
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:31:13 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 19:07:57 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:12:35 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	ms_exec_builtin(char **complete_cmd, int pip[2][2], int type)
 	close(fd_save_in);
 	ms_close_fd_parent(pip, type);
 	if (ft_strcmp(complete_cmd[0], "exit") == 0)
-		exit_builtin(complete_cmd);
+		return (exit_builtin(complete_cmd));
 	return (EXIT_SUCCESS);
 }

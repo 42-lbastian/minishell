@@ -6,7 +6,7 @@
 /*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:40:22 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 19:14:35 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:17:50 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	ms_read_file_in_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 	if (fd == -1)
 		return (ms_close_return(ERR_WRONG_FILE_IN, pip, 1));
 	pip[0][0] = fd;
-	ms_read_lst_parser_short(lst->next, st, pip);
-	return (EXIT_SUCCESS);
+	return (ms_read_lst_parser_short(lst->next, st, pip));
 }
 
 int	ms_read_file_out_short(t_lst_parser *lst, t_env *st, int pip[2][2])
@@ -39,8 +38,7 @@ int	ms_read_file_out_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 	if (fd == -1)
 		return (ms_close_return(ERR_WRONG_FILE_OUT, pip, 1));
 	pip[1][1] = fd;
-	ms_read_lst_parser_short(lst->next, st, pip);
-	return (EXIT_SUCCESS);
+	return (ms_read_lst_parser_short(lst->next, st, pip));
 }
 
 int	ms_read_pipe_short(t_lst_parser *lst, t_env *st, int pip[2][2])

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/13 15:05:53 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:22:42 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 int	_exit_routine(void *to_free, int exit_code)
 {
 	ft_free(to_free);
-	printf("exit\n");
+	if (exit_code == ERR_CODE_CTRL_D)
+		printf("exit\n");
 	rl_clear_history();
 	free_env(get_env());
 	free_wd(get_wd());
