@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 16:25:55 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:05:53 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
  * @todo:	Once exit_inbuilt is done, add here an 'if(exit_code == 130)'make
  * 
 */
-static int	_exit_routine(void *to_free, int exit_code)
+int	_exit_routine(void *to_free, int exit_code)
 {
 	ft_free(to_free);
 	printf("exit\n");
 	rl_clear_history();
 	free_env(get_env());
 	free_wd(get_wd());
-	return (exit_code);
+	exit(exit_code);
 }
 
 static int	_routine(void)
@@ -46,7 +46,6 @@ static int	_routine(void)
 			buf = ft_str_rm_char(buf, 0);
 		if (ft_strlen(buf) && ms_main_lexer(buf, get_env()) == EXIT_FAILURE)
 			return (_exit_routine(buf, EXIT_FAILURE));
-		//ft_free(buf);
 	}
 	return (_exit_routine(buf, EXIT_FAILURE));
 }

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/12 19:14:02 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:47:02 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	set_err_code(int err_code);
 void	ms_free_main_s(t_struct *main_s);
 void	ms_free_lst(t_mslist *lst);
 void	ms_free_parse(t_lst_parser **lst_parser);
+int		_exit_routine(void *to_free, int exit_code);
 
 /*
  *  ------- DEBUG FUNCTIONS ----------
