@@ -6,51 +6,56 @@
 /*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:20:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 16:43:13 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:59:36 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	ms_check_cmd_2(t_lst_parser **lst, t_env *st, int pip[2][2])
+static int	ms_check_cmd_2(t_lst_parser **lst, t_env *st, int pip[2][2], int i)
 {
 	if ((*lst) && (*lst)->prev && (*lst)->type == CMD && ((*lst)->prev->type
 			== ARG_FILE_OUT_OVER || (*lst)->prev->type == ARG_FILE_OUT_APP))
 	{
 		if (!(*lst)->next)
-			ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_OUT_END);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_OUT_END);
 		else
-			ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_OUT);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_OUT);
 		(*lst) = (*lst)->next;
 	}
 	if ((*lst) && (*lst)->prev && (*lst)->type == CMD && (*lst)->prev->type
 		== LIMITOR)
 	{
 		if (!(*lst)->next)
-			ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_HERE_DOC_END);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_HERE_DOC_END);
 		else
-			ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_HERE_DOC);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_HERE_DOC);
 		(*lst) = (*lst)->next;
 	}
+	return (i);
 }
 
-static void	ms_check_cmd(t_lst_parser **lst, t_env *st, int pip[2][2])
+static int	ms_check_cmd(t_lst_parser **lst, t_env *st, int pip[2][2])
 {
+	int i;
+
+	i = 0;
 	if ((*lst) && (*lst)->type == CMD && pip[0][0] == -1)
 	{
-		ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_BEGIN);
+		i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_BEGIN);
 		(*lst) = (*lst)->next;
 	}
 	if ((*lst) && (*lst)->prev && (*lst)->prev->type
 		== ARG_FILE_IN && (*lst)->type == CMD)
 	{
 		if (!(*lst)->next)
-			ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_IN_END);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_IN_END);
 		else
-			ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_IN);
+			i = ms_is_builtin_short((*lst)->value.cmd, st, pip, CMD_FILE_IN);
 		(*lst) = (*lst)->next;
 	}
-	ms_check_cmd_2(lst, st, pip);
+	i = ms_check_cmd_2(lst, st, pip, i);
+	return (i);
 }
 
 int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2])
@@ -60,7 +65,8 @@ int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 		ms_is_builtin_short(lst->value.cmd, st, pip, CMD_ALONE);
 		return (EXIT_SUCCESS);
 	}
-	ms_check_cmd(&lst, st, pip);
+	if (ms_check_cmd(&lst, st, pip) == -1)
+		return (-1);
 	if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
