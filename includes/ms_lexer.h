@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:39:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 11:36:28 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:43:37 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ int			ms_main_replace_env(t_mslist **lst, t_env *st);
 */
 int			ms_split_expand(char *temp, t_mslist **lst, char **split);
 int			ms_error_return(char *str);
-
-/*
- *		lexer/count.c
-*/
-
-int			ms_start_read_var(char *str, int index);
-int			ms_lenght_read_var(char *str, int index);
-int			ms_count_char(char *str);
-int			ms_count_nb_quotes(char *str);
-int			ms_count_remove_quotes(char *str);
 
 /*
  *		lexer/utils.c
