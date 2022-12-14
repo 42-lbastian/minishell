@@ -6,11 +6,36 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/14 11:04:12 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:06:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static int	_set_type_cmd(t_mslist **lst)
+{
+	t_mslist	*temp;
+
+	temp = (*lst);
+	while (lst && (*lst))
+	{
+		if ((*lst)->next && (*lst)->next->type == CMD
+			&& (*lst)->type == FILE_IN)
+			(*lst)->next->type = ARG_FILE_IN;
+		else if ((*lst)->next && (*lst)->next->type == CMD
+			&& (*lst)->type == FILE_OUT_OVER)
+			(*lst)->next->type = ARG_FILE_OUT_OVER;
+		else if ((*lst)->next && (*lst)->next->type == CMD
+			&& (*lst)->type == FILE_OUT_APP)
+			(*lst)->next->type = ARG_FILE_OUT_APP;
+		else if ((*lst)->next && (*lst)->next->type == CMD
+			&& (*lst)->type == HERE_DOC)
+			(*lst)->next->type = LIMITOR;
+		(*lst) = (*lst)->next;
+	}
+	(*lst) = temp;
+	return (0);
+}
 
 /*
  * @brief Allocates then fills with zeros
@@ -56,7 +81,7 @@ int	ms_lexer(char *str, t_env *st)
 	str = ms_remove_special(str, 0);
 	ret = _lexer(str, main_s);
 	if (ret == 0)
-		ret = ms_set_type_cmd(&main_s->lst);
+		ret = _set_type_cmd(&main_s->lst);
 	if (ret == 0)
 		ret = ms_remove_spaces(&main_s->lst);
 	if (ret == 0)

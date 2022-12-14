@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:39:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 10:46:30 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:09:10 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int			ms_count_remove_quotes(char *str);
 int			ms_strjoin_3(char *dest, char *str, int start);
 char		*ms_strjoin_2(char *str1, char *str2);
 char		*ms_strjoin_c(char *str, char c);
-int			ms_have_space(char *str);
 
 /*
  *		lexer/utils_2.c
@@ -102,11 +101,5 @@ int			ms_lstadd_back(t_mslist **lst, t_mslist *new);
 */
 
 int			ms_remove_spaces(t_mslist **lst);
-
-/*
- *		lexer/set_type_cmd.c
-*/
-
-int			ms_set_type_cmd(t_mslist **lst);
 
 #endif
