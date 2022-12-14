@@ -47,7 +47,6 @@ SRC_LEXER	=	lexer.c\
 				remove_spaces.c\
 				remove_quotes.c\
 				expand_env_var.c\
-				expand_env_var_2.c\
 
 SRC_PARSER	=	parse.c\
 				create_lst_parser.c \

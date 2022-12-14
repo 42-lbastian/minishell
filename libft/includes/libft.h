@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 15:45:08 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 15:50:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 12:46:06 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ char			*ft_str_rm_last_occ(char *src, char c);
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t nmemb, size_t size);
 void			ft_free(void *p);
+int				ft_free_and_return(void *p, int return_value);
 void			*ft_memchr(const void *s, int c, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
