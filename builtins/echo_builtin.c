@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:52:01 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 16:54:02 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 13:33:16 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	echo_builtin(char **args)
 
 	newline = true;
 	args++;
-	if (*args && _no_nl(*args))
+	while (*args && _no_nl(*args))
 	{
 		newline = false;
 		args++;
