@@ -6,11 +6,50 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:07:57 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/14 12:29:32 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 12:31:10 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static void	_free_strcpy_cmd(char **ret)
+{
+	int	i;
+
+	i = 0;
+	while (ret[i])
+	{
+		free (ret[i]);
+		i++;
+	}
+	free (ret);
+}
+
+static char	**ms_strcpy_cmd(char **arr)
+{
+	char	**ret;
+	int		i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	ret = malloc(sizeof(char *) * (i + 1));
+	if (!ret)
+		return (NULL);
+	ret[i] = NULL;
+	i = 0;
+	while (arr[i])
+	{
+		ret[i] = ms_strcpy(arr[i]);
+		if (!ret[i])
+		{
+			_free_strcpy_cmd(ret);
+			return (NULL);
+		}
+		i++;
+	}
+	return (ret);
+}
 
 static t_lst_parser	*_lst_parse_last(t_lst_parser *lst)
 {

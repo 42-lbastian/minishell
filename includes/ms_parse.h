@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 12:29:04 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 12:31:25 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,5 @@ char			**ms_env_array(t_env *st);
 
 t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type);
 int				ms_lst_p_addback(t_lst_parser **lst, t_lst_parser *new);
-
-/*
-**		parse/tools.c
-*/
-
-char			**ms_strcpy_cmd(char **arr);
 
 #endif
