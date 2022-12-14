@@ -1,24 +1,10 @@
+### Minishell
 
-|LEXER ->|PARSER ->|EXPANDER ->|EXECUTOR|
-|--|--|--|--|
+*Project Minishell from 42 Cursus*
 
+## As beautifu as a shell
 
-### TO-DO now :
-- Make signals work (!) must work for child processes too!
-	- ~~CTRL-C	(New Prompt on a new line)~~
-	- CTRL-D	(Exit the shell) -> Need error code + child processus gestion + fix bug when buffer is not empty (exit written but not leaving)
-	- ~~CTRL-\		(do nothing)~~
+The objective of this project is to create a simple shell.
 
-### ON WORK :
-- Can it work for exit_code ??
-
-### FOLLOW:
-| builtins |
-|--|
-| cd |
-| echo + echo -n |
-| pwd |
-| export |
-| unset |
-| env |
-| exit |
+[FR subject (v6):](https://cdn.intra.42.fr/pdf/pdf/64489/fr.subject.pdf)
+[EN subject (v6):](https://cdn.intra.42.fr/pdf/pdf/64488/en.subject.pdf)
