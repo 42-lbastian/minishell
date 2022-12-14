@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:44 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:30:44 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	ms_set_type_oper(t_struct *main)
+static void	_set_type_oper(t_struct *main)
 {
 	if (ft_strcmp(ms_lst_last(main->lst)->content, "|") == 0)
 		ms_lst_last(main->lst)->type = PIPE;
@@ -42,7 +42,7 @@ void	ms_read_special(char *str, t_struct *main)
 	if (error || !(ms_lst_last(main->lst)->content))
 		main->char_check.error = 1;
 	else
-		ms_set_type_oper(main);
+		_set_type_oper(main);
 	main->i += y;
 }
 
