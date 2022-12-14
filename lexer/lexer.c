@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/14 10:46:30 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:04:12 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * @brief Allocates then fills with zeros
 */
-static t_struct	*ms_init_struct(void)
+static t_struct	*_init_struct(void)
 {
 	t_struct	*main_s;
 
@@ -50,7 +50,7 @@ int	ms_lexer(char *str, t_env *st)
 	int			ret;
 	t_struct	*main_s;
 
-	main_s = ms_init_struct();
+	main_s = _init_struct();
 	str = ms_check_quotes(str, main_s);
 	str = ms_check_quotes(str, main_s);
 	str = ms_remove_special(str, 0);
