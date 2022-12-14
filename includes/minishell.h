@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 09:54:46 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:54:57 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,16 @@
 # include "../libft/includes/libft.h"
 # include "ms_structures.h"
 # include "ms_env.h"
-# include "ms_signal.h"
 # include "ms_lexer.h"
 # include "ms_parse.h"
 # include "ms_builtins.h"
 # include <errno.h>
+
+/*
+ *		main/signal.c
+*/
+
+void	signal_handler(int argc, char **argv);
 
 /*
 *		main/errors.c

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/14 10:46:30 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:54:04 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 	t_env		*ms_env;
 
 	ms_env = NULL;
-	global_signals_handler(argc, argv);
+	signal_handler(argc, argv);
 	if (ms_create_env(envp, &ms_env) == EXIT_FAILURE)
 		return (ft_putmsg_fd(ERR_ENV_MALLOC, STDERR_FILENO, EXIT_FAILURE));
 	if (ms_init_wd() == EXIT_FAILURE)

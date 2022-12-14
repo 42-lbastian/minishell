@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:14:12 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:54:04 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param sig: the signal (here SIGINT)
  * @todo set the error code (130 for CTRL+C)
  */
-void	global_signal(int sig)
+static void	_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -33,11 +33,11 @@ void	global_signal(int sig)
  *@brief signal handler for main process
  *@param ARGS: just here to avoid "not used variable" error
 */
-void	global_signals_handler(int argc, char **argv)
+void	signal_handler(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
-	signal(SIGINT, global_signal);
+	signal(SIGINT, _signal);
 }
