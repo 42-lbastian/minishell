@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:10 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:18:27 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_mslist	*ms_lst_new_join(char *content, int type)
 	if (!new)
 		return (NULL);
 	new->next = NULL;
-	new->content = ms_strcpy_2(content);
+	new->content = ms_strcpy(content);
 	new->type = type;
 	return (new);
 }

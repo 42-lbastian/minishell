@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:46 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/14 11:15:07 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:18:47 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,32 @@ char	*ms_strjoin_2(char *str1, char *str2)
 		free(str1);
 	free(str2);
 	return (dest);
+}
+
+char	*ms_strcpy(char *str)
+{
+	char	*ret;
+	int		i;
+
+	i = 0;
+	ret = malloc(sizeof(char) * (ms_strlen(str) + 1));
+	if (!ret)
+		return (NULL);
+	while (str[i])
+	{
+		ret[i] = str[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+int	ms_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

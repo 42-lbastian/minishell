@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:02:05 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:18:27 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**ms_strcpy_cmd(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		ret[i] = ms_strcpy_2(arr[i]);
+		ret[i] = ms_strcpy(arr[i]);
 		if (!ret[i])
 		{
 			ms_free_strcpy_cmd(ret);

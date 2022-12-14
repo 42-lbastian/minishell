@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:43 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 18:04:50 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 11:18:27 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	ms_replace(t_mslist **lst, t_env *st, int *count)
 {
 	char	*str;
 
-	str = ms_strcpy_2((*lst)->content);
+	str = ms_strcpy((*lst)->content);
 	if (!str)
 		return (1);
 	free((*lst)->content);

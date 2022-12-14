@@ -42,7 +42,6 @@ SRC_LEXER	=	lexer.c\
 				read_char.c\
 				unwanted.c\
 				utils.c\
-				utils_2.c\
 				lst.c\
 				lst_2.c\
 				free.c\
