@@ -1,16 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_lst_parser_short.c                            :+:      :+:    :+:   */
+/*   read_lst_parser.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <lbastian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:20:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/13 15:38:31 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:00:20 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static char	*_malloc_strjoin_here_doc(char *str1, char *str2)
+{
+	char	*dest;
+
+	if (!str1)
+		dest = malloc(sizeof(char) * (ms_strlen(str2) + 2));
+	else
+		dest = malloc(sizeof(char) * (ms_strlen(str1) + ms_strlen(str2) + 2));
+	if (!dest)
+		return (NULL);
+	return (dest);
+}
+
+char	*ms_strjoin_here_doc(char *str1, char *str2)
+{
+	char	*dest;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	dest = _malloc_strjoin_here_doc(str1, str2);
+	if (!dest)
+		return (NULL);
+	while (str1 && str1[i])
+	{
+		dest[i] = str1[i];
+		i++;
+	}
+	while (str2 && str2[j])
+	{
+		dest[i + j] = str2[j];
+		j++;
+	}
+	dest[i + j] = '\n';
+	dest[i + j + 1] = '\0';
+	if (str1)
+		free(str1);
+	return (dest);
+}
 
 static int	ms_check_cmd_2(t_lst_parser **lst, t_env *st, int pip[2][2], int i)
 {
@@ -61,7 +102,7 @@ static int	ms_check_cmd(t_lst_parser **lst, t_env *st, int pip[2][2])
 	return (i);
 }
 
-int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2])
+int	ms_read_lst_parser(t_lst_parser *lst, t_env *st, int pip[2][2])
 {
 	if (lst && lst->prev == NULL && lst->next == NULL && lst->type == CMD)
 	{
@@ -74,11 +115,11 @@ int	ms_read_lst_parser_short(t_lst_parser *lst, t_env *st, int pip[2][2])
 	if (lst && lst->next && lst->type == CMD)
 		lst = lst->next;
 	if (lst && lst->type == PIPE)
-		return (ms_read_pipe_short(lst, st, pip));
+		return (ms_read_pipe(lst, st, pip));
 	if (lst && lst->type == FILE_IN)
-		return (ms_read_file_in_short(lst, st, pip));
+		return (ms_read_file_in(lst, st, pip));
 	if (lst && (lst->type == FILE_OUT_OVER || lst->type == FILE_OUT_APP))
-		return (ms_read_file_out_short(lst, st, pip));
+		return (ms_read_file_out(lst, st, pip));
 	if (lst && lst->type == HERE_DOC)
 		return (ms_here_doc(lst->next, st, pip));
 	return (0);
