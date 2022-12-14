@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:20:59 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:59:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	set_err_code(int err_code)
 	if (last_ctrl_c == true)
 	{
 		last_ctrl_c = false;
+		_get_err_code(err_code, true);
 		return ;
 	}
 	if (err_code == ERR_CODE_CTRL_D)
