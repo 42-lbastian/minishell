@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:38:11 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/14 12:16:34 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 12:26:15 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,17 @@ void	ms_free_split(char **all_path)
 		i++;
 	}
 	free(all_path);
+}
+
+char	*ms_find_var_path(char *str, t_env *st)
+{
+	if (!str)
+		return (NULL);
+	while (st)
+	{
+		if (ft_strcmp(st->var, str) == 0)
+			return (st->value);
+		st = st->next;
+	}
+	return ("");
 }
