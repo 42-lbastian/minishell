@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:03 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 16:25:51 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:46:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_struct	*ms_init_struct(void)
 	return (main_s);
 }
 
-static int	ms_lexer(char *str, t_struct *main_s)
+static int	_lexer(char *str, t_struct *main_s)
 {
 	main_s->i = 0;
 	main_s->is_arg = 0;
@@ -45,7 +45,7 @@ static int	ms_lexer(char *str, t_struct *main_s)
 	return (0);
 }
 
-int	ms_main_lexer(char *str, t_env *st)
+int	ms_lexer(char *str, t_env *st)
 {	
 	int			ret;
 	t_struct	*main_s;
@@ -54,7 +54,7 @@ int	ms_main_lexer(char *str, t_env *st)
 	str = ms_check_quotes(str, main_s);
 	str = ms_check_quotes(str, main_s);
 	str = ms_remove_special(str, 0);
-	ret = ms_lexer(str, main_s);
+	ret = _lexer(str, main_s);
 	if (ret == 0)
 		ret = ms_set_type_cmd(&main_s->lst);
 	if (ret == 0)

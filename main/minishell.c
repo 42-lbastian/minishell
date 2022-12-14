@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:38 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/13 15:22:42 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:46:30 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	_routine(void)
 			add_history(buf);
 		while (*buf == ' ')
 			buf = ft_str_rm_char(buf, 0);
-		if (ft_strlen(buf) && ms_main_lexer(buf, get_env()) == EXIT_FAILURE)
+		if (ft_strlen(buf) && ms_lexer(buf, get_env()) == EXIT_FAILURE)
 			return (_exit_routine(buf, EXIT_FAILURE));
 	}
 	return (_exit_routine(buf, EXIT_FAILURE));
