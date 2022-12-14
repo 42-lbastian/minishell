@@ -6,21 +6,20 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:18:50 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/01 17:59:22 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 11:58:22 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	ms_file_in_out(t_mslist **lst, t_lst_parser **lst_parser,
-	char ***cmd, int i)
+static int	_file_io(t_mslist **lst, t_lst_parser **lst_p, char ***cmd, int i)
 {
-	ms_lst_p_addback(lst_parser, ms_lst_parse_new(NULL, (*lst)->content,
+	ms_lst_p_addback(lst_p, ms_lst_parse_new(NULL, (*lst)->content,
 			(*lst)->type));
 	(*lst) = (*lst)->next;
 	if ((*lst) && (*lst)->type < PIPE)
 	{
-		ms_lst_p_addback(lst_parser, ms_lst_parse_new(NULL,
+		ms_lst_p_addback(lst_p, ms_lst_parse_new(NULL,
 				(*lst)->content, (*lst)->type));
 		(*lst) = (*lst)->next;
 		if ((*cmd))
@@ -33,7 +32,7 @@ static int	ms_file_in_out(t_mslist **lst, t_lst_parser **lst_parser,
 				(*lst) = (*lst)->next;
 				i++;
 			}
-			ms_lst_p_addback(lst_parser, ms_lst_parse_new((*cmd), NULL, CMD));
+			ms_lst_p_addback(lst_p, ms_lst_parse_new((*cmd), NULL, CMD));
 			return (ms_free_cmd(cmd));
 		}
 		return (0);
@@ -42,7 +41,7 @@ static int	ms_file_in_out(t_mslist **lst, t_lst_parser **lst_parser,
 		return (ms_set_err_int_out(ERR_FILE_IN_OUT_ARG, STDERR_FILENO));
 }
 
-static int	ms_create_cmd(int *i, t_mslist **lst, char ***cmd)
+static int	_create_cmd(int *i, t_mslist **lst, char ***cmd)
 {	
 	(*i) = 0;
 	(*cmd) = malloc(sizeof(char *) * (ms_count_nb_cmd((*lst)) + 1));
@@ -60,7 +59,7 @@ static int	ms_create_cmd(int *i, t_mslist **lst, char ***cmd)
 	return (0);
 }
 
-static int	ms_add_pipe(t_mslist **lst, t_lst_parser **lst_parser, char **cmd)
+static int	_add_pipe(t_mslist **lst, t_lst_parser **lst_parser, char **cmd)
 {
 	if (ms_lst_p_addback(lst_parser, ms_lst_parse_new(NULL,
 				(*lst)->content, (*lst)->type)))
@@ -69,7 +68,7 @@ static int	ms_add_pipe(t_mslist **lst, t_lst_parser **lst_parser, char **cmd)
 	return (0);
 }
 
-static int	ms_add_cmd(t_lst_parser **lst_parser, char ***cmd)
+static int	_add_cmd(t_lst_parser **lst_parser, char ***cmd)
 {
 	if ((*cmd))
 	{
@@ -90,18 +89,18 @@ int	ms_create_lst_parser_main(t_mslist *lst, t_lst_parser **lst_parser)
 	{
 		if (lst && lst->type == CMD)
 		{
-			if (ms_create_cmd(&i, &lst, &cmd))
+			if (_create_cmd(&i, &lst, &cmd))
 				return (ft_putmsg_fd(ERR_CMD_MALLOC, STDERR_FILENO, 1));
 		}
 		if (lst && ms_is_type_in_out(lst->type))
 		{
-			if (ms_file_in_out(&lst, lst_parser, &cmd, i) == 2)
+			if (_file_io(&lst, lst_parser, &cmd, i) == 2)
 				return (ms_free_cmd(&cmd));
 		}
 		else if (lst && lst->type == PIPE && !cmd)
-			if (ms_add_pipe(&lst, lst_parser, cmd))
+			if (_add_pipe(&lst, lst_parser, cmd))
 				return (1);
-		if (ms_add_cmd(lst_parser, &cmd))
+		if (_add_cmd(lst_parser, &cmd))
 			return (1);
 	}
 	return (0);
