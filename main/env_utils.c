@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:17:40 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 10:14:49 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:26:22 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,29 @@ int	ms_env_update(t_env **env, char *var, char *new_value)
 		tmp = tmp->next;
 	}
 	return (EXIT_FAILURE);
+}
+
+/*
+ * NOT DOCUMENTED
+*/
+char	*ms_find_var(char *str, t_env *st)
+{
+	if (!str)
+		return (NULL);
+	if (ft_strcmp(str, "?") == 0)
+	{
+		free(str);
+		return (ft_itoa(get_err_code()));
+	}
+	while (st)
+	{
+		if (ft_strcmp(st->var, str) == 0)
+		{
+			free(str);
+			return (ft_strdup(st->value));
+		}
+		st = st->next;
+	}
+	free(str);
+	return (ft_strdup(""));
 }
