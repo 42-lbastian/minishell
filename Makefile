@@ -79,16 +79,13 @@ SRC_BUILT	=	echo_builtin.c\
 				env_builtin.c\
 				exit_builtin.c\
 
-SRC_DEBUG	=	debug_00.c\
-
 #Objects
 
 OBJ_MAIN	=	$(addprefix $(O_DIR)/, $(SRC_MAIN:.c=.o))
 OBJ_LEXER	=	$(addprefix $(O_DIR)/, $(SRC_LEXER:.c=.o))
 OBJ_PARSER	=	$(addprefix $(O_DIR)/, $(SRC_PARSER:.c=.o))
 OBJ_BUILT	=	$(addprefix $(O_DIR)/, $(SRC_BUILT:.c=.o))
-OBJ_DEBUG	=	$(addprefix $(O_DIR)/, $(SRC_DEBUG:.c=.o))
-OBJ_ALL		=	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT) $(OBJ_DEBUG)
+OBJ_ALL		=	$(OBJ_MAIN) $(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_BUILT)
 
 $(O_DIR)/%.o:	./*/%.c
 				@echo $(Y)Compiling [$@]...$(X)

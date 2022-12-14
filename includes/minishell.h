@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:09 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 16:32:02 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 09:54:46 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define NORMAL "\1\x1b[0m\2"
 # define NAME "minishell> "
 
-# define NB_CHAR_VALID 15
 # define VALID_CHAR "=/|<>.'\" $?-_~+"
 # define CMD_CHAR " ><|"
 # define C_CHECK_CHAR "\'\"$ "
@@ -57,10 +56,7 @@
 # define ERR_ENV_MALLOC "Error Malloc env\n"
 # define ERR_CHAR_VALID_MALLOC "Error Malloc Char Valid\n"
 # define ERR_MAIN_MALLOC "Error Malloc Main struct\n"
-# define ERR_LEXER "Error Lexer\n"
-# define ERR_NB_CHAR "ERROR NB_CHAR\n"
 # define ERR_PIPE "Error Pipe Creation\n"
-# define ERR_LST_PARSER_CREATION "Error lst parser Creation\n"
 # define ERR_FILE_IN_OUT_ARG "bash: syntax error near unexpected token\n"
 # define ERR_CMD_MALLOC "Error Malloc cmd parser\n"
 # define ERR_WRONG_FILE_IN "bash: No such file or directory\n"
@@ -104,16 +100,10 @@ void	set_err_code(int err_code);
 void	ms_free_main_s(t_struct *main_s);
 void	ms_free_lst(t_mslist *lst);
 void	ms_free_parse(t_lst_parser **lst_parser);
-int		_exit_routine(void *to_free, int exit_code);
 
 /*
- *  ------- DEBUG FUNCTIONS ----------
+ *		main/minishell.c
 */
-
-int		_ms_print_env(t_env *ms_env);
-void	_ms_print_lst(t_mslist *lst);
-int		_basic_checks(void);
-void	ms_clear_env(t_env **st);
-void	_display_env_pointers(void);
+int		_exit_routine(void *to_free, int exit_code);
 
 #endif
