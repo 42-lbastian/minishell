@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:46:53 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/18 11:58:05 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:16:02 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static size_t	_get_word_nbr(char const *s, char c)
 	return (wd_nbr);
 }
 
-static char	*_get_wd(const char *s, char c)
+static char	*_get_word(const char *s, char c)
 {
 	int		size;
 	int		j;
@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 	{
 		if (*s != c)
 		{
-			tab[i] = _get_wd(s, c);
+			tab[i] = _get_word(s, c);
 			if (tab[i] == NULL)
 				return (NULL);
 			i++;
