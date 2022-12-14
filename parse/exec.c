@@ -6,11 +6,46 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:47:29 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 18:34:47 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:02:26 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static void	_exec_builtin_loop(char **complete_cmd)
+{
+	if (ft_strcmp(complete_cmd[0], "echo") == 0)
+		set_err_code(echo_builtin(complete_cmd));
+	if (ft_strcmp(complete_cmd[0], "pwd") == 0)
+		set_err_code(pwd_builtin());
+	if (ft_strcmp(complete_cmd[0], "env") == 0)
+		set_err_code(env_builtin(complete_cmd));
+	if (ft_strcmp(complete_cmd[0], "cd") == 0)
+		set_err_code(cd_builtin(complete_cmd));
+	if (ft_strcmp(complete_cmd[0], "export") == 0)
+		set_err_code(export_builtin(complete_cmd));
+	if (ft_strcmp(complete_cmd[0], "unset") == 0)
+		set_err_code(unset_builtin(complete_cmd));
+}
+
+static int	ms_exec_builtin(char **complete_cmd, int pip[2][2], int type)
+{
+	int	fd_save_out;
+	int	fd_save_in;
+
+	fd_save_out = dup(STDOUT_FILENO);
+	fd_save_in = dup(STDIN_FILENO);
+	ms_set_dup2(pip, type);
+	_exec_builtin_loop(complete_cmd);
+	dup2(fd_save_out, STDOUT_FILENO);
+	dup2(fd_save_in, STDIN_FILENO);
+	close(fd_save_out);
+	close(fd_save_in);
+	ms_close_fd_parent(pip, type);
+	if (ft_strcmp(complete_cmd[0], "exit") == 0)
+		return (exit_builtin(complete_cmd));
+	return (EXIT_SUCCESS);
+}
 
 static void	ms_exec_parent(int pip[2][2], int pid, int type)
 {

@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/12 19:12:46 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:02:38 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ int				ms_set_err_int_out(char *str, int fd);
 */
 int				ms_is_builtin_short(char **complete_cmd, t_env *st,
 					int pipe[2][2], int type);
-
-/*
-**		parse/exec_builtins.c
-*/
-int				ms_exec_builtin(char **complete_cmd, int pip[2][2], int type);
 
 /*
 **		parse/exec_utils.c
