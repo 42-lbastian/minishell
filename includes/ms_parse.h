@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 12:12:09 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 12:17:37 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int				ms_is_builtin_short(char **complete_cmd, t_env *st,
 **		parse/exec_utils.c
 */
 int				ft_exec_cmd(char *path, char **complete_cmd, char **env_arr);
+int				ms_env_size(t_env *st);
+char			*ms_strjoin_env(char *str1, char *str2, char c, int i);
+void			ms_free_split(char **all_path);
 
 /*
 **		parse/exec_dup_fd.c
@@ -96,13 +99,6 @@ void			ms_close_fd_parent(int pip[2][2], int type);
 */
 char			*ms_find_path(char *cmd, char **all_path);
 char			**ms_env_array(t_env *st);
-void			ms_free_split(char **all_path);
-
-/*
-**		parse/exec_path_utils.c
-*/
-int				ms_env_size(t_env *st);
-char			*ms_strjoin_env(char *str1, char *str2, char c, int i);
 
 /*
 **		parse/lst_parse.c
