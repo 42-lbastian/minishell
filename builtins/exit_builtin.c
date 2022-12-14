@@ -6,12 +6,15 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:31:13 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/13 16:24:08 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 13:09:35 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*
+ * @brief Tests if the given string is over the limits of LLONG_MIN / LLONG_MAX
+*/
 static bool	_compare_limits(long long nb, char *str)
 {
 	int	i;
@@ -37,11 +40,9 @@ static bool	_compare_limits(long long nb, char *str)
 */
 static int	_display_exit_error(char *arg, char *error, int exit_code)
 {
+	ft_putstr_fd(EXIT_MSG, STDERR_FILENO);
 	if (ft_strcmp(error, ERR_EXIT_ARGS) == 0)
-	{
-		ft_putstr_fd(EXIT_MSG, STDERR_FILENO);
 		ft_putstr_fd(error, STDERR_FILENO);
-	}
 	else
 	{
 		ft_putstr_fd("exit: ", STDERR_FILENO);
@@ -51,6 +52,9 @@ static int	_display_exit_error(char *arg, char *error, int exit_code)
 	return (exit_code);
 }
 
+/*
+ * @brief Checks if the given exit flag is valid.
+*/
 static bool	_is_valid_exit_flag(char *arg)
 {
 	int		i;
@@ -93,10 +97,11 @@ int	exit_builtin(char **args)
 	else if (args && _is_valid_exit_flag(args[1]) == false)
 		exit_code = _display_exit_error(args[1], ERR_EXIT_VALID, 2);
 	else
+	{
 		exit_code = ft_atoll(args[1]);
-	if (_compare_limits(ft_atoll(args[1]), args[1]) == false)
+		if (_compare_limits(ft_atoll(args[1]), args[1]) == false)
 		exit_code = _display_exit_error(args[1], ERR_EXIT_VALID, 2);
-	ft_putstr_fd(EXIT_MSG, STDERR_FILENO);
+	}
 	set_err_code(exit_code);
 	return (-1);
 }
