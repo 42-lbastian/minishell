@@ -6,20 +6,12 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:56:45 by stelie            #+#    #+#             */
-/*   Updated: 2022/11/29 15:10:15 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:49:52 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_STRUCTURES_H
 # define MS_STRUCTURES_H
-
-/*
-typedef struct s_lexer_token
-{
-	char	*tok;
-	int		type;
-}				t_lextok;
-*/
 
 typedef struct s_pipe
 {
@@ -33,16 +25,6 @@ typedef struct s_char_check
 	int		last_double_q;
 	int		error;
 }				t_char_check;
-
-/*
-typedef struct s_minishell_main
-{
-	int				i;
-	int				is_arg;
-	t_list			lst;
-	t_char_check	char_check;
-}				t_ms;
-*/
 
 //Value for AST/LST_CMD
 typedef union s_value
