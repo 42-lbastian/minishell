@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:04 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:38:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	ms_count_spaces(char *str)
+static int	_count_spaces(char *str)
 {
 	int	size;
 	int	i;
@@ -39,7 +39,7 @@ static int	ms_count_spaces(char *str)
 	return (size);
 }
 
-static int	*ms_spaces_flag_loop(int *count, char *str, char **temp, char c)
+static int	*_spaces_flag_loop(int *count, char *str, char **temp, char c)
 {
 	if (str[count[0]] && (str[count[0]] == '"' || str[count[0]] == '\''))
 	{
@@ -68,7 +68,7 @@ static int	*ms_spaces_flag_loop(int *count, char *str, char **temp, char c)
 	return (count);
 }
 
-static char	*ms_spaces_flag(char *str)
+static char	*_spaces_flag(char *str)
 {
 	int		*count;
 	int		size;
@@ -81,7 +81,7 @@ static char	*ms_spaces_flag(char *str)
 		return (NULL);
 	count[0] = 0;
 	count[1] = 0;
-	size = ms_count_spaces(str);
+	size = _count_spaces(str);
 	temp = malloc(sizeof(char) * (size + 1));
 	if (!temp)
 	{
@@ -90,7 +90,7 @@ static char	*ms_spaces_flag(char *str)
 	}
 	temp[size] = '\0';
 	while (str[count[0]])
-		count = ms_spaces_flag_loop(count, str, &temp, c);
+		count = _spaces_flag_loop(count, str, &temp, c);
 	free(str);
 	free(count);
 	return (temp);
@@ -104,7 +104,7 @@ int	ms_remove_spaces(t_mslist **lst)
 	while (lst && (*lst))
 	{
 		if (((*lst)->content[0] != '"' && (*lst)->content[0] != '\''))
-			(*lst)->content = ms_spaces_flag((*lst)->content);
+			(*lst)->content = _spaces_flag((*lst)->content);
 		if (!(*lst)->content)
 			return (1);
 		(*lst) = (*lst)->next;
