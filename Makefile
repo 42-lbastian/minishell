@@ -43,7 +43,6 @@ SRC_LEXER	=	lexer.c\
 				unwanted.c\
 				utils.c\
 				lst.c\
-				lst_2.c\
 				free.c\
 				remove_spaces.c\
 				remove_quotes.c\
