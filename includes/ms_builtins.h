@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:46:17 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/09 14:05:21 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 14:29:28 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ERR_NO_SUCH ": No such file or directory\n"
 
 # define ERR_EXIT_VALID ": numeric argument required\n"
-# define ERR_EXIT_ARGS "exit : too many arguments\n"
+# define ERR_EXIT_ARGS "exit: too many arguments\n"
 
 # define ERR_EXPORT "\': not a valid identifier\n"
 # define EXIT_MSG "exit\n"

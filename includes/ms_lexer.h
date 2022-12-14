@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:39:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 12:49:06 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 14:28:33 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,6 @@ char		*ms_remove_special(char *str, int i);
 */
 
 int			ms_lstadd(t_mslist **lst, t_mslist *new);
-
-/*
- *		lexer/lst_2.c
-*/
-
 t_mslist	*ms_lst_new_join(char *content, int type);
 t_mslist	*ms_lst_new(char *content, int type);
 t_mslist	*ms_lst_last(t_mslist *lst);
