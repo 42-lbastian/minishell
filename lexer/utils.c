@@ -6,12 +6,15 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:46 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/14 11:09:06 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:15:07 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*
+ * @brief used in expand_env_var.c
+*/
 char	*ms_strjoin_c(char *str, char c)
 {
 	int		i;
@@ -38,7 +41,7 @@ char	*ms_strjoin_c(char *str, char c)
 	return (dest);
 }
 
-char	*ms_malloc_strjoin_2(char *str1, char *str2)
+static char	*_malloc_strjoin_2(char *str1, char *str2)
 {
 	char	*dest;
 
@@ -51,6 +54,9 @@ char	*ms_malloc_strjoin_2(char *str1, char *str2)
 	return (dest);
 }
 
+/*
+ * @brief used in expand_env_var.c && expand_env_var_2.c
+*/
 char	*ms_strjoin_2(char *str1, char *str2)
 {
 	char	*dest;
@@ -59,7 +65,7 @@ char	*ms_strjoin_2(char *str1, char *str2)
 
 	i = 0;
 	j = 0;
-	dest = ms_malloc_strjoin_2(str1, str2);
+	dest = _malloc_strjoin_2(str1, str2);
 	if (!dest)
 		return (NULL);
 	while (str1 && str1[i])
@@ -77,25 +83,4 @@ char	*ms_strjoin_2(char *str1, char *str2)
 		free(str1);
 	free(str2);
 	return (dest);
-}
-
-int	ms_strjoin_3(char *dest, char *str, int start)
-{
-	int	i;
-	int	j;
-
-	j = start;
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			dest[j] = str[i];
-			i++;
-			j++;
-		}
-	}
-	else
-		dest = NULL;
-	return (j);
 }

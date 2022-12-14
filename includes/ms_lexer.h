@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:39:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 11:09:10 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:12:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int			ms_count_remove_quotes(char *str);
  *		lexer/utils.c
 */
 
-int			ms_strjoin_3(char *dest, char *str, int start);
 char		*ms_strjoin_2(char *str1, char *str2);
 char		*ms_strjoin_c(char *str, char c);
 
