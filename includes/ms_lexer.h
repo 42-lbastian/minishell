@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:39:51 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 11:26:36 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:36:28 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			ms_lexer(char *str, t_env *st);
  *		lexer/remove_quotes.c
 */
 
-int			ms_main_remove_quotes(t_mslist **lst);
+int			ms_remove_quotes(t_mslist **lst);
 
 /*
  *		lexer/expand_env_var.c

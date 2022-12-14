@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:09:53 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:36:28 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char	*ms_remove_quotes(char *str, int i, int j, int quotes)
+static char	*_remove_quotes(char *str, int i, int j, int quotes)
 {
 	char	*temp;
 
@@ -40,14 +40,14 @@ static char	*ms_remove_quotes(char *str, int i, int j, int quotes)
 	return (temp);
 }
 
-int	ms_main_remove_quotes(t_mslist **lst)
+int	ms_remove_quotes(t_mslist **lst)
 {
 	t_mslist	*temp;
 
 	temp = (*lst);
 	while (lst && (*lst))
 	{
-		(*lst)->content = ms_remove_quotes((*lst)->content, 0, 0, 0);
+		(*lst)->content = _remove_quotes((*lst)->content, 0, 0, 0);
 		if (!(*lst)->content)
 			return (1);
 		(*lst) = (*lst)->next;
