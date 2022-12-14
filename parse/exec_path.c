@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:40:05 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/07 11:10:31 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:10:57 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ char	**ms_env_array(t_env *st)
 	{
 		env_arr[i] = ms_strjoin_env(st->var, st->value, '=', 0);
 		if (!env_arr[i])
-			return (ms_free_env_arr(env_arr));
+		{
+			ft_str_arr_free(env_arr);
+			return (NULL);
+		}
 		st = st->next;
 		i++;
 	}
 	return (env_arr);
 }
 
-int	ms_have_path(char *cmd)
+static int	_have_path(char *cmd)
 {
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (0);
@@ -44,7 +47,7 @@ int	ms_have_path(char *cmd)
 	return (1);
 }
 
-static void	ms_set_err_path(char *good_path)
+static void	_set_err_path(char *good_path)
 {
 	if (access(good_path, F_OK) == -1)
 		set_err_code(127);
@@ -52,7 +55,7 @@ static void	ms_set_err_path(char *good_path)
 		set_err_code(126);
 }
 
-static char	*ms_find_path_loop(char *cmd, char **all_path)
+static char	*_find_path_loop(char *cmd, char **all_path)
 {
 	char	*good_path;
 	int		i;
@@ -71,7 +74,7 @@ static char	*ms_find_path_loop(char *cmd, char **all_path)
 		}
 		else
 		{
-			ms_set_err_path(good_path);
+			_set_err_path(good_path);
 			free(good_path);
 			good_path = NULL;
 		}
@@ -90,13 +93,13 @@ char	*ms_find_path(char *cmd, char **all_path)
 	if (cmd[0] == '.' || cmd[0] == '/')
 	{
 		ms_free_split(all_path);
-		if (ms_have_path(cmd) == 0)
+		if (_have_path(cmd) == 0)
 			return (ft_strdup(cmd));
 		else
 			return (NULL);
 	}
 	else
-		good_path = ms_find_path_loop(cmd, all_path);
+		good_path = _find_path_loop(cmd, all_path);
 	ms_free_split(all_path);
 	return (good_path);
 }

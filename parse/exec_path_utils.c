@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbastian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:48:52 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/29 16:32:44 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:11:07 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,17 @@ char	*ms_strjoin_env(char *str1, char *str2, char c, int i)
 	}
 	dst[y] = 0;
 	return (dst);
+}
+
+void	ms_free_split(char **all_path)
+{
+	int	i;
+
+	i = 0;
+	while (all_path[i])
+	{
+		free(all_path[i]);
+		i++;
+	}
+	free(all_path);
 }
