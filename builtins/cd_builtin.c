@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:07:03 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/12 17:16:31 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:14:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ static int	_update_env_if(t_env *env, char **wd)
 	int	exit_code;
 
 	exit_code = EXIT_SUCCESS;
-	if (ms_env_var_exists(env, "PWD") && ms_env_var_exists(env, "OLDPWD"))
+	if (ms_env_exists(env, "PWD") && ms_env_exists(env, "OLDPWD"))
 	{
 		exit_code = ms_env_update(&env, "PWD", wd[PWD]);
 		if (exit_code == EXIT_SUCCESS)
 			exit_code = ms_env_update(&env, "OLDPWD", wd[OLDPWD]);
 	}
-	else if (!(ms_env_var_exists(env, "PWD"))
-		&& !(ms_env_var_exists(env, "OLDPWD")))
+	else if (!(ms_env_exists(env, "PWD"))
+		&& !(ms_env_exists(env, "OLDPWD")))
 		exit_code = EXIT_SUCCESS;
-	else if (ms_env_var_exists(env, "PWD")
-		&& !(ms_env_var_exists(env, "OLDPWD")))
+	else if (ms_env_exists(env, "PWD")
+		&& !(ms_env_exists(env, "OLDPWD")))
 		exit_code = ms_env_update(&env, "PWD", wd[PWD]);
 	else
 		exit_code = ms_env_update(&env, "OLDPWD", wd[OLDPWD]);
@@ -121,7 +121,7 @@ int	cd_builtin(char	**args)
 		return (_print_cd_error(NULL, ERR_CD_ARGS));
 	if (args[1] == NULL)
 	{
-		home = get_env_value(env, "HOME");
+		home = ms_get_env_value(env, "HOME");
 		if (home != NULL)
 		{
 			exit_code = _cd_to_path(home, env);

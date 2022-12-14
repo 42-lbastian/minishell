@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:17:40 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 10:03:15 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:14:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief Says if a variable exists in the given env.
  * @return Returns true or false.
 */
-bool	ms_env_var_exists(t_env *env, char *var)
+bool	ms_env_exists(t_env *env, char *var)
 {
 	t_env	*tmp;
 
@@ -36,7 +36,7 @@ bool	ms_env_var_exists(t_env *env, char *var)
  * @brief Get the value of the given env variable.
  * @return Returns a pointer to the newly created string, containing the value.
 */
-char	*get_env_value(t_env *env, char *var)
+char	*ms_get_env_value(t_env *env, char *var)
 {
 	char	*value;
 	t_env	*tmp;
@@ -67,7 +67,7 @@ int	ms_env_update(t_env **env, char *var, char *new_value)
 	tmp = (*env);
 	if (var == NULL)
 		return (EXIT_FAILURE);
-	if (env == NULL || ms_env_var_exists((*env), var) == false)
+	if (env == NULL || ms_env_exists((*env), var) == false)
 		return (ms_add_back_env(env, ms_new_env(ft_strdup(var) \
 		, ft_strdup(new_value))));
 	while (tmp && tmp->var)

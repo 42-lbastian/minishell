@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:30:21 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/06 14:22:05 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:14:49 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	_print_export_no_args(t_env *env, char **var)
 	value = NULL;
 	while (var[i])
 	{
-		value = get_env_value(env, var[i]);
+		value = ms_get_env_value(env, var[i]);
 		printf("declare -x %s=;%s\n", var[i], value);
 		ft_free(value);
 		i++;

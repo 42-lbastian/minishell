@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:16 by lbastian          #+#    #+#             */
-/*   Updated: 2022/12/12 17:08:35 by lbastian         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:10:53 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_env	*ms_new_env(char *var, char *value)
 /*
  * @brief Gets and returns the last item of the given t_env list.
 */
-static t_env	*_ms_last_env(t_env *st)
+static t_env	*_last_env(t_env *st)
 {
 	while (st && st->next)
 		st = st->next;
@@ -61,7 +61,7 @@ int	ms_add_back_env(t_env **st, t_env *new)
 	if (!new)
 		return (EXIT_FAILURE);
 	if (st && (*st))
-		_ms_last_env((*st))->next = new;
+		_last_env((*st))->next = new;
 	else
 		(*st) = new;
 	return (EXIT_SUCCESS);
@@ -71,7 +71,7 @@ int	ms_add_back_env(t_env **st, t_env *new)
  * @brief Sub-function to initialise t_env.
  * @return Returns EXIT_SUCCESS or EXIT_FAILURE.
 */
-static int	_ms_str_trim_env(char *str, t_env **st)
+static int	_trim_env(char *str, t_env **st)
 {
 	int	i;
 
@@ -95,7 +95,7 @@ int	ms_create_env(char **envp, t_env **st)
 	i = 0;
 	while (envp[i])
 	{
-		if (_ms_str_trim_env(envp[i], st) == EXIT_FAILURE)
+		if (_trim_env(envp[i], st) == EXIT_FAILURE)
 		{
 			free_env(*st);
 			return (EXIT_FAILURE);
