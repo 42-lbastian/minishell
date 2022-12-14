@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:14:47 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/07 17:54:53 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:51:01 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ms_init_wd(void)
 	char	**wd;
 
 	wd = NULL;
-	wd = malloc(sizeof(char *) * 3);
+	wd = malloc(sizeof(char *) * 2);
 	if (wd == NULL)
 		return (EXIT_FAILURE);
 	buf = NULL;
