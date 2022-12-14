@@ -6,19 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:08:49 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:49:15 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ms_free_main_s(t_struct *main_s)
-{
-	ms_free_lst(main_s->lst);
-	ft_free(main_s);
-}
-
-void	ms_free_lst(t_mslist *lst)
+static void	_free_lst(t_mslist *lst)
 {
 	t_mslist	*temp;
 
@@ -33,6 +27,18 @@ void	ms_free_lst(t_mslist *lst)
 	}
 }
 
+/*
+ * @brief Function to free the main structure
+*/
+void	ms_free_main_s(t_struct *main_s)
+{
+	_free_lst(main_s->lst);
+	ft_free(main_s);
+}
+
+/*
+ * @brief Function to free the parser structure
+*/
 void	ms_free_parse(t_lst_parser **lst_parser)
 {
 	t_lst_parser	*temp;
