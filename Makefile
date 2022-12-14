@@ -60,7 +60,6 @@ SRC_PARSER	=	parse.c\
 				exec_dup_fd.c\
 				exec_path.c\
 				lst_parse.c\
-				lst_parse_print.c\
 				tools.c\
 
 SRC_BUILT	=	echo_builtin.c\

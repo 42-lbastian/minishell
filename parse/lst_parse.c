@@ -6,24 +6,11 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:07:57 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 12:25:41 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*ms_find_var_path(char *str, t_env *st)
-{
-	if (!str)
-		return (NULL);
-	while (st)
-	{
-		if (ft_strcmp(st->var, str) == 0)
-			return (st->value);
-		st = st->next;
-	}
-	return ("");
-}
 
 t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type)
 {
@@ -60,18 +47,5 @@ int	ms_lst_p_addback(t_lst_parser **lst, t_lst_parser *new)
 	}
 	else
 		(*lst) = new;
-	return (0);
-}
-
-int	ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new)
-{
-	if (!new)
-		return (1);
-	if (lst && (*lst))
-	{
-		(*lst)->prev = new;
-		new->next = (*lst);
-	}
-	(*lst) = new;
 	return (0);
 }

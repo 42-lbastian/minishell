@@ -6,7 +6,7 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:31 by stelie            #+#    #+#             */
-/*   Updated: 2022/12/14 12:17:37 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 12:25:45 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int				ft_exec_cmd(char *path, char **complete_cmd, char **env_arr);
 int				ms_env_size(t_env *st);
 char			*ms_strjoin_env(char *str1, char *str2, char c, int i);
 void			ms_free_split(char **all_path);
+char			*ms_find_var_path(char *str, t_env *st);
 
 /*
 **		parse/exec_dup_fd.c
@@ -106,16 +107,7 @@ char			**ms_env_array(t_env *st);
 
 t_lst_parser	*ms_lst_parse_new(char **cmd, char *oper, int type);
 int				ms_lst_p_addback(t_lst_parser **lst, t_lst_parser *new);
-int				ms_lst_parse_add_front(t_lst_parser **lst, t_lst_parser *new);
-char			*ms_find_var_path(char *str, t_env *st);
 t_lst_parser	*ms_lst_parse_last(t_lst_parser *lst);
-
-/**
-**		parse/lst_parse_print.c
-**/
-
-void			ms_print_lst_parse(t_lst_parser *lst);
-void			ms_print_lst_parse_reverse(t_lst_parser *lst);
 
 /*
 **		parse/tools.c
