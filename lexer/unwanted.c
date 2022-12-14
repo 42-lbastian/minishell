@@ -6,13 +6,13 @@
 /*   By: stelie <stelie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:10:17 by lbastian          #+#    #+#             */
-/*   Updated: 2022/11/28 16:43:39 by stelie           ###   ########.fr       */
+/*   Updated: 2022/12/14 11:39:14 by stelie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	ms_count_quotes(int i, int quotes, t_struct *main, int fact)
+static int	_count_quotes(int i, int quotes, t_struct *main, int fact)
 {
 	if (fact == SIMPLE)
 		main->char_check.last_simple_q = i;
@@ -25,7 +25,7 @@ static int	ms_count_quotes(int i, int quotes, t_struct *main, int fact)
 	return (quotes);
 }
 
-static int	ms_count_quotes_unwanted(int quotes)
+static int	_count_quotes_unwanted(int quotes)
 {
 	if (quotes == 0)
 		quotes++;
@@ -44,9 +44,9 @@ char	*ms_remove_special(char *str, int i)
 	while (str && str[i])
 	{
 		if (str[i] == '"')
-			double_quotes = ms_count_quotes_unwanted(double_quotes);
+			double_quotes = _count_quotes_unwanted(double_quotes);
 		if (str[i] == '\'')
-			simple_quotes = ms_count_quotes_unwanted(simple_quotes);
+			simple_quotes = _count_quotes_unwanted(simple_quotes);
 		if (!ft_isalnum(str[i]) && !ft_incharset(str[i], VALID_CHAR))
 		{
 			if (double_quotes == 0 && simple_quotes == 0)
@@ -75,9 +75,9 @@ char	*ms_check_quotes(char *str, t_struct *main)
 	while (str[i])
 	{
 		if (str[i] == '"' && simple_quotes == 0)
-			double_quotes = ms_count_quotes(i, double_quotes, main, DOUBLE);
+			double_quotes = _count_quotes(i, double_quotes, main, DOUBLE);
 		if (str[i] == '\'' && double_quotes == 0)
-			simple_quotes = ms_count_quotes(i, simple_quotes, main, SIMPLE);
+			simple_quotes = _count_quotes(i, simple_quotes, main, SIMPLE);
 		i++;
 	}
 	if (simple_quotes == 1)
