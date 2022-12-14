@@ -1,0 +1,10 @@
+minishell
+*.out
+*.o
+*.a
+libft/libft.a
+*.tmp
+*.swp
+.nfs*
+.vscode/
+obj/

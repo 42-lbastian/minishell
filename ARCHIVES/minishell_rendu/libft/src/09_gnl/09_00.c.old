@@ -1,0 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   09_00.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krozis <krozis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/25 11:40:37 by krozis            #+#    #+#             */
+/*   Updated: 2022/05/10 13:31:39 by krozis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static char	*gnl_cut_before(char *src)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	while (src[i] && src[i] != '\n')
+		i++;
+	dest = malloc(sizeof(char) * (i + 1));
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (src[i] && src[i] != '\n')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\n';
+	dest[i + 1] = '\0';
+	return (dest);
+}
+
+static char	*gnl_read(char **stash, int fd)
+{
+	char	buff[BUFFER_SIZE + 1];
+	char	*line;
+
+	line = ft_strdup(*stash);
+	while (!ft_incharset('\n', buff))
+	{
+		if (read(fd, buff, BUFFER_SIZE) == 0)
+			return (NULL);
+		buff[BUFFER_SIZE + 1] = '\0';
+		if (ft_incharset('\n', buff))
+		{
+			line = ft_strjoin(line, gnl_cut_before(buff));
+			*stash = ft_str_cut_after(buff, '\n');
+		}
+		else
+			line = ft_strjoin(line, buff);
+	}
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*stash = NULL;
+	char		*line;
+
+	if (fd <= 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
+		return (NULL);
+	line = NULL;
+	if (stash == NULL)
+		stash = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (stash == NULL)
+		return (NULL);
+	if (stash && ft_incharset('\n', stash))
+	{
+		line = gnl_cut_before(stash);
+		stash = ft_str_cut_after(stash, '\n');
+	}
+	else
+		line = gnl_read(&stash, fd);
+	if (line == NULL)
+		free(stash);
+	return (line);
+}

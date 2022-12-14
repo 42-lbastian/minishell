@@ -1,0 +1,3 @@
+echo tutu | > toto cat		//Store tutu to toto
+< toto cat 					// Print content of toto
+cat < TATA

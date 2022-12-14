@@ -1,0 +1,75 @@
+grep hi <../minishell_test/test_files/infile
+grep hi "<infile" <         ../minishell_test/test_files/infile
+echo hi < ../minishell_test/test_files/infile bye bye
+grep hi <../minishell_test/test_files/infile_big <../minishell_test/test_files/infile
+echo <"../minishell_test/test_files/infile" "bonjour       42"
+cat <"../minishell_test/test_files/file name with spaces"
+cat <../minishell_test/test_files/infile_big ../minishell_test/test_files/infile
+cat <"1""2""3""4""5"
+echo <"../minishell_test/test_files/infile" <missing <"../minishell_test/test_files/infile"
+echo <missing <"../minishell_test/test_files/infile" <missing
+cat <"../minishell_test/test_files/infile"
+echo <"../minishell_test/test_files/infile_big" | cat <"../minishell_test/test_files/infile"
+echo <"../minishell_test/test_files/infile_big" | cat "../minishell_test/test_files/infile"
+echo <"../minishell_test/test_files/infile_big" | echo <"../minishell_test/test_files/infile"
+echo hi | cat <"../minishell_test/test_files/infile"
+echo hi | cat "../minishell_test/test_files/infile"
+cat <"../minishell_test/test_files/infile" | echo hi
+cat <"../minishell_test/test_files/infile" | grep hello
+cat <"../minishell_test/test_files/infile_big" | echo hi
+cat <missing
+cat <missing | cat
+cat <missing | echo oi
+cat <missing | cat <"../minishell_test/test_files/infile"
+echo <123 <456 hi | echo 42
+ls >../minishell_test/outfiles/outfile01
+ls >         ../minishell_test/outfiles/outfile01
+echo hi >         ../minishell_test/outfiles/outfile01 bye
+ls >../minishell_test/outfiles/outfile01 >../minishell_test/outfiles/outfile02
+ls >../minishell_test/outfiles/outfile01 >../minishell_test/test_files/invalid_permission
+ls >"../minishell_test/outfiles/outfile with spaces"
+ls >"../minishell_test/outfiles/outfile""1""2""3""4""5"
+ls >"../minishell_test/outfiles/outfile01" >../minishell_test/test_files/invalid_permission >"../minishell_test/outfiles/outfile02"
+ls >../minishell_test/test_files/invalid_permission >"../minishell_test/outfiles/outfile01" >../minishell_test/test_files/invalid_permission
+cat <"../minishell_test/test_files/infile" >"../minishell_test/outfiles/outfile01"
+echo hi >../minishell_test/outfiles/outfile01 | echo bye
+echo hi >../minishell_test/outfiles/outfile01 >../minishell_test/outfiles/outfile02 | echo bye
+echo hi | echo >../minishell_test/outfiles/outfile01 bye
+echo hi | echo bye >../minishell_test/outfiles/outfile01 >../minishell_test/outfiles/outfile02
+echo hi >../minishell_test/outfiles/outfile01 | echo bye >../minishell_test/outfiles/outfile02
+echo hi >../minishell_test/outfiles/outfile01 >../minishell_test/test_files/invalid_permission | echo bye
+echo hi >../minishell_test/test_files/invalid_permission | echo bye
+echo hi >../minishell_test/test_files/invalid_permission >../minishell_test/outfiles/outfile01 | echo bye
+echo hi | echo bye >../minishell_test/test_files/invalid_permission
+echo hi | >../minishell_test/outfiles/outfile01 echo bye >../minishell_test/test_files/invalid_permission
+echo hi | echo bye >../minishell_test/test_files/invalid_permission >../minishell_test/outfiles/outfile01
+cat <"../minishell_test/test_files/infile" >../minishell_test/test_files/invalid_permission
+cat >../minishell_test/test_files/invalid_permission <"../minishell_test/test_files/infile"
+cat <missing >../minishell_test/outfiles/outfile01
+cat >../minishell_test/outfiles/outfile01 <missing
+cat <missing >../minishell_test/test_files/invalid_permission
+cat >../minishell_test/test_files/invalid_permission <missing
+cat >../minishell_test/outfiles/outfile01 <missing >../minishell_test/test_files/invalid_permission
+ls >>../minishell_test/outfiles/outfile01
+ls >>      ../minishell_test/outfiles/outfile01
+ls >>../minishell_test/outfiles/outfile01 >../minishell_test/outfiles/outfile01
+ls >../minishell_test/outfiles/outfile01 >>../minishell_test/outfiles/outfile01
+ls >../minishell_test/outfiles/outfile01 >>../minishell_test/outfiles/outfile01 >../minishell_test/outfiles/outfile02
+ls >>../minishell_test/outfiles/outfile01 >>../minishell_test/outfiles/outfile02
+ls >>../minishell_test/test_files/invalid_permission
+ls >>../minishell_test/test_files/invalid_permission >>../minishell_test/outfiles/outfile01
+ls >>../minishell_test/outfiles/outfile01 >>../minishell_test/test_files/invalid_permission
+ls >../minishell_test/outfiles/outfile01 >>../minishell_test/test_files/invalid_permission >>../minishell_test/outfiles/outfile02
+ls <missing >>../minishell_test/test_files/invalid_permission >>../minishell_test/outfiles/outfile02
+ls >>../minishell_test/test_files/invalid_permission >>../minishell_test/outfiles/outfile02 <missing
+echo hi >>../minishell_test/outfiles/outfile01 | echo bye
+echo hi >>../minishell_test/outfiles/outfile01 >>../minishell_test/outfiles/outfile02 | echo bye
+echo hi | echo >>../minishell_test/outfiles/outfile01 bye
+echo hi | echo bye >>../minishell_test/outfiles/outfile01 >>../minishell_test/outfiles/outfile02
+echo hi >>../minishell_test/outfiles/outfile01 | echo bye >>../minishell_test/outfiles/outfile02
+echo hi >>../minishell_test/test_files/invalid_permission | echo bye
+echo hi >>../minishell_test/test_files/invalid_permission >../minishell_test/outfiles/outfile01 | echo bye
+echo hi | echo bye >>../minishell_test/test_files/invalid_permission
+echo hi | echo >>../minishell_test/outfiles/outfile01 bye >../minishell_test/test_files/invalid_permission
+cat <minishell.h>../minishell_test/outfiles/outfile
+cat <minishell.h|ls

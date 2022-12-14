@@ -1,0 +1,7 @@
+env | sort | grep SHLVL
+cat ../minishell/include/minishell.h | grep ");"
+
+
+
+cat ../minishell_test/test_files/infile_big | grep oi
+export GHOST=123 | env | grep GHOST

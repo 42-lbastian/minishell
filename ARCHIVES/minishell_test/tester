@@ -1,0 +1,94 @@
+#!/bin/bash
+
+MINISHELL_PATH="../../minishell/minishell"
+
+# Run a specific test if the file name was specified
+if [[ $1 ]]; then
+	test_lists=(
+		$1
+	)
+else
+	test_lists=(
+		"redirects"
+		"builtins"
+		"pipes"
+		"extras"
+	)
+fi
+
+if [[ $1 == "wildcards"  || $1 == "bonus" ]]; then
+	MINISHELL_PATH="../minishell_bonus"
+fi
+
+BOLD="\e[1m"
+YELLOW="\033[0;33m"
+GREY="\033[38;5;244m"
+PURPLE="\033[0;35m"
+BLUE="\033[0;36m"
+RED="\e[0;31m"
+END="\033[0m"
+
+chmod 000 ./test_files/invalid_permission
+mkdir ./outfiles
+mkdir ./mini_outfiles
+mkdir ./bash_outfiles
+rm -rf ./val
+
+printf $RED
+echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥";
+echo "                                                                                             ";
+echo " ██    ██ █ ██    █ █ █████ █   █ █████ █     █       ██████ █████ █████ ██████ █████ █████  ";
+echo " ███  ███ █ ███   █ █ █     █   █ █     █     █         ██   █     █       ██   █     █   ██ ";
+echo " █ ████ █ █ █ ██  █ █ █████ █████ ████  █     █         ██   ████  █████   ██   ████  █████  ";
+echo " █  ██  █ █ █  ██ █ █     █ █   █ █     █     █         ██   █         █   ██   █     █   ██ ";
+echo " █      █ █ █   ███ █ █████ █   █ █████ █████ █████     ██   █████ █████   ██   █████ █   ██ ";
+echo "                                                                                             ";
+echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥";
+echo "                                                                                              ";
+
+PROMPT=$(echo -e "\nexit\n" | $MINISHELL_PATH | head -n 1 | sed -r "s:\x1B\[[0-9;]*[mK]::g")
+
+for testfile in ${test_lists[*]}; do
+
+	printf $RED
+	echo ———————————— $testfile
+
+	while read teste; do
+		((i++))
+
+		echo -e "$teste" | $MINISHELL_PATH &> mini_out
+
+		printf "minishell> %s\n" "$teste" > bash_out
+		echo -e "$teste" | bash &>> bash_out
+		printf "minishell> exit\n" >> bash_out
+		
+		DIFF=$(diff mini_out bash_out)
+		if [ "$DIFF" == "" ]; then
+			((ok++))
+		else
+			printf ❌
+			printf "$GREY $teste \n$END"
+			exit 1
+		fi
+	done < $testfile
+done
+
+chmod 666 ./test_files/invalid_permission
+rm -rf ./outfiles
+rm -rf ./mini_outfiles
+rm -rf ./bash_outfiles
+
+printf $PURPLE
+printf $BOLD
+echo   $ok/$i
+printf $END
+
+if [[ "$ok" == "$i" ]]; then
+	echo "🎊 🎊 🎊"
+	echo "😎 😎 😎"
+	echo "🎉 🎉 🎉"
+	exit 0
+else
+	echo "😭 😭 😭"
+	exit 1
+fi
