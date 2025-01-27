@@ -4,7 +4,7 @@
 <h5 align="center">
   <a href="#description_id">Description</a> - 
   <a href="#usage_id">Usage</a> - 
-  <a href="#credits_id">Ressource</a>
+  <a href="#credits_id">Credits</a>
 </h5>
 
 ---
